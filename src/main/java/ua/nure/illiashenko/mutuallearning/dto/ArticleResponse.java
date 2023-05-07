@@ -1,17 +1,16 @@
-package ua.nure.illiashenko.mutuallearning.entity;
+package ua.nure.illiashenko.mutuallearning.dto;
 
 import java.sql.Timestamp;
-import lombok.Builder;
-import lombok.Data;
+import ua.nure.illiashenko.mutuallearning.entity.Mark;
 
-@Data
-@Builder
-public class Article {
+public class ArticleResponse {
 
     private int id;
     private String title;
     private String type;
     private Timestamp creationDateTime;
     private Timestamp lastUpdateDateTime;
+    private ArticlePartResponse[] articleParts;
+    private Mark[] marks;
     private String status;
 }

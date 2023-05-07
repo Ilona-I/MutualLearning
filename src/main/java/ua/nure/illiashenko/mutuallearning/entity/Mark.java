@@ -9,5 +9,6 @@ public class Mark {
 
     private int id;
     private String title;
+    private String type;
     private String description;
 }

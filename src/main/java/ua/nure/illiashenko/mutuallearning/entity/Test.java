@@ -11,4 +11,6 @@ public class Test {
     private int articleId;
     private String name;
     private String description;
+    private int numberOfAttempt;
+    private String type;
 }

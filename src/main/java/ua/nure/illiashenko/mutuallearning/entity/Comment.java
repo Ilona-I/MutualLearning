@@ -1,6 +1,6 @@
 package ua.nure.illiashenko.mutuallearning.entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,7 +10,8 @@ public class Comment {
 
     private int id;
     private int articleId;
-    private Date creationDateTime;
-    private Date lastUpdateDateTime;
+    private Timestamp creationDateTime;
+    private Timestamp lastUpdateDateTime;
     private String link;
+    private String status;
 }

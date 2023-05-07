@@ -28,6 +28,7 @@ CREATE TABLE `mutual_learning_db`.`comment` (
             `creationDateTime` TIMESTAMP NOT NULL,
             `lastUpdateDateTime` TIMESTAMP NULL,
             `link` INT NULL,
+            `status` VARCHAR(45) NOT NULL,
             PRIMARY KEY (`id`),
             UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
             INDEX `article_comment_idx` (`article_id` ASC) VISIBLE,
@@ -40,7 +41,8 @@ CREATE TABLE `mutual_learning_db`.`comment` (
 CREATE TABLE `mutual_learning_db`.`mark` (
          `id` INT NOT NULL AUTO_INCREMENT,
          `title` VARCHAR(45) NOT NULL,
-         `description` VARCHAR(200) NULL,
+         `type` VARCHAR(45) NOT NULL,
+         `description` TEXT NULL,
          PRIMARY KEY (`id`),
          UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
 
@@ -48,7 +50,9 @@ CREATE TABLE `mutual_learning_db`.`test` (
          `id` INT NOT NULL AUTO_INCREMENT,
          `article_id` INT NOT NULL,
          `title` VARCHAR(45) NOT NULL,
-         `description` VARCHAR(500) NULL,
+         `description` TEXT NULL,
+         `number_of_attempts` INT NOT NULL,
+         `type` VARCHAR(45) NOT NULL,
          PRIMARY KEY (`id`),
          UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
          CONSTRAINT `article_test_fk`
@@ -175,3 +179,24 @@ CREATE TABLE `mutual_learning_db`.`user_comment` (
              REFERENCES `mutual_learning_db`.`comment` (`id`)
              ON DELETE CASCADE
              ON UPDATE CASCADE);
+
+CREATE TABLE `mutual_learning_db`.`user_test` (
+      `id` INT NOT NULL AUTO_INCREMENT,
+      `test_id` INT NOT NULL,
+      `login` VARCHAR(45) NOT NULL,
+      `mark` INT NOT NULL,
+      `datetime` TIMESTAMP NOT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+      INDEX `user_test_fk_idx` (`login` ASC) VISIBLE,
+      INDEX `test_user_fk_idx` (`test_id` ASC) VISIBLE,
+      CONSTRAINT `user_test_fk`
+          FOREIGN KEY (`login`)
+              REFERENCES `mutual_learning_db`.`user` (`login`)
+              ON DELETE NO ACTION
+              ON UPDATE NO ACTION,
+      CONSTRAINT `test_user_fk`
+          FOREIGN KEY (`test_id`)
+              REFERENCES `mutual_learning_db`.`test` (`id`)
+              ON DELETE NO ACTION
+              ON UPDATE NO ACTION);
