@@ -1,5 +1,5 @@
 package ua.nure.illiashenko.mutuallearning.exception.user;
 
-public class RegistrationException {
+public class UserValidationException {
 
 }
