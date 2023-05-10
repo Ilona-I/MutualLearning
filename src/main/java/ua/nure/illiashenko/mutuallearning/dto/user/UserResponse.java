@@ -1,4 +1,4 @@
-package ua.nure.illiashenko.mutuallearning.dto;
+package ua.nure.illiashenko.mutuallearning.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

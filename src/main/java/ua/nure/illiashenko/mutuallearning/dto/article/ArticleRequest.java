@@ -1,4 +1,4 @@
-package ua.nure.illiashenko.mutuallearning.dto;
+package ua.nure.illiashenko.mutuallearning.dto.article;
 
 public class ArticleRequest {
 

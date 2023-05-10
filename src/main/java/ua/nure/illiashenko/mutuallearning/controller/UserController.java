@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ua.nure.illiashenko.mutuallearning.dto.ChangePasswordRequest;
-import ua.nure.illiashenko.mutuallearning.dto.RegistrationRequest;
-import ua.nure.illiashenko.mutuallearning.dto.UserLoginResponse;
-import ua.nure.illiashenko.mutuallearning.dto.UserRequest;
-import ua.nure.illiashenko.mutuallearning.dto.UserResponse;
+import ua.nure.illiashenko.mutuallearning.dto.user.ChangePasswordRequest;
+import ua.nure.illiashenko.mutuallearning.dto.user.RegistrationRequest;
+import ua.nure.illiashenko.mutuallearning.dto.user.UserLoginResponse;
+import ua.nure.illiashenko.mutuallearning.dto.user.UserRequest;
+import ua.nure.illiashenko.mutuallearning.dto.user.UserResponse;
 
 @RestController
 @RequestMapping("/users")
@@ -28,19 +28,23 @@ public class UserController {
         return null;
     }
 
-    @PutMapping("/{login}/password")
-    public UserLoginResponse changePassword(@RequestBody ChangePasswordRequest updatePasswordRequest,
-        @PathVariable String login) {
+    @PutMapping("/password")
+    public UserLoginResponse changePassword(@RequestBody ChangePasswordRequest updatePasswordRequest) {
         return null;
     }
 
-    @PutMapping("/{login}")
-    public UserResponse updateUser(@RequestBody UserRequest user, @PathVariable String login) {
+    @PutMapping()
+    public UserResponse updateUser(@RequestBody UserRequest user) {
         return null;
     }
 
     @GetMapping("/{login}")
     public UserResponse getUser(@PathVariable String login) {
+        return null;
+    }
+
+    @GetMapping
+    public UserResponse getUsers() {
         return null;
     }
 

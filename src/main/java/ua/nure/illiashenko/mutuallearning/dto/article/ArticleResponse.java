@@ -1,4 +1,4 @@
-package ua.nure.illiashenko.mutuallearning.dto;
+package ua.nure.illiashenko.mutuallearning.dto.article;
 
 import java.sql.Timestamp;
 import ua.nure.illiashenko.mutuallearning.entity.Mark;

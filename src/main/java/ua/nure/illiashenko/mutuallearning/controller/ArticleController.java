@@ -1,17 +1,19 @@
 package ua.nure.illiashenko.mutuallearning.controller;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ua.nure.illiashenko.mutuallearning.dto.ArticleResponse;
-import ua.nure.illiashenko.mutuallearning.dto.ArticleRequest;
-import ua.nure.illiashenko.mutuallearning.dto.QuestionsResponse;
+import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
+import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
+import ua.nure.illiashenko.mutuallearning.dto.article.QuestionsResponse;
 
 @RestController
 @RequestMapping("/articles")
@@ -33,8 +35,15 @@ public class ArticleController {
         return null;
     }
 
-    @GetMapping("/questions")
+    @GetMapping
     public QuestionsResponse getQuestions() {
         return null;
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteArticle(@PathVariable int id){
+
+    }
+
 }
