@@ -1,0 +1,37 @@
+.inner_block{
+  width: 90%;
+  height: 90%;
+  margin-top: 5%;
+  margin-right: auto;
+  margin-left: auto;
+
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 29px;
+
+  align-items: center;
+  text-align: center;
+
+  color: #1C1018;
+}
+
+.input_info{
+  margin-top: 20px;
+
+}
+
+.simple_green_block{
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  height: max-content;
+  padding: 20px;
+  min-width: 300px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 30px;
+  border-color: #95E06C;
+}
