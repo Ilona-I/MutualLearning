@@ -1,7 +1,7 @@
-.inner_block{
+.inner_block_center{
   width: 90%;
   height: 90%;
-  margin-top: 5%;
+  margin-top: 1%;
   margin-right: auto;
   margin-left: auto;
 
@@ -34,4 +34,28 @@
   border-width: 1px;
   border-radius: 30px;
   border-color: #95E06C;
+}
+
+.profile_block{
+  margin-top: 40px;
+  margin-left: 5%;
+  width: max-content;
+  height: max-content;
+  padding: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 30px;
+  border-color: #95E06C;
+  padding: 20px;
+}
+
+.inner_block_left{
+
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 29px;
+
+  color: #1C1018;
 }
