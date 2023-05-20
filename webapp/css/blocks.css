@@ -46,7 +46,6 @@
   border-width: 1px;
   border-radius: 30px;
   border-color: #95E06C;
-  padding: 20px;
 }
 
 .inner_block_left{
@@ -58,4 +57,34 @@
   line-height: 29px;
 
   color: #1C1018;
+}
+
+.article_block{
+  margin-top: 20px;
+  margin-left: 20%;
+  width: 50%;
+  min-width: 500px;
+  height: max-content;
+  padding: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: #95E06C;
+
+}
+
+.article_right_block{
+  margin-top: 20px;
+  margin-left: 10px;
+  width: 300px;
+  height: max-content;
+  padding: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: #95E06C;
+}
+
+.article_marks{
+  margin-bottom: 10px;
 }

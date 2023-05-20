@@ -41,45 +41,59 @@
       </li>
       <li class="nav-item menu_button">
         <a class="nav-link menu_button_text" href="#">ТЕСТИ</a>
+      <li class="nav-item menu_button">
+        <button class="btn"
+                style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
+          Створити статтю
+        </button>
       </li>
     </ul>
   </div>
   <div class="collapse navbar-collapse">
-    <button class="btn btn-light menu_button_sign_up"
-            style="  background-color: #C3F73A; color: #68B684;border-width: 0px">Log in
-    </button>
+    <div class="btn-group">
+      <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+        <img src="../../file/profile.png" alt="Profile" width="40" height="40">
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Мій профіль</a>
+        <a class="dropdown-item" href="#">Оформити підписку</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Вийти</a>
+      </div>
+    </div>
   </div>
 </nav>
 <div>
 
 
-<div class="profile_block">
-  <div class="inner_block_left">
-    <div class="row" style="margin-left: 0px;">
-      <h3>Profile</h3>
-      <button class="btn"
-              style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
-        Зберегти зміни
-      </button>
-      <button class="btn"
-              style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #094D92; color: white">
-        Змінити пароль
-      </button>
+  <div class="profile_block">
+    <div class="inner_block_left">
+      <div class="row" style="margin-left: 0px;">
+        <h3>Profile</h3>
+        <button class="btn"
+                style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
+          Зберегти зміни
+        </button>
+        <button class="btn"
+                style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #094D92; color: white">
+          Змінити пароль
+        </button>
+      </div>
+      <h6>Login:</h6>
+      <h6>Level: новачок</h6>
+      <h6>Тип акаунту: звичайний/преміум</h6>
+      <input type="text" class="form-control input_info" style="width: 350px;"
+             placeholder="Full name or nickname">
+
+
+      <input type="email" class="form-control input_info" style="width: 350px;"
+             placeholder="E-mail">
+
+      <textarea type="text" class="form-control input_info" placeholder="Info"></textarea>
+
     </div>
-    <h6>Login:</h6>
-    <h6>Level: новачок</h6>
-    <h6>Тип акаунту: звичайний/преміум</h6>
-    <input type="text" class="form-control input_info" style="width: 350px;"
-           placeholder="Full name or nickname">
-
-
-    <input type="email" class="form-control input_info" style="width: 350px;"
-           placeholder="E-mail">
-
-    <textarea type="text" class="form-control input_info" placeholder="Info"></textarea>
-
   </div>
-</div>
 </div>
 </body>
 </html>

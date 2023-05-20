@@ -2,9 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <link rel="stylesheet" href="../../css/menu.css">
+  <link rel="stylesheet" href="../../css/blocks.css">
+  <link rel="stylesheet" href="../../css/buttons.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+  <title>Article</title>
 </head>
 <body>
+
+
+<nav class="navbar  navbar-expand-lg navbar-light menu_background">
+
+  <img class="logo" src="../../file/logo.png" alt="Manual Learning">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="n1avbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active menu_button">
+        <a class="nav-link menu_button_text " href="#">ГОЛОВНА</a>
+      </li>
+      <li class="nav-item  menu_button">
+        <a class="nav-link menu_button_text " href="#">СТАТТІ</a>
+      </li>
+      <li class="nav-item menu_button">
+        <a class="nav-link menu_button_text" href="#">ТЕСТИ</a>
+      <li class="nav-item menu_button">
+        <button class="btn"
+                style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
+          Створити статтю
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="collapse navbar-collapse">
+    <div class="btn-group">
+      <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+        <img src="../../file/profile.png" alt="Profile" width="40" height="40">
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Мій профіль</a>
+        <a class="dropdown-item" href="#">Оформити підписку</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Вийти</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="article_block">
+    <h4>Заголовок статті</h4>
+    <div class="article_marks">
+      <span class="badge badge-pill badge-light">Мітка1</span>
+      <span class="badge badge-pill badge-light">Мітка2</span>
+    </div>
+    <p class="article_text">
+      Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
+      інструкцій,
+      які описують порядок дій виконавця, щоб досягти результату розв'язання задачі за скінченну
+      кількість дій;
+      система правил виконання дискретного процесу, яка досягає поставленої мети за скінченний час.
+      Для візуалізації
+      алгоритмів часто використовують блок-схеми.
+      Для комп'ютерних програм алгоритм є списком деталізованих інструкцій, що реалізують процес
+      обчислення, який,
+      починаючи з початкового стану, відбувається через послідовність логічних станів, яка
+      завершується кінцевим станом.
+      Перехід з попереднього до наступного стану не обов'язково детермінований — деякі алгоритми
+      можуть містити елементи випадковості.
+
+      Поняття алгоритму належить до підвалин математики. Обчислювальні процеси алгоритмічного
+      характеру (як-то арифметичні
+      дії над цілими числами, знаходження НСД двох чисел тощо) відомі людству з глибокої давнини.
+      Проте чітке поняття алгоритму
+      сформувалося лише на початку XX століття.
+    </p>
+    <img src="../../file/profile.png" alt="Фото">
+    <p>
+    <pre>
+<code>
+Поняття алгоритму належить до підвалин математики. Обчислювальні процеси алгоритмічного характеру (як-то арифметичні
+дії над цілими
+</code>
+    </pre>
+    </p>
+  </div>
+  <div>
+    <div class="article_right_block">
+      <h6>Тести до статті</h6>
+      <a href="#">test1</a>
+    </div>
+    <div class="article_right_block">
+      <h6>Учасники</h6>
+
+    </div>
+  </div>
+
+</div>
+
 
 </body>
 </html>
