@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="../../css/menu.css">
   <link rel="stylesheet" href="../../css/blocks.css">
   <link rel="stylesheet" href="../../css/buttons.css">
+  <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -47,27 +48,30 @@
           Створити статтю
         </button>
       </li>
+      <li>
+        <div class="btn-group" style="margin-left: 50px;">
+          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            <img src="../../file/profile.png" alt="Profile" width="40" height="40">
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Мій профіль</a>
+            <a class="dropdown-item" href="#">Оформити підписку</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Вийти</a>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
-  <div class="collapse navbar-collapse">
-    <div class="btn-group">
-      <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-        <img src="../../file/profile.png" alt="Profile" width="40" height="40">
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Мій профіль</a>
-        <a class="dropdown-item" href="#">Оформити підписку</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Вийти</a>
-      </div>
-    </div>
-  </div>
+
 </nav>
 
 <div class="row">
   <div class="article_block">
     <h4>Заголовок статті</h4>
+    <p class="datetime_text">ред. 21.05.2023</p>
     <div class="article_marks">
       <span class="badge badge-pill badge-light">Мітка1</span>
       <span class="badge badge-pill badge-light">Мітка2</span>
@@ -102,20 +106,214 @@
 </code>
     </pre>
     </p>
+    <p class="article_text">
+      Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
+      інструкцій,
+    </p>
+    <p>Open a PDF file <a href="../../file/1.pdf">PDF</a>.</p>
+    <p>Open a DOCX file <a href="../../file/1.docx">DOCX</a>.</p>
+    <p>Open a PPTX file <a href="../../file/1.pptx">PPTX</a>.</p>
+
+    <div style="float: right">
+      <button style="border-color: transparent; background-color: transparent">
+        <img src="../../file/like_selected.png" width="20" height="30">
+      </button>
+      <button style="border-color: transparent; background-color: transparent">
+        <img src="../../file/dislike.png" width="20" height="30">
+      </button>
+    </div>
   </div>
   <div>
+    <div class="article_right_block">
+      <h6>Творці</h6>
+      <div class="row">
+        <div>
+          <button type="button" class="btn" data-toggle="modal"
+                  data-target="#exampleModalScrollable">
+            Учасник1
+          </button>
+
+          <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+               aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalScrollableTitle">Учасник1 </h5>
+                  <span class="badge badge-pill badge-primary"
+                        style="margin-left: 20px;">Задав питання</span>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h6>#login</h6>
+                  Інформація про себе
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-light">Переглянути статті та питання
+                    користувача
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="badge badge-pill badge-primary"
+                style="margin-left: 10px;">Задав питання</span>
+        </div>
+
+      </div>
+      <div class="row">
+        <div>
+          <button type="button" class="btn" data-toggle="modal"
+                  data-target="#exampleModalScrollable1">
+            Учасник2
+          </button>
+
+          <div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog"
+               aria-labelledby="exampleModalScrollableTitle1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalScrollableTitle1">Учасник2 </h5>
+                  <span class="badge badge-pill badge-success" style="margin-left: 10px;">Автор статті</span>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h6>#login2</h6>
+                  Інформація про себе
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-light">Переглянути статті та питання
+                    користувача
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="badge badge-pill badge-success"
+                style="margin-left: 10px;">Автор статті</span>
+        </div>
+
+      </div>
+    </div>
     <div class="article_right_block">
       <h6>Тести до статті</h6>
       <a href="#">test1</a>
     </div>
-    <div class="article_right_block">
-      <h6>Учасники</h6>
 
-    </div>
   </div>
 
 </div>
 
+<div class="comment_block">
+  <div class="row" style="margin-left: 10px">
+    <h6>Обговорення</h6>
+    <button class="btn" style="font-style: italic; color: gray; padding: 0; height: 25px; margin-left: 50px; margin-top: -3px; text-decoration-line: underline">Написати</button>
+  </div>
+<hr>
+  <div class="comment_unit_block">
+    <div>
+      <p class="datetime_text">25.05.2023</p>
+      <div>
+        <button type="button" class="btn" data-toggle="modal"
+                data-target="#exampleModalScrollable3" style="height: 25px; padding: 0; font-style: revert;">
+          Учасник3
+        </button>
 
+        <div class="modal fade" id="exampleModalScrollable3" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalScrollableTitle3" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle3">Учасник3 </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6>#login3</h6>
+                Інформація про себе
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light">Переглянути статті та питання
+                  користувача
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<hr>
+    <div>
+      <p> Проте чітке поняття алгоритму сформувалося </p>
+    </div>
+  <div class="row" style="margin-left: 5px;">
+    <button style="border-color: transparent; background-color: transparent">
+      <img src="../../file/like.png" width="13" height="19">
+    </button>
+    <button style="border-color: transparent; background-color: transparent">
+      <img src="../../file/dislike_selected.png" width="13" height="19">
+    </button>
+    <button class="btn" style="font-size: small; font-style: italic; color: gray; padding: 0; height: 20px; margin-left: 20px; margin-top: 4px;  text-decoration-line: underline">Відповісти</button>
+    <button class="btn" style="font-size: small; font-style: italic; color: gray; padding: 0; height: 20px; margin-left: 20px; margin-top: 4px;  text-decoration-line: underline">Сховати відповіді (1)</button>
+  </div>
+  </div>
+  <div class="answer_comment_unit_block">
+    <div>
+      <p class="datetime_text">25.05.2023</p>
+      <div>
+        <button type="button" class="btn" data-toggle="modal"
+                data-target="#exampleModalScrollable4" style="height: 25px; padding: 0; font-style: revert;">
+          Учасник4
+        </button>
+
+        <div class="modal fade" id="exampleModalScrollable4" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalScrollableTitle4" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle4">Учасник4 </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6>#login3</h6>
+                Інформація про себе
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light">Переглянути статті та питання
+                  користувача
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div>
+      <p> Обчислювальні процеси алгоритмічного характер</p>
+    </div>
+    <div class="row" style="margin-left: 5px;">
+      <button style="border-color: transparent; background-color: transparent">
+        <img src="../../file/like.png" width="13" height="19">
+      </button>
+      <button style="border-color: transparent; background-color: transparent">
+        <img src="../../file/dislike_selected.png" width="13" height="19">
+      </button>
+      <button class="btn" style="font-size: small; font-style: italic; color: gray; padding: 0; height: 20px; margin-left: 20px; margin-top: 4px;  text-decoration-line: underline">Відповісти</button>
+      <button class="btn" style="font-size: small; font-style: italic; color: gray; padding: 0; height: 20px; margin-left: 20px; margin-top: 4px;  text-decoration-line: underline">Показати відповіді (1)</button>
+    </div>
+  </div>
+</div>
+<hr>
 </body>
 </html>

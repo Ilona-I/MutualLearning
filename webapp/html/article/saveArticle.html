@@ -2,9 +2,230 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <link rel="stylesheet" href="../../css/menu.css">
+  <link rel="stylesheet" href="../../css/blocks.css">
+  <link rel="stylesheet" href="../../css/buttons.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+  <title>Article</title>
 </head>
 <body>
 
+
+<nav class="navbar  navbar-expand-lg navbar-light menu_background">
+
+  <img class="logo" src="../../file/logo.png" alt="Manual Learning">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="n1avbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active menu_button">
+        <a class="nav-link menu_button_text " href="#">ГОЛОВНА</a>
+      </li>
+      <li class="nav-item  menu_button">
+        <a class="nav-link menu_button_text " href="#">СТАТТІ</a>
+      </li>
+      <li class="nav-item menu_button">
+        <a class="nav-link menu_button_text" href="#">ТЕСТИ</a>
+      <li class="nav-item menu_button">
+        <button class="btn"
+                style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
+          Створити статтю
+        </button>
+      </li>
+      <li>
+        <div class="btn-group" style="margin-left: 50px;">
+          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            <img src="../../file/profile.png" alt="Profile" width="40" height="40">
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Мій профіль</a>
+            <a class="dropdown-item" href="#">Оформити підписку</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Вийти</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</nav>
+
+<div class="row">
+  <div class="article_block">
+    <textarea class="form-control input_info" style="font-size: x-large"
+              placeholder="Заголовок статті"></textarea>
+    <!--Початок блоку з мітками-->
+    <div>
+      <div class="article_marks">
+        <span class="badge badge-pill badge-light">Мітка1</span>
+        <span class="badge badge-pill badge-light">Мітка2</span>
+      </div>
+
+      <!-- Початок блоку з додаванням міток -->
+      <div>
+        <button type="button" class="btn" data-toggle="modal"
+                style="background-color: #68B684; color: white;"
+                data-target="#exampleModalScrollable">
+          Додати мітку +
+        </button>
+
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Додати мітку</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- Початок блоку зі створенням мітки -->
+                <div class="dropdown" style="margin-left: 5px;">
+                  <button class="btn btn-secondary dropdown-toggle" type="button"
+                          style="background-color: #C3F73A"
+                          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                    Створити мітку
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                       style="padding: 10px; width: 400px;">
+                    <input type="text" class="form-control input_info"
+                           placeholder="Mark name">
+                    <textarea class="form-control input_info"
+                              placeholder="Description"></textarea>
+
+                    <div class="row" style="margin-left: 20px; margin-top: 10px;">
+                      <button type="button" class="btn"
+                              style="background-color: #68B684; color: white;">Зберегти
+                      </button>
+                      <button type="button" class="btn btn-secondary" style="margin-left: 10px;">
+                        Скасувати
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Кінець блоку зі створенням мітки -->
+                <!-- Початок роботи з блоком пошуку міток-->
+                <div class="row" style="width: 100%; margin-top: 20px;">
+                  <input type="text" style="width: 70%; margin-left: 20px;" class="form-control"
+                         placeholder="Search...">
+                  <button class="btn"
+                          style="background-color: #95E06C; margin-left: 5%; width: 20%;">Find
+                  </button>
+                </div>
+                <!-- Кінець роботи з блоком пошуку міток-->
+                <!-- Початок роботи з блоком фільтрації міток (всі, лише власні)-->
+                <div style="margin-top: 10px; margin-left: 20px;">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                           id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">Всі</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                           id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">Власні</label>
+                  </div>
+                </div>
+                <!-- Кінець роботи з блоком фільтрації міток (всі, лише власні)-->
+                <hr>
+                <!-- Початок блоку зі списком міток -->
+                <div
+                    style="margin-left: 20px; overflow-y:scroll; height: 350px;">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <div class="form-check-label" for="defaultCheck1">
+                      <div class="row" style="margin-left: 5px; width: 90%;">
+                        <p>Власна мітка1</p>
+
+                          <!-- Початок блоку із редагуванням мітки -->
+                          <div class="dropdown" style="margin-left: 5px;">
+                            <button class="btn dropdown-toggle" type="button"
+                                    style="margin-left:10px; height:25px; background-color: transparent; color: #C3F73A; border-color: #C3F73A; font-size: small; padding: 0;"
+                                    id="dropdownMenuButton1" data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                              Редагувати
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+                                 style="padding: 10px; width: 400px;">
+                              <input type="text" class="form-control input_info"
+                                     placeholder="Mark name">
+                              <textarea class="form-control input_info"
+                                        placeholder="Description"></textarea>
+
+                              <div class="row" style="margin-left: 20px; margin-top: 10px;">
+                                <button type="button" class="btn"
+                                        style="background-color: #68B684; color: white;">Зберегти
+                                </button>
+                                <button type="button" class="btn btn-secondary"
+                                        style="margin-left: 10px;">Скасувати
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Кінець блоку із редагуванням мітки -->
+
+                          <!-- Початок блоку з видаленням мітки -->
+
+                          <button class="btn"
+                                  style="height:25px; margin-left: 5px; margin-top: 2px; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small; padding: 0;">
+                            Видалити
+                          </button>
+                          <!-- Кінець блоку з видаленням мітки -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                      <label class="form-check-label" for="defaultCheck3">
+                        Мітка1
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                      <label class="form-check-label" for="defaultCheck4">
+                        Мітка2
+                      </label>
+                    </div>
+                  </div>
+                  <!-- Кінець блоку зі списком міток -->
+                  <div class="modal-footer" style="margin-top: 5px;">
+                    <button type="button" class="btn"
+                            style="background-color: #68B684; color: white;">Зберегти
+                    </button>
+                    <button type="button" class="btn btn-secondary">Скасувати</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Кінець блоку з додаванням міток-->
+      </div>
+      <!-- Кінець блоку з мітками -->
+
+    </div>
+</div>
 </body>
 </html>
