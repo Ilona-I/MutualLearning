@@ -75,5 +75,156 @@
 </nav>
 <!-- Кінець роботи з меню -->
 
+<!-- Початок роботи з статтям-->
+<div>
+  <!-- Початок роботи з параметрами відображених статей-->
+  <div class="row" style="margin-top: 20px;">
+
+    <!-- Початок роботи з фільтрацією за мітками -->
+    <div class="dropdown" style="margin-left: 50px; width: 50px;">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Мітки
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 600px;padding: 20px;">
+
+        <!-- Початок роботи з блоком пошуку міток-->
+        <div class="row" style="width: 100%; ">
+          <input type="text" style="width: 50%; margin-left: 20px;" class="form-control"
+                 placeholder="Search...">
+          <button class="btn"
+                  style="background-color: #95E06C; margin-left: 5px; width: 20%;">Find
+          </button>
+          <button style="margin-left: 5px;">&#10539;</button>
+        </div>
+        <!-- Кінець роботи з блоком пошуку міток-->
+        <!-- Початок роботи з кнопками-->
+        <div>
+          <button>Обрати все</button>
+          <button>Зкинути все</button>
+        </div>
+        <!-- Кінець роботи з кнопками-->
+        <!-- Початок блоку з списком міток -->
+        <div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Мітка1
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+            <label class="form-check-label" for="defaultCheck2">
+              Мітка2
+            </label>
+          </div>
+        </div>
+        <!-- Кінець блоку з списком міток -->
+      </div>
+    </div>
+    <!-- Кінець роботи з фільтрацією за мітками -->
+
+    <!-- Початок блоку з типом статті -->
+    <div style="margin-left: 100px;">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+        <label class="form-check-label" for="defaultCheck3">
+         Стаття
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+        <label class="form-check-label" for="defaultCheck4">
+          Питання
+        </label>
+      </div>
+    </div>
+    <!-- Кінець блоку з списком міток -->
+
+    <!-- Початок роботи з пошуком -->
+    <div class="row" style="width: 600px; margin-left: 40px;">
+      <div style="width: 30%">
+        <select  class="form-control" name="cars" id="cars">
+          <option value="by_title">За заголовком</option>
+          <option value="by_login">За логіном автора</option>
+        </select>
+      </div>
+      <div style="margin-left: 5px; width: 35%">
+        <input type="text"  class="form-control"
+               placeholder="Search...">
+      </div>
+      <button class="btn"
+              style="background-color: #95E06C; margin-left: 5px; width: 20%;">Find
+      </button>
+      <button style="margin-left: 5px;">&#10539;</button>
+    </div>
+    <!-- Кінець роботи з пошуком -->
+
+    <!-- Початок роботи з фільтрацією (усі статті, власні, збережені) -->
+    <div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio12"
+               value="option1">
+        <label class="form-check-label" for="inlineRadio12">Усі</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio22"
+               value="option2">
+        <label class="form-check-label" for="inlineRadio22">Власні</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio23"
+               value="option2">
+        <label class="form-check-label" for="inlineRadio23">Збережені</label>
+      </div>
+    </div>
+    <!-- Кінець роботи з фільтрацією (усі статті, власні, збережені) -->
+
+    <!-- Початок роботи з сортуванням -->
+    <div class="row" style="margin-left: 30px;">
+      <!-- Початок роботи з типом сортування -->
+      <div>
+        <select  class="form-control" name="cars" id="sort">
+          <option value="by_title">За популярністю</option>
+          <option value="by_title">За заголовком</option>
+          <option value="by_login">За датою</option>
+        </select>
+      </div>
+      <!-- Кінець роботи з типом сортування -->
+
+      <!-- Початок роботи з порядком сортування -->
+      <div class="row" style="margin-left: 15px;">
+        <button
+            style="padding: 0; background-color: transparent; border-width: 0; font-size: xx-large; ">
+          &#8593;
+        </button>
+        <button
+            style="margin-left: 10px; padding: 0; background-color: transparent; color: grey; border-width: 0; font-size: xx-large">
+          &#8595;
+        </button>
+      </div>
+      <!-- Кінець роботи з порядком сортування-->
+    </div>
+    <!-- Кінець роботи з сортуванням -->
+  </div>
+  <!-- Кінець роботи з параметрами відображених статей-->
+
+  <!-- Початок роботи з списком статей -->
+  <div>
+
+    <!-- Початок роботи з однією статтею -->
+    <div>
+
+    </div>
+    <!-- Кінець роботи з однією статтею -->
+  </div>
+  <!-- Кінець роботи з списком статей -->
+  <!-- Початок роботи з пагінацією -->
+  <div>
+
+  </div>
+  <!-- Кінець роботи з пагінацією -->
+</div>
+<!-- Кінець роботи з статтям-->
 </body>
 </html>
