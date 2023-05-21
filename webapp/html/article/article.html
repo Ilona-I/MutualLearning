@@ -43,10 +43,16 @@
       <li class="nav-item menu_button">
         <a class="nav-link menu_button_text" href="#">ТЕСТИ</a>
       <li class="nav-item menu_button">
-        <button class="btn"
-                style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
-          Створити статтю
-        </button>
+        <div>
+          <button class="btn"
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #094D92; color: white">
+            Створити статтю
+          </button>
+          <button class="btn"
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+            Задати питання
+          </button>
+        </div>
       </li>
       <li>
         <div class="btn-group" style="margin-left: 50px;">
@@ -69,13 +75,18 @@
 </nav>
 
 <div class="row">
+  <!-- Початок блоку статті -->
   <div class="article_block">
     <h4>Заголовок статті</h4>
     <p class="datetime_text">ред. 21.05.2023</p>
+    <!-- Початок списку міток -->
     <div class="article_marks">
       <span class="badge badge-pill badge-light">Мітка1</span>
       <span class="badge badge-pill badge-light">Мітка2</span>
     </div>
+    <!-- Кінець списку міток -->
+    <!-- Початок тіла статті -->
+    <div>
     <p class="article_text">
       Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
       інструкцій,
@@ -110,10 +121,12 @@
       Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
       інструкцій,
     </p>
-    <p>Open a PDF file <a href="../../file/1.pdf">PDF</a>.</p>
-    <p>Open a DOCX file <a href="../../file/1.docx">DOCX</a>.</p>
-    <p>Open a PPTX file <a href="../../file/1.pptx">PPTX</a>.</p>
-
+    <p><a href="../../file/1.pdf">Завантажити PDF</a></p>
+    <p><a href="../../file/1.docx">Завантажити DOCX</a></p>
+    <p><a href="../../file/1.pptx">Завантажити PPTX</a></p>
+    </div>
+    <!-- Кінець тіла статті -->
+    <!-- Початок реакцій -->
     <div style="float: right">
       <button style="border-color: transparent; background-color: transparent">
         <img src="../../file/like_selected.png" width="20" height="30">
@@ -122,8 +135,12 @@
         <img src="../../file/dislike.png" width="20" height="30">
       </button>
     </div>
+    <!-- Кінець реакцій -->
   </div>
+  <!-- Кінець блоку статті -->
+  <!-- Початок бокових блоків (учасники, тести) -->
   <div>
+    <!-- Початок блоку з учасниками -->
     <div class="article_right_block">
       <h6>Творці</h6>
       <div class="row">
@@ -202,13 +219,15 @@
 
       </div>
     </div>
+    <!-- Кінець блоку з учасниками -->
+    <!-- Початок блоку з тестами -->
     <div class="article_right_block">
       <h6>Тести до статті</h6>
       <a href="#">test1</a>
     </div>
-
+    <!-- Кінець блоку з тестами -->
   </div>
-
+  <!-- Кінець бокових блоків (учасники, тести) -->
 </div>
 
 <div class="comment_block">
