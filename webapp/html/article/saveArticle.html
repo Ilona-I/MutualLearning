@@ -73,478 +73,541 @@
   </div>
 
 </nav>
-
-<div class="row">
-  <div class="edit_article_block">
-    <textarea class="form-control input_info" style="font-size: x-large"
-              placeholder="Заголовок статті"></textarea>
-    <!--Початок блоку з мітками-->
+<!-- Початок роботи з блоком статті -->
+<div class="edit_article_block">
+  <div>
+    <!-- Початок вибору типу статті (стаття чи питання) -->
     <div>
-      <div class="article_marks">
-        <span class="badge badge-pill badge-light">Мітка1</span>
-        <span class="badge badge-pill badge-light">Мітка2</span>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio12"
+               value="option1">
+        <label class="form-check-label" for="inlineRadio12">Стаття</label>
       </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio22"
+               value="option2">
+        <label class="form-check-label" for="inlineRadio22">Питання</label>
+      </div>
+    </div>
+    <!-- Кінець вибору типу статті (стаття чи питання) -->
 
-      <!-- Початок блоку з керуванням мітками -->
-      <div>
-        <button type="button" class="btn" data-toggle="modal"
-                style="background-color: #68B684; color: white;"
-                data-target="#exampleModalScrollable">
-          Керувати мітками
-        </button>
+  </div>
 
-        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">Додати мітку</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+  <hr>
+  <textarea class="form-control input_info" style="font-size: x-large"
+            placeholder="Заголовок статті"></textarea>
+  <!-- Початок блоку з мітками -->
+  <div>
+    <div class="article_marks">
+      <span class="badge badge-pill badge-light">Мітка1</span>
+      <span class="badge badge-pill badge-light">Мітка2</span>
+    </div>
+
+    <!-- Початок блоку з керуванням мітками -->
+    <div>
+      <button type="button" class="btn" data-toggle="modal"
+              style="background-color: #68B684; color: white;"
+              data-target="#exampleModalScrollable">
+        Керувати мітками
+      </button>
+
+      <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalScrollableTitle">Додати мітку</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- Початок блоку зі створенням мітки -->
+              <div class="dropdown" style="margin-left: 5px;">
+                <button class="btn btn-secondary dropdown-toggle" type="button"
+                        style="background-color: #C3F73A"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                  Створити мітку
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                     style="padding: 10px; width: 400px;">
+                  <input type="text" class="form-control input_info"
+                         placeholder="Mark name">
+                  <textarea class="form-control input_info"
+                            placeholder="Description"></textarea>
+
+                  <div class="row" style="margin-left: 20px; margin-top: 10px;">
+                    <button type="button" class="btn"
+                            style="color: #68B684; border-color: #68B684; background-color: white;">
+                      Зберегти
+                    </button>
+                    <button type="button" class="btn btn-secondary"
+                            style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
+                      Скасувати
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Кінець блоку зі створенням мітки -->
+              <!-- Початок роботи з блоком пошуку міток-->
+              <div class="row" style="width: 100%; margin-top: 20px;">
+                <input type="text" style="width: 70%; margin-left: 20px;" class="form-control"
+                       placeholder="Search...">
+                <button class="btn"
+                        style="background-color: #95E06C; margin-left: 5%; width: 20%;">Find
                 </button>
               </div>
-              <div class="modal-body">
-                <!-- Початок блоку зі створенням мітки -->
-                <div class="dropdown" style="margin-left: 5px;">
-                  <button class="btn btn-secondary dropdown-toggle" type="button"
-                          style="background-color: #C3F73A"
-                          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">
-                    Створити мітку
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                       style="padding: 10px; width: 400px;">
-                    <input type="text" class="form-control input_info"
-                           placeholder="Mark name">
-                    <textarea class="form-control input_info"
-                              placeholder="Description"></textarea>
-
-                    <div class="row" style="margin-left: 20px; margin-top: 10px;">
-                      <button type="button" class="btn"
-                              style="color: #68B684; border-color: #68B684; background-color: white;">
-                        Зберегти
-                      </button>
-                      <button type="button" class="btn btn-secondary"
-                              style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
-                        Скасувати
-                      </button>
-                    </div>
-                  </div>
+              <!-- Кінець роботи з блоком пошуку міток-->
+              <!-- Початок роботи з блоком фільтрації міток (всі, лише власні)-->
+              <div style="margin-top: 10px; margin-left: 20px;">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                         id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">Всі</label>
                 </div>
-
-                <!-- Кінець блоку зі створенням мітки -->
-                <!-- Початок роботи з блоком пошуку міток-->
-                <div class="row" style="width: 100%; margin-top: 20px;">
-                  <input type="text" style="width: 70%; margin-left: 20px;" class="form-control"
-                         placeholder="Search...">
-                  <button class="btn"
-                          style="background-color: #95E06C; margin-left: 5%; width: 20%;">Find
-                  </button>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                         id="inlineRadio2" value="option2">
+                  <label class="form-check-label" for="inlineRadio2">Власні</label>
                 </div>
-                <!-- Кінець роботи з блоком пошуку міток-->
-                <!-- Початок роботи з блоком фільтрації міток (всі, лише власні)-->
-                <div style="margin-top: 10px; margin-left: 20px;">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                           id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Всі</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                           id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Власні</label>
-                  </div>
-                </div>
-                <!-- Кінець роботи з блоком фільтрації міток (всі, лише власні)-->
-                <hr>
-                <!-- Початок блоку зі списком міток -->
-                <div
-                    style="margin-left: 20px; overflow-y:scroll; height: 350px;">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <div class="form-check-label" for="defaultCheck1">
-                      <div class="row" style="margin-left: 2px; width: 90%;">
-                        <p>Власна мітка1</p>
+              </div>
+              <!-- Кінець роботи з блоком фільтрації міток (всі, лише власні)-->
+              <hr>
+              <!-- Початок блоку зі списком міток -->
+              <div
+                  style="margin-left: 20px; overflow-y:scroll; height: 350px;">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <div class="form-check-label" for="defaultCheck1">
+                    <div class="row" style="margin-left: 2px; width: 90%;">
+                      <p>Власна мітка1</p>
 
-                        <!-- Початок блоку із редагуванням мітки -->
-                        <div class="dropdown" style="margin-left: 5px;">
-                          <button class="btn dropdown-toggle" type="button"
-                                  style="margin-left:10px; height:25px; background-color: transparent; color: #C3F73A; border-color: #C3F73A; font-size: small; padding-top: 0; padding-bottom: 0;"
-                                  id="dropdownMenuButton1" data-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false">
-                            Редагувати
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
-                               style="padding: 10px; width: 400px;">
-                            <input type="text" class="form-control input_info"
-                                   placeholder="Mark name">
-                            <textarea class="form-control input_info"
-                                      placeholder="Description"></textarea>
+                      <!-- Початок блоку із редагуванням мітки -->
+                      <div class="dropdown" style="margin-left: 5px;">
+                        <button class="btn dropdown-toggle" type="button"
+                                style="margin-left:10px; height:25px; background-color: transparent; color: #C3F73A; border-color: #C3F73A; font-size: small; padding-top: 0; padding-bottom: 0;"
+                                id="dropdownMenuButton1" data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                          Редагувати
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+                             style="padding: 10px; width: 400px;">
+                          <input type="text" class="form-control input_info"
+                                 placeholder="Mark name">
+                          <textarea class="form-control input_info"
+                                    placeholder="Description"></textarea>
 
-                            <div class="row" style="margin-left: 20px; margin-top: 10px;">
-                              <button type="button" class="btn"
-                                      style="color: #68B684; border-color: #68B684; background-color: white;">
-                                Зберегти
-                              </button>
-                              <button type="button" class="btn btn-secondary"
-                                      style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
-                                Скасувати
-                              </button>
-                            </div>
+                          <div class="row" style="margin-left: 20px; margin-top: 10px;">
+                            <button type="button" class="btn"
+                                    style="color: #68B684; border-color: #68B684; background-color: white;">
+                              Зберегти
+                            </button>
+                            <button type="button" class="btn btn-secondary"
+                                    style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
+                              Скасувати
+                            </button>
                           </div>
                         </div>
-                        <!-- Кінець блоку із редагуванням мітки -->
-
-                        <!-- Початок блоку з видаленням мітки -->
-                        <div class="dropdown" style="margin-left: 5px;">
-                          <button class="btn dropdown-toggle" type="button"
-                                  style="height:25px; margin-left: 5px; margin-top: 2px; padding-top: 0; padding-bottom: 0; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small;"
-                                  id="dropdownMenuButton2" data-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false">
-                            Видалити
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2"
-                               style="padding: 15px; width: 300px;">
-                            <p>Ви впевнені, що хочете видалити мітку?</p>
-                            <div class="row" style="margin-left: 20px; margin-top: 10px;">
-                              <button type="button" class="btn btn-danger">Видалити
-                              </button>
-                              <button type="button" class="btn btn-secondary"
-                                      style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
-                                Скасувати
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Кінець блоку з видаленням мітки -->
                       </div>
+                      <!-- Кінець блоку із редагуванням мітки -->
+
+                      <!-- Початок блоку з видаленням мітки -->
+                      <div class="dropdown" style="margin-left: 5px;">
+                        <button class="btn dropdown-toggle" type="button"
+                                style="height:25px; margin-left: 5px; margin-top: 2px; padding-top: 0; padding-bottom: 0; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small;"
+                                id="dropdownMenuButton2" data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                          Видалити
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2"
+                             style="padding: 15px; width: 300px;">
+                          <p>Ви впевнені, що хочете видалити мітку?</p>
+                          <div class="row" style="margin-left: 20px; margin-top: 10px;">
+                            <button type="button" class="btn btn-danger">Видалити
+                            </button>
+                            <button type="button" class="btn btn-secondary"
+                                    style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
+                              Скасувати
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Кінець блоку з видаленням мітки -->
                     </div>
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                    <label class="form-check-label" for="defaultCheck3">
-                      Мітка1
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                    <label class="form-check-label" for="defaultCheck4">
-                      Мітка2
-                    </label>
-                  </div>
                 </div>
-                <!-- Кінець блоку зі списком міток -->
-                <div class="modal-footer" style="margin-top: 5px;">
-                  <button type="button" class="btn"
-                          style="background-color: #68B684; color: white;">Зберегти
-                  </button>
-                  <button type="button" class="btn btn-secondary">Скасувати</button>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                  <label class="form-check-label" for="defaultCheck3">
+                    Мітка1
+                  </label>
                 </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                  <label class="form-check-label" for="defaultCheck4">
+                    Мітка2
+                  </label>
+                </div>
+              </div>
+              <!-- Кінець блоку зі списком міток -->
+              <div class="modal-footer" style="margin-top: 5px;">
+                <button type="button" class="btn"
+                        style="background-color: #68B684; color: white;">Зберегти
+                </button>
+                <button type="button" class="btn btn-secondary">Скасувати</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Кінець блоку з з керуванням мітками-->
     </div>
-    <!-- Кінець блоку з мітками -->
+    <!-- Кінець блоку з з керуванням мітками-->
+  </div>
+  <!-- Кінець блоку з мітками -->
+  <hr>
+  <!-- Початок роботи з блоками статті -->
 
-    <!-- Початок роботи з блоками статті -->
+  <!-- Початок роботи з блоком додавання елементу -->
+  <div class="row" style="width: 100%;">
+    <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
+      <button class="btn btn-light dropdown-toggle" type="button"
+              style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton31"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton31">
+        <button class="dropdown-item">Додати текст</button>
+        <button class="dropdown-item">Додати фото</button>
+        <button class="dropdown-item">Додати код</button>
+        <button class="dropdown-item">Додати файл</button>
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <hr>
+    </div>
+  </div>
+  <!-- Кінець роботи з блоком додавання елементу -->
 
-    <!-- Початок роботи з блоком додавання елементу -->
-    <div class="row" style="width: 100%;">
-      <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
-        <button class="btn btn-light dropdown-toggle" type="button" style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton31" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          +
+
+  <div class="row" style="width: 130%;">
+    <div style="width: 77%; margin-left: 15px;">
+      <!-- Початок роботи з блоком попереднього перегляду-->
+      <div>
+        <p class="article_text">
+          Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
+          інструкцій,
+        </p>
+      </div>
+      <!-- Кінець роботи з блоком попереднього перегляду-->
+      <!-- Початок роботи з блоком редагування-->
+      <div>
+<textarea class="form-control input_info article_text">
+  Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
+  інструкцій,
+</textarea>
+      </div>
+      <!-- Кінець роботи з блоком редагування-->
+    </div>
+    <!-- Початок роботи з блоком опцій редагування-->
+    <div class="edit_article_option_block">
+
+      <!-- Початок роботи з кнопками позиції блоку-->
+      <div class="row" style="margin-left: 15px;">
+        <button
+            style="padding: 0; background-color: transparent; border-width: 0; color: #68B684; font-size: xx-large">
+          &#8673;
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton31" >
-          <button class="dropdown-item" >Додати текст</button>
-          <button class="dropdown-item" >Додати фото</button>
-          <button class="dropdown-item" >Додати код</button>
-          <button class="dropdown-item" >Додати файл</button>
-        </div>
+        <button
+            style="margin-left: 30px; padding: 0; background-color: transparent; border-width: 0;  color: #68B684; font-size: xx-large">
+          &#8675;
+        </button>
       </div>
-      <div style="width: 100%;">
-        <hr>
-      </div>
-    </div>
-    <!-- Кінець роботи з блоком додавання елементу -->
+      <!-- Кінець роботи з кнопками позиції блоку-->
 
-
-    <div class="row" style="width: 130%" >
-      <div style="width: 77%; margin-left: 15px;">
-        <!-- Початок роботи з блоком попереднього перегляду-->
-        <div>
-          <p class="article_text">
-            Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
-            інструкцій,
-          </p>
-        </div>
-        <!-- Кінець роботи з блоком попереднього перегляду-->
-        <!-- Початок роботи з блоком редагування-->
-        <div >
-          <textarea class="form-control input_info article_text" >
-            Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
-            інструкцій,
-          </textarea>
-        </div>
-        <!-- Кінець роботи з блоком редагування-->
-      </div>
-      <!-- Початок роботи з блоком опцій редагування-->
-      <div class="edit_article_option_block">
-
-        <!-- Початок роботи з кнопками позиції блоку-->
-        <div class="row" style="margin-left: 15px;">
-          <button style="padding: 0; background-color: transparent; border-width: 0; color: #68B684; font-size: xx-large">&#8673;</button>
-          <button style="margin-left: 30px; padding: 0; background-color: transparent; border-width: 0;  color: #68B684; font-size: xx-large">&#8675;</button>
-        </div>
-        <!-- Кінець роботи з кнопками позиції блоку-->
-
-        <!-- Початок роботи з кнопкою редагування-->
-        <button class="btn" style="border-color: #95E06C; color: #95E06C; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;">Редагувати</button>
-        <!-- Кінець роботи з кнопкою редагування-->
-        <!-- Початок роботи з кнопкою скасування редагування-->
-        <button class="btn" style="border-color: grey ; color: grey; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;">Скасувати</button>
-        <!-- Кінець роботи з кнопкою скасування редагування-->
-        <!-- Початок блоку з видаленням елементу -->
-        <div class="dropdown" >
-          <button class="btn dropdown-toggle" type="button"
-                  style="height:25px;  width: 100px; margin-top: 2px; padding-top: 0; padding-bottom: 0; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small;"
-                  id="dropdownMenuButton21" data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-            Видалити
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton21"
-               style="padding: 15px; width: 300px;">
-            <p>Ви впевнені, що хочете видалити блок?</p>
-            <div class="row" style="margin-left: 20px; margin-top: 10px;">
-              <button type="button" class="btn btn-danger">Видалити
-              </button>
-              <button type="button" class="btn btn-secondary"
-                      style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
-                Скасувати
-              </button>
-            </div>
+      <!-- Початок роботи з кнопкою редагування-->
+      <button class="btn"
+              style="border-color: #95E06C; color: #95E06C; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;">
+        Редагувати
+      </button>
+      <!-- Кінець роботи з кнопкою редагування-->
+      <!-- Початок роботи з кнопкою скасування редагування-->
+      <button class="btn"
+              style="border-color: grey ; color: grey; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;">
+        Скасувати
+      </button>
+      <!-- Кінець роботи з кнопкою скасування редагування-->
+      <!-- Початок блоку з видаленням елементу -->
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button"
+                style="height:25px;  width: 100px; margin-top: 2px; padding-top: 0; padding-bottom: 0; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small;"
+                id="dropdownMenuButton21" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+          Видалити
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton21"
+             style="padding: 15px; width: 300px;">
+          <p>Ви впевнені, що хочете видалити блок?</p>
+          <div class="row" style="margin-left: 20px; margin-top: 10px;">
+            <button type="button" class="btn btn-danger">Видалити
+            </button>
+            <button type="button" class="btn btn-secondary"
+                    style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
+              Скасувати
+            </button>
           </div>
         </div>
-        <!-- Кінець блоку з видаленням елементу -->
       </div>
-      <!-- Кінець роботи з блоком опцій редагування-->
+      <!-- Кінець блоку з видаленням елементу -->
     </div>
+    <!-- Кінець роботи з блоком опцій редагування-->
+  </div>
 
-    <!-- Початок роботи з блоком додавання елементу -->
-    <div class="row" style="width: 100%;">
-      <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
-        <button class="btn btn-light dropdown-toggle" type="button" style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton32" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          +
+  <!-- Початок роботи з блоком додавання елементу -->
+  <div class="row" style="width: 100%;">
+    <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
+      <button class="btn btn-light dropdown-toggle" type="button"
+              style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton32"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton32">
+        <button class="dropdown-item">Додати текст</button>
+        <button class="dropdown-item">Додати фото</button>
+        <button class="dropdown-item">Додати код</button>
+        <button class="dropdown-item">Додати файл</button>
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <hr>
+    </div>
+  </div>
+  <!-- Кінець роботи з блоком додавання елементу -->
+  <div class="row" style="width: 130%">
+    <div style="width: 77%; margin-left: 15px;">
+      <!-- Початок роботи з блоком попереднього перегляду-->
+      <div>
+        <img src="../../file/profile.png" alt="Фото">
+      </div>
+      <!-- Кінець роботи з блоком попереднього перегляду-->
+      <!-- Початок роботи з блоком редагування-->
+      <div style="margin-top: 10px;">
+        <input type="file" accept="image/*" onchange="loadFile(event)" id="actual-img-btn" hidden>
+        <label for="actual-img-btn" class="btn btn-light">Оберіть зображення</label>
+        <img id="output" style="max-width: 100%;"/>
+      </div>
+      <!-- Кінець роботи з блоком редагування-->
+    </div>
+    <!-- Початок роботи з блоком опцій редагування-->
+    <div class="edit_article_option_block">
+
+      <!-- Початок роботи з кнопками позиції блоку-->
+      <div class="row" style="margin-left: 15px;">
+        <button
+            style="padding: 0; background-color: transparent; border-width: 0; color: #68B684; font-size: xx-large">
+          &#8673;
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton32" >
-          <button class="dropdown-item" >Додати текст</button>
-          <button class="dropdown-item" >Додати фото</button>
-          <button class="dropdown-item" >Додати код</button>
-          <button class="dropdown-item" >Додати файл</button>
-        </div>
+        <button
+            style="margin-left: 30px; padding: 0; background-color: transparent; border-width: 0;  color: #68B684; font-size: xx-large">
+          &#8675;
+        </button>
       </div>
-      <div style="width: 100%;">
-        <hr>
-      </div>
-    </div>
-    <!-- Кінець роботи з блоком додавання елементу -->
-    <div class="row" style="width: 130%" >
-      <div style="width: 77%; margin-left: 15px;">
-        <!-- Початок роботи з блоком попереднього перегляду-->
-        <div>
-      <img src="../../file/profile.png" alt="Фото">
-        </div>
-        <!-- Кінець роботи з блоком попереднього перегляду-->
-        <!-- Початок роботи з блоком редагування-->
-        <div style="margin-top: 10px;">
-          <input type="file" accept="image/*" onchange="loadFile(event)" id="actual-img-btn" hidden>
-          <label for="actual-img-btn" class="btn btn-light">Оберіть зображення</label>
-          <img id="output" style="max-width: 100%;"/>
-        </div>
-        <!-- Кінець роботи з блоком редагування-->
-      </div>
-      <!-- Початок роботи з блоком опцій редагування-->
-      <div class="edit_article_option_block">
+      <!-- Кінець роботи з кнопками позиції блоку-->
 
-        <!-- Початок роботи з кнопками позиції блоку-->
-        <div class="row" style="margin-left: 15px;">
-          <button style="padding: 0; background-color: transparent; border-width: 0; color: #68B684; font-size: xx-large">&#8673;</button>
-          <button style="margin-left: 30px; padding: 0; background-color: transparent; border-width: 0;  color: #68B684; font-size: xx-large">&#8675;</button>
-        </div>
-        <!-- Кінець роботи з кнопками позиції блоку-->
-
-        <!-- Початок роботи з кнопкою редагування-->
-        <button class="btn" style="border-color: #95E06C; color: #95E06C; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;">Редагувати</button>
-        <!-- Кінець роботи з кнопкою редагування-->
-        <!-- Початок роботи з кнопкою скасування редагування-->
-        <button class="btn" style="border-color: grey ; color: grey; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;">Скасувати</button>
-        <!-- Кінець роботи з кнопкою скасування редагування-->
-        <!-- Початок блоку з видаленням елементу -->
-        <div class="dropdown" >
-          <button class="btn dropdown-toggle" type="button"
-                  style="height:25px;  width: 100px; margin-top: 2px; padding-top: 0; padding-bottom: 0; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small;"
-                  id="dropdownMenuButton211" data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-            Видалити
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton211"
-               style="padding: 15px; width: 300px;">
-            <p>Ви впевнені, що хочете видалити блок?</p>
-            <div class="row" style="margin-left: 20px; margin-top: 10px;">
-              <button type="button" class="btn btn-danger">Видалити
-              </button>
-              <button type="button" class="btn btn-secondary"
-                      style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
-                Скасувати
-              </button>
-            </div>
+      <!-- Початок роботи з кнопкою редагування-->
+      <button class="btn"
+              style="border-color: #95E06C; color: #95E06C; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;">
+        Редагувати
+      </button>
+      <!-- Кінець роботи з кнопкою редагування-->
+      <!-- Початок роботи з кнопкою скасування редагування-->
+      <button class="btn"
+              style="border-color: grey ; color: grey; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;">
+        Скасувати
+      </button>
+      <!-- Кінець роботи з кнопкою скасування редагування-->
+      <!-- Початок блоку з видаленням елементу -->
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button"
+                style="height:25px;  width: 100px; margin-top: 2px; padding-top: 0; padding-bottom: 0; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small;"
+                id="dropdownMenuButton211" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+          Видалити
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton211"
+             style="padding: 15px; width: 300px;">
+          <p>Ви впевнені, що хочете видалити блок?</p>
+          <div class="row" style="margin-left: 20px; margin-top: 10px;">
+            <button type="button" class="btn btn-danger">Видалити
+            </button>
+            <button type="button" class="btn btn-secondary"
+                    style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
+              Скасувати
+            </button>
           </div>
         </div>
-        <!-- Кінець блоку з видаленням елементу -->
       </div>
-      <!-- Кінець роботи з блоком опцій редагування-->
+      <!-- Кінець блоку з видаленням елементу -->
     </div>
-    <!-- Початок роботи з блоком додавання елементу -->
-    <div class="row" style="width: 100%;">
-      <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
-        <button class="btn btn-light dropdown-toggle" type="button" style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton33" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          +
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton33" >
-          <button class="dropdown-item" >Додати текст</button>
-          <button class="dropdown-item" >Додати фото</button>
-          <button class="dropdown-item" >Додати код</button>
-          <button class="dropdown-item" >Додати файл</button>
-        </div>
-      </div>
-      <div style="width: 100%;">
-        <hr>
+    <!-- Кінець роботи з блоком опцій редагування-->
+  </div>
+  <!-- Початок роботи з блоком додавання елементу -->
+  <div class="row" style="width: 100%;">
+    <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
+      <button class="btn btn-light dropdown-toggle" type="button"
+              style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton33"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton33">
+        <button class="dropdown-item">Додати текст</button>
+        <button class="dropdown-item">Додати фото</button>
+        <button class="dropdown-item">Додати код</button>
+        <button class="dropdown-item">Додати файл</button>
       </div>
     </div>
-    <!-- Кінець роботи з блоком додавання елементу -->
-    <div>
-      <p>
-      <pre>
+    <div style="width: 100%;">
+      <hr>
+    </div>
+  </div>
+  <!-- Кінець роботи з блоком додавання елементу -->
+  <div>
+    <p>
+    <pre>
 <code>
 Поняття алгоритму належить до підвалин математики. Обчислювальні процеси алгоритмічного характеру (як-то арифметичні
 дії над цілими
 </code>
     </pre>
-      </p>
-    </div>
-    <!-- Початок роботи з блоком додавання елементу -->
-    <div class="row" style="width: 100%;">
-      <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
-        <button class="btn btn-light dropdown-toggle" type="button" style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton34" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          +
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton34" >
-          <button class="dropdown-item" >Додати текст</button>
-          <button class="dropdown-item" >Додати фото</button>
-          <button class="dropdown-item" >Додати код</button>
-          <button class="dropdown-item" >Додати файл</button>
-        </div>
-      </div>
-      <div style="width: 100%;">
-        <hr>
-      </div>
-    </div>
-    <!-- Кінець роботи з блоком додавання елементу -->
-    <div>
-      <p class="article_text">
-        Ім'ям перського математика аль-Хорезмі — набір інструкцій
-      </p>
-    </div>
-    <!-- Початок роботи з блоком додавання елементу -->
-    <div class="row" style="width: 100%;">
-      <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
-        <button class="btn btn-light dropdown-toggle" type="button" style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton35" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          +
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton35" >
-          <button class="dropdown-item" >Додати текст</button>
-          <button class="dropdown-item" >Додати фото</button>
-          <button class="dropdown-item" >Додати код</button>
-          <button class="dropdown-item" >Додати файл</button>
-        </div>
-      </div>
-      <div style="width: 100%;">
-        <hr>
-      </div>
-    </div>
-    <!-- Кінець роботи з блоком додавання елементу -->
-    <div>
-      <p><a href="../../file/1.pdf">Завантажити PDF</a></p>
-    </div>
-    <!-- Початок роботи з блоком додавання елементу -->
-    <div class="row" style="width: 100%;">
-      <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
-        <button class="btn btn-light dropdown-toggle" type="button" style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton36" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          +
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton36" >
-          <button class="dropdown-item" >Додати текст</button>
-          <button class="dropdown-item" >Додати фото</button>
-          <button class="dropdown-item" >Додати код</button>
-          <button class="dropdown-item" >Додати файл</button>
-        </div>
-      </div>
-      <div style="width: 100%;">
-        <hr>
-      </div>
-    </div>
-    <!-- Кінець роботи з блоком додавання елементу -->
-    <div>
-      <p><a href="../../file/1.docx">Завантажити DOCX</a></p>
-    </div>
-    <!-- Початок роботи з блоком додавання елементу -->
-    <div class="row" style="width: 100%;">
-      <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
-        <button class="btn btn-light dropdown-toggle" type="button" style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton37" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          +
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton37" >
-          <button class="dropdown-item" >Додати текст</button>
-          <button class="dropdown-item" >Додати фото</button>
-          <button class="dropdown-item" >Додати код</button>
-          <button class="dropdown-item" >Додати файл</button>
-        </div>
-      </div>
-      <div style="width: 100%;">
-        <hr>
-      </div>
-    </div>
-    <!-- Кінець роботи з блоком додавання елементу -->
-    <div>
-      <p><a href="../../file/1.pptx">Завантажити PPTX</a></p>
-    </div>
-    <!-- Початок роботи з блоком додавання елементу -->
-    <div class="row" style="width: 100%;">
-      <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
-        <button class="btn btn-light dropdown-toggle" type="button" style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton38" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          +
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton38" >
-          <button class="dropdown-item" >Додати текст</button>
-          <button class="dropdown-item" >Додати фото</button>
-          <button class="dropdown-item" >Додати код</button>
-          <button class="dropdown-item" >Додати файл</button>
-        </div>
-      </div>
-      <div style="width: 100%;">
-        <hr>
-      </div>
-    </div>
-    <!-- Кінець роботи з блоком додавання елементу -->
-    <!-- Кінець роботи з блоками статті -->
+    </p>
   </div>
+  <!-- Початок роботи з блоком додавання елементу -->
+  <div class="row" style="width: 100%;">
+    <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
+      <button class="btn btn-light dropdown-toggle" type="button"
+              style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton34"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton34">
+        <button class="dropdown-item">Додати текст</button>
+        <button class="dropdown-item">Додати фото</button>
+        <button class="dropdown-item">Додати код</button>
+        <button class="dropdown-item">Додати файл</button>
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <hr>
+    </div>
+  </div>
+  <!-- Кінець роботи з блоком додавання елементу -->
+  <div>
+    <p class="article_text">
+      Ім'ям перського математика аль-Хорезмі — набір інструкцій
+    </p>
+  </div>
+  <!-- Початок роботи з блоком додавання елементу -->
+  <div class="row" style="width: 100%;">
+    <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
+      <button class="btn btn-light dropdown-toggle" type="button"
+              style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton35"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton35">
+        <button class="dropdown-item">Додати текст</button>
+        <button class="dropdown-item">Додати фото</button>
+        <button class="dropdown-item">Додати код</button>
+        <button class="dropdown-item">Додати файл</button>
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <hr>
+    </div>
+  </div>
+  <!-- Кінець роботи з блоком додавання елементу -->
+  <div>
+    <p><a href="../../file/1.pdf">Завантажити PDF</a></p>
+  </div>
+  <!-- Початок роботи з блоком додавання елементу -->
+  <div class="row" style="width: 100%;">
+    <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
+      <button class="btn btn-light dropdown-toggle" type="button"
+              style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton36"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton36">
+        <button class="dropdown-item">Додати текст</button>
+        <button class="dropdown-item">Додати фото</button>
+        <button class="dropdown-item">Додати код</button>
+        <button class="dropdown-item">Додати файл</button>
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <hr>
+    </div>
+  </div>
+  <!-- Кінець роботи з блоком додавання елементу -->
+  <div>
+    <p><a href="../../file/1.docx">Завантажити DOCX</a></p>
+  </div>
+  <!-- Початок роботи з блоком додавання елементу -->
+  <div class="row" style="width: 100%;">
+    <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
+      <button class="btn btn-light dropdown-toggle" type="button"
+              style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton37"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton37">
+        <button class="dropdown-item">Додати текст</button>
+        <button class="dropdown-item">Додати фото</button>
+        <button class="dropdown-item">Додати код</button>
+        <button class="dropdown-item">Додати файл</button>
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <hr>
+    </div>
+  </div>
+  <!-- Кінець роботи з блоком додавання елементу -->
+  <div>
+    <p><a href="../../file/1.pptx">Завантажити PPTX</a></p>
+  </div>
+  <!-- Початок роботи з блоком додавання елементу -->
+  <div class="row" style="width: 100%;">
+    <div class="dropdown" style="margin-top: 5px; margin-left: -70px; ">
+      <button class="btn btn-light dropdown-toggle" type="button"
+              style="height: 28px; padding-right: 0; padding-top: 0;" id="dropdownMenuButton38"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        +
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton38">
+        <button class="dropdown-item">Додати текст</button>
+        <button class="dropdown-item">Додати фото</button>
+        <button class="dropdown-item">Додати код</button>
+        <button class="dropdown-item">Додати файл</button>
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <hr>
+    </div>
+  </div>
+  <!-- Кінець роботи з блоком додавання елементу -->
+  <!-- Початок кнопки збереження змін -->
+  <div style="margin-top: 10px;">
+    <button class="btn btn-info" style="width: 100%;">Зберегти зміни</button>
+  </div>
+  <!-- Кінець кнопки збереження змін -->
+  <!-- Кінець роботи з блоками статті -->
 </div>
+<!-- Кінець роботи з блоком статті -->
 <script src="../../js/uploadImage.js"></script>
 </body>
 </html>
