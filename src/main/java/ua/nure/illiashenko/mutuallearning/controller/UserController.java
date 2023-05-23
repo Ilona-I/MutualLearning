@@ -54,7 +54,7 @@ public class UserController {
 
     }
 
-    @GetMapping
+    @GetMapping("/email")
     public UserResponse getUserByEmail(@RequestParam String email) {
         return null;
     }
