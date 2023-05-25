@@ -11,5 +11,6 @@ public class ArticlePart {
     private int articleId;
     private int sequenceNumber;
     private String text;
+    private String link;
     private String type;
 }

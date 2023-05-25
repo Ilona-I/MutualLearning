@@ -11,5 +11,6 @@ public class CommentPart {
     private int commentId;
     private int sequenceNumber;
     private String text;
+    private String link;
     private String type;
 }

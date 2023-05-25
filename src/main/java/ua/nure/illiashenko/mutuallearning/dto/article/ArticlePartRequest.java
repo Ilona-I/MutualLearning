@@ -11,6 +11,7 @@ public class ArticlePartRequest {
     private int id;
     private int sequenceNumber;
     private String text;
+    private String link;
     private MultipartFile file;
     private String type;
 }

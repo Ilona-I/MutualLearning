@@ -68,13 +68,30 @@ public class ArticleController {
                         .id(2)
                         .sequenceNumber(2)
                         .text("Text2")
+                        .link("/article/1.png")
                         .type("image")
                         .build(),
                     ArticlePartResponse.builder()
                         .id(3)
                         .sequenceNumber(3)
-                        .text("Text1")
+                        .text("Text3")
+                        .link("/article/1.pdf")
                         .type("file")
+                        .build(),
+                    ArticlePartResponse.builder()
+                        .id(4)
+                        .sequenceNumber(4)
+                        .text("<input type='text' \"\n"
+                            + "        + \"      id='sequenceNumber\" + partId + \"' \"\n"
+                            + "        + \"      value='\" + sequenceNumber + \"' hidden>")
+                        .type("code")
+                        .build(),
+                    ArticlePartResponse.builder()
+                        .id(5)
+                        .sequenceNumber(5)
+                        .text("Current link")
+                        .link("https://www.google.de/")
+                        .type("link")
                         .build()
                 }
             )

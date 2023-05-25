@@ -95,7 +95,7 @@ function setMarks(marks) {
   document.getElementById("markList").innerHTML = innerHTML;
 }
 
-function getAddNewElementButtonBlock(partId) {
+function getAddNewElementButtonBlock(partId, sequenceNumber) {
   return "    <!-- Початок роботи з блоком додавання елементу -->\n"
       + "    <div class=\"row\" style=\"width: 105%;\">\n"
       + "      <div class=\"dropdown\" style=\"margin-top: 5px; margin-left: -70px; \">\n"
@@ -107,10 +107,16 @@ function getAddNewElementButtonBlock(partId) {
       + "        </button>\n"
       + "        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButtonAdd"
       + partId + "\">\n"
-      + "          <button class=\"dropdown-item\">Додати текст</button>\n"
-      + "          <button class=\"dropdown-item\">Додати фото</button>\n"
-      + "          <button class=\"dropdown-item\">Додати код</button>\n"
-      + "          <button class=\"dropdown-item\">Додати файл</button>\n"
+      + "          <button class=\"dropdown-item\" onclick='addText(" + sequenceNumber
+      + ")'>Додати текст</button>\n"
+      + "          <button class=\"dropdown-item\" onclick='addPhoto(" + sequenceNumber
+      + ")'>Додати фото</button>\n"
+      + "          <button class=\"dropdown-item\" onclick='addCode(" + sequenceNumber
+      + ")'>Додати код</button>\n"
+      + "          <button class=\"dropdown-item\" onclick='addFile(" + sequenceNumber
+      + ")'>Додати файл</button>\n"
+      + "          <button class=\"dropdown-item\" onclick='addLink(" + sequenceNumber
+      + ")'>Додати файл</button>\n"
       + "        </div>\n"
       + "      </div>\n"
       + "      <div style=\"width: 100%;\">\n"
@@ -203,6 +209,128 @@ function getTextBlock(partMap) {
       + "      </div>";
 }
 
+function getImageBlock(partMap) {
+  return " <div style=\"width: 77%; margin-left: 15px;\">\n"
+      + "        <!-- Початок роботи з блоком попереднього перегляду-->\n"
+      + "        <div id='prevBlock" + partMap.get("id") + "'>\n"
+      + "          <img src=\"../../file/profile.png\" alt=\"Фото\">\n"
+      + "        </div>\n"
+      + "        <!-- Кінець роботи з блоком попереднього перегляду-->\n"
+      + "        <!-- Початок роботи з блоком редагування-->\n"
+      + "        <div id='editBlock" + partMap.get("id") + "' "
+      + "             style=\"margin-top: 10px;\""
+      + "             hidden>\n"
+      + "          <input type=\"file\" accept=\"image/*\" "
+      + "                 onchange=\"loadFile(event, 'output" + partMap.get(
+          "id") + "')\" "
+      + "                 id=\"actual-img-btn" + partMap.get("id")
+      + "\" hidden>\n"
+      + "          <label for=\"actual-img-btn" + partMap.get("id")
+      + "\" class=\"btn btn-light\">Оберіть зображення</label>\n"
+      + "          <img id=\"output" + partMap.get("id")
+      + "\" style=\"max-width: 100%;\"/>\n"
+      + "        </div>\n"
+      + "        <!-- Кінець роботи з блоком редагування-->\n"
+      + "      </div>\n";
+}
+
+function getCodeBlock(partMap) {
+  return " <div style=\"width: 77%; margin-left: 15px;\""
+      + "         id='prevBlock" + partMap.get("id") + "'>\n"
+      + "      <p>\n"
+      + "      <pre>\n"
+      + "<code>\n"
+      + escapeHTML(partMap.get("text"))
+      + "</code>\n"
+      + "    </pre>\n"
+      + "      </p>\n"
+      + "    </div>"
+      + "<div style=\"width: 77%; margin-left: 15px;\""
+      + "      id='editBlock" + partMap.get("id") + "' hidden>"
+      + "<textarea style='width: 100%; height: 300px'> "
+      + escapeHTML(partMap.get("text"))
+      + "</textarea>"
+      + "</div>";
+}
+
+function getFileBlock(partMap) {
+  return "<div style=\"width: 77%; margin-left: 15px;\">\n"
+      + "         <div id='prevBlock" + partMap.get("id") + "'>"
+      + "               <p><a href=\"../../file/1.pdf\">" + partMap.get("text")
+      + "</a></p>\n"
+      + "         </div>"
+      + "         <div id='editBlock" + partMap.get("id") + "' hidden> "
+      + "             <p>Текст посилання:</p>"
+      + "           <input type='text' class=\"form-control input_info article_text\" value='"
+      + partMap.get("text") + "'>"
+      + "             <br>"
+      + "          <label for=\"file" + partMap.get("id")
+      + "\" class=\"drop-container\">\n"
+      + "  <input type=\"file\" id=\"file" + partMap.get("id")
+      + "\" accept=\"*/*\" required>\n"
+      + "</label>"
+      + "         </div>  "
+      + "       </div>";
+}
+
+function setArticleBody(articleParts) {
+  let innerHTML = "<div id='articleBlock0'></div>"
+  innerHTML += getAddNewElementButtonBlock(0, 0);
+  for (const element of articleParts) {
+    let part = JSON.parse(JSON.stringify(element));
+    let partMap = new Map(Object.entries(part));
+    let partId = partMap.get("id");
+    let sequenceNumber = partMap.get("sequenceNumber");
+    let partType = partMap.get("type");
+    innerHTML += "<div id='articleBlock" + partId + "'>"
+        + "<input type='number' "
+        + "      name='sequenceNumber'"
+        + "      id='sequenceNumber" + partId + "' "
+        + "      value='" + sequenceNumber + "' hidden>"
+        + "<input type='text' "
+        + "      name='type'"
+        + "      id='type" + partId + "' "
+        + "      value='" + partType + "' hidden>"
+        + "<div class=\"row\" style=\"width: 130%;\">";
+
+    if (partType === "text") {
+      innerHTML += getTextBlock(partMap);
+    } else if (partType === "image") {
+      innerHTML += getImageBlock(partMap);
+    } else if (partType === "code") {
+      innerHTML += getCodeBlock(partMap);
+    } else if (partType === "file") {
+      innerHTML += getFileBlock(partMap);
+    } else if (partType === "link") {
+      innerHTML += " <div style=\"width: 77%; margin-left: 15px;\""
+          + "         id='prevBlock" + partMap.get("id") + "'>\n"
+          + " <a href='" + partMap.get("link") + "'>" + partMap.get("text")
+          + "</a>"
+          + "    </div>"
+          + "<div style=\"width: 77%; margin-left: 15px;\""
+          + "      id='editBlock" + partMap.get("id") + "' hidden>"
+          + "   <p>Текст посилання</p>"
+          + "           <input type='text' class=\"form-control input_info article_text\" value='"
+          + partMap.get("text") + "'>"
+          + "<br>"
+          + "   <p>Посилання</p>"
+          + "           <input type='text' class=\"form-control input_info article_text\" value='"
+          + partMap.get("link") + "'>"
+          + "</div>";
+    }
+
+    innerHTML += getOptionBlock(partId);
+    innerHTML += "</div></div>";
+    innerHTML += getAddNewElementButtonBlock(partId, sequenceNumber);
+  }
+  document.getElementById("articleBody").innerHTML = innerHTML;
+}
+
+function escapeHTML(html) {
+  return html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g,
+      '&gt;');
+}
+
 function jsonToHTML(jsonString) {
   let jsonObject = JSON.parse(jsonString);
   let dataMap = new Map(Object.entries(jsonObject));
@@ -222,67 +350,7 @@ function jsonToHTML(jsonString) {
     setTypeArticle();
   }
   let articleParts = dataMap.get("articleParts");
-  let innerHTML = getAddNewElementButtonBlock(0);
-  for (const element of articleParts) {
-    let part = JSON.parse(JSON.stringify(element));
-    let partMap = new Map(Object.entries(part));
-    let partId = partMap.get("id");
-    let sequenceNumber = partMap.get("sequenceNumber");
-    let partType = partMap.get("type");
-    innerHTML += "<div>"
-        + "<input type='text' id='sequenceNumber" + partId + "' value='"
-        + sequenceNumber + "' hidden>"
-        + " <div class=\"row\" style=\"width: 130%;\">";
-
-    if (partType === "text") {
-      innerHTML += getTextBlock(partMap);
-    } else if (partType === "image") {
-      innerHTML += " <div style=\"width: 77%; margin-left: 15px;\">\n"
-          + "        <!-- Початок роботи з блоком попереднього перегляду-->\n"
-          + "        <div id='prevBlock" + partMap.get("id") + "'>\n"
-          + "          <img src=\"../../file/profile.png\" alt=\"Фото\">\n"
-          + "        </div>\n"
-          + "        <!-- Кінець роботи з блоком попереднього перегляду-->\n"
-          + "        <!-- Початок роботи з блоком редагування-->\n"
-          + "        <div id='editBlock" + partMap.get("id") + "' "
-          + "             style=\"margin-top: 10px;\""
-          + "             hidden>\n"
-          + "          <input type=\"file\" accept=\"image/*\" onchange=\"loadFile(event)\" id=\"actual-img-btn\" hidden>\n"
-          + "          <label for=\"actual-img-btn\" class=\"btn btn-light\">Оберіть зображення</label>\n"
-          + "          <img id=\"output\" style=\"max-width: 100%;\"/>\n"
-          + "        </div>\n"
-          + "        <!-- Кінець роботи з блоком редагування-->\n"
-          + "      </div>\n";
-    } else if (partType === "code") {
-      innerHTML += " <div style=\"width: 77%; margin-left: 15px;\""
-          + "         id='prevBlock" + partMap.get("id") + "'>\n"
-          + "      <p>\n"
-          + "      <pre>\n"
-          + "<code>\n"
-          + partMap.get("text")
-          + "</code>\n"
-          + "    </pre>\n"
-          + "      </p>\n"
-          + "    </div>"
-          + "<div id='editBlock" + partMap.get("id") + "' hidden>"
-          + partMap.get("text") + "</div>";
-
-    } else if (partType === "file") {
-      innerHTML += "<div style=\"width: 77%; margin-left: 15px;\">\n"
-          + "         <div id='prevBlock" + partMap.get("id") + "'>"
-          + "               <p><a href=\"../../file/1.pdf\">Завантажити PDF</a></p>\n"
-          + "         </div>"
-          + "         <div id='editBlock" + partMap.get("id") + "' hidden> "
-          + "               Edit"
-          + "         </div>  "
-          + "       </div>";
-    }
-
-    innerHTML += getOptionBlock(partId);
-    innerHTML += "</div></div>";
-    innerHTML += getAddNewElementButtonBlock(partId);
-  }
-  document.getElementById("articleBody").innerHTML = innerHTML;
+  setArticleBody(articleParts);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -309,4 +377,41 @@ function cancelEditBlock(partId) {
   document.getElementById(editBlock).hidden = true;
   document.getElementById(editButtonOption).hidden = false;
   document.getElementById(cancelButtonOption).hidden = true;
+}
+
+function addText(prevSequenceNumberValue) {
+  let allSequenceNumbers = document.getElementsByName("sequenceNumber");
+  for (const element of allSequenceNumbers) {
+    let elementValue = element.value;
+    if (elementValue > prevSequenceNumberValue) {
+      element.value = elementValue + 1;
+    } else if (elementValue === prevSequenceNumberValue) {
+      let codeAfter = "<div><input type='number' "
+          + "      name='sequenceNumber'"
+          + "      value='" + (elementValue + 1) + "' hidden>"
+          + "<input type='text' "
+          + "      name='type'"
+          + "      value='text' hidden>"
+          + "<textarea class=\"form-control input_info article_text\" >\n"
+          + "</textarea>\n"
+          + "</div>";
+      console.log(element.parentElement);
+     }
+  }
+}
+function addPhoto(sequenceNumber){
+
+
+}
+function addCode(sequenceNumber){
+
+
+}
+function addFile(sequenceNumber){
+
+
+}
+function addLink(sequenceNumber){
+
+
 }

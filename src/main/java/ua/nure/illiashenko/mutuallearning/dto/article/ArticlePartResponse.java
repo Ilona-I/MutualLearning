@@ -10,5 +10,6 @@ public class ArticlePartResponse {
     private int id;
     private int sequenceNumber;
     private String text;
+    private String link;
     private String type;
 }
