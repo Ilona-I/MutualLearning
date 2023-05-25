@@ -97,7 +97,7 @@ function setMarks(marks) {
 
 function getAddNewElementButtonBlock(partId, sequenceNumber) {
   return "    <!-- Початок роботи з блоком додавання елементу -->\n"
-      + "    <div class=\"row\" style=\"width: 105%;\">\n"
+      + "    <div id= 'prevNode"+partId+"'class=\"row\" style=\"width: 105%;\">\n"
       + "      <div class=\"dropdown\" style=\"margin-top: 5px; margin-left: -70px; \">\n"
       + "        <button class=\"btn btn-light dropdown-toggle\" type=\"button\"\n"
       + "                style=\"height: 28px; padding-right: 0; padding-top: 0;\" id=\"dropdownMenuButtonAdd"
@@ -107,15 +107,20 @@ function getAddNewElementButtonBlock(partId, sequenceNumber) {
       + "        </button>\n"
       + "        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButtonAdd"
       + partId + "\">\n"
-      + "          <button class=\"dropdown-item\" onclick='addText(" + sequenceNumber
+      + "          <button class=\"dropdown-item\" onclick='addText("+partId+", "
+      + sequenceNumber
       + ")'>Додати текст</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addPhoto(" + sequenceNumber
+      + "          <button class=\"dropdown-item\" onclick='addPhoto("+partId+", "
+      + sequenceNumber
       + ")'>Додати фото</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addCode(" + sequenceNumber
+      + "          <button class=\"dropdown-item\" onclick='addCode("+partId+", "
+      + sequenceNumber
       + ")'>Додати код</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addFile(" + sequenceNumber
+      + "          <button class=\"dropdown-item\" onclick='addFile("+partId+", "
+      + sequenceNumber
       + ")'>Додати файл</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addLink(" + sequenceNumber
+      + "          <button class=\"dropdown-item\" onclick='addLink("+partId+", "
+      + sequenceNumber
       + ")'>Додати файл</button>\n"
       + "        </div>\n"
       + "      </div>\n"
@@ -127,8 +132,8 @@ function getAddNewElementButtonBlock(partId, sequenceNumber) {
       + "    <!-- Кінець роботи з блоком додавання елементу -->";
 }
 
-function getOptionBlock(partId) {
-  return " <!-- Початок роботи з блоком опцій редагування-->\n"
+function getOptionBlock(partId, isNewElement) {
+  let result = " <!-- Початок роботи з блоком опцій редагування-->\n"
       + "      <div class=\"edit_article_option_block\">\n"
       + "\n"
       + "        <!-- Початок роботи з кнопками позиції блоку-->\n"
@@ -142,26 +147,27 @@ function getOptionBlock(partId) {
       + "            &#8675;\n"
       + "          </button>\n"
       + "        </div>\n"
-      + "        <!-- Кінець роботи з кнопками позиції блоку-->\n"
-      + "\n"
-      + "        <!-- Початок роботи з кнопкою редагування-->\n"
-      + "        <button class=\"btn\"\n"
-      + "                style=\"border-color: #95E06C; color: #95E06C; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;\""
-      + "                id='editButtonOption" + partId + "'"
-      + "                onclick='editBlock(" + partId + ")'>\n"
-      + "          Редагувати\n"
-      + "        </button>\n"
-      + "        <!-- Кінець роботи з кнопкою редагування-->\n"
-      + "        <!-- Початок роботи з кнопкою скасування редагування-->\n"
-      + "        <button class=\"btn\"\n"
-      + "                style=\"border-color: grey ; color: grey; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;\""
-      + "                id='cancelButtonOption" + partId + "' "
-      + "                onclick='cancelEditBlock(" + partId + ")'"
-      + "                hidden>\n"
-      + "          Скасувати\n"
-      + "        </button>\n"
-      + "        <!-- Кінець роботи з кнопкою скасування редагування-->\n"
-      + "        <!-- Початок блоку з видаленням елементу -->\n"
+      + "        <!-- Кінець роботи з кнопками позиції блоку-->\n";
+  if (!isNewElement) {
+    result += "        <!-- Початок роботи з кнопкою редагування-->\n"
+        + "        <button class=\"btn\"\n"
+        + "                style=\"border-color: #95E06C; color: #95E06C; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;\""
+        + "                id='editButtonOption" + partId + "'"
+        + "                onclick='editBlock(" + partId + ")'>\n"
+        + "          Редагувати\n"
+        + "        </button>\n"
+        + "        <!-- Кінець роботи з кнопкою редагування-->\n"
+        + "        <!-- Початок роботи з кнопкою скасування редагування-->\n"
+        + "        <button class=\"btn\"\n"
+        + "                style=\"border-color: grey ; color: grey; height:25px; width: 100px; font-size: small;margin-top: 5px; padding-top: 0; padding-bottom: 1px;\""
+        + "                id='cancelButtonOption" + partId + "' "
+        + "                onclick='cancelEditBlock(" + partId + ")'"
+        + "                hidden>\n"
+        + "          Скасувати\n"
+        + "        </button>\n"
+        + "        <!-- Кінець роботи з кнопкою скасування редагування-->\n";
+  }
+  result += "        <!-- Початок блоку з видаленням елементу -->\n"
       + "        <div class=\"dropdown\">\n"
       + "          <button class=\"btn dropdown-toggle\" type=\"button\"\n"
       + "                  style=\"height:25px;  width: 100px; margin-top: 2px; padding-top: 0; padding-bottom: 0; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small;\"\n"
@@ -188,6 +194,7 @@ function getOptionBlock(partId) {
       + "        <!-- Кінець блоку з видаленням елементу -->\n"
       + "      </div>\n"
       + "      <!-- Кінець роботи з блоком опцій редагування-->";
+  return result;
 }
 
 function getTextBlock(partMap) {
@@ -276,6 +283,9 @@ function getFileBlock(partMap) {
 function setArticleBody(articleParts) {
   let innerHTML = "<div id='articleBlock0'></div>"
   innerHTML += getAddNewElementButtonBlock(0, 0);
+  innerHTML += "<input type='number' "
+      + "      name='sequenceNumber'"
+      + "      value='0' hidden>"
   for (const element of articleParts) {
     let part = JSON.parse(JSON.stringify(element));
     let partMap = new Map(Object.entries(part));
@@ -319,7 +329,7 @@ function setArticleBody(articleParts) {
           + "</div>";
     }
 
-    innerHTML += getOptionBlock(partId);
+    innerHTML += getOptionBlock(partId, false);
     innerHTML += "</div></div>";
     innerHTML += getAddNewElementButtonBlock(partId, sequenceNumber);
   }
@@ -379,39 +389,74 @@ function cancelEditBlock(partId) {
   document.getElementById(cancelButtonOption).hidden = true;
 }
 
-function addText(prevSequenceNumberValue) {
+function addText(partId, prevSequenceNumberValue) {
   let allSequenceNumbers = document.getElementsByName("sequenceNumber");
+  let codeAfter = "";
+  let cElement;
+  let cElementValue;
+  let id;
+  let isNext = true;
   for (const element of allSequenceNumbers) {
-    let elementValue = element.value;
+    let elementValue = parseInt(element.value);
     if (elementValue > prevSequenceNumberValue) {
-      element.value = elementValue + 1;
+      if(isNext){
+        isNext=false;
+        cElement=element;
+      }
+      element.value = (elementValue + 1);
     } else if (elementValue === prevSequenceNumberValue) {
-      let codeAfter = "<div><input type='number' "
+      id = getRandomInt();
+      cElementValue = elementValue;
+      codeAfter += "<div id='articleBlock" + id + "'>"
+          + "<input type='number' "
           + "      name='sequenceNumber'"
+          + "      id='sequenceNumber" + id + "' "
           + "      value='" + (elementValue + 1) + "' hidden>"
           + "<input type='text' "
           + "      name='type'"
+          + "      id='type" + id + "' "
           + "      value='text' hidden>"
-          + "<textarea class=\"form-control input_info article_text\" >\n"
-          + "</textarea>\n"
+          + "<div class=\"row\" style=\"width: 130%;\">"
+          + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
+          + "           <textarea class=\"form-control input_info article_text\" >\n"
+          + "           </textarea>\n"
+          + "       </div>";
+      codeAfter += getOptionBlock(id, true);
+      codeAfter += "</div>"
           + "</div>";
-      console.log(element.parentElement);
-     }
+      codeAfter += getAddNewElementButtonBlock(id, cElementValue);
+
+    }
+    console.log(elementValue);
+
+
   }
+ /* cElement.parentNode.insertBefore(convertStringToHTML(codeAfter),
+      cElement.nextSibling);*/
 }
-function addPhoto(sequenceNumber){
 
-
-}
-function addCode(sequenceNumber){
-
+function addPhoto(sequenceNumber) {
 
 }
-function addFile(sequenceNumber){
 
+function addCode(sequenceNumber) {
 
 }
-function addLink(sequenceNumber){
 
+function addFile(sequenceNumber) {
 
+}
+
+function addLink(sequenceNumber) {
+
+}
+
+const convertStringToHTML = htmlString => {
+  const parser = new DOMParser();
+  const html = parser.parseFromString(htmlString, 'text/html');
+  return html.body;
+}
+
+function getRandomInt() {
+  return Math.floor(Math.random() * 90071992547409);
 }
