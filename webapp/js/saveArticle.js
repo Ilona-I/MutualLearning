@@ -260,7 +260,7 @@ function getFileBlock(partMap) {
       + "</a></p>\n"
       + "         </div>"
       + "         <div id='editBlock" + partMap.get("id") + "' hidden> "
-      + "             <p>Текст посилання:</p>"
+      + "             <p>Текст відображення:</p>"
       + "           <input type='text' class=\"form-control input_info article_text\" value='"
       + partMap.get("text") + "'>"
       + "             <br>"
