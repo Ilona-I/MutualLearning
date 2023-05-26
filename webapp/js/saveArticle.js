@@ -395,14 +395,9 @@ function addText(partId, prevSequenceNumberValue) {
   let cElement;
   let cElementValue;
   let id;
-  let isNext = true;
   for (const element of allSequenceNumbers) {
     let elementValue = parseInt(element.value);
     if (elementValue > prevSequenceNumberValue) {
-      if(isNext){
-        isNext=false;
-        cElement=element;
-      }
       element.value = (elementValue + 1);
     } else if (elementValue === prevSequenceNumberValue) {
       id = getRandomInt();
@@ -425,14 +420,11 @@ function addText(partId, prevSequenceNumberValue) {
       codeAfter += "</div>"
           + "</div>";
       codeAfter += getAddNewElementButtonBlock(id, cElementValue);
-
     }
-    console.log(elementValue);
-
-
   }
- /* cElement.parentNode.insertBefore(convertStringToHTML(codeAfter),
-      cElement.nextSibling);*/
+  cElement=document.getElementById("prevNode"+partId)
+  cElement.parentNode.insertBefore(convertStringToHTML(codeAfter),
+      cElement.nextSibling);
 }
 
 function addPhoto(sequenceNumber) {
