@@ -97,7 +97,8 @@ function setMarks(marks) {
 
 function getAddNewElementButtonBlock(partId, sequenceNumber) {
   return "    <!-- Початок роботи з блоком додавання елементу -->\n"
-      + "    <div id= 'prevNode"+partId+"'class=\"row\" style=\"width: 105%;\">\n"
+      + "    <div id= 'prevNode" + partId
+      + "'class=\"row\" style=\"width: 105%;\">\n"
       + "      <div class=\"dropdown\" style=\"margin-top: 5px; margin-left: -70px; \">\n"
       + "        <button class=\"btn btn-light dropdown-toggle\" type=\"button\"\n"
       + "                style=\"height: 28px; padding-right: 0; padding-top: 0;\" id=\"dropdownMenuButtonAdd"
@@ -107,19 +108,24 @@ function getAddNewElementButtonBlock(partId, sequenceNumber) {
       + "        </button>\n"
       + "        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButtonAdd"
       + partId + "\">\n"
-      + "          <button class=\"dropdown-item\" onclick='addText("+partId+", "
+      + "          <button class=\"dropdown-item\" onclick='addText(" + partId
+      + ", "
       + sequenceNumber
       + ")'>Додати текст</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addPhoto("+partId+", "
+      + "          <button class=\"dropdown-item\" onclick='addImage(" + partId
+      + ", "
       + sequenceNumber
       + ")'>Додати фото</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addCode("+partId+", "
+      + "          <button class=\"dropdown-item\" onclick='addCode(" + partId
+      + ", "
       + sequenceNumber
       + ")'>Додати код</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addFile("+partId+", "
+      + "          <button class=\"dropdown-item\" onclick='addFile(" + partId
+      + ", "
       + sequenceNumber
       + ")'>Додати файл</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addLink("+partId+", "
+      + "          <button class=\"dropdown-item\" onclick='addLink(" + partId
+      + ", "
       + sequenceNumber
       + ")'>Додати файл</button>\n"
       + "        </div>\n"
@@ -254,7 +260,11 @@ function getCodeBlock(partMap) {
       + "    </div>"
       + "<div style=\"width: 77%; margin-left: 15px;\""
       + "      id='editBlock" + partMap.get("id") + "' hidden>"
-      + "<textarea style='width: 100%; height: 300px'> "
+      + "<textarea onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
+      + "e=this.selectionEnd;this.value=v.substring(0, s)+'\\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;"
+      + "return false;}\" "
+      + " id='textareaCode" + partMap.get("id")
+      + "' style=\"width: 100%; height: 300px; font-family: 'Courier New'\"> "
       + escapeHTML(partMap.get("text"))
       + "</textarea>"
       + "</div>";
@@ -280,6 +290,24 @@ function getFileBlock(partMap) {
       + "       </div>";
 }
 
+function getLink(partMap) {
+  return " <div style=\"width: 77%; margin-left: 15px;\""
+      + "         id='prevBlock" + partMap.get("id") + "'>\n"
+      + " <a href='" + partMap.get("link") + "'>" + partMap.get("text")
+      + "</a>"
+      + "    </div>"
+      + "<div style=\"width: 77%; margin-left: 15px;\""
+      + "      id='editBlock" + partMap.get("id") + "' hidden>"
+      + "   <p>Текст посилання</p>"
+      + "           <input type='text' class=\"form-control input_info article_text\" value='"
+      + partMap.get("text") + "'>"
+      + "<br>"
+      + "   <p>Посилання</p>"
+      + "           <input type='text' class=\"form-control input_info article_text\" value='"
+      + partMap.get("link") + "'>"
+      + "</div>";
+}
+
 function setArticleBody(articleParts) {
   let innerHTML = "<div id='articleBlock0'></div>"
   innerHTML += getAddNewElementButtonBlock(0, 0);
@@ -302,7 +330,6 @@ function setArticleBody(articleParts) {
         + "      id='type" + partId + "' "
         + "      value='" + partType + "' hidden>"
         + "<div class=\"row\" style=\"width: 130%;\">";
-
     if (partType === "text") {
       innerHTML += getTextBlock(partMap);
     } else if (partType === "image") {
@@ -312,23 +339,8 @@ function setArticleBody(articleParts) {
     } else if (partType === "file") {
       innerHTML += getFileBlock(partMap);
     } else if (partType === "link") {
-      innerHTML += " <div style=\"width: 77%; margin-left: 15px;\""
-          + "         id='prevBlock" + partMap.get("id") + "'>\n"
-          + " <a href='" + partMap.get("link") + "'>" + partMap.get("text")
-          + "</a>"
-          + "    </div>"
-          + "<div style=\"width: 77%; margin-left: 15px;\""
-          + "      id='editBlock" + partMap.get("id") + "' hidden>"
-          + "   <p>Текст посилання</p>"
-          + "           <input type='text' class=\"form-control input_info article_text\" value='"
-          + partMap.get("text") + "'>"
-          + "<br>"
-          + "   <p>Посилання</p>"
-          + "           <input type='text' class=\"form-control input_info article_text\" value='"
-          + partMap.get("link") + "'>"
-          + "</div>";
+      innerHTML += getLink(partMap);
     }
-
     innerHTML += getOptionBlock(partId, false);
     innerHTML += "</div></div>";
     innerHTML += getAddNewElementButtonBlock(partId, sequenceNumber);
@@ -390,6 +402,64 @@ function cancelEditBlock(partId) {
 }
 
 function addText(partId, prevSequenceNumberValue) {
+  let blockContent =
+      "<input type='text' "
+      + "      name='type'"
+      + "      id='type" + partId + "' "
+      + "      value='text' hidden>"
+      + "<div class=\"row\" style=\"width: 130%;\">"
+      + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
+      + "           <textarea class=\"form-control input_info article_text\" >\n"
+      + "           </textarea>\n"
+      + "       </div>";
+  addNewBlock(blockContent, partId, prevSequenceNumberValue);
+}
+
+function addImage(partId, prevSequenceNumberValue) {
+  let blockContent = "<input type='text' "
+      + "      name='type'"
+      + "      id='type" + partId + "' "
+      + "      value='image' hidden>"
+      + "<div class=\"row\" style=\"width: 130%;\">"
+      + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
+      + "          <input type=\"file\" accept=\"image/*\" "
+      + "                 onchange=\"loadFile(event, 'output" + partId + "')\" "
+      + "                 id=\"actual-img-btn" + partId
+      + "\" hidden>\n"
+      + "          <label for=\"actual-img-btn" + partId
+      + "\" class=\"btn btn-light\">Оберіть зображення</label>\n"
+      + "          <img id=\"output" + partId
+      + "\" style=\"max-width: 100%;\"/>\n"
+      + "       </div>";
+  addNewBlock(blockContent, partId, prevSequenceNumberValue);
+}
+
+function addCode(partId, prevSequenceNumberValue) {
+  let blockContent =
+      "<input type='text' "
+      + "      name='type'"
+      + "      id='type" + partId + "' "
+      + "      value='code' hidden>"
+      + "<div class=\"row\" style=\"width: 130%;\">"
+      + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
+      + "<textarea onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
+      + "e=this.selectionEnd;this.value=v.substring(0, s)+'\\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;"
+      + "return false;}\" "
+      + "style=\"width: 100%; height: 300px; font-family: 'Courier New'\"> "
+      + "</textarea>"
+      + "       </div>";
+  addNewBlock(blockContent, partId, prevSequenceNumberValue);
+}
+
+function addFile(partId, prevSequenceNumberValue) {
+
+}
+
+function addLink(partId, prevSequenceNumberValue) {
+
+}
+
+function addNewBlock(blockContent, partId, prevSequenceNumberValue) {
   let allSequenceNumbers = document.getElementsByName("sequenceNumber");
   let codeAfter = "";
   let cElement;
@@ -406,41 +476,17 @@ function addText(partId, prevSequenceNumberValue) {
           + "<input type='number' "
           + "      name='sequenceNumber'"
           + "      id='sequenceNumber" + id + "' "
-          + "      value='" + (elementValue + 1) + "' hidden>"
-          + "<input type='text' "
-          + "      name='type'"
-          + "      id='type" + id + "' "
-          + "      value='text' hidden>"
-          + "<div class=\"row\" style=\"width: 130%;\">"
-          + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
-          + "           <textarea class=\"form-control input_info article_text\" >\n"
-          + "           </textarea>\n"
-          + "       </div>";
+          + "      value='" + (elementValue + 1) + "' hidden>";
+      codeAfter += blockContent;
       codeAfter += getOptionBlock(id, true);
       codeAfter += "</div>"
           + "</div>";
       codeAfter += getAddNewElementButtonBlock(id, cElementValue);
     }
   }
-  cElement=document.getElementById("prevNode"+partId)
+  cElement = document.getElementById("prevNode" + partId)
   cElement.parentNode.insertBefore(convertStringToHTML(codeAfter),
       cElement.nextSibling);
-}
-
-function addPhoto(sequenceNumber) {
-
-}
-
-function addCode(sequenceNumber) {
-
-}
-
-function addFile(sequenceNumber) {
-
-}
-
-function addLink(sequenceNumber) {
-
 }
 
 const convertStringToHTML = htmlString => {
