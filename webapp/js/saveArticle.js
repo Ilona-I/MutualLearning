@@ -250,12 +250,13 @@ function getImageBlock(partMap) {
       + "             style=\"margin-top: 10px;\""
       + "             hidden>\n"
       + "          <input type=\"file\" accept=\"image/*\" "
-      + "                 onchange=\"loadFile(event, 'output" + partMap.get(
-          "id") + "')\" "
+      + "                onchange=\"document.getElementById('output"
+      + partMap.get("id")
+      + "').src = window.URL.createObjectURL(this.files[0])\" "
       + "                 id=\"actual-img-btn" + partMap.get("id")
       + "\" hidden>\n"
       + "          <label for=\"actual-img-btn" + partMap.get("id")
-      + "\" class=\"btn btn-light\">Оберіть зображення</label>\n"
+      + "\" class=\"btn btn-light\">Оберіть зображення</label><br>\n"
       + "          <img id=\"output" + partMap.get("id")
       + "\" style=\"max-width: 100%;\"/>\n"
       + "        </div>\n"
@@ -421,30 +422,34 @@ function cancelEditBlock(partId) {
 }
 
 function addText(partId, sequenceNumberValue) {
+  let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">\n"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "           <textarea class=\"form-control input_info article_text\" >\n"
       + "           </textarea>\n"
       + "       </div>\n";
-  addNewBlock(blockContent, partId, sequenceNumberValue, "text");
+  addNewBlock(blockContent, partId, sequenceNumberValue, "text", id);
 }
 
 function addImage(partId, sequenceNumberValue) {
+  let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "          <input type=\"file\" accept=\"image/*\" "
-      + "                 onchange=\"loadFile(event, 'output" + partId + "')\" "
-      + "                 id=\"actual-img-btn" + partId
+      + "                 onchange=\"document.getElementById('output" + id
+      + "').src = window.URL.createObjectURL(this.files[0])\" "
+      + "                 id=\"actual-img-btn" + id
       + "\" hidden>\n"
-      + "          <label for=\"actual-img-btn" + partId
-      + "\" class=\"btn btn-light\">Оберіть зображення</label>\n"
-      + "          <img id=\"output" + partId
+      + "          <label for=\"actual-img-btn" + id
+      + "\" class=\"btn btn-light\">Оберіть зображення</label><br>\n"
+      + "          <img id=\"output" + id
       + "\" style=\"max-width: 100%;\"/>\n"
       + "       </div>";
-  addNewBlock(blockContent, partId, sequenceNumberValue, "image");
+  addNewBlock(blockContent, partId, sequenceNumberValue, "image", id);
 }
 
 function addCode(partId, sequenceNumberValue) {
+  let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "<textarea onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
@@ -453,25 +458,27 @@ function addCode(partId, sequenceNumberValue) {
       + "style=\"width: 100%; height: 300px; font-family: 'Courier New'\"> "
       + "</textarea>"
       + "       </div>";
-  addNewBlock(blockContent, partId, sequenceNumberValue, "code");
+  addNewBlock(blockContent, partId, sequenceNumberValue, "code", id);
 }
 
 function addFile(partId, sequenceNumberValue) {
+  let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "             <p>Текст відображення:</p>"
       + "           <input type='text' class=\"form-control input_info article_text\" >"
       + "             <br>"
-      + "          <label for=\"file" + partId
+      + "          <label for=\"file" + id
       + "\" class=\"drop-container\">\n"
-      + "  <input type=\"file\" id=\"file" + partId
+      + "  <input type=\"file\" id=\"file" + id
       + "\" accept=\"*/*\" required>\n"
       + "</label>"
       + "       </div>";
-  addNewBlock(blockContent, partId, sequenceNumberValue, "file");
+  addNewBlock(blockContent, partId, sequenceNumberValue, "file", id);
 }
 
 function addLink(partId, sequenceNumberValue) {
+  let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "   <p>Текст посилання</p>"
@@ -480,25 +487,25 @@ function addLink(partId, sequenceNumberValue) {
       + "   <p>Посилання</p>"
       + "           <input type='text' class=\"form-control input_info article_text\">"
       + "       </div>";
-  addNewBlock(blockContent, partId, sequenceNumberValue, "link");
+  addNewBlock(blockContent, partId, sequenceNumberValue, "link", id);
 }
 
-function addNewBlock(blockContent, partId, sequenceNumberValue, type) {
-  let allSequenceNumbers = Array.from(document.getElementsByName("sequenceNumber"));
+function addNewBlock(blockContent, partId, sequenceNumberValue, type, id) {
+  let allSequenceNumbers = Array.from(
+      document.getElementsByName("sequenceNumber"));
   let codeAfter = "";
   let cElement;
-  let id;
   let size = allSequenceNumbers.length;
   sequenceNumberValue = parseInt(sequenceNumberValue);
   let isUsed = false;
   for (const element of allSequenceNumbers) {
     let elementValue = parseInt(element.value);
-    let mainId = element.id.replace("sequenceNumber","");
-    if (elementValue > sequenceNumberValue || elementValue===sequenceNumberValue&&isUsed) {
-      setNewSequenceNumber(mainId, (elementValue+1), (size+1));
+    let mainId = element.id.replace("sequenceNumber", "");
+    if (elementValue > sequenceNumberValue || elementValue
+        === sequenceNumberValue && isUsed) {
+      setNewSequenceNumber(mainId, (elementValue + 1), (size + 1));
     } else if (elementValue === sequenceNumberValue) {
       isUsed = true;
-      id = getRandomInt();
       codeAfter += "<div id='articleBlock" + id + "'>\n"
           + "<input type='number' "
           + "      name='sequenceNumber'"
@@ -509,7 +516,7 @@ function addNewBlock(blockContent, partId, sequenceNumberValue, type) {
           + "      id='type" + id + "' "
           + "      value='" + type + "' hidden>\n";
       codeAfter += blockContent;
-      codeAfter += getOptionBlock(id, (elementValue + 1), (size+1 ),
+      codeAfter += getOptionBlock(id, (elementValue + 1), (size + 1),
           true);
       codeAfter += "</div>"
           + "</div>";
@@ -521,14 +528,15 @@ function addNewBlock(blockContent, partId, sequenceNumberValue, type) {
       cElement.parentNode.insertBefore(
           convertStringToHTML(codeAfter).children[0],
           cElement.nextSibling);
-    } else if(elementValue < sequenceNumberValue&&elementValue>0){
-      setNewSequenceNumber(mainId, elementValue, (size+1));
+    } else if (elementValue < sequenceNumberValue && elementValue > 0) {
+      setNewSequenceNumber(mainId, elementValue, (size + 1));
     }
   }
 }
 
 function setNewSequenceNumber(partId, sequenceNumber, size) {
-  document.getElementById("sequenceNumber" + partId).setAttribute('value',sequenceNumber);
+  document.getElementById("sequenceNumber" + partId).setAttribute('value',
+      sequenceNumber);
 
   let upButton = document.getElementById("upButton" + partId);
   upButton.setAttribute('onclick',
