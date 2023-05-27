@@ -1,5 +1,39 @@
-.l_button{
+.l_button {
   margin-top: 20px;
   width: 100%;
   height: 50px;
+}
+
+.upActiveButton {
+  padding: 0;
+  background-color: transparent;
+  border-width: 0;
+  font-size: xx-large;
+  color: #68B684;
+}
+
+.upDisableButton {
+  padding: 0;
+  background-color: transparent;
+  border-width: 0;
+  font-size: xx-large;
+  color: #D5D5EAFF;
+}
+
+.downActiveButton {
+  margin-left: 30px;
+  padding: 0;
+  background-color: transparent;
+  border-width: 0;
+  font-size: xx-large;
+  color: #68B684;
+}
+
+.downDisableButton {
+  margin-left: 30px;
+  padding: 0;
+  background-color: transparent;
+  border-width: 0;
+  font-size: xx-large;
+  color: #D5D5EAFF;
 }

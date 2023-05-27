@@ -138,18 +138,23 @@ function getAddNewElementButtonBlock(partId, sequenceNumber) {
       + "    <!-- Кінець роботи з блоком додавання елементу -->";
 }
 
-function getOptionBlock(partId, isNewElement) {
+function getOptionBlock(partId, sequenceNumber, size, isNewElement) {
   let result = " <!-- Початок роботи з блоком опцій редагування-->\n"
       + "      <div class=\"edit_article_option_block\">\n"
       + "\n"
       + "        <!-- Початок роботи з кнопками позиції блоку-->\n"
-      + "        <div class=\"row\" style=\"margin-left: 15px;\">\n"
-      + "          <button\n"
-      + "              style=\"padding: 0; background-color: transparent; border-width: 0; color: #68B684; font-size: xx-large\">\n"
+      + "        <div class=\"row\" style=\"margin-left: 15px;\">\n";
+
+  result += "          <button onclick='upArticlePart("+partId+", "+sequenceNumber+", "+size+")' name='upButton' \n"
+      + (sequenceNumber === 1 ? 'class=\'upDisableButton\' disabled'
+          : 'class=\'upActiveButton\'')
+      + ">\n"
       + "            &#8673;\n"
-      + "          </button>\n"
-      + "          <button\n"
-      + "              style=\"margin-left: 30px; padding: 0; background-color: transparent; border-width: 0;  color: #68B684; font-size: xx-large\">\n"
+      + "          </button>\n";
+  result += "          <button name='downButton' \n"
+      + (sequenceNumber === size ? 'class=\'downDisableButton\' disabled'
+          : 'class=\'downActiveButton\'')
+      + ">\n"
       + "            &#8675;\n"
       + "          </button>\n"
       + "        </div>\n"
@@ -314,6 +319,7 @@ function setArticleBody(articleParts) {
   innerHTML += "<input type='number' "
       + "      name='sequenceNumber'"
       + "      value='0' hidden>"
+  let size = articleParts.length;
   for (const element of articleParts) {
     let part = JSON.parse(JSON.stringify(element));
     let partMap = new Map(Object.entries(part));
@@ -341,7 +347,7 @@ function setArticleBody(articleParts) {
     } else if (partType === "link") {
       innerHTML += getLink(partMap);
     }
-    innerHTML += getOptionBlock(partId, false);
+    innerHTML += getOptionBlock(partId, sequenceNumber, size, false);
     innerHTML += "</div></div>";
     innerHTML += getAddNewElementButtonBlock(partId, sequenceNumber);
   }
@@ -465,6 +471,16 @@ function addNewBlock(blockContent, partId, prevSequenceNumberValue) {
   let cElement;
   let cElementValue;
   let id;
+  let size = allSequenceNumbers.length;
+  if (prevSequenceNumberValue === 0 && size>1) {
+    let upButton = document.getElementsByName("upButton")[0];
+    upButton.className = 'upActiveButton';
+    upButton.disable = false;
+  }else if (prevSequenceNumberValue === size-1 && size>1) {
+    let upButton = document.getElementsByName("downButton")[size-2];
+    upButton.className = 'downActiveButton';
+    upButton.disable = false;
+  }
   for (const element of allSequenceNumbers) {
     let elementValue = parseInt(element.value);
     if (elementValue > prevSequenceNumberValue) {
@@ -478,7 +494,8 @@ function addNewBlock(blockContent, partId, prevSequenceNumberValue) {
           + "      id='sequenceNumber" + id + "' "
           + "      value='" + (elementValue + 1) + "' hidden>";
       codeAfter += blockContent;
-      codeAfter += getOptionBlock(id, true);
+      codeAfter += getOptionBlock(id, (prevSequenceNumberValue + 1),
+          (size), true);
       codeAfter += "</div>"
           + "</div>";
       codeAfter += getAddNewElementButtonBlock(id, cElementValue);
@@ -487,6 +504,11 @@ function addNewBlock(blockContent, partId, prevSequenceNumberValue) {
   cElement = document.getElementById("prevNode" + partId)
   cElement.parentNode.insertBefore(convertStringToHTML(codeAfter),
       cElement.nextSibling);
+}
+
+function upArticlePart(partId, sequenceNumber, size){
+
+
 }
 
 const convertStringToHTML = htmlString => {
