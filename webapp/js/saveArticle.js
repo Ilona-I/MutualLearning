@@ -505,15 +505,16 @@ function addNewBlock(blockContent, partId, prevSequenceNumberValue) {
           + "      id='sequenceNumber" + id + "' "
           + "      value='" + (elementValue + 1) + "' hidden>";
       codeAfter += blockContent;
-      codeAfter += getOptionBlock(id, (prevSequenceNumberValue + 1),
-          (size), true);
+      codeAfter += getOptionBlock(id, (prevSequenceNumberValue + 1), size, true);
       codeAfter += "</div>"
           + "</div>";
       codeAfter += getAddNewElementButtonBlock(id, cElementValue);
     }
   }
   cElement = document.getElementById("prevNode" + partId)
-  cElement.parentNode.insertBefore(convertStringToHTML(codeAfter),
+  cElement.parentNode.insertBefore(convertStringToHTML(codeAfter).children[1],
+      cElement.nextSibling);
+  cElement.parentNode.insertBefore(convertStringToHTML(codeAfter).children[0],
       cElement.nextSibling);
 }
 
