@@ -108,23 +108,28 @@ function getAddNewElementButtonBlock(partId, sequenceNumber) {
       + "        </button>\n"
       + "        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButtonAdd"
       + partId + "\">\n"
-      + "          <button class=\"dropdown-item\" onclick='addText(" + partId
+      + "          <button id='addText" + partId
+      + "' class=\"dropdown-item\" onclick='addText(" + partId
       + ", "
       + sequenceNumber
       + ")'>Додати текст</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addImage(" + partId
+      + "          <button  id='addImage" + partId
+      + "' class=\"dropdown-item\" onclick='addImage(" + partId
       + ", "
       + sequenceNumber
       + ")'>Додати фото</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addCode(" + partId
+      + "          <button id='addCode" + partId
+      + "' class=\"dropdown-item\" onclick='addCode(" + partId
       + ", "
       + sequenceNumber
       + ")'>Додати код</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addFile(" + partId
+      + "          <button id='addFile" + partId
+      + "' class=\"dropdown-item\" onclick='addFile(" + partId
       + ", "
       + sequenceNumber
       + ")'>Додати файл</button>\n"
-      + "          <button class=\"dropdown-item\" onclick='addLink(" + partId
+      + "          <button id='addLink" + partId
+      + "' class=\"dropdown-item\" onclick='addLink(" + partId
       + ", "
       + sequenceNumber
       + ")'>Додати файл</button>\n"
@@ -145,13 +150,19 @@ function getOptionBlock(partId, sequenceNumber, size, isNewElement) {
       + "        <!-- Початок роботи з кнопками позиції блоку-->\n"
       + "        <div class=\"row\" style=\"margin-left: 15px;\">\n";
 
-  result += "          <button onclick='upArticlePart("+partId+", "+sequenceNumber+", "+size+")' name='upButton' \n"
+  result += "          <button id='upButton" + partId
+      + "' onclick='upArticlePart(" + partId + ", "
+      + sequenceNumber + ", " + size + ")' "
+      + "name='upButton' \n"
       + (sequenceNumber === 1 ? 'class=\'upDisableButton\' disabled'
           : 'class=\'upActiveButton\'')
       + ">\n"
       + "            &#8673;\n"
       + "          </button>\n";
-  result += "          <button name='downButton' \n"
+  result += "          <button id='downButton" + partId + "' "
+      + "name='downButton' "
+      + "onclick='downArticlePart(" + partId + ", " + sequenceNumber + ", "
+      + size + ")' \n"
       + (sequenceNumber === size ? 'class=\'downDisableButton\' disabled'
           : 'class=\'downActiveButton\'')
       + ">\n"
@@ -472,12 +483,12 @@ function addNewBlock(blockContent, partId, prevSequenceNumberValue) {
   let cElementValue;
   let id;
   let size = allSequenceNumbers.length;
-  if (prevSequenceNumberValue === 0 && size>1) {
+  if (prevSequenceNumberValue === 0 && size > 1) {
     let upButton = document.getElementsByName("upButton")[0];
     upButton.className = 'upActiveButton';
     upButton.disable = false;
-  }else if (prevSequenceNumberValue === size-1 && size>1) {
-    let upButton = document.getElementsByName("downButton")[size-2];
+  } else if (prevSequenceNumberValue === size - 1 && size > 1) {
+    let upButton = document.getElementsByName("downButton")[size - 2];
     upButton.className = 'downActiveButton';
     upButton.disable = false;
   }
@@ -506,9 +517,86 @@ function addNewBlock(blockContent, partId, prevSequenceNumberValue) {
       cElement.nextSibling);
 }
 
-function upArticlePart(partId, sequenceNumber, size){
+function setNewSequenceNumber(partId, sequenceNumber, size) {
+  document.getElementById("sequenceNumber" + partId).value = sequenceNumber;
 
+  let upButton = document.getElementById("upButton" + partId);
+  upButton.setAttribute('onclick',
+      'upArticlePart(' + partId + ', ' + sequenceNumber + ', ' + size + ')');
 
+  if(sequenceNumber === 1){
+    upButton.className = 'upDisableButton'
+    upButton.disabled = true;
+  } else {
+    upButton.className = 'upActiveButton'
+    upButton.disabled = false;
+  }
+
+  let downButton = document.getElementById("downButton" + partId);
+  downButton.setAttribute('onclick',
+      'downArticlePart(' + partId + ', ' + sequenceNumber + ', ' + size + ')');
+  if(sequenceNumber === size){
+    downButton.className = 'downDisableButton'
+    downButton.disabled = true;
+  } else {
+    downButton.className = 'downActiveButton'
+    downButton.disabled = false;
+  }
+
+  document.getElementById("addText" + partId).setAttribute('onclick',
+      'addText(' + partId + ',' + sequenceNumber + ')');
+  document.getElementById("addImage" + partId).setAttribute('onclick',
+      'addImage(' + partId + ',' + sequenceNumber + ')');
+  document.getElementById("addCode" + partId).setAttribute('onclick',
+      'addCode(' + partId + ',' + sequenceNumber + ')');
+  document.getElementById("addFile" + partId).setAttribute('onclick',
+      'addFile(' + partId + ',' + sequenceNumber + ')');
+  document.getElementById("addLink" + partId).setAttribute('onclick',
+      'addLink(' + partId + ',' + sequenceNumber + ')');
+}
+
+function upArticlePart(partId, sequenceNumber, size) {
+  if (sequenceNumber === 1) {
+    return;
+  }
+  let articleBlock = document.getElementById("articleBlock" + partId);
+  let addNewElementBlock = document.getElementById("prevNode" + partId);
+  let prevPartId = articleBlock.previousElementSibling.id.replace("prevNode",
+      "");
+  setNewSequenceNumber(partId, (parseInt(sequenceNumber) - 1), parseInt(size));
+  setNewSequenceNumber(prevPartId, parseInt(sequenceNumber), parseInt(size));
+
+  let prevArticleBlock = document.getElementById("articleBlock" + prevPartId);
+
+  document.getElementById("prevNode" + partId).remove();
+  document.getElementById("articleBlock" + partId).remove();
+
+  prevArticleBlock.parentNode.insertBefore(addNewElementBlock,
+      prevArticleBlock);
+  prevArticleBlock.parentNode.insertBefore(articleBlock,
+      prevArticleBlock.previousSibling);
+}
+
+function downArticlePart(partId, sequenceNumber, size) {
+  if (sequenceNumber === size) {
+    return;
+  }
+  let articleBlock = document.getElementById("articleBlock" + partId);
+  let addNewElementBlock = document.getElementById("prevNode" + partId);
+  let nextPartId = addNewElementBlock.nextElementSibling.id.replace(
+      "articleBlock",
+      "");
+  setNewSequenceNumber(partId, (parseInt(sequenceNumber) + 1), parseInt(size));
+  setNewSequenceNumber(nextPartId, parseInt(sequenceNumber), parseInt(size));
+
+  let nextPrevNode = document.getElementById("prevNode" + nextPartId);
+
+  document.getElementById("prevNode" + partId).remove();
+  document.getElementById("articleBlock" + partId).remove();
+  nextPrevNode.parentNode.insertBefore(addNewElementBlock,
+      nextPrevNode.nextSibling);
+  nextPrevNode.parentNode.insertBefore(articleBlock,
+      nextPrevNode.nextSibling);
 }
 
 const convertStringToHTML = htmlString => {
