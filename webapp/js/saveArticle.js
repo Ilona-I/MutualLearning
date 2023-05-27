@@ -113,7 +113,7 @@ function getAddNewElementButtonBlock(partId, sequenceNumber) {
       + ", "
       + sequenceNumber
       + ")'>Додати текст</button>\n"
-      + "          <button  id='addImage" + partId
+      + "          <button id='addImage" + partId
       + "' class=\"dropdown-item\" onclick='addImage(" + partId
       + ", "
       + sequenceNumber
@@ -132,7 +132,7 @@ function getAddNewElementButtonBlock(partId, sequenceNumber) {
       + "' class=\"dropdown-item\" onclick='addLink(" + partId
       + ", "
       + sequenceNumber
-      + ")'>Додати файл</button>\n"
+      + ")'>Додати посилання</button>\n"
       + "        </div>\n"
       + "      </div>\n"
       + "      <div style=\"width: 100%;\">\n"
@@ -150,20 +150,20 @@ function getOptionBlock(partId, sequenceNumber, size, isNewElement) {
       + "        <!-- Початок роботи з кнопками позиції блоку-->\n"
       + "        <div class=\"row\" style=\"margin-left: 15px;\">\n";
 
-  result += "          <button id='upButton" + partId
-      + "' onclick='upArticlePart(" + partId + ", "
-      + sequenceNumber + ", " + size + ")' "
+  result += "          <button id='upButton" + partId + "' "
       + "name='upButton' \n"
+      + "onclick='upArticlePart(" + partId + ", " + sequenceNumber + ", " + size
+      + ")' \n"
       + (sequenceNumber === 1 ? 'class=\'upDisableButton\' disabled'
           : 'class=\'upActiveButton\'')
       + ">\n"
       + "            &#8673;\n"
       + "          </button>\n";
   result += "          <button id='downButton" + partId + "' "
-      + "name='downButton' "
+      + "name='downButton' \n"
       + "onclick='downArticlePart(" + partId + ", " + sequenceNumber + ", "
       + size + ")' \n"
-      + (sequenceNumber === size ? 'class=\'downDisableButton\' disabled'
+      + (sequenceNumber === size - 1 ? 'class=\'downDisableButton\' disabled'
           : 'class=\'downActiveButton\'')
       + ">\n"
       + "            &#8675;\n"
@@ -325,11 +325,13 @@ function getLink(partMap) {
 }
 
 function setArticleBody(articleParts) {
-  let innerHTML = "<div id='articleBlock0'></div>"
-  innerHTML += getAddNewElementButtonBlock(0, 0);
-  innerHTML += "<input type='number' "
+  let innerHTML = "<div id='articleBlock0'>"
+      + "<input type='number' "
+      + "      id='sequenceNumber0'"
       + "      name='sequenceNumber'"
       + "      value='0' hidden>"
+      + "</div>"
+  innerHTML += getAddNewElementButtonBlock(0, 0);
   let size = articleParts.length;
   for (const element of articleParts) {
     let part = JSON.parse(JSON.stringify(element));
@@ -358,7 +360,7 @@ function setArticleBody(articleParts) {
     } else if (partType === "link") {
       innerHTML += getLink(partMap);
     }
-    innerHTML += getOptionBlock(partId, sequenceNumber, size, false);
+    innerHTML += getOptionBlock(partId, sequenceNumber, size + 1, false);
     innerHTML += "</div></div>";
     innerHTML += getAddNewElementButtonBlock(partId, sequenceNumber);
   }
@@ -418,26 +420,17 @@ function cancelEditBlock(partId) {
   document.getElementById(cancelButtonOption).hidden = true;
 }
 
-function addText(partId, prevSequenceNumberValue) {
-  let blockContent =
-      "<input type='text' "
-      + "      name='type'"
-      + "      id='type" + partId + "' "
-      + "      value='text' hidden>"
-      + "<div class=\"row\" style=\"width: 130%;\">"
+function addText(partId, sequenceNumberValue) {
+  let blockContent = "<div class=\"row\" style=\"width: 130%;\">\n"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "           <textarea class=\"form-control input_info article_text\" >\n"
       + "           </textarea>\n"
-      + "       </div>";
-  addNewBlock(blockContent, partId, prevSequenceNumberValue);
+      + "       </div>\n";
+  addNewBlock(blockContent, partId, sequenceNumberValue, "text");
 }
 
-function addImage(partId, prevSequenceNumberValue) {
-  let blockContent = "<input type='text' "
-      + "      name='type'"
-      + "      id='type" + partId + "' "
-      + "      value='image' hidden>"
-      + "<div class=\"row\" style=\"width: 130%;\">"
+function addImage(partId, sequenceNumberValue) {
+  let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "          <input type=\"file\" accept=\"image/*\" "
       + "                 onchange=\"loadFile(event, 'output" + partId + "')\" "
@@ -448,16 +441,11 @@ function addImage(partId, prevSequenceNumberValue) {
       + "          <img id=\"output" + partId
       + "\" style=\"max-width: 100%;\"/>\n"
       + "       </div>";
-  addNewBlock(blockContent, partId, prevSequenceNumberValue);
+  addNewBlock(blockContent, partId, sequenceNumberValue, "image");
 }
 
-function addCode(partId, prevSequenceNumberValue) {
-  let blockContent =
-      "<input type='text' "
-      + "      name='type'"
-      + "      id='type" + partId + "' "
-      + "      value='code' hidden>"
-      + "<div class=\"row\" style=\"width: 130%;\">"
+function addCode(partId, sequenceNumberValue) {
+  let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "<textarea onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
       + "e=this.selectionEnd;this.value=v.substring(0, s)+'\\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;"
@@ -465,67 +453,87 @@ function addCode(partId, prevSequenceNumberValue) {
       + "style=\"width: 100%; height: 300px; font-family: 'Courier New'\"> "
       + "</textarea>"
       + "       </div>";
-  addNewBlock(blockContent, partId, prevSequenceNumberValue);
+  addNewBlock(blockContent, partId, sequenceNumberValue, "code");
 }
 
-function addFile(partId, prevSequenceNumberValue) {
-
+function addFile(partId, sequenceNumberValue) {
+  let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
+      + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
+      + "             <p>Текст відображення:</p>"
+      + "           <input type='text' class=\"form-control input_info article_text\" >"
+      + "             <br>"
+      + "          <label for=\"file" + partId
+      + "\" class=\"drop-container\">\n"
+      + "  <input type=\"file\" id=\"file" + partId
+      + "\" accept=\"*/*\" required>\n"
+      + "</label>"
+      + "       </div>";
+  addNewBlock(blockContent, partId, sequenceNumberValue, "file");
 }
 
-function addLink(partId, prevSequenceNumberValue) {
-
+function addLink(partId, sequenceNumberValue) {
+  let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
+      + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
+      + "   <p>Текст посилання</p>"
+      + "           <input type='text' class=\"form-control input_info article_text\">"
+      + "<br>"
+      + "   <p>Посилання</p>"
+      + "           <input type='text' class=\"form-control input_info article_text\">"
+      + "       </div>";
+  addNewBlock(blockContent, partId, sequenceNumberValue, "link");
 }
 
-function addNewBlock(blockContent, partId, prevSequenceNumberValue) {
-  let allSequenceNumbers = document.getElementsByName("sequenceNumber");
+function addNewBlock(blockContent, partId, sequenceNumberValue, type) {
+  let allSequenceNumbers = Array.from(document.getElementsByName("sequenceNumber"));
   let codeAfter = "";
   let cElement;
-  let cElementValue;
   let id;
   let size = allSequenceNumbers.length;
-  if (prevSequenceNumberValue === 0 && size > 1) {
-    let upButton = document.getElementsByName("upButton")[0];
-    upButton.className = 'upActiveButton';
-    upButton.disable = false;
-  } else if (prevSequenceNumberValue === size - 1 && size > 1) {
-    let upButton = document.getElementsByName("downButton")[size - 2];
-    upButton.className = 'downActiveButton';
-    upButton.disable = false;
-  }
+  sequenceNumberValue = parseInt(sequenceNumberValue);
+  let isUsed = false;
   for (const element of allSequenceNumbers) {
     let elementValue = parseInt(element.value);
-    if (elementValue > prevSequenceNumberValue) {
-      element.value = (elementValue + 1);
-    } else if (elementValue === prevSequenceNumberValue) {
+    let mainId = element.id.replace("sequenceNumber","");
+    if (elementValue > sequenceNumberValue || elementValue===sequenceNumberValue&&isUsed) {
+      setNewSequenceNumber(mainId, (elementValue+1), (size+1));
+    } else if (elementValue === sequenceNumberValue) {
+      isUsed = true;
       id = getRandomInt();
-      cElementValue = elementValue;
-      codeAfter += "<div id='articleBlock" + id + "'>"
+      codeAfter += "<div id='articleBlock" + id + "'>\n"
           + "<input type='number' "
           + "      name='sequenceNumber'"
           + "      id='sequenceNumber" + id + "' "
-          + "      value='" + (elementValue + 1) + "' hidden>";
+          + "      value='" + (elementValue + 1) + "' hidden>\n"
+          + "<input type='text' "
+          + "      name='type'"
+          + "      id='type" + id + "' "
+          + "      value='" + type + "' hidden>\n";
       codeAfter += blockContent;
-      codeAfter += getOptionBlock(id, (prevSequenceNumberValue + 1), size, true);
+      codeAfter += getOptionBlock(id, (elementValue + 1), (size+1 ),
+          true);
       codeAfter += "</div>"
           + "</div>";
-      codeAfter += getAddNewElementButtonBlock(id, cElementValue);
+      codeAfter += getAddNewElementButtonBlock(id, (elementValue + 1));
+      cElement = document.getElementById("prevNode" + partId)
+      cElement.parentNode.insertBefore(
+          convertStringToHTML(codeAfter).children[1],
+          cElement.nextSibling);
+      cElement.parentNode.insertBefore(
+          convertStringToHTML(codeAfter).children[0],
+          cElement.nextSibling);
+    } else if(elementValue < sequenceNumberValue&&elementValue>0){
+      setNewSequenceNumber(mainId, elementValue, (size+1));
     }
   }
-  cElement = document.getElementById("prevNode" + partId)
-  cElement.parentNode.insertBefore(convertStringToHTML(codeAfter).children[1],
-      cElement.nextSibling);
-  cElement.parentNode.insertBefore(convertStringToHTML(codeAfter).children[0],
-      cElement.nextSibling);
 }
 
 function setNewSequenceNumber(partId, sequenceNumber, size) {
-  document.getElementById("sequenceNumber" + partId).value = sequenceNumber;
+  document.getElementById("sequenceNumber" + partId).setAttribute('value',sequenceNumber);
 
   let upButton = document.getElementById("upButton" + partId);
   upButton.setAttribute('onclick',
       'upArticlePart(' + partId + ', ' + sequenceNumber + ', ' + size + ')');
-
-  if(sequenceNumber === 1){
+  if (sequenceNumber === 1) {
     upButton.className = 'upDisableButton'
     upButton.disabled = true;
   } else {
@@ -536,7 +544,7 @@ function setNewSequenceNumber(partId, sequenceNumber, size) {
   let downButton = document.getElementById("downButton" + partId);
   downButton.setAttribute('onclick',
       'downArticlePart(' + partId + ', ' + sequenceNumber + ', ' + size + ')');
-  if(sequenceNumber === size){
+  if (sequenceNumber === size - 1) {
     downButton.className = 'downDisableButton'
     downButton.disabled = true;
   } else {
@@ -557,7 +565,7 @@ function setNewSequenceNumber(partId, sequenceNumber, size) {
 }
 
 function upArticlePart(partId, sequenceNumber, size) {
-  if (sequenceNumber === 1) {
+  if (sequenceNumber < 1) {
     return;
   }
   let articleBlock = document.getElementById("articleBlock" + partId);
@@ -579,7 +587,7 @@ function upArticlePart(partId, sequenceNumber, size) {
 }
 
 function downArticlePart(partId, sequenceNumber, size) {
-  if (sequenceNumber === size) {
+  if (sequenceNumber > size - 1) {
     return;
   }
   let articleBlock = document.getElementById("articleBlock" + partId);
