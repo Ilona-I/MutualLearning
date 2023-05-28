@@ -7,4 +7,9 @@ import lombok.Data;
 @Builder
 public class MarkResponse {
 
+    private int id;
+    private String title;
+    private String type;
+    private String description;
+    private String creator;
 }

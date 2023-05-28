@@ -109,7 +109,7 @@
     <div>
       <button type="button" class="btn" data-toggle="modal"
               style="background-color: #68B684; color: white;"
-              data-target="#exampleModalScrollable">
+              data-target="#exampleModalScrollable" onclick="getInfoAboutMarks()">
         Керувати мітками
       </button>
 
@@ -165,21 +165,30 @@
               <!-- Початок роботи з блоком фільтрації міток (всі, лише власні)-->
               <div style="margin-top: 10px; margin-left: 20px;">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                         id="inlineRadio1" value="option1">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
+                         id="inlineRadio1" value="optionMark1" checked="checked">
                   <label class="form-check-label" for="inlineRadio1">Всі</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                         id="inlineRadio2" value="option2">
-                  <label class="form-check-label" for="inlineRadio2">Власні</label>
+                  <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
+                         id="inlineRadio2" value="optionMark2">
+                  <label class="form-check-label" for="inlineRadio2">Системні</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
+                         id="inlineRadio3" value="optionMark3">
+                  <label class="form-check-label" for="inlineRadio3">Власні</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
+                         id="inlineRadio4" value="optionMark4">
+                  <label class="form-check-label" for="inlineRadio4">Інших користувачів</label>
                 </div>
               </div>
-              <!-- Кінець роботи з блоком фільтрації міток (всі, лише власні)-->
+              <!-- Кінець роботи з блоком фільтрації міток (всі, лише системні, лише власні, лише інших користувачів)-->
               <hr>
               <!-- Початок блоку зі списком міток -->
-              <div
-                  style="margin-left: 20px; overflow-y:scroll; height: 350px;">
+              <div id="markCheckboxList" style="margin-left: 20px; overflow-y:scroll; height: 350px;">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                   <div class="form-check-label" for="defaultCheck1">
@@ -309,11 +318,10 @@
     <!-- Кінець кнопки скасування змін -->
   </div>
 
-
-
 </div>
 <!-- Кінець роботи з блоками статті -->
 
-<script src="../../js/saveArticle.js"></script>
+<script src="../../js/saveArticleLoadData.js"></script>
+<script src="../../js/saveArticleManageMarks.js"></script>
 </body>
 </html>

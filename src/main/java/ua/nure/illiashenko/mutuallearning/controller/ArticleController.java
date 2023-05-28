@@ -17,7 +17,7 @@ import ua.nure.illiashenko.mutuallearning.dto.article.ArticlePartResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
 import ua.nure.illiashenko.mutuallearning.dto.article.QuestionsResponse;
-import ua.nure.illiashenko.mutuallearning.entity.Mark;
+import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 
 @RestController
 @RequestMapping("/articles")
@@ -40,18 +40,26 @@ public class ArticleController {
             .id(id)
             .title("Title1")
             .type("article")
-            .marks(new Mark[]{
-                Mark.builder()
+            .marks(new MarkResponse[]{
+                MarkResponse.builder()
                     .id(1)
                     .title("Mark1")
+                    .creator("user1")
                     .type("custom")
                     .description("Description1")
                     .build(),
-                Mark.builder()
+                MarkResponse.builder()
                     .id(2)
                     .title("Mark2")
-                    .type("system")
+                    .creator("user2")
+                    .type("custom")
                     .description("Description2")
+                    .build(),
+                MarkResponse.builder()
+                    .id(3)
+                    .title("Mark3")
+                    .type("system")
+                    .description("Description3")
                     .build()
             })
             .articleParts(

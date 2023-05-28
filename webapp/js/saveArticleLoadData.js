@@ -12,6 +12,7 @@ function createXMLHttpRequest() {
 
 function getInfoAboutCurrentArticle() {
   let articleId = localStorage.getItem("articleId");
+  localStorage.setItem("userLogin", "user1")
   articleId = 1;
   if (articleId == null) {
     let articleType = localStorage.getItem("articleType");
@@ -64,7 +65,18 @@ function setMarks(marks) {
     let mark = JSON.parse(JSON.stringify(element));
     let markMap = new Map(Object.entries(mark));
     innerHTML += " <div style='margin: 3px;'>\n"
-        + "        <button class=\"badge badge-pill badge-light\" style=\"border-width: 0;\" data-toggle=\"modal\" data-target=\"#exampleModal"
+        + "        <button "
+        + "class=\"badge badge-pill ";
+    if (markMap.get("type") === "system") {
+      innerHTML += "badge-success";
+    } else if (markMap.get("type") === "custom" && markMap.get("creator")
+        === localStorage.getItem("userLogin")) {
+      innerHTML += "badge-primary";
+    } else {
+      innerHTML += "badge-info";
+    }
+    innerHTML += "\"";
+    innerHTML += " style=\"border-width: 0;\" data-toggle=\"modal\" data-target=\"#exampleModal"
         + markMap.get("id") + "\">"
         + markMap.get("title") + "</button>\n"
         + "        <div class=\"modal fade\" id=\"exampleModal" + markMap.get(
@@ -76,7 +88,17 @@ function setMarks(marks) {
         + "              <div class=\"modal-header\">\n"
         + "                <h5 class=\"modal-title\" id=\"exampleModalLabel"
         + markMap.get("id") + "\">"
-        + markMap.get("title") + "</h5>\n"
+        + "<span class=\"badge badge-pill ";
+    if (markMap.get("type") === "system") {
+      innerHTML += "badge-success";
+    } else if (markMap.get("type") === "custom" && markMap.get("creator")
+        === localStorage.getItem("userLogin")) {
+      innerHTML += "badge-primary";
+    } else {
+      innerHTML += "badge-info";
+    }
+    innerHTML += "\"";
+    innerHTML += ">" + markMap.get("title") + "</span> </h5>\n"
         + "                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n"
         + "                  <span aria-hidden=\"true\">&times;</span>\n"
         + "                </button>\n"
@@ -643,7 +665,7 @@ function deleteBlock(partId) {
     let elementPartId = element.id.replace("sequenceNumber", "")
     if (elementValue > sequenceNumber) {
       setNewSequenceNumber(elementPartId, elementValue - 1, (size - 1));
-    } else if(elementValue>0){
+    } else if (elementValue > 0) {
       setNewSequenceNumber(elementPartId, elementValue, (size - 1));
     }
   }
