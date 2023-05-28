@@ -204,7 +204,8 @@ function getOptionBlock(partId, sequenceNumber, size, isNewElement) {
       + "               style=\"padding: 15px; width: 300px;\">\n"
       + "            <p>Ви впевнені, що хочете видалити блок?</p>\n"
       + "            <div class=\"row\" style=\"margin-left: 20px; margin-top: 10px;\">\n"
-      + "              <button type=\"button\" class=\"btn btn-danger\">Видалити\n"
+      + "              <button onclick='deleteBlock(\"" + partId
+      + "\")' type=\"button\" class=\"btn btn-danger\">Видалити\n"
       + "              </button>\n"
       + "              <button type=\"button\" class=\"btn btn-secondary\"\n"
       + "                      style=\"margin-left: 10px; color: gray; border-color: gray; background-color: white;\">\n"
@@ -528,6 +529,10 @@ function addNewBlock(blockContent, partId, sequenceNumberValue, type, id) {
       cElement.parentNode.insertBefore(
           convertStringToHTML(codeAfter).children[0],
           cElement.nextSibling);
+      if (element.value > 0) {
+        setNewSequenceNumber(mainId, elementValue, (size + 1));
+      }
+
     } else if (elementValue < sequenceNumberValue && elementValue > 0) {
       setNewSequenceNumber(mainId, elementValue, (size + 1));
     }
@@ -624,4 +629,25 @@ const convertStringToHTML = htmlString => {
 
 function getRandomInt() {
   return Math.floor(Math.random() * 90071992547409);
+}
+
+function deleteBlock(partId) {
+  let allSequenceNumbers = Array.from(
+      document.getElementsByName("sequenceNumber"));
+  let size = allSequenceNumbers.length;
+  let sequenceNumber = parseInt(
+      document.getElementById("sequenceNumber" + partId).value);
+
+  for (const element of allSequenceNumbers) {
+    let elementValue = parseInt(element.value);
+    let elementPartId = element.id.replace("sequenceNumber", "")
+    if (elementValue > sequenceNumber) {
+      setNewSequenceNumber(elementPartId, elementValue - 1, (size - 1));
+    } else if(elementValue>0){
+      setNewSequenceNumber(elementPartId, elementValue, (size - 1));
+    }
+  }
+
+  document.getElementById("articleBlock" + partId).remove();
+  document.getElementById("prevNode" + partId).remove();
 }

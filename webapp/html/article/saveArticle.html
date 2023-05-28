@@ -278,11 +278,37 @@
 
   </div>
   <!-- Кінець роботи з блоком статті -->
-  <!-- Початок кнопки збереження змін -->
+
   <div style="margin-top: 10px;">
+    <!-- Початок кнопки збереження змін -->
     <button class="btn btn-info" style="width: 100%;">Зберегти зміни</button>
+    <!-- Кінець кнопки збереження змін -->
+    <!-- Початок кнопки скасування змін -->
+    <button type="button" class="btn btn-danger" style="width: 100%; margin-top: 10px;"
+            data-toggle="modal" data-target="#cancelModal"> Скасувати зміни
+    </button>
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Скасувати зміни</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Ви дійсно бажаєте скасувати зміни?.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Продовжити редагування</button>
+            <button type="button" class="btn btn-secondary">Скасувати зміни</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Кінець кнопки скасування змін -->
   </div>
-  <!-- Кінець кнопки збереження змін -->
+
 
 
 </div>
