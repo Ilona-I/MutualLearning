@@ -43,7 +43,7 @@ public class ArticleController {
             .marks(new MarkResponse[]{
                 MarkResponse.builder()
                     .id(1)
-                    .title("Mark1")
+                    .title("Інженерія програмного забезпечення")
                     .creator("user1")
                     .type("custom")
                     .description("Description1")

@@ -93,7 +93,6 @@
       </div>
     </div>
     <!-- Кінець вибору типу статті (стаття чи питання) -->
-
   </div>
 
   <hr>
@@ -113,9 +112,10 @@
         Керувати мітками
       </button>
 
-      <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+      <div class="modal fade bd-example-modal-lg" id="exampleModalScrollable" tabindex="-1"
+           role="dialog"
            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalScrollableTitle">Додати мітку</h5>
@@ -125,27 +125,30 @@
             </div>
             <div class="modal-body">
               <!-- Початок блоку зі створенням мітки -->
-              <div class="dropdown" style="margin-left: 5px;">
-                <button class="btn btn-secondary dropdown-toggle" type="button"
+              <div style="margin-left: 5px;">
+                <button class="btn btn-secondary "
                         style="background-color: #C3F73A"
-                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                        onclick="showCreateForm()">
                   Створити мітку
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                     style="padding: 10px; width: 400px;">
-                  <input type="text" class="form-control input_info"
-                         placeholder="Mark name">
-                  <textarea class="form-control input_info"
-                            placeholder="Description"></textarea>
+                <div id="createMarkForm"
+                     style="margin-top: 10px; padding: 10px; width: 98%; border-width: 1px; border-color: #555555; border-style: solid;"
+                     hidden>
+                  <input id="createMarkTitle" type="text" class="form-control input_info"
+                         placeholder="Mark name" onkeyup="deleteCreateMarkTitleErrors()">
+                  <textarea style="max-height: 350px;" id="createMarkDescription" class="form-control input_info"
+                            placeholder="Description"
+                            onkeyup="deleteCreateMarkDescriptionErrors()"></textarea>
 
                   <div class="row" style="margin-left: 20px; margin-top: 10px;">
                     <button type="button" class="btn"
-                            style="color: #68B684; border-color: #68B684; background-color: white;">
+                            style="color: #68B684; border-color: #68B684; background-color: white;"
+                            onclick="createMark()">
                       Зберегти
                     </button>
                     <button type="button" class="btn btn-secondary"
-                            style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
+                            style="margin-left: 10px; color: gray; border-color: gray; background-color: white;"
+                            onclick="hideCreateForm()">
                       Скасувати
                     </button>
                   </div>
@@ -155,119 +158,53 @@
               <!-- Кінець блоку зі створенням мітки -->
               <!-- Початок роботи з блоком пошуку міток-->
               <div class="row" style="width: 100%; margin-top: 20px;">
-                <input type="text" style="width: 70%; margin-left: 20px;" class="form-control"
-                       placeholder="Search...">
-                <button class="btn"
-                        style="background-color: #95E06C; margin-left: 5%; width: 20%;">Find
-                </button>
+                <input id="searchMarkLine" type="text" style="width: 100%; margin-left: 20px;"
+                       class="form-control"
+                       placeholder="Search..." onkeyup="displayMarks()">
               </div>
               <!-- Кінець роботи з блоком пошуку міток-->
               <!-- Початок роботи з блоком фільтрації міток (всі, лише власні)-->
               <div style="margin-top: 10px; margin-left: 20px;">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
-                         id="inlineRadio1" value="optionMark1" checked="checked">
+                         id="inlineRadio1" value="optionMark1" checked="checked"
+                         onchange="displayMarks()">
                   <label class="form-check-label" for="inlineRadio1">Всі</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
-                         id="inlineRadio2" value="optionMark2">
-                  <label class="form-check-label" for="inlineRadio2">Системні</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
-                         id="inlineRadio3" value="optionMark3">
-                  <label class="form-check-label" for="inlineRadio3">Власні</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
-                         id="inlineRadio4" value="optionMark4">
-                  <label class="form-check-label" for="inlineRadio4">Інших користувачів</label>
+                         id="ownMarks" value="optionMark3" onchange="displayMarks()">
+                  <label class="form-check-label" for="ownMarks">Власні</label>
                 </div>
               </div>
-              <!-- Кінець роботи з блоком фільтрації міток (всі, лише системні, лише власні, лише інших користувачів)-->
+              <!-- Кінець роботи з блоком фільтрації міток (всі, лише власні)-->
+              <!-- Початок роботи з блоком фільтрації міток (всі, помічені)-->
+              <div style="margin-top: 10px; margin-left: 20px;">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio"
+                         name="inlineRadioOptionsMarksCheckedType"
+                         id="inlineRadio2" value="optionMark1" checked="checked"
+                         onchange="displayMarks()">
+                  <label class="form-check-label" for="inlineRadio2">Всі</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio"
+                         name="inlineRadioOptionsMarksCheckedType"
+                         id="checkedMarks" value="optionMark2" onchange="displayMarks()">
+                  <label class="form-check-label" for="checkedMarks">Обрані</label>
+                </div>
+              </div>
+              <!-- Кінець роботи з блоком фільтрації міток (всі, обрані)-->
               <hr>
               <!-- Початок блоку зі списком міток -->
-              <div id="markCheckboxList" style="margin-left: 20px; overflow-y:scroll; height: 350px;">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <div class="form-check-label" for="defaultCheck1">
-                    <div class="row" style="margin-left: 2px; width: 90%;">
-                      <p>Власна мітка1</p>
+              <div id="markCheckboxList"
+                   style="margin-left: 20px; overflow-y:scroll; height: 350px;">
 
-                      <!-- Початок блоку із редагуванням мітки -->
-                      <div class="dropdown" style="margin-left: 5px;">
-                        <button class="btn dropdown-toggle" type="button"
-                                style="margin-left:10px; height:25px; background-color: transparent; color: #C3F73A; border-color: #C3F73A; font-size: small; padding-top: 0; padding-bottom: 0;"
-                                id="dropdownMenuButton1" data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                          Редагувати
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
-                             style="padding: 10px; width: 400px;">
-                          <input type="text" class="form-control input_info"
-                                 placeholder="Mark name">
-                          <textarea class="form-control input_info"
-                                    placeholder="Description"></textarea>
-
-                          <div class="row" style="margin-left: 20px; margin-top: 10px;">
-                            <button type="button" class="btn"
-                                    style="color: #68B684; border-color: #68B684; background-color: white;">
-                              Зберегти
-                            </button>
-                            <button type="button" class="btn btn-secondary"
-                                    style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
-                              Скасувати
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Кінець блоку із редагуванням мітки -->
-
-                      <!-- Початок блоку з видаленням мітки -->
-                      <div class="dropdown" style="margin-left: 5px;">
-                        <button class="btn dropdown-toggle" type="button"
-                                style="height:25px; margin-left: 5px; margin-top: 2px; padding-top: 0; padding-bottom: 0; background-color: transparent; color: #ff6e64; border-color:#ff6e64; font-size: small;"
-                                id="dropdownMenuButton2" data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                          Видалити
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2"
-                             style="padding: 15px; width: 300px;">
-                          <p>Ви впевнені, що хочете видалити мітку?</p>
-                          <div class="row" style="margin-left: 20px; margin-top: 10px;">
-                            <button type="button" class="btn btn-danger">Видалити
-                            </button>
-                            <button type="button" class="btn btn-secondary"
-                                    style="margin-left: 10px; color: gray; border-color: gray; background-color: white;">
-                              Скасувати
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Кінець блоку з видаленням мітки -->
-                    </div>
-                  </div>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                  <label class="form-check-label" for="defaultCheck3">
-                    Мітка1
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                  <label class="form-check-label" for="defaultCheck4">
-                    Мітка2
-                  </label>
-                </div>
               </div>
               <!-- Кінець блоку зі списком міток -->
               <div class="modal-footer" style="margin-top: 5px;">
                 <button type="button" class="btn"
-                        style="background-color: #68B684; color: white;">Зберегти
+                        style="background-color: #68B684; color: white;">Застосувати
                 </button>
                 <button type="button" class="btn btn-secondary">Скасувати</button>
               </div>
@@ -296,7 +233,8 @@
     <button type="button" class="btn btn-danger" style="width: 100%; margin-top: 10px;"
             data-toggle="modal" data-target="#cancelModal"> Скасувати зміни
     </button>
-    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -309,7 +247,9 @@
             <p>Ви дійсно бажаєте скасувати зміни?.</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Продовжити редагування</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Продовжити
+              редагування
+            </button>
             <button type="button" class="btn btn-secondary">Скасувати зміни</button>
           </div>
         </div>

@@ -61,9 +61,11 @@ function handleStateChange() {
 
 function setMarks(marks) {
   let innerHTML = "";
+  let marksId = [];
   for (const element of marks) {
     let mark = JSON.parse(JSON.stringify(element));
     let markMap = new Map(Object.entries(mark));
+    marksId.push(markMap.get("id"));
     innerHTML += " <div style='margin: 3px;'>\n"
         + "        <button "
         + "class=\"badge badge-pill ";
@@ -114,6 +116,7 @@ function setMarks(marks) {
         + "        </div>\n"
         + "      </div>"
   }
+  localStorage.setItem("articleMarksId", JSON.stringify(marksId));
   document.getElementById("markList").innerHTML = innerHTML;
 }
 
