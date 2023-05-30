@@ -37,3 +37,11 @@
   font-size: xx-large;
   color: #D5D5EAFF;
 }
+
+.loadFileButton{
+  border-width: 0;
+  background-color: transparent;
+  font-style: italic;
+  text-underline: #084cdf;
+  color: #084cdf;
+}

@@ -81,7 +81,7 @@ public class ArticleController {
                         .id(3)
                         .sequenceNumber(3)
                         .text("Text3")
-                        .link("/article/1.pdf")
+                        .link("1.pdf")
                         .type("file")
                         .build(),
                     ArticlePartResponse.builder()

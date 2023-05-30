@@ -23,13 +23,15 @@ function handleStateChangeMarks() {
 }
 
 function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
-  let innerHtml = " <div id='markBlock"+markMap.get("id")+"' style='width: 100%;'";
+  let innerHtml = " <div id='markBlock" + markMap.get("id")
+      + "' style='width: 100%;'";
   let currentMark = document.getElementById("defaultCheck" + markMap.get("id"));
   if (isOnlyOwn === true && localStorage.getItem("userLogin") !== markMap.get(
           "creator")
       || isOnlyChecked === true && (currentMark !== null && currentMark.checked
           === false)
-      || !markMap.get("title").toLowerCase().includes(searchParam.toLowerCase())) {
+      || !markMap.get("title").toLowerCase().includes(
+          searchParam.toLowerCase())) {
     console.log(markMap.get("id"));
     innerHtml += " hidden ";
   }
@@ -85,18 +87,20 @@ function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
         + "                        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButtonEditMark"
         + markMap.get("id") + "\"\n"
         + "                             style=\"padding: 10px; width: 400px;\">\n"
-        + "                          <input id='updateMarkTitle"+markMap.get("id")+"' type=\"text\" class=\"form-control input_info\"\n"
+        + "                          <input id='updateMarkTitle" + markMap.get(
+            "id") + "' type=\"text\" class=\"form-control input_info\"\n"
         + "                                 placeholder=\"Mark name\" value='"
         + markMap.get("title") + "'>\n"
-        + "                          <textarea id='updateMarkDescription"+markMap.get("id")+"' class=\"form-control input_info\"\n"
+        + "                          <textarea id='updateMarkDescription"
+        + markMap.get("id") + "' class=\"form-control input_info\"\n"
         + "                                    placeholder=\"Description\">"
         + markMap.get("description") + "</textarea>\n"
         + "\n"
         + "                          <div class=\"row\" style=\"margin-left: 20px; margin-top: 10px;\">\n"
         + "                            <button type=\"button\" class=\"btn\"\n"
         + "                                    style=\"color: #68B684; border-color: #68B684; background-color: white;\""
-        + "                                    onclick='updateMark("
-        + markMap.get("id") + ")'>\n"
+        + "                                    onclick=\"updateMark('"
+        + markMap.get("id") + "', '" + markMap.get("title") + "')\">\n"
         + "                              Зберегти\n"
         + "                            </button>\n"
         + "                            <button type=\"button\" class=\"btn btn-secondary\"\n"
@@ -116,8 +120,7 @@ function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
         + markMap.get("id") + "\" data-toggle=\"dropdown\"\n"
         + "                                aria-haspopup=\"true\"\n"
         + "                                aria-expanded=\"false\""
-        + "                                onclick='deleteMark(" + markMap.get(
-            "id") + ")'>\n"
+        + "                                >\n"
         + "                          Видалити\n"
         + "                        </button>\n"
         + "                        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButtonDeleteMark"
@@ -125,7 +128,10 @@ function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
         + "                             style=\"padding: 15px; width: 300px;\">\n"
         + "                          <p>Ви впевнені, що хочете видалити мітку?</p>\n"
         + "                          <div class=\"row\" style=\"margin-left: 20px; margin-top: 10px;\">\n"
-        + "                            <button type=\"button\" class=\"btn btn-danger\">Видалити\n"
+        + "                            <button type=\"button\" class=\"btn btn-danger\" "
+        + "                                     onclick=\"deleteMark('"
+        + markMap.get("id") + "', '" + markMap.get("title") + "')\""
+        + "                                     >Видалити\n"
         + "                            </button>\n"
         + "                            <button type=\"button\" class=\"btn btn-secondary\"\n"
         + "                                    style=\"margin-left: 10px; color: gray; border-color: gray; background-color: white;\">\n"
@@ -213,6 +219,43 @@ function createMark() {
         descriptionTextarea.nextSibling);
   }
 
+  const url = "http://localhost:8080/marks";
+  createXMLHttpRequest();
+  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  xmlHttp.open("POST", url, false);
+  xmlHttp.onreadystatechange = handleStateCreateMark;
+  xmlHttp.setRequestHeader("Content-Type", "application/json");
+  xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
+  let createMarkBody = '{"title": "' + title + '",'
+      + '"description" : "' + description + '"}';
+  xmlHttp.send(createMarkBody);
+
+}
+
+function handleStateCreateMark() {
+  if (xmlHttp.readyState == 4) {
+    if (xmlHttp.status == 200) {
+      displayCreatedMark(xmlHttp.responseText);
+    } else {
+
+    }
+  }
+}
+
+function displayCreatedMark(jsonString) {
+  hideCreateForm();
+  let allMarkTitles = JSON.parse(localStorage.getItem("allMarkTitles"));
+  let allMarks = JSON.parse(localStorage.getItem("allMarks"));
+
+  let mark = JSON.parse(jsonString);
+  let markMap = new Map(Object.entries(mark));
+
+  allMarkTitles.push(markMap.get("title"));
+  allMarks.push(mark);
+
+  localStorage.setItem("allMarkTitles", JSON.stringify(allMarkTitles));
+  localStorage.setItem("allMarks", JSON.stringify(allMarks));
+  displayMarks();
 }
 
 function deleteCreateMarkTitleErrors() {
@@ -229,8 +272,8 @@ function deleteCreateMarkDescriptionErrors() {
   }
 }
 
-function updateMark(markId) {
-  let titleInput = document.getElementById("updateMarkTitle");
+function updateMark(markId, markTitle) {
+  let titleInput = document.getElementById("updateMarkTitle" + markId);
   let title = titleInput.value;
   let allMarkTitles = JSON.stringify(localStorage.getItem("allMarkTitles"));
   if (title.trim() === "") {
@@ -240,36 +283,80 @@ function updateMark(markId) {
         titleInput.nextSibling);
     return;
   }
-  if (allMarkTitles.indexOf(title)!==allMarkTitles.lastIndexOf(title)) {
+  if (allMarkTitles.indexOf(title) !== allMarkTitles.lastIndexOf(title)) {
     let wrongTitleHtml = "<div id='wrongTitleUpdateMark'><p style='color: darkred'>* мітка з цією назвою вже існує</p></div>";
     titleInput.parentNode.insertBefore(
         convertStringToHTML(wrongTitleHtml).children[0],
         titleInput.nextSibling);
     return;
   }
-  let descriptionTextarea = document.getElementById("createMarkDescription");
+  let descriptionTextarea = document.getElementById(
+      "updateMarkDescription" + markId);
   let description = descriptionTextarea.value;
   if (description.trim() === "") {
-    let wrongDescriptionHtml = "<div id='wrongDescriptionCreateMark'><p style='color: darkred'>*напишіть опис</p></div>";
+    let wrongDescriptionHtml = "<div id='wrongDescriptionUpdateMark'><p style='color: darkred'>*напишіть опис</p></div>";
     descriptionTextarea.parentNode.insertBefore(
         convertStringToHTML(wrongDescriptionHtml).children[0],
         descriptionTextarea.nextSibling);
   }
 
+  localStorage.setItem("currentUpdatedMarkTitle", markTitle);
+  const url = "http://localhost:8080/marks";
+  createXMLHttpRequest();
+  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  xmlHttp.open("PUT", url, false);
+  xmlHttp.onreadystatechange = handleStateUpdateMark;
+  xmlHttp.setRequestHeader("Content-Type", "application/json");
+  xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
+  let updateMarkBody = '{"id": "'+markId+'",'
+      + '"title": "' + title + '",'
+      + '"description" : "' + description + '"}';
+  xmlHttp.send(updateMarkBody);
 }
 
-function deleteMark(markId) {
-    let markBlock = document.getElementById("markBlock"+markId);
- /* let allMarkTitles = JSON.parse(localStorage.getItem("allMarkTitles"));
-  let allMarks = JSON.parse(localStorage.getItem("allMarks"));
-  let resultAllMarkTitles = [];
-  for(const element of allMarkTitles){
-    if(element===)
-  }
-  localStorage.setItem("allMarkTitles", JSON.stringify(resultAllMarkTitles));*/
-    markBlock.remove();
+function handleStateUpdateMark() {
+  if (xmlHttp.readyState == 4) {
+    if (xmlHttp.status == 200) {
+      displayUpdatedMark(xmlHttp.responseText);
+    } else {
 
-  const url = "http://localhost:8080/marks/"+markId;
+    }
+  }
+  localStorage.removeItem("currentUpdatedMarkTitle")
+}
+
+function displayUpdatedMark(jsonString){
+  let markTitle = localStorage.getItem("currentUpdatedMarkTitle");
+  let allMarkTitles = JSON.parse(localStorage.getItem("allMarkTitles"));
+  let allMarks = JSON.parse(localStorage.getItem("allMarks"));
+
+  let mark = JSON.parse(jsonString);
+  let markMap = new Map(Object.entries(mark));
+
+  let markIndex = allMarkTitles.indexOf(markTitle);
+  allMarkTitles.splice(markIndex, 1);
+  allMarks.splice(markIndex, 1);
+
+  allMarkTitles.push(markMap.get("title"));
+  allMarks.push(mark);
+
+  localStorage.setItem("allMarkTitles", JSON.stringify(allMarkTitles));
+  localStorage.setItem("allMarks", JSON.stringify(allMarks));
+  displayMarks();
+}
+
+function deleteMark(markId, markTitle) {
+  let markBlock = document.getElementById("markBlock" + markId);
+  let allMarkTitles = JSON.parse(localStorage.getItem("allMarkTitles"));
+  let allMarks = JSON.parse(localStorage.getItem("allMarks"));
+  let markIndex = allMarkTitles.indexOf(markTitle);
+  allMarkTitles.splice(markIndex, 1);
+  allMarks.splice(markIndex, 1);
+  localStorage.setItem("allMarkTitles", JSON.stringify(allMarkTitles));
+  localStorage.setItem("allMarks", JSON.stringify(allMarks));
+  markBlock.remove();
+
+  const url = "http://localhost:8080/marks/" + markId;
   createXMLHttpRequest();
   let user = '{"login":"' + localStorage.getItem("login") + '}';
   xmlHttp.open("DELETE", url, false);
