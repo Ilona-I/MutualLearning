@@ -1,5 +1,7 @@
 package ua.nure.illiashenko.mutuallearning.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleForUpdateResponse;
+import ua.nure.illiashenko.mutuallearning.dto.article.ArticlePartRequest;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticlePartResponse;
-import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
+import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.QuestionsResponse;
+import ua.nure.illiashenko.mutuallearning.dto.article.SaveArticleResponse;
 import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 
 @RestController
@@ -25,13 +29,24 @@ import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 public class ArticleController {
 
     @PostMapping
-    public ArticleResponse createArticle(@RequestBody ArticleRequest articleRequest) {
+    public List<SaveArticleResponse> createArticle(@RequestBody ArticleRequest articleRequest) {
         return null;
     }
 
     @PutMapping("/{id}")
-    public ArticleResponse editArticle(@RequestBody ArticleRequest articleRequest, @PathVariable int id) {
-        return null;
+    public List<SaveArticleResponse> editArticle(@RequestBody ArticleRequest articleRequest, @PathVariable int id) {
+        System.out.println(articleRequest);
+        List<SaveArticleResponse> response = new ArrayList();
+        for (ArticlePartRequest part : articleRequest.getArticleParts()) {
+            if (part.getType().equals("image") || part.getType().equals("file")) {
+                response.add(SaveArticleResponse.builder()
+                    .id(part.getId())
+                    .type(part.getType())
+                    .link(part.getId()+"-"+part.getLink())
+                    .build());
+            }
+        }
+        return response;
     }
 
     @GetMapping("/edit")
@@ -116,7 +131,7 @@ public class ArticleController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteArticle(@PathVariable int id){
+    public void deleteArticle(@PathVariable int id) {
 
     }
 

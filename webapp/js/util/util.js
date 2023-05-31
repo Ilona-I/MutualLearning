@@ -5,7 +5,7 @@ const convertStringToHTML = htmlString => {
 }
 
 function getRandomInt() {
-  return Math.floor(Math.random() * 90071992547409);
+  return Math.floor(Math.random() * 2147483648);
 }
 
 function escapeHTML(html) {

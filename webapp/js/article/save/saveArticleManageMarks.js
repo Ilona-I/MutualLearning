@@ -32,7 +32,6 @@ function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
           === false)
       || !markMap.get("title").toLowerCase().includes(
           searchParam.toLowerCase())) {
-    console.log(markMap.get("id"));
     innerHtml += " hidden ";
   }
   innerHtml += ">\n"

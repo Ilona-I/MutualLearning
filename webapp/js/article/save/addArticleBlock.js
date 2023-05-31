@@ -2,7 +2,7 @@ function addText(partId, sequenceNumberValue) {
   let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">\n"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
-      + "           <textarea class=\"form-control input_info article_text\" >\n"
+      + "           <textarea id='newTextType"+id+"' class=\"form-control input_info article_text\" >\n"
       + "           </textarea>\n"
       + "       </div>\n";
   addNewBlock(blockContent, partId, sequenceNumberValue, "text", id);
@@ -29,7 +29,7 @@ function addCode(partId, sequenceNumberValue) {
   let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
-      + "<textarea onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
+      + "<textarea id='newCodeType"+id+"' onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
       + "e=this.selectionEnd;this.value=v.substring(0, s)+'\\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;"
       + "return false;}\" "
       + "style=\"width: 100%; height: 300px; font-family: 'Courier New'\"> "
@@ -43,7 +43,7 @@ function addFile(partId, sequenceNumberValue) {
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "             <p>Текст відображення:</p>"
-      + "           <input type='text' class=\"form-control input_info article_text\" >"
+      + "           <input id='newFileTypeText"+id+"' type='text' class=\"form-control input_info article_text\" >"
       + "             <br>"
       + "          <label for=\"file" + id
       + "\" class=\"drop-container\">\n"
@@ -59,10 +59,10 @@ function addLink(partId, sequenceNumberValue) {
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "   <p>Текст посилання</p>"
-      + "           <input type='text' class=\"form-control input_info article_text\">"
+      + "           <input id='newLinkTypeTitle"+id+"' type='text' class=\"form-control input_info article_text\">"
       + "<br>"
       + "   <p>Посилання</p>"
-      + "           <input type='text' class=\"form-control input_info article_text\">"
+      + "           <input id='newLinkTypeLink"+id+"' type='text' class=\"form-control input_info article_text\">"
       + "       </div>";
   addNewBlock(blockContent, partId, sequenceNumberValue, "link", id);
 }
@@ -91,7 +91,11 @@ function addNewBlock(blockContent, partId, sequenceNumberValue, type, id) {
           + "<input type='text' "
           + "      name='type'"
           + "      id='type" + id + "' "
-          + "      value='" + type + "' hidden>\n";
+          + "      value='" + type + "' hidden>\n"
+          + "<input type='text' "
+          + "      name='newOld'"
+          + "      id='newOld" + id + "' "
+          + "      value='new' hidden>";
       codeAfter += blockContent;
       codeAfter += getOptionBlock(id, (elementValue + 1), (size + 1),
           true);

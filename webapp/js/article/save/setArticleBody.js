@@ -2,14 +2,14 @@ function getTextBlock(partMap) {
   return "<div style=\"width: 77%; margin-left: 15px;\">\n"
       + "        <!-- Початок роботи з блоком попереднього перегляду-->\n"
       + "        <div id='prevBlock" + partMap.get("id") + "'>\n"
-      + "          <p class=\"article_text\">\n"
+      + "          <p id='displayTextType"+partMap.get("id")+"' class=\"article_text\">\n"
       + "            " + partMap.get("text") + "\n"
       + "          </p>\n"
       + "        </div>\n"
       + "        <!-- Кінець роботи з блоком попереднього перегляду-->\n"
       + "        <!-- Початок роботи з блоком редагування-->\n"
       + "        <div id='editBlock" + partMap.get("id") + "' hidden>\n"
-      + "<textarea class=\"form-control input_info article_text\" >\n"
+      + "<textarea id='editTextType"+partMap.get("id")+"' class=\"form-control input_info article_text\" >\n"
       + partMap.get("text") + "\n"
       + "</textarea>\n"
       + "        </div>\n"
@@ -21,6 +21,7 @@ function getImageBlock(partMap) {
   return " <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "        <!-- Початок роботи з блоком попереднього перегляду-->\n"
       + "        <div id='prevBlock" + partMap.get("id") + "'>\n"
+      + "           <input id='articleImageLink"+partMap.get("id")+"' type='text' value='"+partMap.get("link")+"' hidden>"
       + "          <img id='articleImage"+partMap.get("id")+"' src=\"\" alt=\"Фото\">\n"
       + "        </div>\n"
       + "        <!-- Кінець роботи з блоком попереднього перегляду-->\n"
@@ -48,7 +49,7 @@ function getCodeBlock(partMap) {
       + "         id='prevBlock" + partMap.get("id") + "'>\n"
       + "      <p>\n"
       + "      <pre>\n"
-      + "<code>\n"
+      + "<code id='displayCodeType"+partMap.get("id")+"'>\n"
       + escapeHTML(partMap.get("text"))
       + "</code>\n"
       + "    </pre>\n"
@@ -56,7 +57,7 @@ function getCodeBlock(partMap) {
       + "    </div>"
       + "<div style=\"width: 77%; margin-left: 15px;\""
       + "      id='editBlock" + partMap.get("id") + "' hidden>"
-      + "<textarea onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
+      + "<textarea id='editCodeType"+partMap.get("id")+"' onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
       + "e=this.selectionEnd;this.value=v.substring(0, s)+'\\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;"
       + "return false;}\" "
       + " id='textareaCode" + partMap.get("id")
@@ -69,12 +70,13 @@ function getCodeBlock(partMap) {
 function getFileBlock(partMap) {
   return "<div style=\"width: 77%; margin-left: 15px;\">\n"
       + "         <div id='prevBlock" + partMap.get("id") + "'>"
-      + "               <p><button class='loadFileButton' onclick=\"downloadFile('"+partMap.get("link")+"')\">" + partMap.get("text")
+      + "           <input id='displayFileTypeLink"+partMap.get("id")+"' type='text' value='"+partMap.get("link")+"' hidden>"
+      + "               <p><button id='displayFileType"+partMap.get("id")+"' class='loadFileButton' onclick=\"downloadFile('"+partMap.get("link")+"')\">" + partMap.get("text")
       + "</button></p>\n"
       + "         </div>"
       + "         <div id='editBlock" + partMap.get("id") + "' hidden> "
       + "             <p>Текст відображення:</p>"
-      + "           <input type='text' class=\"form-control input_info article_text\" value='"
+      + "           <input id='editFileTypeTitle"+partMap.get("id")+"' type='text' class=\"form-control input_info article_text\" value='"
       + partMap.get("text") + "'>"
       + "             <br>"
       + "          <label for=\"file" + partMap.get("id")
@@ -89,17 +91,17 @@ function getFileBlock(partMap) {
 function getLink(partMap) {
   return " <div style=\"width: 77%; margin-left: 15px;\""
       + "         id='prevBlock" + partMap.get("id") + "'>\n"
-      + " <a href='" + partMap.get("link") + "'>" + partMap.get("text")
+      + " <a id='displayLinkType"+partMap.get("id")+"' href='" + partMap.get("link") + "'>" + partMap.get("text")
       + "</a>"
       + "    </div>"
       + "<div style=\"width: 77%; margin-left: 15px;\""
       + "      id='editBlock" + partMap.get("id") + "' hidden>"
       + "   <p>Текст посилання</p>"
-      + "           <input type='text' class=\"form-control input_info article_text\" value='"
+      + "           <input id='editLinkTypeTitle"+partMap.get("id")+"' type='text' class=\"form-control input_info article_text\" value='"
       + partMap.get("text") + "'>"
       + "<br>"
       + "   <p>Посилання</p>"
-      + "           <input type='text' class=\"form-control input_info article_text\" value='"
+      + "           <input id='editLinkTypeLink"+partMap.get("id")+"' type='text' class=\"form-control input_info article_text\" value='"
       + partMap.get("link") + "'>"
       + "</div>";
 }
@@ -129,6 +131,10 @@ function setArticleBody(articleParts) {
         + "      name='type'"
         + "      id='type" + partId + "' "
         + "      value='" + partType + "' hidden>"
+        + "<input type='text' "
+        + "      name='newOld'"
+        + "      id='newOld" + partId + "' "
+        + "      value='old' hidden>"
         + "<div class=\"row\" style=\"width: 130%;\">";
     if (partType === "text") {
       innerHTML += getTextBlock(partMap);

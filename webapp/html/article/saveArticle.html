@@ -208,7 +208,7 @@
                         onclick="updateSetMarks()" data-dismiss="modal"
                 >Застосувати до статті
                 </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Скасувати вибір</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Скасувати</button>
               </div>
             </div>
           </div>
@@ -229,7 +229,7 @@
 
   <div style="margin-top: 10px;">
     <!-- Початок кнопки збереження змін -->
-    <button class="btn btn-info" style="width: 100%;">Зберегти зміни</button>
+    <button class="btn btn-info" style="width: 100%;" onclick="sendArticleChanges()">Зберегти зміни</button>
     <!-- Кінець кнопки збереження змін -->
     <!-- Початок кнопки скасування змін -->
     <button type="button" class="btn btn-danger" style="width: 100%; margin-top: 10px;"
@@ -275,6 +275,7 @@
 <script src="../../js/article/save/setNewSequenceNumber.js"></script>
 <script src="../../js/article/save/editBlockEvent.js"></script>
 <script src="../../js/article/save/updateSetMarks.js"></script>
+<script src="../../js/article/save/sendChanges.js"></script>
 <script src="../../js/article/save/getAddNewElementButtonBlock.js"></script>
 <script src="../../js/util/util.js"></script>
 </body>

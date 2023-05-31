@@ -11,9 +11,9 @@ function createXMLHttpRequest() {
 }
 
 function getInfoAboutCurrentArticle() {
+  localStorage.setItem("articleId", "1")
   let articleId = localStorage.getItem("articleId");
   localStorage.setItem("userLogin", "user1")
-  articleId = 1;
   if (articleId == null) {
     let articleType = localStorage.getItem("articleType");
     setStructure(articleType);
