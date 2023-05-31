@@ -25,7 +25,7 @@ function handleStateChangeMarks() {
 function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
   let innerHtml = " <div id='markBlock" + markMap.get("id")
       + "' style='width: 100%;'";
-  let currentMark = document.getElementById("defaultCheck" + markMap.get("id"));
+  let currentMark = document.getElementById("defaultCheckMarkList" + markMap.get("id"));
   if (isOnlyOwn === true && localStorage.getItem("userLogin") !== markMap.get(
           "creator")
       || isOnlyChecked === true && (currentMark !== null && currentMark.checked
@@ -37,15 +37,15 @@ function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
   }
   innerHtml += ">\n"
       + "                  <input type=\"checkbox\" value=\"" + markMap.get(
-          "id") + "\" id=\"defaultCheck"
+          "id") + "\" id=\"defaultCheckMarkList"
       + markMap.get("id") + "\"";
-  if (isArticleMark(markMap.get("id")) && (currentMark === null
+  if (isArticleMark(markMap.get("id")) === true && (currentMark === null
           || currentMark.checked === true) || currentMark !== null
       && currentMark.checked === true) {
     innerHtml += " checked='checked' ";
   }
   innerHtml += ">\n"
-      + "                  <label style='width: 90%;' for=\"defaultCheck"
+      + "                  <label style='width: 90%;' for=\"defaultCheckMarkList"
       + markMap.get("id") + "\""
       + ">\n"
       + "                    <div class=\"row\" style=\"margin-left: 2px; width: 90%;\">\n"

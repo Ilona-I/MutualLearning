@@ -65,7 +65,7 @@ function jsonToHTML(jsonString) {
   let title = dataMap.get("title");
   let type = dataMap.get("type");
   let marks = dataMap.get("marks");
-  document.getElementById("articleTitle").innerText = title;
+  document.getElementById("articleTitle").innerText = title.toString();
   setMarks(marks);
 
   if (type === "question") {

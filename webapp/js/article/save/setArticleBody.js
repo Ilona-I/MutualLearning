@@ -21,7 +21,7 @@ function getImageBlock(partMap) {
   return " <div style=\"width: 77%; margin-left: 15px;\">\n"
       + "        <!-- Початок роботи з блоком попереднього перегляду-->\n"
       + "        <div id='prevBlock" + partMap.get("id") + "'>\n"
-      + "          <img src=\"../../file/profile.png\" alt=\"Фото\">\n"
+      + "          <img id='articleImage"+partMap.get("id")+"' src=\"\" alt=\"Фото\">\n"
       + "        </div>\n"
       + "        <!-- Кінець роботи з блоком попереднього перегляду-->\n"
       + "        <!-- Початок роботи з блоком редагування-->\n"
@@ -112,6 +112,7 @@ function setArticleBody(articleParts) {
       + "      value='0' hidden>"
       + "</div>"
   innerHTML += getAddNewElementButtonBlock(0, 0);
+  let images = [];
   let size = articleParts.length;
   for (const element of articleParts) {
     let part = JSON.parse(JSON.stringify(element));
@@ -132,6 +133,7 @@ function setArticleBody(articleParts) {
     if (partType === "text") {
       innerHTML += getTextBlock(partMap);
     } else if (partType === "image") {
+      images.push(partMap);
       innerHTML += getImageBlock(partMap);
     } else if (partType === "code") {
       innerHTML += getCodeBlock(partMap);
@@ -145,4 +147,8 @@ function setArticleBody(articleParts) {
     innerHTML += getAddNewElementButtonBlock(partId, sequenceNumber);
   }
   document.getElementById("articleBody").innerHTML = innerHTML;
+  for(const element of images){
+    localStorage.setItem("currentImageId", element.get("id"));
+    downloadImage(element.get("link"));
+  }
 }

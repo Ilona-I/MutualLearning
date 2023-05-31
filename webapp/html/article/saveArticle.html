@@ -204,7 +204,9 @@
               <!-- Кінець блоку зі списком міток -->
               <div class="modal-footer" style="margin-top: 5px;">
                 <button type="button" class="btn"
-                        style="background-color: #68B684; color: white;">Застосувати до статті
+                        style="background-color: #68B684; color: white;"
+                        onclick="updateSetMarks()" data-dismiss="modal"
+                >Застосувати до статті
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Скасувати вибір</button>
               </div>
@@ -272,6 +274,7 @@
 <script src="../../js/article/save/downloadFile.js"></script>
 <script src="../../js/article/save/setNewSequenceNumber.js"></script>
 <script src="../../js/article/save/editBlockEvent.js"></script>
+<script src="../../js/article/save/updateSetMarks.js"></script>
 <script src="../../js/article/save/getAddNewElementButtonBlock.js"></script>
 <script src="../../js/util/util.js"></script>
 </body>

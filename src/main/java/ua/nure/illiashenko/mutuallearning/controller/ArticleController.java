@@ -74,7 +74,7 @@ public class ArticleController {
                         .id(2)
                         .sequenceNumber(2)
                         .text("Text2")
-                        .link("/article/1.png")
+                        .link("1.png")
                         .type("image")
                         .build(),
                     ArticlePartResponse.builder()
