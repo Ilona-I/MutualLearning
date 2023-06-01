@@ -21,8 +21,8 @@ function handleStateChangeMarks() {
 }
 
 function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
-  let innerHtml = " <div id='markBlock" + markMap.get("id")
-      + "' style='width: 100%;'";
+  let innerHtml = " <div class=\"custom-control custom-checkbox\" id='markBlock" + markMap.get("id")
+      + "' style='width: 100%; margin-left:5px;'";
   let currentMark = document.getElementById("defaultCheckMarkList" + markMap.get("id"));
   if (isOnlyOwn === true && localStorage.getItem("userLogin") !== markMap.get(
           "creator")
@@ -33,8 +33,9 @@ function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
     innerHtml += " hidden ";
   }
   innerHtml += ">\n"
-      + "                  <input type=\"checkbox\" value=\"" + markMap.get(
-          "id") + "\" id=\"defaultCheckMarkList"
+      + "                  <input class=\"custom-control-input\""
+      + " type=\"checkbox\" value=\"" + markMap.get("id")
+      + "\" id=\"defaultCheckMarkList"
       + markMap.get("id") + "\"";
   if (isArticleMark(markMap.get("id")) === true && (currentMark === null
           || currentMark.checked === true) || currentMark !== null
@@ -42,7 +43,8 @@ function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
     innerHtml += " checked='checked' ";
   }
   innerHtml += ">\n"
-      + "                  <label style='width: 90%;' for=\"defaultCheckMarkList"
+      + "                  <label class=\"custom-control-label\" "
+      + " style='width: 90%;' for=\"defaultCheckMarkList"
       + markMap.get("id") + "\""
       + ">\n"
       + "                    <div class=\"row\" style=\"margin-left: 2px; width: 90%;\">\n"
