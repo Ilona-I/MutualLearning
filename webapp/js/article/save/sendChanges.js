@@ -132,7 +132,6 @@ function sendArticleChanges() {
   resultMap.set("type", articleType);
 
   let json = JSON.stringify(Object.fromEntries(resultMap));
-  console.log(json);
   let articleId = localStorage.getItem("articleId");
   const url = "http://localhost:8080/articles/" + articleId;
   createXMLHttpRequest();

@@ -1,7 +1,5 @@
 function getInfoAboutMarks() {
   setDefaultFilters();
-  let articleId = localStorage.getItem("articleId");
-  articleId = 1;
   const url = "http://localhost:8080/marks";
   createXMLHttpRequest();
   let user = '{"login":"' + localStorage.getItem("login") + '}';

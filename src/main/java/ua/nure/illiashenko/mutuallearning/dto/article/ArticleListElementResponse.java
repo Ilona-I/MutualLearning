@@ -7,15 +7,14 @@ import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 
 @Data
 @Builder
-public class ArticleResponse {
+public class ArticleListElementResponse {
 
     private int id;
     private String title;
     private String type;
     private Timestamp creationDateTime;
     private Timestamp lastUpdateDateTime;
-    private ArticlePartResponse[] articleParts;
+    private Member[] members;
     private MarkResponse[] marks;
     private String reaction;
-    private String status;
 }

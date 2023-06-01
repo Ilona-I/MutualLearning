@@ -10,6 +10,7 @@ public class Member {
     private String login;
     private String name;
     private String info;
+    private String role;
     private String level;
 
 }

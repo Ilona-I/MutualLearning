@@ -77,57 +77,26 @@
 
 <div class="row">
   <!-- Початок блоку статті -->
-  <div class="article_block">
-    <h4>Заголовок статті</h4>
-    <p class="datetime_text">ред. 21.05.2023</p>
+  <div class="article_block" style="padding:40px;" >
+    <h4 id="title">Заголовок статті</h4>
+    <p id="articleDateTime" class="datetime_text" style="margin-top: -40px;">ред. 21.05.2023</p>
     <!-- Початок списку міток -->
-    <div class="article_marks">
-      <span class="badge badge-pill badge-light">Мітка1</span>
-      <span class="badge badge-pill badge-light">Мітка2</span>
+    <div id="markList" class="row article_marks" style="margin-left: 0">
+
     </div>
     <!-- Кінець списку міток -->
+    <hr>
     <!-- Початок тіла статті -->
-    <div>
-    <p class="article_text">
-      Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
-      інструкцій,
-      які описують порядок дій виконавця, щоб досягти результату розв'язання задачі за скінченну
-      кількість дій;
-      система правил виконання дискретного процесу, яка досягає поставленої мети за скінченний час.
-      Для візуалізації
-      алгоритмів часто використовують блок-схеми.
-      Для комп'ютерних програм алгоритм є списком деталізованих інструкцій, що реалізують процес
-      обчислення, який,
-      починаючи з початкового стану, відбувається через послідовність логічних станів, яка
-      завершується кінцевим станом.
-      Перехід з попереднього до наступного стану не обов'язково детермінований — деякі алгоритми
-      можуть містити елементи випадковості.
+    <div id="articleBody">
 
-      Поняття алгоритму належить до підвалин математики. Обчислювальні процеси алгоритмічного
-      характеру (як-то арифметичні
-      дії над цілими числами, знаходження НСД двох чисел тощо) відомі людству з глибокої давнини.
-      Проте чітке поняття алгоритму
-      сформувалося лише на початку XX століття.
-    </p>
-    <img src="../../file/profile.png" alt="Фото">
-    <p>
-    <pre>
-<code>
-Поняття алгоритму належить до підвалин математики. Обчислювальні процеси алгоритмічного характеру (як-то арифметичні
-дії над цілими
-</code>
-    </pre>
-    </p>
-    <p class="article_text">
-      Алгори́тм (латинізов. Algorithmi за араб. ім'ям перського математика аль-Хорезмі) — набір
-      інструкцій,
-    </p>
-    <p><a href="../../file/1.pdf">Завантажити PDF</a></p>
-    <p><a href="../../file/1.docx">Завантажити DOCX</a></p>
-    <p><a href="../../file/1.pptx">Завантажити PPTX</a></p>
+    </div>
+    <div id="giveAnswer" style="width: 100% ;">
+      <button class="btn btn-info"style="width: 100% ;">Дати відповідь</button>
     </div>
     <!-- Кінець тіла статті -->
     <!-- Початок реакцій -->
+    <br>
+    <hr>
     <div style="float: right">
       <button style="border-color: transparent; background-color: transparent">
         <img src="../../file/like_selected.png" width="20" height="30">
@@ -180,7 +149,6 @@
           <span class="badge badge-pill badge-primary"
                 style="margin-left: 10px;">Задав питання</span>
         </div>
-
       </div>
       <div class="row">
         <div>
@@ -217,7 +185,6 @@
           <span class="badge badge-pill badge-success"
                 style="margin-left: 10px;">Автор статті</span>
         </div>
-
       </div>
     </div>
     <!-- Кінець блоку з учасниками -->
@@ -245,7 +212,6 @@
                 data-target="#exampleModalScrollable3" style="height: 25px; padding: 0; font-style: revert;">
           Учасник3
         </button>
-
         <div class="modal fade" id="exampleModalScrollable3" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalScrollableTitle3" aria-hidden="true">
           <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -335,5 +301,10 @@
   </div>
 </div>
 <hr>
+<script src="../../js/article/display/displayArticleLoadData.js"></script>
+<script src="../../js/article/display/setArticleBodyDisplay.js"></script>
+<script src="../../js/article/display/setArticleMarksDisplay.js"></script>
+<script src="../../js/util/util.js"></script>
+<script src="../../js/util/downloadFile.js"></script>
 </body>
 </html>
