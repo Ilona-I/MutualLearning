@@ -3,6 +3,7 @@ package ua.nure.illiashenko.mutuallearning.dto.article;
 import java.sql.Timestamp;
 import lombok.Builder;
 import lombok.Data;
+import ua.nure.illiashenko.mutuallearning.constants.ArticleStatus;
 import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 
 @Data
@@ -17,5 +18,5 @@ public class ArticleResponse {
     private ArticlePartResponse[] articleParts;
     private MarkResponse[] marks;
     private String reaction;
-    private String status;
+    private ArticleStatus status;
 }

@@ -1,5 +1,8 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class ReactionType {
-
+public enum ReactionType {
+    LIKE,
+    DISLIKE,
+    NOT_LIKE,
+    NOT_DISLIKE
 }

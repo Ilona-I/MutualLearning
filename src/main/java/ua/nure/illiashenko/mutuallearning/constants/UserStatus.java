@@ -1,5 +1,7 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class UserStatus {
+public enum UserStatus {
 
+    ACTIVE,
+    BLOCKED
 }

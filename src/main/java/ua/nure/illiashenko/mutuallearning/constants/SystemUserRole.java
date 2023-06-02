@@ -1,4 +1,9 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class SystemUserRole {
+public enum SystemUserRole {
+
+    ADMIN,
+    MODERATOR,
+    USER,
+    PREMIUM_USER
 }

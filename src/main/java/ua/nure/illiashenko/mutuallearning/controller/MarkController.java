@@ -24,7 +24,6 @@ public class MarkController {
 
     @PostMapping
     public MarkResponse createMark(@RequestBody CreateMarkRequest createMarkRequest){
-        System.out.println(createMarkRequest);
         return MarkResponse.builder()
             .id(8)
             .title(createMarkRequest.getTitle())
@@ -36,14 +35,7 @@ public class MarkController {
 
     @PutMapping
     public MarkResponse updateMark(@RequestBody UpdateMarkRequest updateMarkRequest){
-        System.out.println(updateMarkRequest);
-        return MarkResponse.builder()
-            .id(updateMarkRequest.getId())
-            .title(updateMarkRequest.getTitle())
-            .creator("user1")
-            .type("custom")
-            .description(updateMarkRequest.getDescription())
-            .build();
+return null;
     }
     @GetMapping()
     public List<MarkResponse> getMarkList() {

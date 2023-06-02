@@ -1,5 +1,8 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class ArticleStatus {
+public enum ArticleStatus {
+
+    ACTIVE,
+    BLOCKED
 
 }

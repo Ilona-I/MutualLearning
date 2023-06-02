@@ -5,6 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ArticleReactionResponse {
+public class ArticleFileLinksResponse {
 
+    private int id;
+    private String type;
+    private String link;
 }

@@ -1,5 +1,8 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class AnswerType {
+public enum AnswerType {
 
+    ONE_ANSWER,
+    SEVERAL_ANSWERS,
+    TEXT_ANSWER
 }

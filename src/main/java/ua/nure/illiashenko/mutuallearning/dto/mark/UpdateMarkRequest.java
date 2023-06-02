@@ -1,5 +1,6 @@
 package ua.nure.illiashenko.mutuallearning.dto.mark;
 
+import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateMarkRequest {
 
+    @NotEmpty(message = "emptyUpdateMarkRequestId")
     private int id;
+    @NotEmpty(message = "emptyUpdateMarkRequestTitle")
     private String title;
+    @NotEmpty(message = "emptyUpdateMarkRequestDescription")
     private String description;
 }

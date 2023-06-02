@@ -1,5 +1,10 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class ArticlePartType {
+public enum ArticlePartType {
 
+    TEXT,
+    CODE,
+    FILE,
+    IMAGE,
+    LINK
 }

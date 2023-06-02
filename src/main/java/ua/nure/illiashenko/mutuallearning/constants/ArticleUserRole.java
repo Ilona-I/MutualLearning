@@ -1,5 +1,8 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class ArticleUserRole {
+public enum ArticleUserRole {
 
+    ARTICLE_CREATOR,
+    QUESTION_CREATOR,
+    QUESTION_ANSWERER
 }

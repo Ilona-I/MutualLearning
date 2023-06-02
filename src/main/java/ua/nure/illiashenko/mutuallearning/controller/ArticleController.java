@@ -22,7 +22,7 @@ import ua.nure.illiashenko.mutuallearning.dto.article.ArticlePartResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.Member;
-import ua.nure.illiashenko.mutuallearning.dto.article.SaveArticleResponse;
+import ua.nure.illiashenko.mutuallearning.dto.article.ArticleFileLinksResponse;
 import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 
 @RestController
@@ -31,17 +31,17 @@ import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 public class ArticleController {
 
     @PostMapping
-    public List<SaveArticleResponse> createArticle(@RequestBody ArticleRequest articleRequest) {
+    public List<ArticleFileLinksResponse> createArticle(@RequestBody ArticleRequest articleRequest) {
         return null;
     }
 
     @PutMapping("/{id}")
-    public List<SaveArticleResponse> editArticle(@RequestBody ArticleRequest articleRequest, @PathVariable int id) {
+    public List<ArticleFileLinksResponse> editArticle(@RequestBody ArticleRequest articleRequest, @PathVariable int id) {
         System.out.println(articleRequest);
-        List<SaveArticleResponse> response = new ArrayList();
+        List<ArticleFileLinksResponse> response = new ArrayList();
         for (ArticlePartRequest part : articleRequest.getArticleParts()) {
             if (part.getType().equals("image") || part.getType().equals("file")) {
-                response.add(SaveArticleResponse.builder()
+                response.add(ArticleFileLinksResponse.builder()
                     .id(part.getId())
                     .type(part.getType())
                     .link(part.getId() + "-" + part.getLink())

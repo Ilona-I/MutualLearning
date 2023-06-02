@@ -1,5 +1,7 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class ArticleType {
+public enum ArticleType {
 
+    QUESTION,
+    ARTICLE
 }

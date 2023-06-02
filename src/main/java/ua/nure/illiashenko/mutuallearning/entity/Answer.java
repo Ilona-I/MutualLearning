@@ -1,14 +1,31 @@
 package ua.nure.illiashenko.mutuallearning.entity;
 
-import lombok.Builder;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Entity
+@NoArgsConstructor
 @Data
-@Builder
 public class Answer {
 
-    private int id;
-    private int questionId;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name="question_id", nullable=false)
+    private Question question;
+
+    @Column(nullable = false)
     private String text;
-    private int point;
+
+    @Column(nullable = false)
+    private Integer point;
 }

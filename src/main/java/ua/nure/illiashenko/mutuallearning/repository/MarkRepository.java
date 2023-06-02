@@ -7,4 +7,5 @@ import ua.nure.illiashenko.mutuallearning.entity.Mark;
 @Repository
 public interface MarkRepository extends JpaRepository<Mark, Integer> {
 
+    boolean existsMarkByTitle(String title);
 }

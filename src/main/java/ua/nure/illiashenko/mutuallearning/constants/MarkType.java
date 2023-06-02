@@ -1,5 +1,7 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public class MarkType {
+public enum MarkType {
 
+    SYSTEM,
+    CUSTOM
 }
