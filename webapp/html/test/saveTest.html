@@ -4,7 +4,6 @@
   <link rel="stylesheet" href="../../css/menu.css">
   <link rel="stylesheet" href="../../css/blocks.css">
   <link rel="stylesheet" href="../../css/buttons.css">
-  <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -18,6 +17,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
           integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
           crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../css/style.css">
   <title>Article</title>
 </head>
 <body>
@@ -75,67 +75,123 @@
 <!-- Кінець роботи з меню -->
 
 <div class="article_block">
-  <input type="text" class="form-control input_info" value="Title" style="font-size: large" placeholder="Test title">
+  <h4>Тест</h4>
+  <input type="text" class="form-control input_info" value="Title" style="font-size: large"
+         placeholder="Test title">
   <div class="row" style="margin-top: 20px; margin-left: 30px;">
     <div class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" id="customCheck1">
-      <label class="custom-control-label" for="customCheck1">Встановити максимальну кількість спроб:</label>
+      <label class="custom-control-label" for="customCheck1">Встановити максимальну кількість
+        спроб:</label>
     </div>
-    <input class="form-control input_info" style="width: 50px; margin-left: 30px; margin-top: -8px;" type="number" min="1" value="1">
+    <input class="form-control input_info" style="width: 100px; margin-left: 30px; margin-top: -8px;"
+           type="number" min="1" value="1">
   </div>
-
+  <div class="custom-control custom-checkbox" style="margin-left: 30px;">
+    <input type="checkbox" class="custom-control-input" id="customCheck2">
+    <label class="custom-control-label" for="customCheck2">Показувати правильні відповіді після проходження</label>
+  </div>
   <div>
     <hr>
     <!-- Початок питання -->
-     <div style="border-color: #949393; border-style: solid; border-width: 1px; padding: 20px;  background-color: #eeeeff">
-       <textarea class="form-control input_info" placeholder="Question">question1</textarea>
-       <div style="margin-top: 10px;">
-         <div class="custom-control custom-radio custom-control-inline">
-           <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
-           <label class="custom-control-label" for="customRadio1">Один варіант відповіді</label>
-         </div>
-         <div class="custom-control custom-radio custom-control-inline">
-           <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-           <label class="custom-control-label" for="customRadio2">Декілька варіантів відповіді</label>
-         </div>
-         <div class="custom-control custom-radio custom-control-inline">
-           <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-           <label class="custom-control-label" for="customRadio3">Власна відповідь</label>
-         </div>
-       </div>
-
-    <!-- Початок варіантів відповідей -->
-    <div style="width: 100%; padding: 20px;">
-      <!-- Початок варіанту відповіді -->
-      <div class="row" style="width: 100%;">
-        <div style="width: 80%">
-          <p>Текст відповіді:</p>
-          <textarea class="form-control input_info" placeholder="Answer"> </textarea>
-          <p>Оцінка: <input class="form-control input_info" type="number" value="0"></p>
+    <div
+        style="border-color: #949393; margin-top: 10px; border-style: solid; border-width: 1px; padding: 20px;  background-color: #eeeeff">
+      <h6>Питання №1</h6>
+      <button class="btn btn-danger" style="height: 40px; float: right; margin-top: -38px;">
+        Видалити
+      </button>
+      <textarea class="form-control input_info" placeholder="Question">question1</textarea>
+      <div style="margin-top: 10px;">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input"
+                 checked>
+          <label class="custom-control-label" for="customRadio1">Один варіант відповіді</label>
         </div>
-        <button class="btn btn-primary">Видалити</button>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio2">Декілька варіантів
+            відповіді</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio3">Власна відповідь</label>
+        </div>
       </div>
-      <!-- Кінець варіанту відповіді -->
 
-      <div>
-        <button class="btn">Додати варіант відповіді</button>
+      <!-- Початок варіантів відповідей -->
+      <div style="width: 100%; padding: 20px;">
+        <!-- Початок варіанту відповіді -->
+        <div class="row" style="width: 100%; background-color: #e4e7ec; ">
+          <div style="width: 80%; padding: 20px;">
+            <h6>Варіант відповіді:</h6>
+            <div>
+              <p>Текст варіанту відповіді:</p>
+              <textarea class="form-control input_info" placeholder="Answer"> </textarea>
+            </div>
+            <div class="row" style="margin-top: 20px; margin-left: 10px;">
+              <p>Оцінка: </p>
+              <input class="form-control input_info" min="0" type="number" value="0"
+                     style="width: 100px; margin-left: 20px; margin-top: -10px;">
+            </div>
+
+          </div>
+          <div
+              style="padding: 20px; border-left-color: #d2cece; border-left-style: solid; border-left-width: 1px;">
+            <button class="btn btn-danger" style="height: 40px;">Видалити</button>
+          </div>
+
+        </div>
+        <!-- Кінець варіанту відповіді -->
+
+        <div style="margin-top: 20px;">
+          <button class="btn btn-dark">Додати варіант відповіді</button>
+        </div>
       </div>
+      <!-- Кінець  варіантів відповідей -->
     </div>
-    <!-- Кінець  варіантів відповідей -->
-     </div>
     <!-- Кінець питання-->
-    <div>
-      <button class="btn">Додати питання</button>
+    <div style="margin-top: 20px;">
+      <button class="btn btn-light">Додати питання</button>
     </div>
     <hr>
   </div>
 
 
+  <div style="width: 100%;">
+    <button class="btn btn-success" style="width: 100%;">Зберегти тест</button>
+    <!-- Початок кнопки скасування змін -->
+    <div>
+      <button type="button" class="btn btn-secondary" style="width: 100%; margin-top: 10px;" data-toggle="modal" data-target="#cancelChangesModal">
+        Скасувати зміни
+      </button>
+
+      <div class="modal fade" id="cancelChangesModal" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cancelChangesModalLabel">Скасувати зміни</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Ви дійсно бажаєте скасувати зміни?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити редагування</button>
+              <button type="button" class="btn btn-primary">Скасувати зміни</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Кінець кнопки скасування змін -->
 
 
-
+  </div>
 </div>
 
-
+<br>
 </body>
 </html>
