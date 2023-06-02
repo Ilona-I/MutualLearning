@@ -4,26 +4,34 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.nure.illiashenko.mutuallearning.constants.ArticleStatus;
+import ua.nure.illiashenko.mutuallearning.constants.ArticleType;
+import ua.nure.illiashenko.mutuallearning.constants.ArticleUserRole;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleFileLinksResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleForUpdateResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleListElementResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticlePartRequest;
+import ua.nure.illiashenko.mutuallearning.dto.article.ArticlePartResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
+import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 import ua.nure.illiashenko.mutuallearning.entity.Article;
-import ua.nure.illiashenko.mutuallearning.entity.ArticleMark;
 import ua.nure.illiashenko.mutuallearning.entity.ArticlePart;
+import ua.nure.illiashenko.mutuallearning.entity.Mark;
 import ua.nure.illiashenko.mutuallearning.entity.UserArticle;
 import ua.nure.illiashenko.mutuallearning.exception.article.ArticleNotFoundException;
 import ua.nure.illiashenko.mutuallearning.mapper.ArticleMapper;
+import ua.nure.illiashenko.mutuallearning.mapper.ArticlePartMapper;
+import ua.nure.illiashenko.mutuallearning.mapper.MarkMapper;
 import ua.nure.illiashenko.mutuallearning.repository.ArticleMarkRepository;
 import ua.nure.illiashenko.mutuallearning.repository.ArticlePartRepository;
 import ua.nure.illiashenko.mutuallearning.repository.ArticleRepository;
+import ua.nure.illiashenko.mutuallearning.repository.MarkRepository;
 import ua.nure.illiashenko.mutuallearning.repository.UserArticleRepository;
 import ua.nure.illiashenko.mutuallearning.repository.UserRepository;
 import ua.nure.illiashenko.mutuallearning.validation.ArticleValidator;
@@ -34,6 +42,8 @@ public class ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
+    @Autowired
+    private ArticlePartMapper articlePartMapper;
     @Autowired
     private ArticleValidator articleValidator;
     @Autowired
@@ -46,28 +56,33 @@ public class ArticleService {
     private ArticleMarkRepository articleMarkRepository;
     @Autowired
     private ArticlePartRepository articlePartRepository;
-
+    @Autowired
+    private MarkRepository markRepository;
+    @Autowired
+    private MarkMapper markMapper;
 
     public List<ArticleFileLinksResponse> createArticle(String login, ArticleRequest articleRequest) {
         articleValidator.validateArticleRequest(articleRequest);
 
-        Article article = articleMapper.mapArticleRequestToArticle(articleRequest);
-        Timestamp creationDateTime = new Timestamp(System.currentTimeMillis());
+        final Article article = articleMapper.mapArticleRequestToArticle(articleRequest);
+        final Timestamp creationDateTime = new Timestamp(System.currentTimeMillis());
         article.setCreationDateTime(creationDateTime);
         article.setStatus(ArticleStatus.ACTIVE);
 
-        String[] marksId = articleRequest.getMarksId();
-        ArticlePartRequest[] articlePartRequests = articleRequest.getArticleParts();
+        final List<Mark> marks = getArticleRequestMarks(articleRequest);;
+        final ArticlePartRequest[] articlePartRequests = articleRequest.getArticleParts();
 
-        List<ArticleMark> articleMarks = new ArrayList<>();
-        for(String markId: marksId){
+        return createArticle(article, articlePartRequests, marks, login);
+    }
+
+    private List<Mark> getArticleRequestMarks(ArticleRequest articleRequest) {
+        final String[] marksId = articleRequest.getMarksId();
+        final List<Mark> marks = new ArrayList<>();
+        for (String markId : marksId) {
             int markIdInt = Integer.parseInt(markId);
-
+            marks.add(markRepository.findById(markIdInt).get());
         }
-
-
-
-        return null;
+        return marks;
     }
 
     public List<ArticleFileLinksResponse> editArticle(int id, ArticleRequest articleRequest) {
@@ -79,10 +94,26 @@ public class ArticleService {
         return null;
     }
 
-    public ArticleResponse getArticle(int id) {
-        Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
+    public ArticleResponse getArticle(int id, String userLogin) {
+        final Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
+        final ArticleResponse articleResponse = articleMapper.mapArticleToArticleResponse(article);
+        final ArticlePartResponse[] articlePartResponses =
+            articlePartRepository.findByArticleId(id)
+                .stream()
+                .map(articlePart -> articlePartMapper.mapArticlePartToArticlePartResponse(articlePart))
+                .collect(Collectors.toList())
+                .toArray(ArticlePartResponse[]::new);
 
-        return null;
+        final MarkResponse[] markResponses =
+            articleMarkRepository.findByArticleId(id)
+                .stream()
+                .map(articleMark -> markMapper.mapToMarkResponse(markRepository.getById(articleMark.getMarkId())))
+                .collect(Collectors.toList())
+                .toArray(MarkResponse[]::new);
+        articleResponse.setArticleParts(articlePartResponses);
+        articleResponse.setMarks(markResponses);
+        articleResponse.setReaction(userArticleRepository.findByUserLoginAndArticleId(userLogin, id).getReaction());
+        return articleResponse;
     }
 
     public List<ArticleListElementResponse> getArticles(String marksId, String articleType, String ownerType,
@@ -91,24 +122,41 @@ public class ArticleService {
     }
 
     public void deleteArticle(int id) {
-
+        articleRepository.deleteById(id);
     }
 
-   /*   @Transactional
-    public Integer createArticle(Article article, List<ArticlePart> articleParts, UserArticle userArticle, List<ArticleMark> articleMarks) {
-      int articleId = articleRepository.save(article).getId();
-        userArticle.setArticleId(articleId);
-        userArticleRepository.save(userArticle);
-        for (ArticleMark articleMark : articleMarks) {
-            articleMark.setArticleId(articleId);
-            articleMarkRepository.save(articleMark);
-        }
-        for (ArticlePart articlePart : articleParts) {
-            articlePart.setArticleId(articleId);
+    @Transactional
+    public List<ArticleFileLinksResponse> createArticle(Article article, ArticlePartRequest[] articlePartRequests,
+        List<Mark> marks, String login) {
+        Article savedArticle = articleRepository.save(article);
+
+        final List<ArticleFileLinksResponse> articleFileLinksParts = new ArrayList<>();
+        for (ArticlePartRequest articlePartRequest : articlePartRequests) {
+            final ArticlePart articlePart = articlePartMapper.mapArticlePartRequestToArticlePart(articlePartRequest);
+            if (articlePartRepository.existsById(articlePartRequest.getId())) {
+                articlePart.setId(null);
+                articlePart.setLink(null);
+                int id = articlePartRepository.save(articlePart).getId();
+                articlePart.setId(id);
+                articlePart.setLink(id + "-" + articlePartRequest.getLink());
+            }
+            articlePart.setArticleId(savedArticle.getId());
             articlePartRepository.save(articlePart);
+            articleFileLinksParts.add(ArticleFileLinksResponse.builder()
+                .id(articlePartRequest.getId())
+                .link(articlePart.getLink())
+                .type(articlePartRequest.getType())
+                .build());
         }
-        return articleId;
-    }*/
+        final UserArticle userArticle = new UserArticle();
+        userArticle.setArticleId(savedArticle.getId());
+        userArticle.setUserLogin(login);
+        userArticle.setRole(savedArticle.getType().equals(ArticleType.ARTICLE) ? ArticleUserRole.ARTICLE_CREATOR
+            : ArticleUserRole.QUESTION_CREATOR);
+        userArticleRepository.save(userArticle);
+
+        return articleFileLinksParts;
+    }
 
     private ArticleNotFoundException articleNotFoundById(int id) {
         log.error("No article found by id: " + id);

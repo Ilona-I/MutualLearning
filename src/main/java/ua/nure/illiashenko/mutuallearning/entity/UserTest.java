@@ -3,11 +3,7 @@ package ua.nure.illiashenko.mutuallearning.entity;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,23 +13,14 @@ import lombok.NoArgsConstructor;
 public class UserTest {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
-
-    @ManyToOne
-    @JoinColumn(name="user_login", nullable=false)
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name="test_id", nullable=false)
-    private Test test;
-
-    @Column(nullable = false)
+    @Column(name="user_login", nullable=false)
+    private String user_login;
+    @Column(name="test_id")
+    private Integer testId;
     private int mark;
-
-    @Column(nullable = false)
+    @Column(name = "start_date_time")
     private Timestamp startDateTime;
-
-    @Column(nullable = false)
+    @Column(name = "finish_date_time")
     private Timestamp finishDateTime;
 }

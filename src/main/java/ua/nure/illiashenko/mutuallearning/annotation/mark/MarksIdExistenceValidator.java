@@ -10,15 +10,20 @@ import ua.nure.illiashenko.mutuallearning.repository.MarkRepository;
 
 @AllArgsConstructor
 @Component
-public class UniqueMarkValidator implements ConstraintValidator<UniqueMarkValidation, String> {
+public class MarksIdExistenceValidator implements ConstraintValidator<MarksIdExistenceValidation, String[]> {
 
     @NonNull
     @Autowired
     private MarkRepository markRepository;
 
     @Override
-    public boolean isValid(String title, ConstraintValidatorContext context) {
-        return !markRepository.existsMarkByTitle(title);
+    public boolean isValid(String[] marksId, ConstraintValidatorContext context) {
+        for (String markId : marksId) {
+            int markIdInt = Integer.parseInt(markId);
+            if (!markRepository.existsById(markIdInt)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
-

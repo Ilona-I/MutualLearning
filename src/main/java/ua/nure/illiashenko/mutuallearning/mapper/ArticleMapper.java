@@ -1,8 +1,12 @@
 package ua.nure.illiashenko.mutuallearning.mapper;
 
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ua.nure.illiashenko.mutuallearning.dto.article.ArticlePartResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
+import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 import ua.nure.illiashenko.mutuallearning.entity.Article;
 
 @Component

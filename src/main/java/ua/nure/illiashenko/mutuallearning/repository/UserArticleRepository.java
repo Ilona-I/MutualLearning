@@ -7,4 +7,5 @@ import ua.nure.illiashenko.mutuallearning.entity.UserArticle;
 @Repository
 public interface UserArticleRepository extends JpaRepository<UserArticle, Integer> {
 
+    UserArticle findByUserLoginAndArticleId(String login, Integer articleId);
 }

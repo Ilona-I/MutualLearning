@@ -15,11 +15,11 @@ import ua.nure.illiashenko.mutuallearning.util.FileDownloadUtil;
 public class FileDownloadController {
 
     @GetMapping("/downloadFile/{fileCode}")
-    public ResponseEntity<byte[]> downloadFile(@PathVariable("fileCode") String fileCode) throws IOException {
+    public ResponseEntity<byte[]> downloadFile(@PathVariable("fileCode") String fileName) throws IOException {
        FileDownloadUtil downloadUtil = new FileDownloadUtil();
         Resource resource = null;
         try {
-            resource = downloadUtil.getFileAsResource(fileCode);
+            resource = downloadUtil.getFileAsResource(fileName);
         } catch (IOException e) {
             throw new RuntimeException();
         }
