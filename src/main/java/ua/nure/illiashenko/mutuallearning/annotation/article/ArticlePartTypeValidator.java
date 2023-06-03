@@ -1,14 +1,19 @@
 package ua.nure.illiashenko.mutuallearning.annotation.article;
 
-import java.util.Arrays;
+import static ua.nure.illiashenko.mutuallearning.constants.ArticlePartType.TEXT;
+import static ua.nure.illiashenko.mutuallearning.constants.ArticlePartType.CODE;
+import static ua.nure.illiashenko.mutuallearning.constants.ArticlePartType.IMAGE;
+import static ua.nure.illiashenko.mutuallearning.constants.ArticlePartType.FILE;
+import static ua.nure.illiashenko.mutuallearning.constants.ArticlePartType.LINK;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import ua.nure.illiashenko.mutuallearning.constants.ArticlePartType;
 
-public class ArticlePartTypeValidator implements ConstraintValidator<ArticlePartTypeValidation, ArticlePartType> {
+public class ArticlePartTypeValidator implements ConstraintValidator<ArticlePartTypeValidation, String> {
 
     @Override
-    public boolean isValid(ArticlePartType value, ConstraintValidatorContext context) {
-        return Arrays.asList(ArticlePartType.values()).contains(value);
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        return TEXT.equals(value) || CODE.equals(value) || IMAGE.equals(value) || FILE.equals(value) || LINK.equals(
+            value);
     }
 }

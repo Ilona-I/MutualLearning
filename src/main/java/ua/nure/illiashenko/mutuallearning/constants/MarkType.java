@@ -1,7 +1,11 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public enum MarkType {
+public class MarkType {
 
-    SYSTEM,
-    CUSTOM
+    public static final String SYSTEM = "SYSTEM";
+    public static final String CUSTOM = "CUSTOM";
+
+    private MarkType() {
+
+    }
 }

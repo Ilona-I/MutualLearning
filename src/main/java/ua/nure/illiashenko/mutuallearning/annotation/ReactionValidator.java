@@ -1,14 +1,17 @@
 package ua.nure.illiashenko.mutuallearning.annotation;
 
-import java.util.Arrays;
+import static ua.nure.illiashenko.mutuallearning.constants.ReactionType.LIKE;
+import static ua.nure.illiashenko.mutuallearning.constants.ReactionType.DISLIKE;
+import static ua.nure.illiashenko.mutuallearning.constants.ReactionType.NOT_LIKE;
+import static ua.nure.illiashenko.mutuallearning.constants.ReactionType.NOT_DISLIKE;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import ua.nure.illiashenko.mutuallearning.constants.ReactionType;
 
-public class ReactionValidator implements ConstraintValidator<ReactionValidation, Object> {
+public class ReactionValidator implements ConstraintValidator<ReactionValidation, String> {
 
     @Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
-        return Arrays.stream(ReactionType.values()).anyMatch(x-> x.toString().equals(value.toString()));
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        return LIKE.equals(value)||DISLIKE.equals(value)||NOT_LIKE.equals(value)||NOT_DISLIKE.equals(value);
     }
 }

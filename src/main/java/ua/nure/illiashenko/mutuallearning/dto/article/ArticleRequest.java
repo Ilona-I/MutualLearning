@@ -23,7 +23,7 @@ public class ArticleRequest {
 
     @NotEmpty(message = "emptyArticleRequestType")
     @ArticleTypeValidation
-    private ArticleType type;
+    private String type;
 
     private ArticlePartRequest[] articleParts;
 

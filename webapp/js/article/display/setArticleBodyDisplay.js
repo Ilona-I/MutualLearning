@@ -58,16 +58,16 @@ function setArticleBodyDisplay(articleParts) {
     let part = JSON.parse(JSON.stringify(element));
     let partMap = new Map(Object.entries(part));
     let partType = partMap.get("type");
-    if (partType === "text") {
+    if (partType === "TEXT") {
       innerHTML += getTextBlockDisplay(partMap);
-    } else if (partType === "image") {
+    } else if (partType === "IMAGE") {
       images.push(partMap);
       innerHTML += getImageBlockDisplay(partMap);
-    } else if (partType === "code") {
+    } else if (partType === "CODE") {
       innerHTML += getCodeBlockDisplay(partMap);
-    } else if (partType === "file") {
+    } else if (partType === "FILE") {
       innerHTML += getFileBlockDisplay(partMap);
-    } else if (partType === "link") {
+    } else if (partType === "LINK") {
       innerHTML += getLinkDisplay(partMap);
     }
     innerHTML += "</div>";

@@ -10,4 +10,8 @@ import ua.nure.illiashenko.mutuallearning.entity.ArticleMark;
 public interface ArticleMarkRepository extends JpaRepository<ArticleMark, Integer> {
 
     List<ArticleMark> findByArticleId(int articleId);
+
+    List<ArticleMark> findAllByMarkIdIsIn(List<Integer> markId);
+
+    void deleteByMarkIdAndArticleId(Integer markId, Integer articleId);
 }

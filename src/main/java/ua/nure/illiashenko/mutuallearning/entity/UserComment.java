@@ -19,5 +19,5 @@ public class UserComment {
     @Column(name = "comment_id")
     private String commentId;
     private String role;
-    private ReactionType reaction;
+    private String reaction;
 }

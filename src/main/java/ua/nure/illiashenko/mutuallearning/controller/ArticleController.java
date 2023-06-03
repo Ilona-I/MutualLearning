@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ua.nure.illiashenko.mutuallearning.constants.ArticleType;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleForUpdateResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleListElementResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
@@ -51,10 +52,11 @@ public class ArticleController {
     }
 
     @GetMapping()
-    public List<ArticleListElementResponse> getArticles(@RequestParam(required = false) String marksId,
+    public List<ArticleListElementResponse> getArticles(@RequestParam(required = false) Integer[] marksId,
         @RequestParam String articleType, @RequestParam String ownerType, @RequestParam String sortType,
-        @RequestParam(required = false) String searchLine, @RequestParam(required = false) String searchType) {
-        return articleService.getArticles(marksId, articleType, ownerType, sortType, searchLine, searchType);
+        @RequestParam(required = false) String searchLine, @RequestParam(required = false) String searchType,
+        @RequestParam int page, @RequestParam int size) {
+        return articleService.getArticles(marksId, articleType, ownerType, sortType, searchLine, searchType, page, size);
     }
 
     @DeleteMapping("/{id}")

@@ -3,6 +3,8 @@ package ua.nure.illiashenko.mutuallearning.dto.article;
 import java.sql.Timestamp;
 import lombok.Builder;
 import lombok.Data;
+import ua.nure.illiashenko.mutuallearning.constants.ArticleType;
+import ua.nure.illiashenko.mutuallearning.constants.ReactionType;
 import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 
 @Data

@@ -1,7 +1,11 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public enum ArticleType {
+public class ArticleType {
 
-    QUESTION,
-    ARTICLE
+    public static final String QUESTION = "QUESTION";
+    public static final String ARTICLE = "ARTICLE";
+
+    private ArticleType() {
+
+    }
 }

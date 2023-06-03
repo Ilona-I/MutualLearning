@@ -18,5 +18,4 @@ public class Test {
     private String title;
     @Column(name = "number_of_attempts")
     private Integer numberOfAttempts;
-    private String type;
 }

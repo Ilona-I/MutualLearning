@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ua.nure.illiashenko.mutuallearning.constants.ArticlePartType;
 
 @Entity
 @NoArgsConstructor

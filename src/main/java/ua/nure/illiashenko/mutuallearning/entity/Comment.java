@@ -21,5 +21,4 @@ public class Comment {
     @Column(name = "last_update_date_time")
     private Timestamp lastUpdateDateTime;
     private String text;
-    private String status;
 }

@@ -15,7 +15,7 @@ function escapeHTML(html) {
 
 function getDate(timeStamp) {
   let dateFormat = new Date(timeStamp);
-  return dateFormat.getDate() + "." + dateFormat.getMonth() + "."
+  return dateFormat.getDate() + "." + (dateFormat.getMonth()+1)+ "."
       + dateFormat.getFullYear()
 }
 

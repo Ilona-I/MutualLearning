@@ -36,9 +36,14 @@ public class MarkController {
         return markService.updateMark(updateMarkRequest);
     }
 
+    @GetMapping("/{id}")
+    public MarkResponse getMark(@PathVariable int id) {
+        return markService.getMark(id);
+    }
+
     @GetMapping()
     public List<MarkResponse> getMarkList() {
-     return markService.getMarkList();
+        return markService.getMarkList();
     }
 
     @DeleteMapping("/{id}")

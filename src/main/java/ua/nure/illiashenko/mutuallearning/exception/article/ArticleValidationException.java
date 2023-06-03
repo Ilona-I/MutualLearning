@@ -10,6 +10,5 @@ public class ArticleValidationException extends ServiceApiException {
 
         public ArticleValidationException(String errorCode, Map<String, String> errorDetails) {
                 super(errorCode, errorDetails, HttpStatus.BAD_REQUEST);
-
         }
 }

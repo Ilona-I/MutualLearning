@@ -19,6 +19,6 @@ public class UserArticle {
     private String userLogin;
     @Column(name = "article_Id")
     private Integer articleId;
-    private ArticleUserRole role;
-    private ReactionType reaction;
+    private String role;
+    private String reaction;
 }

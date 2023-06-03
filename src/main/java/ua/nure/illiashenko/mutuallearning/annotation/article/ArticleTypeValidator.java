@@ -1,14 +1,15 @@
 package ua.nure.illiashenko.mutuallearning.annotation.article;
 
-import java.util.Arrays;
+import static ua.nure.illiashenko.mutuallearning.constants.ArticleType.ARTICLE;
+import static ua.nure.illiashenko.mutuallearning.constants.ArticleType.QUESTION;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import ua.nure.illiashenko.mutuallearning.constants.ArticleType;
 
-public class ArticleTypeValidator implements ConstraintValidator<ArticleTypeValidation, ArticleType> {
+public class ArticleTypeValidator implements ConstraintValidator<ArticleTypeValidation, String> {
 
     @Override
-    public boolean isValid(ArticleType value, ConstraintValidatorContext context) {
-        return Arrays.asList(ArticleType.values()).contains(value);
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        return ARTICLE.equals(value)||QUESTION.equals(value);
     }
 }

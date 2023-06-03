@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.nure.illiashenko.mutuallearning.annotation.article.ArticlePartTypeValidation;
+import ua.nure.illiashenko.mutuallearning.constants.ArticlePartType;
 
 @Data
 @Builder

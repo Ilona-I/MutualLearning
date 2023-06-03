@@ -11,6 +11,7 @@ function createXMLHttpRequest() {
 }
 
 function getInfoAboutCurrentArticle() {
+  localStorage.setItem("articleId", "1")
   let articleId = localStorage.getItem("articleId");
   localStorage.setItem("userLogin", "user1")
   if (articleId == null) {
@@ -59,6 +60,7 @@ function handleStateChange() {
 }
 
 function jsonToHTML(jsonString) {
+  console.log(jsonString)
   let jsonObject = JSON.parse(jsonString);
   let dataMap = new Map(Object.entries(jsonObject));
   let title = dataMap.get("title");

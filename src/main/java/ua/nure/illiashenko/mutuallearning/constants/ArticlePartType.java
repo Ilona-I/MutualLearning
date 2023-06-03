@@ -1,10 +1,14 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public enum ArticlePartType {
+public class ArticlePartType {
 
-    TEXT,
-    CODE,
-    FILE,
-    IMAGE,
-    LINK
+    public static final String TEXT = "TEXT";
+    public static final String CODE = "CODE";
+    public static final String FILE = "FILE";
+    public static final String IMAGE = "IMAGE";
+    public static final String LINK = "LINK";
+
+    private ArticlePartType() {
+
+    }
 }

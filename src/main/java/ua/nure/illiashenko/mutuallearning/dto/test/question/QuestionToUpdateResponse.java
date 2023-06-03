@@ -11,6 +11,6 @@ public class QuestionToUpdateResponse {
 
     private Integer questionId;
     private String text;
-    private AnswerType type;
+    private String type;
     private AnswerToUpdateResponse[] answerToUpdateResponses;
 }

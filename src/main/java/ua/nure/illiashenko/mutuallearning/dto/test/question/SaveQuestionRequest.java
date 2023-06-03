@@ -14,6 +14,6 @@ public class SaveQuestionRequest {
 
     private Integer questionId;
     private String text;
-    private AnswerType type;
+    private String type;
 
 }

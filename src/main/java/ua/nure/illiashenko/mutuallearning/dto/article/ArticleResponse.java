@@ -14,11 +14,10 @@ public class ArticleResponse {
 
     private int id;
     private String title;
-    private ArticleType type;
+    private String type;
     private Timestamp creationDateTime;
     private Timestamp lastUpdateDateTime;
     private ArticlePartResponse[] articleParts;
     private MarkResponse[] marks;
-    private ReactionType reaction;
-    private ArticleStatus status;
+    private String reaction;
 }

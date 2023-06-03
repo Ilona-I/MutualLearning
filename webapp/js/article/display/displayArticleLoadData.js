@@ -1,6 +1,4 @@
 let xmlHttp;
-const articleTypeArticle = "article";
-const articleTypeQuestion = "question";
 
 function createXMLHttpRequest() {
   if (window.ActiveXObject) {
@@ -39,12 +37,13 @@ function handleStateChangeDisplay() {
       console.log(38)
       jsonToHTMLDisplay(xmlHttp.responseText);
     } else {
-      document.location = "../html/error.html";
+     // document.location = "../error.html";
     }
   }
 }
 
 function jsonToHTMLDisplay(jsonString) {
+  console.log(jsonString)
   let jsonObject = JSON.parse(jsonString);
   let dataMap = new Map(Object.entries(jsonObject));
   let title = dataMap.get("title");
@@ -61,7 +60,7 @@ function jsonToHTMLDisplay(jsonString) {
   document.getElementById("title").innerText = title.toString();
   setMarksDisplay(marks);
 
-  if (type === "question") {
+  if (type === "QUESTION") {
     setTypeQuestionDisplay();
     return;
   } else {

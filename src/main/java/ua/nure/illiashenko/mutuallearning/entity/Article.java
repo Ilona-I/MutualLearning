@@ -17,11 +17,9 @@ public class Article {
     @Id
     private Integer id;
     private String title;
-    private ArticleType type;
+    private String type;
     @Column(name = "creation_date_time")
     private Timestamp creationDateTime;
     @Column(name = "last_update_date_time")
     private Timestamp lastUpdateDateTime;
-    private ArticleStatus status;
-
 }

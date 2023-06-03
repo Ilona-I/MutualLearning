@@ -1,7 +1,11 @@
 package ua.nure.illiashenko.mutuallearning.constants;
 
-public enum UserStatus {
+public class UserStatus {
 
-    ACTIVE,
-    BLOCKED
+    public static final String ACTIVE = "ACTIVE";
+    public static final String BLOCKED = "BLOCKED";
+
+    private UserStatus() {
+
+    }
 }
