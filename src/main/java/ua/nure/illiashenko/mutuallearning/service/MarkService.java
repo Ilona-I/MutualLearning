@@ -24,6 +24,10 @@ public class MarkService {
         return null;
     }
 
+    public MarkResponse getMark(int id){
+        return null;
+    }
+
     public MarkResponse updateMark(UpdateMarkRequest updateMarkRequest){
         return null;
 

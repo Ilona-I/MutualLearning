@@ -21,6 +21,7 @@ import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
 import ua.nure.illiashenko.mutuallearning.dto.mark.MarkResponse;
 import ua.nure.illiashenko.mutuallearning.entity.Article;
+import ua.nure.illiashenko.mutuallearning.entity.ArticleMark;
 import ua.nure.illiashenko.mutuallearning.entity.ArticlePart;
 import ua.nure.illiashenko.mutuallearning.entity.Mark;
 import ua.nure.illiashenko.mutuallearning.entity.UserArticle;
@@ -61,7 +62,7 @@ public class ArticleService {
     @Autowired
     private MarkMapper markMapper;
 
-    public List<ArticleFileLinksResponse> createArticle(String login, ArticleRequest articleRequest) {
+    public List<ArticleFileLinksResponse> createArticle(ArticleRequest articleRequest) {
         articleValidator.validateArticleRequest(articleRequest);
 
         final Article article = articleMapper.mapArticleRequestToArticle(articleRequest);
@@ -69,21 +70,10 @@ public class ArticleService {
         article.setCreationDateTime(creationDateTime);
         article.setStatus(ArticleStatus.ACTIVE);
 
-        final List<Mark> marks = getArticleRequestMarks(articleRequest);;
-        final ArticlePartRequest[] articlePartRequests = articleRequest.getArticleParts();
 
-        return createArticle(article, articlePartRequests, marks, login);
+        return createArticle(article, articleRequest);
     }
 
-    private List<Mark> getArticleRequestMarks(ArticleRequest articleRequest) {
-        final String[] marksId = articleRequest.getMarksId();
-        final List<Mark> marks = new ArrayList<>();
-        for (String markId : marksId) {
-            int markIdInt = Integer.parseInt(markId);
-            marks.add(markRepository.findById(markIdInt).get());
-        }
-        return marks;
-    }
 
     public List<ArticleFileLinksResponse> editArticle(int id, ArticleRequest articleRequest) {
         articleValidator.validateArticleRequest(articleRequest);
@@ -94,7 +84,7 @@ public class ArticleService {
         return null;
     }
 
-    public ArticleResponse getArticle(int id, String userLogin) {
+    public ArticleResponse getArticle(int id) {
         final Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
         final ArticleResponse articleResponse = articleMapper.mapArticleToArticleResponse(article);
         final ArticlePartResponse[] articlePartResponses =
@@ -112,7 +102,7 @@ public class ArticleService {
                 .toArray(MarkResponse[]::new);
         articleResponse.setArticleParts(articlePartResponses);
         articleResponse.setMarks(markResponses);
-        articleResponse.setReaction(userArticleRepository.findByUserLoginAndArticleId(userLogin, id).getReaction());
+        articleResponse.setReaction(userArticleRepository.findByUserLoginAndArticleId(getUserLogin(), id).getReaction());
         return articleResponse;
     }
 
@@ -126,8 +116,8 @@ public class ArticleService {
     }
 
     @Transactional
-    public List<ArticleFileLinksResponse> createArticle(Article article, ArticlePartRequest[] articlePartRequests,
-        List<Mark> marks, String login) {
+    public List<ArticleFileLinksResponse> createArticle(Article article, ArticleRequest articleRequest) {
+        final ArticlePartRequest[] articlePartRequests = articleRequest.getArticleParts();
         Article savedArticle = articleRepository.save(article);
 
         final List<ArticleFileLinksResponse> articleFileLinksParts = new ArrayList<>();
@@ -148,12 +138,22 @@ public class ArticleService {
                 .type(articlePartRequest.getType())
                 .build());
         }
+
         final UserArticle userArticle = new UserArticle();
         userArticle.setArticleId(savedArticle.getId());
-        userArticle.setUserLogin(login);
+        userArticle.setUserLogin(getUserLogin());
         userArticle.setRole(savedArticle.getType().equals(ArticleType.ARTICLE) ? ArticleUserRole.ARTICLE_CREATOR
             : ArticleUserRole.QUESTION_CREATOR);
         userArticleRepository.save(userArticle);
+
+        for (String markId : articleRequest.getMarksId()) {
+            int markIdInt = Integer.parseInt(markId);
+            final ArticleMark articleMark = new ArticleMark();
+            articleMark.setArticleId(savedArticle.getId());
+            articleMark.setMarkId(markIdInt);
+            articleMarkRepository.save(articleMark);
+        }
+
 
         return articleFileLinksParts;
     }
@@ -162,5 +162,10 @@ public class ArticleService {
         log.error("No article found by id: " + id);
         return new ArticleNotFoundException("articleNotFound",
             Collections.singletonMap("article", "No article found by id: " + id));
+    }
+
+
+    private String getUserLogin() {
+        return "";
     }
 }
