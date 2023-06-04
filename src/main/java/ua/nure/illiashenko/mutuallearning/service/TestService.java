@@ -146,12 +146,12 @@ public class TestService {
     public TestResponse getTest(int id) {
         return TestResponse.builder()
             .title("title1")
-            .questionResponses(new QuestionResponse[]{
+            .questions(new QuestionResponse[]{
                 QuestionResponse.builder()
                     .questionId(1)
                     .text("Question text 1")
                     .type(ONE_ANSWER)
-                    .answerResponses(
+                    .answers(
                         new AnswerResponse[]{
                             AnswerResponse.builder()
                                 .answerId(1)
@@ -168,7 +168,7 @@ public class TestService {
                     .questionId(2)
                     .text("Question text 1")
                     .type(SEVERAL_ANSWERS)
-                    .answerResponses(
+                    .answers(
                         new AnswerResponse[]{
                             AnswerResponse.builder()
                                 .answerId(3)
@@ -180,6 +180,44 @@ public class TestService {
                                 .build(),
                             AnswerResponse.builder()
                                 .answerId(5)
+                                .text("Answer 3 text")
+                                .build()
+                        }
+                    )
+                    .build(),
+                QuestionResponse.builder()
+                    .questionId(3)
+                    .text("Question text 1")
+                    .type(ONE_ANSWER)
+                    .answers(
+                        new AnswerResponse[]{
+                            AnswerResponse.builder()
+                                .answerId(6)
+                                .text("Answer 1 text")
+                                .build(),
+                            AnswerResponse.builder()
+                                .answerId(7)
+                                .text("Answer 2 text")
+                                .build()
+                        }
+                    )
+                    .build(),
+                QuestionResponse.builder()
+                    .questionId(4)
+                    .text("Question text 1")
+                    .type(SEVERAL_ANSWERS)
+                    .answers(
+                        new AnswerResponse[]{
+                            AnswerResponse.builder()
+                                .answerId(8)
+                                .text("Answer 1 text")
+                                .build(),
+                            AnswerResponse.builder()
+                                .answerId(9)
+                                .text("Answer 2 text")
+                                .build(),
+                            AnswerResponse.builder()
+                                .answerId(10)
                                 .text("Answer 3 text")
                                 .build()
                         }

@@ -9,6 +9,6 @@ import ua.nure.illiashenko.mutuallearning.dto.test.question.QuestionResponse;
 public class TestResponse {
 
     private String title;
-    private QuestionResponse[] questionResponses;
+    private QuestionResponse[] questions;
 
 }

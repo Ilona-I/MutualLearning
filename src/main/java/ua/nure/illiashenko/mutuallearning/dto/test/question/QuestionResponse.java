@@ -12,6 +12,6 @@ public class QuestionResponse {
     private Integer questionId;
     private String text;
     private String type;
-    private AnswerResponse[] answerResponses;
+    private AnswerResponse[] answers;
 
 }
