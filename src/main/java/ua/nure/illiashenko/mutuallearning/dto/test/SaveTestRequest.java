@@ -13,5 +13,5 @@ import ua.nure.illiashenko.mutuallearning.dto.test.question.SaveQuestionRequest;
 public class SaveTestRequest {
 
     private String title;
-    private SaveQuestionRequest[] saveQuestionRequests;
+    private SaveQuestionRequest[] questions;
 }

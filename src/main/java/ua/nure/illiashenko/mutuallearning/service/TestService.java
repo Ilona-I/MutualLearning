@@ -22,22 +22,12 @@ import ua.nure.illiashenko.mutuallearning.dto.test.question.answer.AnswerToUpdat
 @Service
 public class TestService {
 
-    public TestInfoResponse createTest(SaveTestRequest saveTestRequest) {
+    public void createTest(SaveTestRequest saveTestRequest) {
         System.out.println(saveTestRequest);
-        return TestInfoResponse.builder()
-            .title(saveTestRequest.getTitle())
-            .maxMark(10)
-            .usersAttemptsResponse(new UsersAttemptsResponse[0])
-            .build();
     }
 
-    public TestInfoResponse editTest(int id, SaveTestRequest saveTestRequest) {
+    public void editTest(int id, SaveTestRequest saveTestRequest) {
         System.out.println(saveTestRequest);
-        return TestInfoResponse.builder()
-            .title(saveTestRequest.getTitle())
-            .maxMark(10)
-            .usersAttemptsResponse(new UsersAttemptsResponse[0])
-            .build();
     }
 
     public TestToUpdateResponse getTestToUpdate(int id) {

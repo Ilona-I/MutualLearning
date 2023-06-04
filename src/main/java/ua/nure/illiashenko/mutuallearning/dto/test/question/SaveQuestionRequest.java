@@ -16,6 +16,6 @@ public class SaveQuestionRequest {
     private Integer questionId;
     private String text;
     private String type;
-    private SaveAnswerRequest[] saveAnswerRequests;
+    private SaveAnswerRequest[] answers;
 
 }

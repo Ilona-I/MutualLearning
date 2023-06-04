@@ -58,7 +58,7 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
         + "        <h6>Питання: </h6>"
         + "        <input name='question' type='text' value='" + questionId
         + "' hidden> "
-        + "        <textarea style='width: 85%' class=\"form-control input_info\" placeholder=\"Question\">"
+        + "        <textarea id='questionText"+questionId+"' style='width: 85%' class=\"form-control input_info\" placeholder=\"Question\">"
         + questionText + "</textarea>\n"
         + "        <button onclick='deleteQuestionBlock(" + questionId
         + ")' class=\"btn btn-danger\" style=\"height: 40px; float: right; margin-top: -40px;\">\n"
@@ -105,17 +105,17 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
           + "          <div id='answerBlock" + answerId
           + "' class=\"row\" style=\"width: 100%; margin-top: 10px; background-color: #e4e7ec; \">\n"
           + "          <input name='answer" + questionId
-          + "' type='text' value='answer" + answerId + "' hidden>"
+          + "' type='text' value='" + answerId + "' hidden>"
           + "            <div style=\"width: 80%; padding: 20px;\">\n"
           + "              <h6>Варіант відповіді:</h6>\n"
           + "              <div>\n"
           + "                <p>Текст варіанту відповіді:</p>\n"
-          + "                <textarea class=\"form-control input_info\" placeholder=\"Answer\"> "
+          + "                <textarea id='answerText"+answerId+"' class=\"form-control input_info\" placeholder=\"Answer\"> "
           + answerText + "</textarea>\n"
           + "              </div>\n"
           + "              <div class=\"row\" style=\"margin-top: 20px; margin-left: 10px;\">\n"
           + "                <p>Оцінка: </p>\n"
-          + "                <input class=\"form-control input_info\" min=\"0\" type=\"number\" value=\""
+          + "                <input id='answerMark"+answerId+"' class=\"form-control input_info\" min=\"0\" type=\"number\" value=\""
           + answerMark + "\"\n"
           + "                       style=\"width: 100px; margin-left: 20px; margin-top: -10px;\">\n"
           + "              </div>\n"

@@ -3,9 +3,8 @@ function addQuestionBlock(){
  let innerHtml = "<div id='questionBlock" + questionId
       + "' style=\"border-color: #949393; margin-top: 10px; border-style: solid; border-width: 1px; padding: 20px;  background-color: #eeeeff\">\n"
       + "        <h6>Питання: </h6>"
-      + "        <input name='question' type='text' value='" + questionId
-      + "' hidden> "
-      + "        <textarea style='width: 85%' class=\"form-control input_info\" placeholder=\"Question\"></textarea>\n"
+      + "        <input name='question' type='text' value='" + questionId + "' hidden> "
+      + "        <textarea id='questionText"+questionId+"' style='width: 85%' class=\"form-control input_info\" placeholder=\"Question\"></textarea>\n"
       + "        <button onclick='deleteQuestionBlock(" + questionId
       + ")' class=\"btn btn-danger\" style=\"height: 40px; float: right; margin-top: -40px;\">\n"
       + "          Видалити\n"

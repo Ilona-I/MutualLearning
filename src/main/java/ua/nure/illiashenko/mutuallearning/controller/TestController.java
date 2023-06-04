@@ -28,13 +28,13 @@ public class TestController {
     public TestService testService;
 
     @PostMapping
-    public TestInfoResponse createTest(@RequestBody SaveTestRequest saveTestRequest) {
-        return testService.createTest(saveTestRequest);
+    public void createTest(@RequestBody SaveTestRequest saveTestRequest) {
+        testService.createTest(saveTestRequest);
     }
 
     @PutMapping("/{id}")
-    public TestInfoResponse editTest(@PathVariable int id, @RequestBody SaveTestRequest saveTestRequest) {
-        return testService.editTest(id, saveTestRequest);
+    public void editTest(@PathVariable int id, @RequestBody SaveTestRequest saveTestRequest) {
+        testService.editTest(id, saveTestRequest);
     }
 
     @GetMapping("/update/{id}")
