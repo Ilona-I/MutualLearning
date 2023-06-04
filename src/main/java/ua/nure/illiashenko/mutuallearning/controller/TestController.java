@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ua.nure.illiashenko.mutuallearning.dto.test.CheckTestRequest;
-import ua.nure.illiashenko.mutuallearning.dto.test.CheckTestResponse;
 import ua.nure.illiashenko.mutuallearning.dto.test.SaveTestRequest;
 import ua.nure.illiashenko.mutuallearning.dto.test.TestInfoResponse;
 import ua.nure.illiashenko.mutuallearning.dto.test.TestResponse;
@@ -54,8 +53,8 @@ public class TestController {
     }
 
     @PostMapping("/{id}")
-    public CheckTestResponse checkTest(@PathVariable int id, @RequestBody CheckTestRequest checkTestRequest) {
-        return testService.checkTest(id, checkTestRequest);
+    public void sendTestToCheck(@PathVariable int id, @RequestBody CheckTestRequest checkTestRequest) {
+         testService.sendTestToCheck(id, checkTestRequest);
     }
 
     @DeleteMapping("/{id}")

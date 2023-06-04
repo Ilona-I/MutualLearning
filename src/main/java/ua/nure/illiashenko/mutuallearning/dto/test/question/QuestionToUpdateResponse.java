@@ -12,5 +12,5 @@ public class QuestionToUpdateResponse {
     private Integer questionId;
     private String text;
     private String type;
-    private AnswerToUpdateResponse[] answerToUpdateResponses;
+    private AnswerToUpdateResponse[] answers;
 }

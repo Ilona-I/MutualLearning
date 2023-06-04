@@ -9,6 +9,5 @@ import ua.nure.illiashenko.mutuallearning.dto.test.question.QuestionToUpdateResp
 public class TestToUpdateResponse {
 
     private String title;
-    private Integer maxNumberOfAttempts;
-    private QuestionToUpdateResponse[] questionForUpdateResponses;
+    private QuestionToUpdateResponse[] questions;
 }

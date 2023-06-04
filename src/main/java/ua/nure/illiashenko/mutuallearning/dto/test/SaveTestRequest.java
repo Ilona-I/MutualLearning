@@ -13,6 +13,5 @@ import ua.nure.illiashenko.mutuallearning.dto.test.question.SaveQuestionRequest;
 public class SaveTestRequest {
 
     private String title;
-    private Integer maxNumberOfAttempts;
     private SaveQuestionRequest[] saveQuestionRequests;
 }

@@ -8,7 +8,6 @@ import lombok.Data;
 public class TestInfoResponse {
 
     private String title;
-    private Integer maxNumberOfAttempts;
     private Integer maxMark;
     private UsersAttemptsResponse[] usersAttemptsResponse;
 }

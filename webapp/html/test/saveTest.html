@@ -76,69 +76,21 @@
 
 <div class="article_block">
   <h4>Тест</h4>
-  <input type="text" class="form-control input_info" value="Title" style="font-size: large"
+  <input id="testTitle" type="text" class="form-control input_info" value="Title"
+         style="font-size: large"
          placeholder="Test title">
   <div>
     <hr>
-    <!-- Початок питання -->
-    <div
-        style="border-color: #949393; margin-top: 10px; border-style: solid; border-width: 1px; padding: 20px;  background-color: #eeeeff">
-      <h6>Питання №1</h6>
-      <button class="btn btn-danger" style="height: 40px; float: right; margin-top: -38px;">
-        Видалити
-      </button>
-      <textarea class="form-control input_info" placeholder="Question">question1</textarea>
-      <div style="margin-top: 10px; margin-left: 5px;">
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input"
-                 checked>
-          <label class="custom-control-label" for="customRadio1">Один варіант відповіді</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio2">Декілька варіантів
-            відповіді</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio3">Власна відповідь</label>
-        </div>
-      </div>
+    <div id="questions">
+      <!-- Початок питання -->
 
-      <!-- Початок варіантів відповідей -->
-      <div style="width: 100%; padding: 20px;">
-        <!-- Початок варіанту відповіді -->
-        <div class="row" style="width: 100%; background-color: #e4e7ec; ">
-          <div style="width: 80%; padding: 20px;">
-            <h6>Варіант відповіді:</h6>
-            <div>
-              <p>Текст варіанту відповіді:</p>
-              <textarea class="form-control input_info" placeholder="Answer"> </textarea>
-            </div>
-            <div class="row" style="margin-top: 20px; margin-left: 10px;">
-              <p>Оцінка: </p>
-              <input class="form-control input_info" min="0" type="number" value="0"
-                     style="width: 100px; margin-left: 20px; margin-top: -10px;">
-            </div>
 
-          </div>
-          <div
-              style="padding: 20px; border-left-color: #d2cece; border-left-style: solid; border-left-width: 1px;">
-            <button class="btn btn-danger" style="height: 40px;">Видалити</button>
-          </div>
 
-        </div>
-        <!-- Кінець варіанту відповіді -->
 
-        <div style="margin-top: 20px;">
-          <button class="btn btn-dark">Додати варіант відповіді</button>
-        </div>
-      </div>
-      <!-- Кінець  варіантів відповідей -->
+
     </div>
-    <!-- Кінець питання-->
-    <div style="margin-top: 20px;">
-      <button class="btn btn-light">Додати питання</button>
+    <div id="addQuestionBlockButton" style="margin-top: 20px;">
+      <button onclick="addQuestionBlock()" class="btn btn-light">Додати питання</button>
     </div>
     <hr>
   </div>
@@ -148,7 +100,8 @@
     <button class="btn btn-success" style="width: 100%;">Зберегти тест</button>
     <!-- Початок кнопки скасування змін -->
     <div>
-      <button type="button" class="btn btn-secondary" style="width: 100%; margin-top: 10px;" data-toggle="modal" data-target="#cancelChangesModal">
+      <button type="button" class="btn btn-secondary" style="width: 100%; margin-top: 10px;"
+              data-toggle="modal" data-target="#cancelChangesModal">
         Скасувати зміни
       </button>
 
@@ -166,7 +119,9 @@
               Ви дійсно бажаєте скасувати зміни?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити редагування</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити
+                редагування
+              </button>
               <button type="button" class="btn btn-primary">Скасувати зміни</button>
             </div>
           </div>
@@ -180,5 +135,11 @@
 </div>
 
 <br>
+<script src="../../js/test/save/loadDataSaveTest.js"></script>
+<script src="../../js/test/save/deleteBlock.js"></script>
+<script src="../../js/test/save/addAnswerBlock.js"></script>
+<script src="../../js/test/save/addQuestionBlock.js"></script>
+<script src="../../js/test/save/changeCheckboxQuestionType.js"></script>
+<script src="../../js/util/util.js"></script>
 </body>
 </html>
