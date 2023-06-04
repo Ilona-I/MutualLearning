@@ -69,7 +69,14 @@ function jsonToHTMLGetTest(jsonString) {
       let answerText = answerMap.get("text");
       innerHtml += "  <!-- Початок варіанту відповіді -->\n"
           + "          <div id='answerBlock" + answerId
-          + "' class=\"row\" style=\"width: 100%; margin-top: 10px;\">\n"
+          + "' class=\"row\" style=\"width: 100%; margin-top: 10px;\" ";
+      if (questionType === "SEVERAL_ANSWERS") {
+        innerHtml += " onclick=\"checkCheckBox(" + answerId + ")\" ";
+      } else {
+        innerHtml += " onclick=\"checkRadio('" + questionId + "','"
+            + answerId + "')\" ";
+      }
+      innerHtml += ">\n"
           + "          <input id='answer" + answerId + "'"
           + "                 value='" + answerId + "'"
           + "                 name='answer" + questionId + "' "
@@ -80,7 +87,8 @@ function jsonToHTMLGetTest(jsonString) {
         innerHtml += "radio";
       }
       innerHtml += "'>"
-          + "                <label style='margin-left: 10px;' for='answer" + answerId + "' > "
+          + "                <label style='margin-left: 10px;' for='answer"
+          + answerId + "' > "
           + answerText + "</label>\n"
           + "          </div>\n"
           + "          <!-- Кінець варіанту відповіді -->";
@@ -90,7 +98,7 @@ function jsonToHTMLGetTest(jsonString) {
         + "        <!-- Кінець  варіантів відповідей -->\n"
         + "      </div>\n"
         + "      <!-- Кінець питання-->";
-    i = i+1;
+    i = i + 1;
   }
   document.getElementById("questions").innerHTML = innerHtml;
 }

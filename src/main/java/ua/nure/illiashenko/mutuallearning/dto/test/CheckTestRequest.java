@@ -12,5 +12,5 @@ import ua.nure.illiashenko.mutuallearning.dto.test.question.CheckQuestionRequest
 @AllArgsConstructor
 public class CheckTestRequest {
 
-    private CheckQuestionRequest[] checkQuestionRequests;
+    private Integer[] answersId;
 }
