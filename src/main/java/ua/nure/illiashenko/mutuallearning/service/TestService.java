@@ -5,6 +5,7 @@ import static ua.nure.illiashenko.mutuallearning.constants.AnswerType.SEVERAL_AN
 
 import java.sql.Timestamp;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.nure.illiashenko.mutuallearning.dto.test.CheckTestRequest;
 import ua.nure.illiashenko.mutuallearning.dto.test.PreviousAttemptsResponse;
@@ -17,10 +18,14 @@ import ua.nure.illiashenko.mutuallearning.dto.test.question.QuestionResponse;
 import ua.nure.illiashenko.mutuallearning.dto.test.question.QuestionToUpdateResponse;
 import ua.nure.illiashenko.mutuallearning.dto.test.question.answer.AnswerResponse;
 import ua.nure.illiashenko.mutuallearning.dto.test.question.answer.AnswerToUpdateResponse;
+import ua.nure.illiashenko.mutuallearning.repository.TestRepository;
 
 @Slf4j
 @Service
 public class TestService {
+
+    @Autowired
+    private TestRepository testRepository;
 
     public void createTest(SaveTestRequest saveTestRequest) {
         System.out.println(saveTestRequest);
@@ -92,13 +97,11 @@ public class TestService {
             .userAverageMark(6.5)
             .ownPreviousAttempts(new PreviousAttemptsResponse[]{
                 PreviousAttemptsResponse.builder()
-                    .startDateTime(new Timestamp(System.currentTimeMillis()))
-                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                    .dateTime(new Timestamp(System.currentTimeMillis()))
                     .mark(7)
                     .build(),
                 PreviousAttemptsResponse.builder()
-                    .startDateTime(new Timestamp(System.currentTimeMillis()))
-                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                    .dateTime(new Timestamp(System.currentTimeMillis()))
                     .mark(6)
                     .build()
             })
@@ -109,13 +112,11 @@ public class TestService {
                         .previousAttempts(
                             new PreviousAttemptsResponse[]{
                                 PreviousAttemptsResponse.builder()
-                                    .startDateTime(new Timestamp(System.currentTimeMillis()))
-                                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                                    .dateTime(new Timestamp(System.currentTimeMillis()))
                                     .mark(7)
                                     .build(),
                                 PreviousAttemptsResponse.builder()
-                                    .startDateTime(new Timestamp(System.currentTimeMillis()))
-                                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                                    .dateTime(new Timestamp(System.currentTimeMillis()))
                                     .mark(6)
                                     .build()
                             }
@@ -126,13 +127,11 @@ public class TestService {
                         .previousAttempts(
                             new PreviousAttemptsResponse[]{
                                 PreviousAttemptsResponse.builder()
-                                    .startDateTime(new Timestamp(System.currentTimeMillis()))
-                                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                                    .dateTime(new Timestamp(System.currentTimeMillis()))
                                     .mark(7)
                                     .build(),
                                 PreviousAttemptsResponse.builder()
-                                    .startDateTime(new Timestamp(System.currentTimeMillis()))
-                                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                                    .dateTime(new Timestamp(System.currentTimeMillis()))
                                     .mark(6)
                                     .build()
                             }
@@ -233,6 +232,10 @@ public class TestService {
     }
 
     public void deleteTest(int id) {
+        testRepository.deleteById(id);
+    }
 
+    private String getUserLogin() {
+        return "user1";
     }
 }

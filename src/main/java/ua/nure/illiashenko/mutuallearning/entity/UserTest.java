@@ -22,8 +22,6 @@ public class UserTest {
     @Column(name="test_id")
     private Integer testId;
     private int mark;
-    @Column(name = "start_date_time")
-    private Timestamp startDateTime;
-    @Column(name = "finish_date_time")
-    private Timestamp finishDateTime;
+    @Column(name = "date_time")
+    private Timestamp dateTime;
 }

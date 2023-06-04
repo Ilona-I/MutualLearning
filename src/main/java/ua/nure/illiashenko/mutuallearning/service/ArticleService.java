@@ -461,12 +461,6 @@ public class ArticleService {
         return new ArticleNotFoundException("articleNotFound");
     }
 
-    private void checkId(int id) {
-        if (!articleRepository.existsById(id)) {
-            throw new ArticleNotFoundException("articleIdNotFound");
-        }
-    }
-
     private String getUserLogin() {
         return "user1";
     }

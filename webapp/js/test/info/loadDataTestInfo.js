@@ -52,15 +52,12 @@ function jsonToHTMLGetTestInfo(jsonString) {
   for (const element of ownPreviousAttempts) {
     let attempt = JSON.parse(JSON.stringify(element));
     let attemptMap = new Map(Object.entries(attempt));
-    let startDateTime = attemptMap.get("startDateTime");
-    let finishDateTime = attemptMap.get("finishDateTime");
+    let dateTime = attemptMap.get("dateTime");
     let mark = attemptMap.get("mark");
     ownAttemptsTableBody += "    <tr>\n"
         + "        <th scope=\"row\">" + i + "</th>\n"
-        + "        <td>" + getDateTime(parseInt(startDateTime.toString()))
-        + "</td>\n"
-        + "        <td>" + getDateTime(parseInt(finishDateTime.toString()))
-        + "</td>\n"
+        + "        <td>" + getDateTime(parseInt(dateTime.toString())) + "</td>\n"
+
         + "        <td>" + mark + "/" + maxMark + "</td>\n"
         + "      </tr>";
     i = i - 1;
@@ -89,10 +86,7 @@ function jsonToHTMLGetTestInfo(jsonString) {
           + "              <h6>Номер спроби</h6>\n"
           + "            </div>\n"
           + "            <div class=\"table_border\">\n"
-          + "              <h6>Дата й час початку</h6>\n"
-          + "            </div>\n"
-          + "            <div class=\"table_border\">\n"
-          + "              <h6>Дата й час завершення</h6>\n"
+          + "              <h6>Дата й час проходження</h6>\n"
           + "            </div>\n"
           + "            <div class=\"table_border\">\n"
           + "              <h6>Оцінка</h6>\n"
@@ -106,14 +100,13 @@ function jsonToHTMLGetTestInfo(jsonString) {
             + "            <div class=\"table_border\">\n"
             + "              <p>" + userLogin + "</p>\n"
             + "            </div>\n"
-            + "            <div style=\"width: 80%\">\n";
+            + "            <div style=\"width: 75%\">\n";
         let previousAttempts = attemptMap.get("previousAttempts");
         let t = previousAttempts.length;
         for (const e of previousAttempts) {
           let pAttempt = JSON.parse(JSON.stringify(e));
           let pAttemptMap = new Map(Object.entries(pAttempt));
-          let startDateTime = pAttemptMap.get("startDateTime");
-          let finishDateTime = pAttemptMap.get("finishDateTime");
+          let dateTime = pAttemptMap.get("dateTime");
           let mark = pAttemptMap.get("mark");
 
           table += "              <div class=\"row\" style=\"margin-left: 0; width: 100%;\">\n"
@@ -121,11 +114,7 @@ function jsonToHTMLGetTestInfo(jsonString) {
               + "                  <p>" + t + "</p>\n"
               + "                </div>\n"
               + "                <div class=\"table_border_body\">\n"
-              + "                  <p>" + getDateTime(parseInt(startDateTime.toString()))
-              + "</p>\n"
-              + "                </div>\n"
-              + "                <div class=\"table_border_body\">\n"
-              + "                  <p>" + getDateTime(parseInt(finishDateTime.toString()))
+              + "                  <p>" + getDateTime(parseInt(dateTime.toString()))
               + "</p>\n"
               + "                </div>\n"
               + "                <div class=\"table_border_body\">\n"

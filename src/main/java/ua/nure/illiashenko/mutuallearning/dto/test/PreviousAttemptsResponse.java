@@ -8,7 +8,6 @@ import lombok.Data;
 @Builder
 public class PreviousAttemptsResponse {
 
-    private Timestamp startDateTime;
-    private Timestamp finishDateTime;
+    private Timestamp dateTime;
     private Integer mark;
 }
