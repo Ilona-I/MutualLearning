@@ -87,11 +87,43 @@ public class TestService {
         return TestInfoResponse.builder()
             .title("title1")
             .maxMark(10)
+            .role("CREATOR")
+            .userCount(2)
+            .userAverageMark(6.5)
+            .ownPreviousAttempts(new PreviousAttemptsResponse[]{
+                PreviousAttemptsResponse.builder()
+                    .startDateTime(new Timestamp(System.currentTimeMillis()))
+                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                    .mark(7)
+                    .build(),
+                PreviousAttemptsResponse.builder()
+                    .startDateTime(new Timestamp(System.currentTimeMillis()))
+                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                    .mark(6)
+                    .build()
+            })
             .usersAttemptsResponse(
                 new UsersAttemptsResponse[]{
                     UsersAttemptsResponse.builder()
-                        .userLogin("user1")
-                        .previousAttemptsResponse(
+                        .userLogin("user2")
+                        .previousAttempts(
+                            new PreviousAttemptsResponse[]{
+                                PreviousAttemptsResponse.builder()
+                                    .startDateTime(new Timestamp(System.currentTimeMillis()))
+                                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                                    .mark(7)
+                                    .build(),
+                                PreviousAttemptsResponse.builder()
+                                    .startDateTime(new Timestamp(System.currentTimeMillis()))
+                                    .finishDateTime(new Timestamp(System.currentTimeMillis()))
+                                    .mark(6)
+                                    .build()
+                            }
+                        )
+                        .build(),
+                    UsersAttemptsResponse.builder()
+                        .userLogin("user3")
+                        .previousAttempts(
                             new PreviousAttemptsResponse[]{
                                 PreviousAttemptsResponse.builder()
                                     .startDateTime(new Timestamp(System.currentTimeMillis()))

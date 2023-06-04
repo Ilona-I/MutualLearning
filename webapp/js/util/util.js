@@ -15,8 +15,24 @@ function escapeHTML(html) {
 
 function getDate(timeStamp) {
   let dateFormat = new Date(timeStamp);
-  return dateFormat.getDate() + "." + (dateFormat.getMonth() + 1) + "."
-      + dateFormat.getFullYear()
+  return (dateFormat.getDate() < 10 ? "0" + dateFormat.getDate()
+          : dateFormat.getDate()) + "."
+      + ((dateFormat.getMonth() + 1) < 10 ? "0" + (dateFormat.getMonth() + 1)
+          : (dateFormat.getMonth() + 1)) + "."
+      + dateFormat.getFullYear();
+}
+
+function getDateTime(timeStamp) {
+  let dateFormat = new Date(timeStamp);
+  return (dateFormat.getDate() < 10 ? "0" + dateFormat.getDate()
+          : dateFormat.getDate()) + "."
+      + ((dateFormat.getMonth() + 1) < 10 ? "0"
+          + (dateFormat.getMonth() + 1) : (dateFormat.getMonth() + 1)) + "."
+      + dateFormat.getFullYear() + " " + dateFormat.getHours() + ":"
+      + (dateFormat.getMinutes() < 10 ? "0" + dateFormat.getMinutes()
+          : dateFormat.getMinutes()) + ":"
+      + (dateFormat.getSeconds() < 10 ? "0" + dateFormat.getSeconds()
+          : dateFormat.getSeconds());
 }
 
 function selectLink(id) {
@@ -30,7 +46,7 @@ function unselectLink(id) {
 let prevScrollpos = window.pageYOffset;
 window.onscroll = function () {
   let menu = document.getElementById("menu");
-  if (menu!==null){
+  if (menu !== null) {
     let currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
       menu.style.top = "0";

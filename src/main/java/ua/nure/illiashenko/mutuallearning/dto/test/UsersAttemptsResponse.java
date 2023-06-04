@@ -8,5 +8,5 @@ import lombok.Data;
 public class UsersAttemptsResponse {
 
     private String userLogin;
-    private PreviousAttemptsResponse[] previousAttemptsResponse;
+    private PreviousAttemptsResponse[] previousAttempts;
 }
