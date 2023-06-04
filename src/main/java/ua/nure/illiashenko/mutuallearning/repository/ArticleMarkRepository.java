@@ -14,4 +14,6 @@ public interface ArticleMarkRepository extends JpaRepository<ArticleMark, Intege
     List<ArticleMark> findAllByMarkIdIsIn(List<Integer> markId);
 
     void deleteByMarkIdAndArticleId(Integer markId, Integer articleId);
+
+    ArticleMark findByArticleIdAndMarkId(Integer articleId, Integer markId);
 }

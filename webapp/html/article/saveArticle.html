@@ -76,7 +76,7 @@
 </nav>
 <!-- Початок роботи з блоком статті -->
 <div class="edit_article_block">
-  <div>
+  <div hidden>
     <!-- Початок вибору типу статті (стаття чи питання) -->
     <div id="articleTypeCheckboxes">
       <div class="form-check form-check-inline">
@@ -106,7 +106,7 @@
 
     <!-- Початок блоку з керуванням мітками -->
     <div>
-      <button type="button" class="btn" data-toggle="modal"
+      <button id="markManagementButton" type="button" class="btn" data-toggle="modal"
               style="background-color: #68B684; color: white;"
               data-target="#exampleModalScrollable" onclick="getInfoAboutMarks()">
         Керувати мітками

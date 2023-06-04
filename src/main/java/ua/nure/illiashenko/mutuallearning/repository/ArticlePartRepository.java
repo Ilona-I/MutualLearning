@@ -9,4 +9,6 @@ import ua.nure.illiashenko.mutuallearning.entity.ArticlePart;
 public interface ArticlePartRepository extends JpaRepository<ArticlePart, Integer> {
 
     List<ArticlePart> findByArticleId(Integer articleId);
+
+    List<ArticlePart> findByArticleIdOrderBySequenceNumberAsc(Integer articleId);
 }

@@ -34,7 +34,7 @@ public class MarkValidator {
         }
     }
 
-    public void validateCreateMarkRequest(UpdateMarkRequest updateMarkRequest) {
+    public void validateUpdateMarkRequest(UpdateMarkRequest updateMarkRequest) {
         Set<ConstraintViolation<UpdateMarkRequest>> violations = validator.validate(updateMarkRequest);
         if (!violations.isEmpty()) {
             log.error("Mark wasn't saved because of invalid data. Total mistake count: {}", violations.size());

@@ -1,6 +1,5 @@
 let xmlHttp;
-const articleTypeArticle = "article";
-const articleTypeQuestion = "question";
+const articleTypeQuestion = "QUESTION";
 
 function createXMLHttpRequest() {
   if (window.ActiveXObject) {
@@ -11,9 +10,8 @@ function createXMLHttpRequest() {
 }
 
 function getInfoAboutCurrentArticle() {
-  localStorage.setItem("articleId", "1")
-  let articleId = localStorage.getItem("articleId");
   localStorage.setItem("userLogin", "user1")
+  let articleId = localStorage.getItem("articleId");
   if (articleId == null) {
     let articleType = localStorage.getItem("articleType");
     setStructure(articleType);
@@ -41,7 +39,7 @@ function setStructure(articleType) {
 }
 
 function setTypeArticle() {
-  document.getElementById("articleBody").hidden = false;
+  document.getElementById("articleBody").removeAttribute("hidden");
 }
 
 function setTypeQuestion() {
@@ -60,7 +58,17 @@ function handleStateChange() {
 }
 
 function jsonToHTML(jsonString) {
-  console.log(jsonString)
+  localStorage.removeItem("isQuestionAnswer");
+  let questionCreatorLogin = localStorage.getItem("questionCreatorLogin");
+  let currentUser = localStorage.getItem("currentUser");
+  let isQuestionAnswer = false;
+  if(questionCreatorLogin!==null&&currentUser!==questionCreatorLogin){
+    document.getElementById("articleTitle").setAttribute("readonly","");
+    document.getElementById("markManagementButton").remove();
+    isQuestionAnswer=true;
+    localStorage.setItem("isQuestionAnswer", "true");
+  }
+
   let jsonObject = JSON.parse(jsonString);
   let dataMap = new Map(Object.entries(jsonObject));
   let title = dataMap.get("title");
@@ -69,7 +77,7 @@ function jsonToHTML(jsonString) {
   document.getElementById("articleTitle").innerText = title.toString();
   setMarks(marks);
 
-  if (type === "question") {
+  if (type === "QUESTION"&&isQuestionAnswer===false) {
     document.getElementById("articleTypeQuestionCheckbox").checked = true;
     setTypeQuestion();
     return;
@@ -80,6 +88,7 @@ function jsonToHTML(jsonString) {
   }
   let articleParts = dataMap.get("articleParts");
   setArticleBody(articleParts);
+  localStorage.removeItem("questionCreatorLogin");
 }
 
 document.addEventListener("DOMContentLoaded", function () {

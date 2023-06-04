@@ -15,25 +15,28 @@ function escapeHTML(html) {
 
 function getDate(timeStamp) {
   let dateFormat = new Date(timeStamp);
-  return dateFormat.getDate() + "." + (dateFormat.getMonth()+1)+ "."
+  return dateFormat.getDate() + "." + (dateFormat.getMonth() + 1) + "."
       + dateFormat.getFullYear()
 }
 
-function selectLink(id){
+function selectLink(id) {
   document.getElementById(id).style.color = "blue";
 }
 
-function unselectLink(id){
+function unselectLink(id) {
   document.getElementById(id).style.color = "black";
 }
 
 let prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-  let currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos) {
-    document.getElementById("menu").style.top = "0";
-  } else {
-    document.getElementById("menu").style.top = "-160px";
+window.onscroll = function () {
+  let menu = document.getElementById("menu");
+  if (menu!==null){
+    let currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      menu.style.top = "0";
+    } else {
+      menu.getElementById("menu").style.top = "-160px";
+    }
+    prevScrollpos = currentScrollPos;
   }
-  prevScrollpos = currentScrollPos;
 }

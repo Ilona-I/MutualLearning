@@ -23,7 +23,7 @@ public class ArticlePartMapper {
         articlePart.setId(articlePartRequest.getId());
         articlePart.setText(articlePartRequest.getText());
         articlePart.setType(articlePartRequest.getType());
-        articlePart.setLink(articlePartRequest.getId() + "-" + articlePartRequest.getLink());
+        articlePart.setLink(articlePartRequest.getLink());
         articlePart.setSequenceNumber(articlePartRequest.getSequenceNumber());
         return articlePart;
     }

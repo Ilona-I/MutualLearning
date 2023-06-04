@@ -112,24 +112,25 @@
 
             </div>
             <!-- Кінець блоку з списком міток -->
+            <p style="color: #555555; font-size: xx-small; font-style: italic">*відображення статей, які мають принаймні одну мітку з обраних. Для перегляду статей, що не мають міток небхідно скинути всі мітки</p>
           </div>
           <!-- Кінець блоку міток -->
           <div style="width: 24%;">
           <!-- Початок блоку з типом статті -->
           <div style="border-width: 1px; border-style: solid; border-color: #d5d5ea; margin-left: 15px;  padding: 20px;">
-            <div class="form-check form-check">
+            <div class="form-check form-check" onclick="checkAllArticleTypes()">
               <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                      id="inlineRadio1ArticleTypeAll"
                      value="all" checked="checked">
               <label class="form-check-label" for="inlineRadio1ArticleTypeAll">Все</label>
             </div>
-            <div class="form-check form-check">
+            <div class="form-check form-check" onclick="checkArticles()">
               <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                      id="inlineRadio2ArticleTypeArticle"
                      value="article">
               <label class="form-check-label" for="inlineRadio2ArticleTypeArticle">Статті</label>
             </div>
-            <div class="form-check form-check">
+            <div class="form-check form-check" onclick="checkQuestions()">
               <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                      id="inlineRadio3ArticleTypeQuestion"
                      value="question">
@@ -139,19 +140,19 @@
           <!-- Кінець блоку з типом статті -->
           <!-- Початок роботи з фільтрацією (усі статті, власні, збережені) -->
           <div id="blockOwner" style="border-width: 1px; border-style: solid; border-color: #d5d5ea; margin-top: 15px; margin-left: 15px; padding: 20px;">
-            <div class="form-check form-check">
+            <div class="form-check form-check" onclick="checkAllOwners()">
               <input class="form-check-input" type="radio" name="inlineRadioOptions2"
                      id="inlineRadio1OwnerAll"
                      value="all" checked="checked">
               <label class="form-check-label" for="inlineRadio1OwnerAll">Усі</label>
             </div>
-            <div class="form-check form-check">
+            <div class="form-check form-check" onclick="checkOwn()">
               <input class="form-check-input" type="radio" name="inlineRadioOptions2"
                      id="inlineRadio2OwnerOwn"
                      value="own">
               <label class="form-check-label" for="inlineRadio2OwnerOwn">Власні</label>
             </div>
-            <div class="form-check form-check">
+            <div class="form-check form-check" onclick="checkLiked()">
               <input class="form-check-input" type="radio" name="inlineRadioOptions2"
                      id="inlineRadio3OwnerSaved"
                      value="saved">
@@ -160,7 +161,7 @@
           </div>
           <!-- Кінець роботи з фільтрацією (усі статті, власні, збережені) -->
             <div style="margin-left: 15px; margin-top: 15px; width: 92%;">
-              <button onclick="loadArticles()" class="btn btn-primary" style="width: 100%;">Застосувати</button>
+              <button onclick="setFilter()" class="btn btn-primary" style="width: 100%;">Застосувати</button>
             </div>
           </div>
         </div>
@@ -194,9 +195,9 @@
     <div class="row" style="margin-left: 10%;">
       <!-- Початок роботи з типом сортування -->
       <div>
-        <select onchange="loadArticles()" class="form-control" id="sort">
-          <option value="by_popular">Спочатку популярні</option>
+        <select onchange="setFilter()" class="form-control" id="sort">
           <option value="by_new">Спочатку новіші</option>
+          <option value="by_popular">Спочатку популярні</option>
         </select>
       </div>
       <!-- Кінець роботи з типом сортування -->
@@ -218,5 +219,6 @@
 <script src="../../js/article/list/getLoadArticlesInfo.js"></script>
 <script src="../../js/article/list/loadArticles.js"></script>
 <script src="../../js/article/list/goToArticle.js"></script>
+<script src="../../js/article/list/checkElement.js"></script>
 </body>
 </html>

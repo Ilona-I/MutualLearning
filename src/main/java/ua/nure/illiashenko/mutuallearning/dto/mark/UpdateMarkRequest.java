@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateMarkRequest {
 
-    @NotEmpty(message = "emptyUpdateMarkRequestId")
     private int id;
     @NotEmpty(message = "emptyUpdateMarkRequestTitle")
     private String title;

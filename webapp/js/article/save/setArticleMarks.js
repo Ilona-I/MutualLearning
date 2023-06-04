@@ -8,9 +8,9 @@ function setMarks(marks) {
     innerHTML += " <div style='margin: 3px;'>\n"
         + "        <button "
         + "class=\"badge badge-pill ";
-    if (markMap.get("type") === "system") {
+    if (markMap.get("type") === "SYSTEM") {
       innerHTML += "badge-success";
-    } else if (markMap.get("type") === "custom" && markMap.get("creator")
+    } else if (markMap.get("type") === "CUSTOM" && markMap.get("creator")
         === localStorage.getItem("userLogin")) {
       innerHTML += "badge-primary";
     } else {

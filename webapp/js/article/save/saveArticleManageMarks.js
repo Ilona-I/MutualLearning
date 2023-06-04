@@ -51,9 +51,9 @@ function getMarkHtml(markMap, searchParam, isOnlyOwn, isOnlyChecked) {
       + "<div class=\"dropdown\" style='margin: 3px;'>\n"
       + "        <button id=\"dropdownMenuButton" + markMap.get("id")
       + "\" class=\"badge badge-pill ";
-  if (markMap.get("type") === "system") {
+  if (markMap.get("type") === "SYSTEM") {
     innerHtml += "badge-success";
-  } else if (markMap.get("type") === "custom" && markMap.get("creator")
+  } else if (markMap.get("type") === "CUSTOM" && markMap.get("creator")
       === localStorage.getItem("userLogin")) {
     innerHtml += "badge-primary";
   } else {

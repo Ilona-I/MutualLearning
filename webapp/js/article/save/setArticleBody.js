@@ -9,7 +9,7 @@ function getTextBlock(partMap) {
       + "        <!-- Кінець роботи з блоком попереднього перегляду-->\n"
       + "        <!-- Початок роботи з блоком редагування-->\n"
       + "        <div id='editBlock" + partMap.get("id") + "' hidden>\n"
-      + "<textarea id='editTextType"+partMap.get("id")+"' class=\"form-control input_info article_text\" >\n"
+      + "<textarea style='height: 400px;' id='editTextType"+partMap.get("id")+"' class=\"form-control input_info article_text\" >\n"
       + partMap.get("text") + "\n"
       + "</textarea>\n"
       + "        </div>\n"
@@ -57,7 +57,7 @@ function getCodeBlock(partMap) {
       + "    </div>"
       + "<div style=\"width: 77%; margin-left: 15px;\""
       + "      id='editBlock" + partMap.get("id") + "' hidden>"
-      + "<textarea id='editCodeType"+partMap.get("id")+"' onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
+      + "<textarea  style='height: 400px;' id='editCodeType"+partMap.get("id")+"' onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
       + "e=this.selectionEnd;this.value=v.substring(0, s)+'\\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;"
       + "return false;}\" "
       + " id='textareaCode" + partMap.get("id")
@@ -136,16 +136,16 @@ function setArticleBody(articleParts) {
         + "      id='newOld" + partId + "' "
         + "      value='old' hidden>"
         + "<div class=\"row\" style=\"width: 130%;\">";
-    if (partType === "text") {
+    if (partType === "TEXT") {
       innerHTML += getTextBlock(partMap);
-    } else if (partType === "image") {
+    } else if (partType === "IMAGE") {
       images.push(partMap);
       innerHTML += getImageBlock(partMap);
-    } else if (partType === "code") {
+    } else if (partType === "CODE") {
       innerHTML += getCodeBlock(partMap);
-    } else if (partType === "file") {
+    } else if (partType === "FILE") {
       innerHTML += getFileBlock(partMap);
-    } else if (partType === "link") {
+    } else if (partType === "LINK") {
       innerHTML += getLink(partMap);
     }
     innerHTML += getOptionBlock(partId, sequenceNumber, size + 1, false);

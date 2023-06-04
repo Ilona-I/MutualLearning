@@ -1,13 +1,13 @@
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('1', '2023-06-01 12:34:56', 'ACTIVE', 'Заголовок статті №1', 'ARTICLE');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('2', '2023-06-02 12:34:56', 'ACTIVE', 'Заголовок статті №2', 'ARTICLE');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('3', '2023-06-03 12:34:56', 'ACTIVE', 'Заголовок статті №3', 'QUESTION');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('4', '2023-06-03 12:44:56', 'ACTIVE', 'Заголовок статті №4', 'QUESTION');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('5', '2023-06-03 12:54:56', 'ACTIVE', 'Заголовок статті №5', 'ARTICLE');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('6', '2023-06-04 12:34:56', 'ACTIVE', 'Заголовок статті №6', 'ARTICLE');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('7', '2023-06-04 13:34:56', 'ACTIVE', 'Заголовок статті №7', 'ARTICLE');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('8', '2023-06-04 14:34:56', 'ACTIVE', 'Заголовок статті №8', 'ARTICLE');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('9', '2023-06-04 15:34:56', 'ACTIVE', 'Заголовок статті №9', 'ARTICLE');
-INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `status`, `title`, `type`) VALUES ('10', '2023-06-04 16:34:56', 'ACTIVE', 'Заголовок статті №10', 'ARTICLE');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('1', '2023-06-01 12:34:56', 'Заголовок статті №1', 'ARTICLE');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('2', '2023-06-02 12:34:56', 'Заголовок статті №2', 'ARTICLE');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('3', '2023-06-03 12:34:56', 'Заголовок статті №3', 'QUESTION');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('4', '2023-06-03 12:44:56', 'Заголовок статті №4', 'QUESTION');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('5', '2023-06-03 12:54:56', 'Заголовок статті №5', 'ARTICLE');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('6', '2023-06-04 12:34:56', 'Заголовок статті №6', 'ARTICLE');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('7', '2023-06-04 13:34:56', 'Заголовок статті №7', 'ARTICLE');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('8', '2023-06-04 14:34:56', 'Заголовок статті №8', 'ARTICLE');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('9', '2023-06-04 15:34:56', 'Заголовок статті №9', 'ARTICLE');
+INSERT INTO `mutual_learning_db`.`article` (`id`, `creation_date_time`, `title`, `type`) VALUES ('10', '2023-06-04 16:34:56', 'Заголовок статті №10', 'ARTICLE');
 
 
 INSERT INTO `mutual_learning_db`.`article_part` (`id`, `sequence_number`, `text`, `type`, `article_id`) VALUES ('1', '1', 'У сучасних мережевих інформаційних системах для роботи із загальною базою даних використовують архітектуру «клієнт-сервер». При цьому в мережі розміщують сервер баз даних. Ним виступає комп\'ютер (або комп\'ютери), який містить бази даних, СКБД та пов\'язане з ними програмне забезпечення, і налаштований для надання користувачам інформаційної системи доступу до бази даних. Клієнти, які працюють із даними (вони можуть бути розташовані на різних комп\'ютерах мережі), надсилають відповідні запити серверу. Сервер їх отримує, опрацьовує, та надсилає відповідь клієнту. Сучасні СКБД (MySQL, PostgreSQL, Microsoft SQL Server та інші) працюють відповідно до цієї архітектури. Сервер баз даних, як правило, є достатньо потужною багатопроцесорною системою, яка використовує масиви дисків RAID для підвищення надійності зберігання даних. Використання дискових масивів RAID дозволяє відновити дані, навіть якщо один з дисків вийшов з ладу. ', 'TEXT', '1');

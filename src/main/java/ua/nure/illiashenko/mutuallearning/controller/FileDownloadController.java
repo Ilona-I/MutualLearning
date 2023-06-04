@@ -24,7 +24,7 @@ public class FileDownloadController {
             throw new RuntimeException();
         }
         if (resource == null) {
-            throw new RuntimeException();
+            return null;
         }
 
         return ResponseEntity.ok()

@@ -1,6 +1,7 @@
 package ua.nure.illiashenko.mutuallearning.mapper;
 
 import org.springframework.stereotype.Component;
+import ua.nure.illiashenko.mutuallearning.dto.article.ArticleForUpdateResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleListElementResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleRequest;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleResponse;
@@ -20,6 +21,15 @@ public class ArticleMapper {
 
     }
 
+    public ArticleForUpdateResponse mapArticleToArticleForUpdateResponse(Article article) {
+        return ArticleForUpdateResponse.builder()
+            .id(article.getId())
+            .type(article.getType())
+            .title(article.getTitle())
+            .build();
+
+    }
+
     public ArticleListElementResponse mapArticleToArticleListElementResponse(Article article){
         return ArticleListElementResponse.builder()
             .id(article.getId())
@@ -32,7 +42,6 @@ public class ArticleMapper {
     }
 
     public Article mapArticleRequestToArticle(ArticleRequest articleRequest) {
-        System.out.println("==================================== 36 ====================");
         Article article = new Article();
         article.setTitle(articleRequest.getTitle());
         article.setType(articleRequest.getType());

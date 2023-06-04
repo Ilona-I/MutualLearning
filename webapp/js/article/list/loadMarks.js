@@ -47,9 +47,9 @@ function getMarkHtmlArticles(markMap, searchParam) {
       + "         <div class=\"dropdown\" style='margin: 0;'>\n"
       + "             <button id=\"dropdownMenuButton" + markMap.get("id") + "\""
       + "                     class=\"badge badge-pill ";
-  if (markMap.get("type") === "system") {
+  if (markMap.get("type") === "SYSTEM") {
     innerHtml += " badge-success ";
-  } else if (markMap.get("type") === "custom" && markMap.get("creator")
+  } else if (markMap.get("type") === "CUSTOM" && markMap.get("creator")
       === localStorage.getItem("userLogin")) {
     innerHtml += " badge-primary ";
   } else {
@@ -73,6 +73,8 @@ function getMarkHtmlArticles(markMap, searchParam) {
 
 document.addEventListener("DOMContentLoaded", function () {
   loadMarks();
+  localStorage.setItem("page", "0");
+  localStorage.setItem("size", "10");
   loadArticles();
 });
 
