@@ -41,7 +41,7 @@ public class MarkService {
         markValidator.validateCreateMarkRequest(createMarkRequest);
         final Optional<User> creator = userRepository.findById(login);
         if (creator.isEmpty()) {
-            throw new UserNotFoundException("userNotFound");
+            throw new UserNotFoundException();
         }
         final User user = creator.get();
         final Mark mark = new Mark();
@@ -54,14 +54,14 @@ public class MarkService {
 
     public MarkResponse getMark(int id) {
         return markMapper.mapToMarkResponse(markRepository.findById(id)
-            .orElseThrow(() -> new MarkNotFoundException("markNotFound")));
+            .orElseThrow(MarkNotFoundException::new));
     }
 
     public MarkResponse updateMark(String login, UpdateMarkRequest updateMarkRequest) {
         markValidator.validateUpdateMarkRequest(updateMarkRequest);
         final Optional<Mark> optionalMark = markRepository.findById(updateMarkRequest.getId());
         if (optionalMark.isEmpty()) {
-            throw new MarkNotFoundException("markNotFound");
+            throw new MarkNotFoundException();
         }
         final Mark mark = optionalMark.get();
         checkAccess(login, mark);
@@ -73,12 +73,12 @@ public class MarkService {
     private void checkAccess(String login, Mark mark) {
         final Optional<User> creator = userRepository.findById(login);
         if (creator.isEmpty()) {
-            throw new UserNotFoundException("userNotFound");
+            throw new UserNotFoundException();
         }
         final User user = creator.get();
         if (mark.getType().equals(SYSTEM) && !user.getRole().equals(ADMIN) && !user.getRole().equals(MODERATOR) ||
             mark.getType().equals(CUSTOM) && !mark.getCreator().equals(user.getLogin())) {
-            throw new AccessDeniedException("cannotUpdateMark");
+            throw new AccessDeniedException();
         }
     }
 
@@ -90,7 +90,7 @@ public class MarkService {
 
     public void deleteMark(int id) {
         if(!markRepository.existsById(id)){
-            throw new MarkNotFoundException("markNotFound");
+            throw new MarkNotFoundException();
         }
         markRepository.deleteById(id);
     }

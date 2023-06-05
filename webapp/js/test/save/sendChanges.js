@@ -32,7 +32,6 @@ function sendTestChanges() {
   resultMap.set("questions", questionsList);
 
   let json = JSON.stringify(Object.fromEntries(resultMap));
-  console.log(json);
   let testId = localStorage.getItem("testId");
   let articleId = localStorage.getItem("articleId");
   let url;

@@ -5,19 +5,14 @@ import static ua.nure.illiashenko.mutuallearning.constants.UserStatus.ACTIVE;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import ua.nure.illiashenko.mutuallearning.dto.user.ChangePasswordRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.RegistrationRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserLoginResponse;
+import ua.nure.illiashenko.mutuallearning.dto.user.UserLoginRoleResponse;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserResponse;
 import ua.nure.illiashenko.mutuallearning.entity.User;
@@ -33,7 +28,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserLoginResponse signUp(@RequestBody RegistrationRequest registrationRequest) {
+    public UserLoginRoleResponse signUp(@RequestBody RegistrationRequest registrationRequest) {
         userValidator.validateArticleRequest(registrationRequest);
         final User user = new User();
         user.setLogin(registrationRequest.getLogin());
@@ -43,7 +38,8 @@ public class UserService {
         user.setInfo(registrationRequest.getInfo());
         user.setRole(USER);
         user.setStatus(ACTIVE);
-        return new UserLoginResponse(userRepository.save(user).getLogin());
+        log.info(user.toString());
+        return new UserLoginRoleResponse(userRepository.save(user).getLogin(), user.getRole());
     }
 
     public UserLoginResponse changePassword(@RequestBody ChangePasswordRequest updatePasswordRequest) {

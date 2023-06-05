@@ -16,9 +16,8 @@ import javax.validation.Payload;
 @Constraint(validatedBy = EmailValidator.class)
 public @interface EmailValidation {
 
-    String[] value();
 
-    String message() default "userWithThisLoginAlreadyExist";
+    String message() default "userWithThisEmailAlreadyExist";
 
     Class<?>[] groups() default {};
 

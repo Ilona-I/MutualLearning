@@ -27,7 +27,7 @@ public class PasswordValidator implements ConstraintValidator<PasswordValidation
                     ? Objects.requireNonNull(PARSER.parseExpression(e).getValue(value)).toString()
                     : ""));
         String password = fieldsValues.get("password");
-        String repeatPassword = fieldsValues.get("repeatPassword");
+        String repeatPassword = fieldsValues.get("repeatedPassword");
         return password.equals(repeatPassword);
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.nure.illiashenko.mutuallearning.dto.user.ChangePasswordRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.RegistrationRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserLoginResponse;
+import ua.nure.illiashenko.mutuallearning.dto.user.UserLoginRoleResponse;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserResponse;
 import ua.nure.illiashenko.mutuallearning.service.UserService;
@@ -28,8 +29,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public UserLoginResponse signUp(@RequestBody RegistrationRequest registrationRequest) {
+    @PostMapping("/signUp")
+    public UserLoginRoleResponse signUp(@RequestBody RegistrationRequest registrationRequest) {
         return userService.signUp(registrationRequest);
     }
 

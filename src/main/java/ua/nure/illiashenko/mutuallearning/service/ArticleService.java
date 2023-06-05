@@ -90,7 +90,7 @@ public class ArticleService {
         articleValidator.validateArticleRequest(articleRequest);
         final Optional<Article> optionalDbArticle = articleRepository.findById(id);
         if (optionalDbArticle.isEmpty()) {
-            throw new ArticleNotFoundException("articleIdNotFound");
+            throw new ArticleNotFoundException();
         }
         final Article updatedArticle = new Article();
         if (optionalDbArticle.get().getType().equals(ARTICLE) || optionalDbArticle.get().getType()
@@ -467,6 +467,6 @@ public class ArticleService {
 
     private ArticleNotFoundException articleNotFoundById(int id) {
         log.error("No article found by id: " + id);
-        return new ArticleNotFoundException("articleNotFound");
+        return new ArticleNotFoundException();
     }
 }

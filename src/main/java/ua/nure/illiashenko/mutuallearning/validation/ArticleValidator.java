@@ -25,9 +25,7 @@ public class ArticleValidator {
         Set<ConstraintViolation<ArticleRequest>> violations = validator.validate(articleRequest);
         if (!violations.isEmpty()) {
             log.error("Article wasn't saved because of invalid data. Total mistake count: {}", violations.size());
-            throw new ArticleValidationException(
-                "wrongArticleRequest",
-                constraintViolationMapper.map(violations));
+            throw new ArticleValidationException(constraintViolationMapper.map(violations));
         }
     }
 }

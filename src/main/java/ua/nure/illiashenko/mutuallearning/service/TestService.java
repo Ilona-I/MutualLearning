@@ -127,7 +127,7 @@ public class TestService {
 
     public TestToUpdateResponse getTestToUpdate(int id) {
         final Test test = testRepository.findById(id)
-            .orElseThrow(() -> new ServiceApiException("testNotFound", HttpStatus.NOT_FOUND));
+            .orElseThrow(() -> new ServiceApiException(HttpStatus.NOT_FOUND));
         final QuestionToUpdateResponse[] questionResponses = questionRepository.findByTestId(id)
             .stream()
             .map(question -> {
@@ -155,7 +155,7 @@ public class TestService {
 
     public TestInfoResponse getTestInfo(String login, int id) {
         final Test test = testRepository.findById(id)
-            .orElseThrow(() -> new ServiceApiException("testNotFound", HttpStatus.NOT_FOUND));
+            .orElseThrow(() -> new ServiceApiException(HttpStatus.NOT_FOUND));
         final Integer maxMark = getMaxMark(id);
         final PreviousAttemptsResponse[] ownPreviousAttempts = getOwnPreviousAttempts(login, id);
         final String role = userArticleRepository.findByUserLoginAndArticleId(login, test.getArticleId())
@@ -243,7 +243,7 @@ public class TestService {
 
     public TestResponse getTest(int id) {
         final Test test = testRepository.findById(id)
-            .orElseThrow(() -> new ServiceApiException("testNotFound", HttpStatus.NOT_FOUND));
+            .orElseThrow(() -> new ServiceApiException(HttpStatus.NOT_FOUND));
         final QuestionResponse[] questionResponses = questionRepository.findByTestId(id)
             .stream()
             .map(question -> {

@@ -58,14 +58,30 @@
 <div class="simple_green_block">
   <div class="inner_block_center">
     <h3>Sign up</h3>
-    <input type="text" class="form-control input_info" placeholder="Login">
+    <input id="signUpLogin" type="text" class="form-control input_info" placeholder="Login" onkeyup="cleanWrongData('wrongSignUpLogin')">
     <p style="font-size: 10px; color: gray; text-align: left">*Ви не зможете потім змінювати логін</p>
-    <input type="password" class="form-control input_info" placeholder="Password">
-    <input type="password" class="form-control input_info" placeholder="Repeat password">
-    <input type="text" class="form-control input_info" placeholder="Full name or nickname">
-    <input type="email" class="form-control input_info" placeholder="E-mail">
-    <textarea type="text" class="form-control input_info" placeholder="Info"></textarea>
-    <button class="btn l_button" style=" background-color: #95E06C;color: #1C1018;">Sign up</button>
+    <div style="width: 100%; text-align: left">
+      <p id="wrongSignUpLogin" style="color: darkred; font-size: small;"></p>
+    </div>
+
+    <input id="signUpPassword" type="password" class="form-control input_info" placeholder="Password" onkeyup="cleanWrongData('wrongSignUpPassword')">
+    <div style="width: 100%; text-align: left">
+      <p id="wrongSignUpPassword" style="color: darkred; font-size: small;"></p>
+    </div>
+
+    <input id="signUpRepeatedPassword" type="password" class="form-control input_info" placeholder="Repeat password" onkeyup="cleanWrongData('wrongSignUpRepeatedPassword')">
+    <div style="width: 100%; text-align: left">
+      <p id="wrongSignUpRepeatedPassword" style="color: darkred; font-size: small;"></p>
+    </div>
+
+    <input id="signUpName" type="text" class="form-control input_info" placeholder="Full name or nickname">
+    <input id="signUpEmail" type="email" class="form-control input_info" placeholder="E-mail" onkeyup="cleanWrongData('wrongSignUpEmail')">
+    <div style="width: 100%; text-align: left">
+      <p id="wrongSignUpEmail" style="color: darkred; font-size: small;"></p>
+    </div>
+
+    <textarea id="signUpInfo" type="text" class="form-control input_info" placeholder="Info"></textarea>
+    <button onclick="signUp()" class="btn l_button" style=" background-color: #95E06C;color: #1C1018;">Sign up</button>
   </div>
 </div>
 <br>
@@ -76,5 +92,7 @@
   <a href="https://www.flaticon.com/free-icons/online-learning" title="online learning icons">Online learning icons created by Circlon Tech - Flaticon</a>
 </footer>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/user/signUp/signUp.js"></script>
+<script src="../../js/util/util.js"></script>
 </body>
 </html>

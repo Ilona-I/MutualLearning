@@ -9,7 +9,6 @@ function createXMLHttpRequest() {
 }
 
 function getInfoAboutCurrentTestToUpdate() {
-  localStorage.setItem("testId", "1");
   let testId = localStorage.getItem("testId");
   if (testId === null) {
     return;
@@ -22,7 +21,6 @@ function getInfoAboutCurrentTestToUpdate() {
   xmlHttp.setRequestHeader("Content-Type", "application/json");
   xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
   xmlHttp.send();
-
 }
 
 function handleStateChangeGetTestToUpdate() {

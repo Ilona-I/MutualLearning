@@ -5,7 +5,7 @@ import ua.nure.illiashenko.mutuallearning.exception.ServiceApiException;
 
 public class ArticleNotFoundException extends ServiceApiException {
 
-    public ArticleNotFoundException(String errorCode) {
-        super(errorCode, HttpStatus.NOT_FOUND);
+    public ArticleNotFoundException() {
+        super(HttpStatus.NOT_FOUND);
     }
 }

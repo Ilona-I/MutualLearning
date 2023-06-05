@@ -56,3 +56,12 @@ window.onscroll = function () {
     prevScrollpos = currentScrollPos;
   }
 }
+
+function onlyLettersAndNumbers(str) {
+  return /^[A-Za-z0-9]*$/.test(str);
+}
+
+function isEmail(str) {
+  const regexExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
+  return regexExp.test(str);
+}

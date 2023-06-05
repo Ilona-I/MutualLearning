@@ -1,5 +1,6 @@
 package ua.nure.illiashenko.mutuallearning.exception;
 
+import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,18 +12,15 @@ import org.springframework.http.HttpStatus;
 @Data
 public class ServiceApiException extends RuntimeException {
 
-    @NonNull
-    protected final String errorCode;
-    protected Map<String, String> errorDetails;
+    protected List<String> errorDetails;
     protected HttpStatus httpStatus;
 
-    public ServiceApiException(String errorCode, Map<String, String> errorDetails, HttpStatus httpStatus){
-        this.errorCode = errorCode;
+    public ServiceApiException(List<String> errorDetails, HttpStatus httpStatus){
         this.errorDetails = errorDetails;
         this.httpStatus = httpStatus;
     }
-    public ServiceApiException(String errorCode, HttpStatus httpStatus){
-        this.errorCode = errorCode;
+
+    public ServiceApiException(HttpStatus httpStatus){
         this.httpStatus = httpStatus;
     }
 }

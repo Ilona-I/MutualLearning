@@ -5,7 +5,7 @@ import ua.nure.illiashenko.mutuallearning.exception.ServiceApiException;
 
 public class MarkNotFoundException extends ServiceApiException {
 
-    public MarkNotFoundException(String errorCode) {
-        super(errorCode, HttpStatus.NOT_FOUND);
+    public MarkNotFoundException() {
+        super(HttpStatus.NOT_FOUND);
     }
 }
