@@ -13,7 +13,6 @@
 </head>
 <body>
 
-
 <nav class="navbar  navbar-expand-lg navbar-light menu_background">
 
   <img class="logo" src="../../file/logo.png" alt="Mutual Learning">
@@ -56,12 +55,19 @@
 <div class="simple_green_block">
   <div class="inner_block_center">
     <h3>Log in</h3>
-    <input type="text" class="form-control input_info" placeholder="Login">
-    <input type="password" class="form-control input_info" placeholder="Password">
-    <button class="btn l_button" style=" background-color: #95E06C;color: #1C1018;">Log in</button>
-    <a href="#" style="font-size: 12px; font-style: italic; ">Забули пароль?</a>
+    <input id="logInLogin" type="text" class="form-control input_info" placeholder="Login" onkeyup="cleanWrongData('wrongLogin')">
+    <div style="width: 100%; text-align: left">
+      <p id="wrongLogin" style="color: darkred; font-size: small;"></p>
+    </div>
+    <input id = "logInPassword" type="password" class="form-control input_info" placeholder="Password" onkeyup="cleanWrongData('wrongPassword')">
+    <div style="width: 100%; text-align: left">
+      <p id="wrongPassword" style="color: darkred; font-size: small;"></p>
+    </div>
+    <button onclick="logIn()" class="btn l_button" style=" background-color: #95E06C;color: #1C1018;">Log in</button>
   </div>
 </div>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/user/logIn/logIn.js"></script>
+<script src="../../js/util/util.js"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ua.nure.illiashenko.mutuallearning.dto.user.ChangePasswordRequest;
+import ua.nure.illiashenko.mutuallearning.dto.user.LoginRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.RegistrationRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserLoginResponse;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserLoginRoleResponse;
@@ -32,6 +33,11 @@ public class UserController {
     @PostMapping("/signUp")
     public UserLoginRoleResponse signUp(@RequestBody RegistrationRequest registrationRequest) {
         return userService.signUp(registrationRequest);
+    }
+
+    @PostMapping("/logIn")
+    public UserLoginRoleResponse logIn(@RequestBody LoginRequest loginRequest) {
+        return userService.logIn(loginRequest);
     }
 
     @PutMapping("/password")

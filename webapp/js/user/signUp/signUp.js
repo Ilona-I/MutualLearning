@@ -29,7 +29,6 @@ function signUp() {
   }
   if(signUpEmail.length<5||isEmail(signUpEmail)===false){
     wrongData.push("wrongEmail")
-
   }
 
   if (wrongData.length > 0) {
