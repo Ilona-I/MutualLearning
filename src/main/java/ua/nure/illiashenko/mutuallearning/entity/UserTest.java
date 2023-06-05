@@ -18,7 +18,7 @@ public class UserTest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="user_login", nullable=false)
-    private String user_login;
+    private String userLogin;
     @Column(name="test_id")
     private Integer testId;
     private int mark;

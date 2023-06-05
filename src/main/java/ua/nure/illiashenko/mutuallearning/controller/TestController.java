@@ -27,9 +27,9 @@ public class TestController {
     @Autowired
     public TestService testService;
 
-    @PostMapping
-    public void createTest(@RequestBody SaveTestRequest saveTestRequest) {
-        testService.createTest(saveTestRequest);
+    @PostMapping("/create/{id}")
+    public void createTest(@PathVariable int id, @RequestBody SaveTestRequest saveTestRequest) {
+        testService.createTest(id, saveTestRequest);
     }
 
     @PutMapping("/{id}")

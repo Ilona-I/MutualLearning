@@ -66,7 +66,7 @@ function jsonToHTMLGetTestInfo(jsonString) {
       "ownAttemptsTableBody").innerHTML = ownAttemptsTableBody;
 
   let role = dataMap.get("role");
-  if (role === "CREATOR") {
+  if (role === "ARTICLE_CREATOR") {
     let userCount = dataMap.get("userCount");
     let userAverageMark = dataMap.get("userAverageMark");
     document.getElementById("userCount").innerText = userCount.toString();

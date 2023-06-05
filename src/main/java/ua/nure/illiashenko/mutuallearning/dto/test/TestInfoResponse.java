@@ -1,10 +1,10 @@
 package ua.nure.illiashenko.mutuallearning.dto.test;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class TestInfoResponse {
 
     private String title;

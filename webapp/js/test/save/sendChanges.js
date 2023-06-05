@@ -34,13 +34,14 @@ function sendTestChanges() {
   let json = JSON.stringify(Object.fromEntries(resultMap));
   console.log(json);
   let testId = localStorage.getItem("testId");
+  let articleId = localStorage.getItem("articleId");
   let url;
   if (testId !== null) {
     url = "http://localhost:8080/test/" + testId;
     createXMLHttpRequest();
     xmlHttp.open("PUT", url, false);
   } else {
-    url = "http://localhost:8080/test";
+    url = "http://localhost:8080/test/create"+articleId;
     createXMLHttpRequest();
     xmlHttp.open("POST", url, false);
   }
