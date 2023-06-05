@@ -1,14 +1,33 @@
 .menu_background{
   height: 73px;
-  background-color: #C3F73A;
-
+  background: rgb(252, 237, 100);
 }
 
 .logo{
-  width: 130px;
-  height: 65px;
-  margin-left: 8%;
-  margin-right: 10%;
+  width: 70px;
+  height: 70px;
+  margin-left: 3%;
+
+}
+
+.logo_text_div{
+  height: 70px;
+  width: 400px;
+  margin-left: 20px;
+  margin-right: 6%;
+  position: relative;
+  font-size: x-large;
+  font-weight: bold;
+  font-family: "MV Boli";
+  color: #D17542;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .menu_button{

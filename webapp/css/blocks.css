@@ -23,9 +23,9 @@
 }
 
 .simple_green_block {
+  background-color: white;
   margin-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 34%;
   width: 30%;
   height: max-content;
   padding: 20px;

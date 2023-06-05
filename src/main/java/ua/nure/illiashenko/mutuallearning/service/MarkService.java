@@ -37,9 +37,9 @@ public class MarkService {
     @Autowired
     private UserRepository userRepository;
 
-    public MarkResponse createMark(CreateMarkRequest createMarkRequest) {
+    public MarkResponse createMark(String login, CreateMarkRequest createMarkRequest) {
         markValidator.validateCreateMarkRequest(createMarkRequest);
-        final Optional<User> creator = userRepository.findById(getUserLogin());
+        final Optional<User> creator = userRepository.findById(login);
         if (creator.isEmpty()) {
             throw new UserNotFoundException("userNotFound");
         }
@@ -57,21 +57,21 @@ public class MarkService {
             .orElseThrow(() -> new MarkNotFoundException("markNotFound")));
     }
 
-    public MarkResponse updateMark(UpdateMarkRequest updateMarkRequest) {
+    public MarkResponse updateMark(String login, UpdateMarkRequest updateMarkRequest) {
         markValidator.validateUpdateMarkRequest(updateMarkRequest);
         final Optional<Mark> optionalMark = markRepository.findById(updateMarkRequest.getId());
         if (optionalMark.isEmpty()) {
             throw new MarkNotFoundException("markNotFound");
         }
         final Mark mark = optionalMark.get();
-        checkAccess(mark);
+        checkAccess(login, mark);
         mark.setTitle(updateMarkRequest.getTitle());
         mark.setDescription(updateMarkRequest.getDescription());
         return markMapper.mapToMarkResponse(markRepository.save(mark));
     }
 
-    private void checkAccess(Mark mark) {
-        final Optional<User> creator = userRepository.findById(getUserLogin());
+    private void checkAccess(String login, Mark mark) {
+        final Optional<User> creator = userRepository.findById(login);
         if (creator.isEmpty()) {
             throw new UserNotFoundException("userNotFound");
         }
@@ -95,7 +95,4 @@ public class MarkService {
         markRepository.deleteById(id);
     }
 
-    private String getUserLogin() {
-        return "user1";
-    }
 }

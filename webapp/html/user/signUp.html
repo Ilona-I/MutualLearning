@@ -9,6 +9,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../css/style.css">
   <title>Sign up</title>
 </head>
 <body>
@@ -16,38 +17,42 @@
 
 <nav class="navbar  navbar-expand-lg navbar-light menu_background">
 
-  <img class="logo" src="../../file/logo.png" alt="Manual Learning">
-
+  <img class="logo" src="../../file/logo.png" alt="Mutual Learning">
+  <div class="logo_text_div">
+    <p class="vertical-center">Mutual Learning</p>
+  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="n1avbarNav">
+  <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active menu_button">
-        <a class="nav-link menu_button_text " href="#">ГОЛОВНА</a>
-      </li>
       <li class="nav-item  menu_button">
-        <a class="nav-link menu_button_text " href="#">СТАТТІ</a>
+        <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
+        border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
+        onclick="document.location='../article/articles.html'">
+          СТАТТІ
+        </button>
       </li>
-      <li class="nav-item menu_button">
-        <a class="nav-link menu_button_text" href="#">ТЕСТИ</a>
-      </li>
-      <li class="nav-item menu_button">
+      <li  class="nav-item menu_button" ></li>
+      <li  class="nav-item menu_button" >
         <div>
-          <button class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #094D92; color: white">
+          <button onclick="goToCreateArticle('../article/saveArticle.html')"
+                  class="btn"
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
             Створити статтю
           </button>
-          <button class="btn"
+          <button onclick="goToCreateQuestion('../article/saveArticle.html')"
+              class="btn"
                   style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
             Задати питання
           </button>
         </div>
+
       </li>
     </ul>
   </div>
-  <div class="collapse navbar-collapse">
-    <button class="btn btn-light menu_button_sign_up" style="  background-color: #68B684; color:#C3F73A ;border-width: 0px">Log in</button>
+  <div class="collapse navbar-collapse" style="margin-left: 10px;">
+    <button onclick="document.location='logIn.html'" class="btn btn-light menu_button_sign_up" style="background-color: #303052; color:#ffffff ;border-width: 0px">Log in</button>
   </div>
 </nav>
 <div class="simple_green_block">
@@ -63,5 +68,13 @@
     <button class="btn l_button" style=" background-color: #95E06C;color: #1C1018;">Sign up</button>
   </div>
 </div>
+<br>
+<br>
+<br>
+<footer>
+  <a href="https://www.flaticon.com/free-icons/online-class" title="online class icons">Online class icons created by SBTS2018 - Flaticon</a>
+  <a href="https://www.flaticon.com/free-icons/online-learning" title="online learning icons">Online learning icons created by Circlon Tech - Flaticon</a>
+</footer>
+<script src="../../js/menu/changeLocation.js"></script>
 </body>
 </html>

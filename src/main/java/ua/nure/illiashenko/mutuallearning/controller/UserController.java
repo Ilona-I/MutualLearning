@@ -1,6 +1,7 @@
 package ua.nure.illiashenko.mutuallearning.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,15 +18,19 @@ import ua.nure.illiashenko.mutuallearning.dto.user.RegistrationRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserLoginResponse;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserRequest;
 import ua.nure.illiashenko.mutuallearning.dto.user.UserResponse;
+import ua.nure.illiashenko.mutuallearning.service.UserService;
 
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping
-    public UserResponse signUp(@RequestBody RegistrationRequest registrationRequest) {
-        return null;
+    public UserLoginResponse signUp(@RequestBody RegistrationRequest registrationRequest) {
+        return userService.signUp(registrationRequest);
     }
 
     @PutMapping("/password")
@@ -34,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping()
-    public UserResponse updateUser(@RequestBody UserRequest user) {
+    public UserLoginResponse updateUser(@RequestBody UserRequest user) {
         return null;
     }
 
@@ -59,8 +64,8 @@ public class UserController {
         return null;
     }
 
-    @GetMapping("/submit/email/{login}/{token}")
-    public UserLoginResponse submitEmail(@PathVariable String login, @PathVariable String token) {
+    @GetMapping("/submit/email/{token}")
+    public UserLoginResponse submitEmail(@PathVariable String token) {
         return null;
     }
 }

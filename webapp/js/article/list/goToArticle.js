@@ -3,8 +3,7 @@ function goToTheArticle(id) {
   document.location = "article.html";
 }
 
-function answerTheQuestion(id, questionCreatorLogin) {
-  localStorage.setItem("questionCreatorLogin", questionCreatorLogin)
+function answerTheQuestion(id) {
   localStorage.setItem("articleId", id);
   document.location = "saveArticle.html";
 }

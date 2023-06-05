@@ -23,60 +23,68 @@
   <title>Article</title>
 </head>
 <body>
-<div id="menu" style="background-color: rgba(255,255,255,0.95); padding-bottom: 20px; border-bottom-color: #d2cece; border-bottom-style: solid;">
-<!-- Початок роботи з меню -->
-<nav  class="navbar  navbar-expand-lg navbar-light menu_background">
+<div id="menu"
+     style="background-color: rgba(255,255,255,0.95); padding-bottom: 20px; border-bottom-color: #d2cece; border-bottom-style: solid;">
 
-  <img class="logo" src="../../file/logo.png" alt="Manual Learning">
+  <!-- Початок роботи з меню -->
+  <nav class="navbar  navbar-expand-lg navbar-light menu_background">
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="n1avbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active menu_button">
-        <a class="nav-link menu_button_text " href="#">ГОЛОВНА</a>
-      </li>
-      <li class="nav-item  menu_button">
-        <a class="nav-link menu_button_text " href="#">СТАТТІ</a>
-      </li>
-      <li class="nav-item menu_button">
-        <a class="nav-link menu_button_text" href="#">ТЕСТИ</a></li>
-      <li class="nav-item menu_button">
-        <div>
-          <button class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #094D92; color: white">
-            Створити статтю
+    <img class="logo" src="../../file/logo.png" alt="Mutual Learning">
+    <div class="logo_text_div">
+      <p class="vertical-center">Mutual Learning</p>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item  menu_button">
+          <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
+        border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
+                  onclick="document.location='../article/articles.html'">
+            СТАТТІ
           </button>
-          <button class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
-            Задати питання
-          </button>
-        </div>
-      </li>
-      <li>
-        <div class="btn-group" style="margin-left: 50px;">
-          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-            <img src="../../file/profile.png" alt="Profile" width="40" height="40">
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Мій профіль</a>
-            <a class="dropdown-item" href="#">Оформити підписку</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Вийти</a>
+        </li>
+        <li class="nav-item menu_button"></li>
+        <li class="nav-item menu_button">
+          <div>
+            <button onclick="goToCreateArticle('../article/saveArticle.html')"
+                    class="btn"
+                    style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+              Створити статтю
+            </button>
+            <button onclick="goToCreateQuestion('../article/saveArticle.html')"
+                    class="btn"
+                    style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+              Задати питання
+            </button>
           </div>
+
+        </li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" style="margin-left: 10px;">
+      <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+          <img src="../../file/profile.png" alt="Profile" width="40" height="40">
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
+          <a class="dropdown-item" href="#">Оформити підписку</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
         </div>
-      </li>
-    </ul>
-  </div>
+      </div>
 
-</nav>
-<!-- Кінець роботи з меню -->
+    </div>
 
-<!-- Початок роботи з статтям-->
+  </nav>
+  <!-- Кінець роботи з меню -->
+
+  <!-- Початок роботи з статтям-->
 
   <!-- Початок роботи з параметрами відображених статей-->
   <div class="row" style="margin-top: 20px;">
@@ -87,7 +95,8 @@
               style="width: 200px">
         Фільтрація
       </button>
-      <div id="dropdown-menu" onclick="event.stopPropagation();" class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+      <div id="dropdown-menu" onclick="event.stopPropagation();" class="dropdown-menu"
+           aria-labelledby="dropdownMenuButton"
            style="width: 850px;padding: 30px 10px 30px 30px;">
         <div class="row" style="width: 100%; ">
           <!-- Початок блоку міток -->
@@ -95,73 +104,84 @@
                style="width: 74%; margin-left: 10px; border-width: 1px; border-style: solid; border-color: #d5d5ea; padding: 30px 40px 40px;">
             <!-- Початок роботи з блоком пошуку міток-->
             <div class="row">
-            <input onkeyup="displayMarksArticles()" id="searchMarkLineArticles" type="text" style="height: 30px;  width: 60%;" class="form-control"
-                   placeholder="Search mark...">
-            <!-- Кінець роботи з блоком пошуку міток-->
-            <!-- Початок роботи з кнопками-->
+              <input onkeyup="displayMarksArticles()" id="searchMarkLineArticles" type="text"
+                     style="height: 30px;  width: 60%;" class="form-control"
+                     placeholder="Search mark...">
+              <!-- Кінець роботи з блоком пошуку міток-->
+              <!-- Початок роботи з кнопками-->
               <button class="btn btn-info" onclick="checkAllMarks()" type="button"
-                      style="font-size: small; margin-left:10px; padding-top: 2px; padding-bottom: 2px;">Обрати все
+                      style="font-size: small; margin-left:10px; padding-top: 2px; padding-bottom: 2px;">
+                Обрати все
               </button>
               <button class="btn btn-dark" onclick="uncheckAllMarks()"
-                      style="font-size: small;margin-left:10px;  padding-top: 2px; padding-bottom: 2px;">Скинути все
+                      style="font-size: small;margin-left:10px;  padding-top: 2px; padding-bottom: 2px;">
+                Скинути все
               </button>
             </div>
             <!-- Кінець роботи з кнопками-->
             <!-- Початок блоку з списком міток -->
-            <div id="markListArticles" class="row" style="margin-top: 15px; margin-left: -50px; max-height: 400px; overflow-y: auto">
+            <div id="markListArticles" class="row"
+                 style="margin-top: 15px; margin-left: -50px; max-height: 400px; overflow-y: auto">
 
             </div>
             <!-- Кінець блоку з списком міток -->
-            <p style="color: #555555; font-size: xx-small; font-style: italic">*відображення статей, які мають принаймні одну мітку з обраних. Для перегляду статей, що не мають міток небхідно скинути всі мітки</p>
+            <p style="color: #555555; font-size: xx-small; font-style: italic">*відображення статей,
+              які мають принаймні одну мітку з обраних. Для перегляду статей, що не мають міток
+              небхідно скинути всі мітки</p>
           </div>
           <!-- Кінець блоку міток -->
           <div style="width: 24%;">
-          <!-- Початок блоку з типом статті -->
-          <div style="border-width: 1px; border-style: solid; border-color: #d5d5ea; margin-left: 15px;  padding: 20px;">
-            <div class="form-check form-check" onclick="checkAllArticleTypes()">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                     id="inlineRadio1ArticleTypeAll"
-                     value="all" checked="checked">
-              <label class="form-check-label" for="inlineRadio1ArticleTypeAll">Все</label>
+            <!-- Початок блоку з типом статті -->
+            <div
+                style="border-width: 1px; border-style: solid; border-color: #d5d5ea; margin-left: 15px;  padding: 20px;">
+              <div class="form-check form-check" onclick="checkAllArticleTypes()">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                       id="inlineRadio1ArticleTypeAll"
+                       value="all" checked="checked">
+                <label class="form-check-label" for="inlineRadio1ArticleTypeAll">Все</label>
+              </div>
+              <div class="form-check form-check" onclick="checkArticles()">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                       id="inlineRadio2ArticleTypeArticle"
+                       value="article">
+                <label class="form-check-label" for="inlineRadio2ArticleTypeArticle">Статті</label>
+              </div>
+              <div class="form-check form-check" onclick="checkQuestions()">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions1"
+                       id="inlineRadio3ArticleTypeQuestion"
+                       value="question">
+                <label class="form-check-label"
+                       for="inlineRadio3ArticleTypeQuestion">Питання</label>
+              </div>
             </div>
-            <div class="form-check form-check" onclick="checkArticles()">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                     id="inlineRadio2ArticleTypeArticle"
-                     value="article">
-              <label class="form-check-label" for="inlineRadio2ArticleTypeArticle">Статті</label>
+            <!-- Кінець блоку з типом статті -->
+            <!-- Початок роботи з фільтрацією (усі статті, власні, збережені) -->
+            <div id="blockOwner"
+                 style="border-width: 1px; border-style: solid; border-color: #d5d5ea; margin-top: 15px; margin-left: 15px; padding: 20px;">
+              <div class="form-check form-check" onclick="checkAllOwners()">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                       id="inlineRadio1OwnerAll"
+                       value="all" checked="checked">
+                <label class="form-check-label" for="inlineRadio1OwnerAll">Усі</label>
+              </div>
+              <div class="form-check form-check" onclick="checkOwn()">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                       id="inlineRadio2OwnerOwn"
+                       value="own">
+                <label class="form-check-label" for="inlineRadio2OwnerOwn">Власні</label>
+              </div>
+              <div class="form-check form-check" onclick="checkLiked()">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                       id="inlineRadio3OwnerSaved"
+                       value="saved">
+                <label class="form-check-label" for="inlineRadio3OwnerSaved">Вподобані</label>
+              </div>
             </div>
-            <div class="form-check form-check" onclick="checkQuestions()">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions1"
-                     id="inlineRadio3ArticleTypeQuestion"
-                     value="question">
-              <label class="form-check-label" for="inlineRadio3ArticleTypeQuestion">Питання</label>
-            </div>
-          </div>
-          <!-- Кінець блоку з типом статті -->
-          <!-- Початок роботи з фільтрацією (усі статті, власні, збережені) -->
-          <div id="blockOwner" style="border-width: 1px; border-style: solid; border-color: #d5d5ea; margin-top: 15px; margin-left: 15px; padding: 20px;">
-            <div class="form-check form-check" onclick="checkAllOwners()">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                     id="inlineRadio1OwnerAll"
-                     value="all" checked="checked">
-              <label class="form-check-label" for="inlineRadio1OwnerAll">Усі</label>
-            </div>
-            <div class="form-check form-check" onclick="checkOwn()">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                     id="inlineRadio2OwnerOwn"
-                     value="own">
-              <label class="form-check-label" for="inlineRadio2OwnerOwn">Власні</label>
-            </div>
-            <div class="form-check form-check" onclick="checkLiked()">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                     id="inlineRadio3OwnerSaved"
-                     value="saved">
-              <label class="form-check-label" for="inlineRadio3OwnerSaved">Вподобані</label>
-            </div>
-          </div>
-          <!-- Кінець роботи з фільтрацією (усі статті, власні, збережені) -->
+            <!-- Кінець роботи з фільтрацією (усі статті, власні, збережені) -->
             <div style="margin-left: 15px; margin-top: 15px; width: 92%;">
-              <button onclick="setFilter()" class="btn btn-primary" style="width: 100%;">Застосувати</button>
+              <button onclick="setFilter()" class="btn btn-primary" style="width: 100%;">
+                Застосувати
+              </button>
             </div>
           </div>
         </div>
@@ -182,35 +202,24 @@
                placeholder="Search...">
       </div>
       <div style="margin-left: 5px; width: 10%;">
-          <button onclick="searchArticles()" class="btn btn-light">Знайти</button>
+        <button onclick="searchArticles()" class="btn btn-light">Знайти</button>
       </div>
       <div id="cancelSearchArticles" style="margin-left: 20px; width: 5%;" hidden>
         <button onclick="cancelSearchArticles()"
-                style="border-color: transparent; background-color: transparent; font-size: large;">&#10539;</button>
+                style="border-color: transparent; background-color: transparent; font-size: large;">
+          &#10539;
+        </button>
       </div>
     </div>
     <!-- Кінець роботи з пошуком -->
-
-    <!-- Початок роботи з сортуванням -->
-    <div class="row" style="margin-left: 10%;">
-      <!-- Початок роботи з типом сортування -->
-      <div>
-        <select onchange="setFilter()" class="form-control" id="sort">
-          <option value="by_new">Спочатку новіші</option>
-          <option value="by_popular">Спочатку популярні</option>
-        </select>
-      </div>
-      <!-- Кінець роботи з типом сортування -->
-    </div>
-    <!-- Кінець роботи з сортуванням -->
   </div>
   <!-- Кінець роботи з параметрами відображених статей-->
 </div>
-  <!-- Початок роботи з списком статей -->
-  <div id="articleList" style="margin-top: 160px;">
+<!-- Початок роботи з списком статей -->
+<div id="articleList" style="margin-top: 160px;">
 
 
-  </div>
+</div>
 
 
 <script src="../../js/util/util.js"></script>
@@ -220,5 +229,6 @@
 <script src="../../js/article/list/loadArticles.js"></script>
 <script src="../../js/article/list/goToArticle.js"></script>
 <script src="../../js/article/list/checkElement.js"></script>
+<script src="../../js/menu/changeLocation.js"></script>
 </body>
 </html>

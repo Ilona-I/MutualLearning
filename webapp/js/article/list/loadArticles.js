@@ -13,7 +13,7 @@ function loadArticles() {
   const url = "http://localhost:8080/articles?" + requestParamLine;
   createXMLHttpRequest();
   console.log(url);
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("GET", url, false);
   xmlHttp.onreadystatechange = handleStateChangeArticles;
   xmlHttp.setRequestHeader("Content-Type", "application/json");

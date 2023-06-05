@@ -9,10 +9,7 @@ function createXMLHttpRequest() {
 }
 
 function getInfoAboutCurrentDisplayedArticle() {
-  localStorage.setItem("articleId", "1")
   let articleId = localStorage.getItem("articleId");
-  localStorage.setItem("userLogin", "user1")
-
   const url = "http://localhost:8080/articles/" + articleId;
   createXMLHttpRequest();
   let user = '{"login":"' + localStorage.getItem("login") + '}';
@@ -23,21 +20,16 @@ function getInfoAboutCurrentDisplayedArticle() {
   xmlHttp.send();
 }
 
-function setTypeArticleDisplay() {
-  document.getElementById("giveAnswer").remove();
-}
-
 function setTypeQuestionDisplay() {
-  document.getElementById("articleBody").remove();
+  document.getElementById("testsBlock").remove();
 }
 
 function handleStateChangeDisplay() {
   if (xmlHttp.readyState == 4) {
     if (xmlHttp.status == 200) {
-      console.log(38)
       jsonToHTMLDisplay(xmlHttp.responseText);
     } else {
-      // document.location = "../error.html";
+
     }
   }
 }
@@ -52,10 +44,12 @@ function jsonToHTMLDisplay(jsonString) {
   let articleDateTime = document.getElementById("articleDateTime");
   let members = dataMap.get("members");
   document.getElementById("members").innerHTML = getMembers(members);
-  let tests = dataMap.get("tests");
-  document.getElementById("tests").innerHTML = getTests(tests);
+  if (type==="ARTICLE"){
+    let tests = dataMap.get("tests");
+    document.getElementById("tests").innerHTML = getTests(tests);
+  }
   if (lastUpdateDateTime !== null && lastUpdateDateTime !== "") {
-    articleDateTime.innerText = "ред." + getDate(
+    articleDateTime.innerText = "ред. " + getDate(
         parseInt(lastUpdateDateTime.toString()));
   } else {
     articleDateTime.innerText = getDate(parseInt(creationDateTime.toString()));
@@ -66,9 +60,6 @@ function jsonToHTMLDisplay(jsonString) {
 
   if (type === "QUESTION") {
     setTypeQuestionDisplay();
-    return;
-  } else {
-    setTypeArticleDisplay();
   }
   let articleParts = dataMap.get("articleParts");
   setArticleBodyDisplay(articleParts);

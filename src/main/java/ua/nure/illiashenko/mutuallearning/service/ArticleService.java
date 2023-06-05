@@ -1,5 +1,6 @@
 package ua.nure.illiashenko.mutuallearning.service;
 
+import static ua.nure.illiashenko.mutuallearning.constants.ArticleType.ANSWERED_QUESTION;
 import static ua.nure.illiashenko.mutuallearning.constants.ArticleType.ARTICLE;
 import static ua.nure.illiashenko.mutuallearning.constants.ArticleType.QUESTION;
 import static ua.nure.illiashenko.mutuallearning.constants.ArticleUserRole.ARTICLE_CREATOR;
@@ -78,27 +79,39 @@ public class ArticleService {
     @Autowired
     private TestRepository testRepository;
 
-    public List<ArticleFileLinksResponse> createArticle(ArticleRequest articleRequest) {
+    public List<ArticleFileLinksResponse> createArticle(String login, ArticleRequest articleRequest) {
         articleValidator.validateArticleRequest(articleRequest);
         final Article article = articleMapper.mapArticleRequestToArticle(articleRequest);
         article.setCreationDateTime(new Timestamp(System.currentTimeMillis()));
-        return createArticle(article, articleRequest);
+        return createArticle(login, article, articleRequest);
     }
 
-    public List<ArticleFileLinksResponse> editArticle(int id, ArticleRequest articleRequest) {
+    public List<ArticleFileLinksResponse> editArticle(String login, int id, ArticleRequest articleRequest) {
         articleValidator.validateArticleRequest(articleRequest);
         final Optional<Article> optionalDbArticle = articleRepository.findById(id);
         if (optionalDbArticle.isEmpty()) {
             throw new ArticleNotFoundException("articleIdNotFound");
         }
-        final Article updatedArticle = articleMapper.mapArticleRequestToArticle(articleRequest);
+        final Article updatedArticle = new Article();
+        if (optionalDbArticle.get().getType().equals(ARTICLE) || optionalDbArticle.get().getType()
+            .equals(ANSWERED_QUESTION)) {
+            updatedArticle.setTitle(articleRequest.getTitle());
+            updatedArticle.setType(optionalDbArticle.get().getType());
+        } else if (optionalDbArticle.get().getType().equals(QUESTION)) {
+            updatedArticle.setTitle(optionalDbArticle.get().getTitle());
+            updatedArticle.setType(ANSWERED_QUESTION);
+            final UserArticle userArticle = new UserArticle();
+            userArticle.setArticleId(id);
+            userArticle.setUserLogin(login);
+            userArticle.setRole(QUESTION_ANSWERER);
+        }
         updatedArticle.setId(id);
         updatedArticle.setCreationDateTime(optionalDbArticle.get().getCreationDateTime());
         updatedArticle.setLastUpdateDateTime(new Timestamp(System.currentTimeMillis()));
         return updateArticle(updatedArticle, articleRequest);
     }
 
-    public ArticleForUpdateResponse getArticleForUpdate(int id) {
+    public ArticleForUpdateResponse getArticleForUpdate(String login, int id) {
         final Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
         final ArticleForUpdateResponse articleForUpdateResponse = articleMapper.mapArticleToArticleForUpdateResponse(
             article);
@@ -109,15 +122,15 @@ public class ArticleService {
         return articleForUpdateResponse;
     }
 
-    public ArticleResponse getArticle(int id) {
+    public ArticleResponse getArticle(String login, int id) {
         final Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
         final ArticleResponse articleResponse = articleMapper.mapArticleToArticleResponse(article);
         final ArticlePartResponse[] articlePartResponses = getArticlePartResponses(id);
         final MarkResponse[] markResponses = getMarkResponses(id);
         articleResponse.setArticleParts(articlePartResponses);
         articleResponse.setMarks(markResponses);
-        final UserArticle userArticle = userArticleRepository.findByUserLoginAndArticleId(getUserLogin(), id);
-        if(userArticle!=null){
+        final UserArticle userArticle = userArticleRepository.findByUserLoginAndArticleId(login, id);
+        if (userArticle != null) {
             articleResponse.setReaction(userArticle.getReaction());
         }
         articleResponse.setMembers(getMembers(article).toArray(Member[]::new));
@@ -125,7 +138,7 @@ public class ArticleService {
         return articleResponse;
     }
 
-    private TestTitleResponse[] getArticleTestTitles(int articleId){
+    private TestTitleResponse[] getArticleTestTitles(int articleId) {
         return testRepository.findByArticleId(articleId)
             .stream()
             .map(test -> TestTitleResponse.builder()
@@ -135,25 +148,20 @@ public class ArticleService {
             .toArray(TestTitleResponse[]::new);
     }
 
-    public List<ArticleListElementResponse> getArticles(Integer[] marksId, String articleType, String ownerType,
-        String sortType, String searchLine, String searchType, int page, int size) {
+    public List<ArticleListElementResponse> getArticles(String login, Integer[] marksId, String articleType,
+        String ownerType, String searchLine, String searchType, int page, int size) {
         String searchLineText = searchLine != null ? searchLine.trim() : "";
-        final Set<Integer> articlesId = getArticlesId(marksId, ownerType, searchType, searchLineText);
+        final Set<Integer> articlesId = getArticlesId(login, marksId, ownerType, searchType, searchLineText);
         Pageable limit = PageRequest.of(page, size);
         final Set<String> articleTypeSet = getArticleTypes(articleType);
 
-        List<Article> foundArticles = new ArrayList<>();
-        if ("by_new".equals(sortType)) {
-            if ("by_title".equals(searchType) && !searchLineText.isEmpty()) {
-                foundArticles = articleRepository.findAllByIdIsInAndTypeIsInAndTitleContainsOrderByCreationDateTimeDesc(
-                    articlesId, articleTypeSet, searchLineText, limit);
-            } else {
-                foundArticles = articleRepository.findAllByIdIsInAndTypeIsInOrderByCreationDateTimeDesc(articlesId,
-                    articleTypeSet, limit);
-            }
-        } else if ("by_popular".equals(sortType)) {
-            foundArticles = articleRepository.findAllByTitleAndByPopularity(articlesId, articleTypeSet, searchLineText,
-                page, size);
+        List<Article> foundArticles;
+        if ("by_title".equals(searchType) && !searchLineText.isEmpty()) {
+            foundArticles = articleRepository.findAllByIdIsInAndTypeIsInAndTitleContainsOrderByCreationDateTimeDesc(
+                articlesId, articleTypeSet, searchLineText, limit);
+        } else {
+            foundArticles = articleRepository.findAllByIdIsInAndTypeIsInOrderByCreationDateTimeDesc(articlesId,
+                articleTypeSet, limit);
         }
 
         final List<ArticleListElementResponse> responses = new ArrayList<>();
@@ -164,7 +172,7 @@ public class ArticleService {
             articleListElement.setMarks(getMarkResponses(article).toArray(MarkResponse[]::new));
             articleListElement.setMembers(getMembers(article).toArray(Member[]::new));
             final UserArticle userArticle = userArticleRepository
-                .findByUserLoginAndArticleId(getUserLogin(), article.getId());
+                .findByUserLoginAndArticleId(login, article.getId());
             if (userArticle != null) {
                 articleListElement.setReaction(userArticle.getReaction());
             }
@@ -186,16 +194,16 @@ public class ArticleService {
         return types;
     }
 
-    public void deleteArticle(int id) {
+    public void deleteArticle(String login, int id) {
         articleRepository.deleteById(id);
     }
 
-    public List<ArticleFileLinksResponse> createArticle(Article article, ArticleRequest articleRequest) {
+    public List<ArticleFileLinksResponse> createArticle(String login, Article article, ArticleRequest articleRequest) {
         final ArticlePartRequest[] articlePartRequests = articleRequest.getArticleParts();
         Article savedArticle = articleRepository.save(article);
         final List<ArticleFileLinksResponse> articleFileLinksParts = createArticleParts(articlePartRequests,
             savedArticle);
-        createUserArticle(savedArticle);
+        createUserArticle(login, savedArticle);
         addMarksToArticle(articleRequest, savedArticle);
         return articleFileLinksParts;
     }
@@ -340,9 +348,10 @@ public class ArticleService {
         articlePartRepository.deleteAllById(articlePartsIdToDelete);
     }
 
-    private Set<Integer> getArticlesId(Integer[] marksId, String ownerType, String searchType, String searchLineText) {
+    private Set<Integer> getArticlesId(String login, Integer[] marksId, String ownerType, String searchType,
+        String searchLineText) {
         final Set<Integer> articlesIdByMarks = getArticlesIdByMarks(marksId);
-        final Set<Integer> articlesIdByOwnType = getArticlesIdByOwnerType(ownerType);
+        final Set<Integer> articlesIdByOwnType = getArticlesIdByOwnerType(login, ownerType);
         final Set<Integer> articlesIdByLoginSearch = getArticlesIdByLoginSearch(searchLineText, searchType);
         Set<Integer> articlesId = new HashSet<>(articlesIdByMarks);
         if (articlesIdByOwnType != null) {
@@ -364,16 +373,16 @@ public class ArticleService {
         return null;
     }
 
-    private Set<Integer> getArticlesIdByOwnerType(String ownerType) {
+    private Set<Integer> getArticlesIdByOwnerType(String login, String ownerType) {
         Set<Integer> articlesIdByOwnType = null;
-        if ("OWN".equals(ownerType)) {
+        if ("OWN".equalsIgnoreCase(ownerType)) {
             articlesIdByOwnType = userArticleRepository
-                .findAllByUserLoginAndRoleIsIn(getUserLogin(), getArticleCreatorRoles()).stream()
+                .findAllByUserLoginAndRoleIsIn(login, getArticleCreatorRoles()).stream()
                 .map(UserArticle::getArticleId)
                 .collect(Collectors.toSet());
-        } else if ("LIKED".equals(ownerType)) {
+        } else if ("LIKED".equalsIgnoreCase(ownerType)) {
             articlesIdByOwnType = userArticleRepository
-                .findAllByUserLoginAndReaction(getUserLogin(), ReactionType.LIKE).stream()
+                .findAllByUserLoginAndReaction(login, ReactionType.LIKE).stream()
                 .map(UserArticle::getArticleId)
                 .collect(Collectors.toSet());
         }
@@ -414,10 +423,10 @@ public class ArticleService {
         return members;
     }
 
-    private void createUserArticle(Article savedArticle) {
+    private void createUserArticle(String login, Article savedArticle) {
         final UserArticle userArticle = new UserArticle();
         userArticle.setArticleId(savedArticle.getId());
-        userArticle.setUserLogin(getUserLogin());
+        userArticle.setUserLogin(login);
         userArticle.setRole(savedArticle.getType().equals(ArticleType.ARTICLE) ? ARTICLE_CREATOR
             : QUESTION_CREATOR);
         userArticleRepository.save(userArticle);
@@ -459,9 +468,5 @@ public class ArticleService {
     private ArticleNotFoundException articleNotFoundById(int id) {
         log.error("No article found by id: " + id);
         return new ArticleNotFoundException("articleNotFound");
-    }
-
-    private String getUserLogin() {
-        return "user1";
     }
 }

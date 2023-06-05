@@ -153,12 +153,12 @@ public class TestService {
             .build();
     }
 
-    public TestInfoResponse getTestInfo(int id) {
+    public TestInfoResponse getTestInfo(String login, int id) {
         final Test test = testRepository.findById(id)
             .orElseThrow(() -> new ServiceApiException("testNotFound", HttpStatus.NOT_FOUND));
         final Integer maxMark = getMaxMark(id);
-        final PreviousAttemptsResponse[] ownPreviousAttempts = getOwnPreviousAttempts(id);
-        final String role = userArticleRepository.findByUserLoginAndArticleId(getUserLogin(), test.getArticleId())
+        final PreviousAttemptsResponse[] ownPreviousAttempts = getOwnPreviousAttempts(login, id);
+        final String role = userArticleRepository.findByUserLoginAndArticleId(login, test.getArticleId())
             .getRole();
 
         int userCount = 0;
@@ -217,8 +217,8 @@ public class TestService {
         return ARTICLE_CREATOR.equals(role) && isPremiumUser();
     }
 
-    private PreviousAttemptsResponse[] getOwnPreviousAttempts(int testId) {
-        return userTestRepository.findByTestIdAndUserLogin(testId, getUserLogin())
+    private PreviousAttemptsResponse[] getOwnPreviousAttempts(String login, int testId) {
+        return userTestRepository.findByTestIdAndUserLogin(testId, login)
             .stream()
             .map(userTest -> PreviousAttemptsResponse.builder()
                 .mark(userTest.getMark())
@@ -268,7 +268,7 @@ public class TestService {
             .build();
     }
 
-    public void sendTestToCheck(int id, CheckTestRequest checkTestRequest) {
+    public void sendTestToCheck(String login, int id, CheckTestRequest checkTestRequest) {
         int mark = 0;
         for (Integer answerId : checkTestRequest.getAnswersId()) {
             final Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
@@ -277,7 +277,7 @@ public class TestService {
             }
         }
         final UserTest userTest = new UserTest();
-        userTest.setUserLogin(getUserLogin());
+        userTest.setUserLogin(login);
         userTest.setTestId(id);
         userTest.setDateTime(new Timestamp(System.currentTimeMillis()));
         userTest.setMark(mark);
@@ -286,11 +286,6 @@ public class TestService {
 
     public void deleteTest(int id) {
         testRepository.deleteById(id);
-    }
-
-    //todo
-    private String getUserLogin() {
-        return "user1";
     }
 
     //todo

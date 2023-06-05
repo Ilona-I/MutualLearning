@@ -6,7 +6,6 @@ function getRequestParamLine() {
   let marks = getSelectedMarksId();
   let articleType = getSelectedType();
   let ownerType = getOwnerType();
-  let sortType = getSortType();
   let searchLine = getSearchLine();
   let searchType = getSearchType();
   let requestParamLine = "";
@@ -26,7 +25,6 @@ function getRequestParamLine() {
   }
   requestParamLine += "&articleType=" + articleType;
   requestParamLine += "&ownerType=" + ownerType;
-  requestParamLine += "&sortType=" + sortType;
   requestParamLine += "&page=" + page;
   requestParamLine += "&size=" + localStorage.getItem("size");
   localStorage.setItem("page", (1 + parseInt(page + "")).toString())
