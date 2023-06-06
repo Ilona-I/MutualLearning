@@ -1,12 +1,15 @@
 function sendArticleChanges() {
-  localStorage.setItem("articleId", "1");
   let resultMap = new Map();
   let articleTypeQuestionCheckbox = document.getElementById(
       "articleTypeQuestionCheckbox");
   let articleType = "";
-  let articleTitle = document.getElementById("articleTitle").value;
+  let articleTitle = document.getElementById("articleTitle").value.trim();
   let articleMarks = localStorage.getItem("articleMarksId");
   let sequenceNumbers = document.getElementsByName("sequenceNumber");
+  if (articleTitle.length === 0) {
+    wrongData("articleTitle");
+    return;
+  }
   resultMap.set("title", articleTitle);
   if (articleMarks.length > 2) {
     resultMap.set("marksId",
