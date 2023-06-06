@@ -9,18 +9,26 @@ function createXMLHttpRequest() {
 }
 
 function getInfoAboutCurrentTestToUpdate() {
-  let testId = localStorage.getItem("testId");
-  if (testId === null) {
-    return;
+  let currentLogin = localStorage.getItem("login")
+  let currentRole = localStorage.getItem("role");
+  if (currentLogin === null) {
+    document.location = '../user/logIn.html'
+  } else if (!(currentRole === "USER" || currentRole === "PREMIUM_USER")) {
+    document.location = '../error/forbidden.html'
+  } else {
+    let testId = localStorage.getItem("testId");
+    if (testId === null) {
+      return;
+    }
+    const url = "http://localhost:8080/test/update/" + testId;
+    createXMLHttpRequest();
+    let user = '{"login":"' + currentLogin + '}';
+    xmlHttp.open("GET", url, false);
+    xmlHttp.onreadystatechange = handleStateChangeGetTestToUpdate;
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
+    xmlHttp.send();
   }
-  const url = "http://localhost:8080/test/update/" + testId;
-  createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
-  xmlHttp.open("GET", url, false);
-  xmlHttp.onreadystatechange = handleStateChangeGetTestToUpdate;
-  xmlHttp.setRequestHeader("Content-Type", "application/json");
-  xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
-  xmlHttp.send();
 }
 
 function handleStateChangeGetTestToUpdate() {
@@ -28,7 +36,7 @@ function handleStateChangeGetTestToUpdate() {
     if (xmlHttp.status == 200) {
       jsonToHTMLGetTestToUpdate(xmlHttp.responseText);
     } else {
-
+      document.location = '../error/forbidden.html'
     }
   }
 }
@@ -56,14 +64,16 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
         + "        <h6>Питання: </h6>"
         + "        <input name='question' type='text' value='" + questionId
         + "' hidden> "
-        + "        <textarea id='questionText"+questionId+"' style='width: 85%' class=\"form-control input_info\" placeholder=\"Question\">"
+        + "        <textarea id='questionText" + questionId
+        + "' style='width: 85%' class=\"form-control input_info\" placeholder=\"Question\">"
         + questionText + "</textarea>\n"
         + "        <button onclick='deleteQuestionBlock(" + questionId
         + ")' class=\"btn btn-danger\" style=\"height: 40px; float: right; margin-top: -40px;\">\n"
         + "          Видалити\n"
         + "        </button>\n"
         + "        <div style=\"margin-top: 10px; margin-left: 5px;\">\n"
-        + "          <div onclick='checkOneAnswer("+questionId+")' class=\"custom-control custom-radio custom-control-inline\">\n"
+        + "          <div onclick='checkOneAnswer(" + questionId
+        + ")' class=\"custom-control custom-radio custom-control-inline\">\n"
         + "            <input type=\"radio\" id=\"customRadioOne" + questionId
         + "\" name=\"customRadio" + questionId
         + "\" class=\"custom-control-input\"\n";
@@ -75,7 +85,8 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
         + "            <label class=\"custom-control-label\" for=\"customRadioOne"
         + questionId + "\">Один варіант відповіді</label>\n"
         + "          </div>\n"
-        + "          <div onclick='checkSeveralAnswers("+questionId+")' class=\"custom-control custom-radio custom-control-inline\">\n"
+        + "          <div onclick='checkSeveralAnswers(" + questionId
+        + ")' class=\"custom-control custom-radio custom-control-inline\">\n"
         + "            <input type=\"radio\" id=\"customRadioSeveral"
         + questionId + "\" name=\"customRadio" + questionId
         + "\" class=\"custom-control-input\"";
@@ -108,12 +119,14 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
           + "              <h6>Варіант відповіді:</h6>\n"
           + "              <div>\n"
           + "                <p>Текст варіанту відповіді:</p>\n"
-          + "                <textarea id='answerText"+answerId+"' class=\"form-control input_info\" placeholder=\"Answer\"> "
+          + "                <textarea id='answerText" + answerId
+          + "' class=\"form-control input_info\" placeholder=\"Answer\"> "
           + answerText + "</textarea>\n"
           + "              </div>\n"
           + "              <div class=\"row\" style=\"margin-top: 20px; margin-left: 10px;\">\n"
           + "                <p>Оцінка: </p>\n"
-          + "                <input id='answerMark"+answerId+"' class=\"form-control input_info\" min=\"0\" type=\"number\" value=\""
+          + "                <input id='answerMark" + answerId
+          + "' class=\"form-control input_info\" min=\"0\" type=\"number\" value=\""
           + answerMark + "\"\n"
           + "                       style=\"width: 100px; margin-left: 20px; margin-top: -10px;\">\n"
           + "              </div>\n"
@@ -130,8 +143,10 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
     }
 
     innerHtml += "\n"
-        + "          <div id='addAnswerBlockButton"+questionId+"' style=\"margin-top: 20px;\">\n"
-        + "            <button onclick='addAnswerBlock("+questionId+")' class=\"btn btn-dark\">Додати варіант відповіді</button>\n"
+        + "          <div id='addAnswerBlockButton" + questionId
+        + "' style=\"margin-top: 20px;\">\n"
+        + "            <button onclick='addAnswerBlock(" + questionId
+        + ")' class=\"btn btn-dark\">Додати варіант відповіді</button>\n"
         + "          </div>\n"
         + "        </div>\n"
         + "        <!-- Кінець  варіантів відповідей -->\n"

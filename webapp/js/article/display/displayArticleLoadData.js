@@ -10,14 +10,18 @@ function createXMLHttpRequest() {
 
 function getInfoAboutCurrentDisplayedArticle() {
   let articleId = localStorage.getItem("articleId");
-  const url = "http://localhost:8080/articles/" + articleId;
-  createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
-  xmlHttp.open("GET", url, false);
-  xmlHttp.onreadystatechange = handleStateChangeDisplay;
-  xmlHttp.setRequestHeader("Content-Type", "application/json");
-  xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
-  xmlHttp.send();
+  if (articleId === null) {
+    document.location = "../error/notFound.html"
+  } else {
+    const url = "http://localhost:8080/articles/" + articleId;
+    createXMLHttpRequest();
+    let user = '{"login":"' + localStorage.getItem("login") + '}';
+    xmlHttp.open("GET", url, false);
+    xmlHttp.onreadystatechange = handleStateChangeDisplay;
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
+    xmlHttp.send();
+  }
 }
 
 function setTypeQuestionDisplay() {

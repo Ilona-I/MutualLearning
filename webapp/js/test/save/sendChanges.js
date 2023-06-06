@@ -50,12 +50,13 @@ function sendTestChanges() {
   xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
   xmlHttp.send(json);
 }
+
 function handleStateChangeSaveTest() {
   if (xmlHttp.readyState == 4) {
     if (xmlHttp.status == 200) {
        document.location="../article/article.html";
     } else {
-      //document.location = "../html/error.html";
+      document.location = "../error/error.html";
     }
   }
 }

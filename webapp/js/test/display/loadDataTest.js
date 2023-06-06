@@ -9,17 +9,23 @@ function createXMLHttpRequest() {
 }
 
 function getInfoAboutCurrentTest() {
-  localStorage.setItem("testId", "1");
-  let testId = localStorage.getItem("testId");
-  const url = "http://localhost:8080/test/" + testId;
-  createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
-  xmlHttp.open("GET", url, false);
-  xmlHttp.onreadystatechange = handleStateChangeGetTest;
-  xmlHttp.setRequestHeader("Content-Type", "application/json");
-  xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
-  xmlHttp.send();
-
+  let currentLogin = localStorage.getItem("login")
+  let currentRole = localStorage.getItem("role");
+  if (currentLogin === null) {
+    document.location = '../user/logIn.html'
+  } else if (!(currentRole === "USER" || currentRole === "PREMIUM_USER")) {
+    document.location = '../error/forbidden.html'
+  } else {
+    let testId = localStorage.getItem("testId");
+    const url = "http://localhost:8080/test/" + testId;
+    createXMLHttpRequest();
+    let user = '{"login":"' + currentLogin + '}';
+    xmlHttp.open("GET", url, false);
+    xmlHttp.onreadystatechange = handleStateChangeGetTest;
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
+    xmlHttp.send();
+  }
 }
 
 function handleStateChangeGetTest() {
@@ -27,7 +33,7 @@ function handleStateChangeGetTest() {
     if (xmlHttp.status == 200) {
       jsonToHTMLGetTest(xmlHttp.responseText);
     } else {
-
+      document.location = '../error/forbidden.html'
     }
   }
 }
