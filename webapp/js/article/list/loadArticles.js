@@ -26,7 +26,7 @@ function handleStateChangeArticles() {
     if (xmlHttp.status == 200) {
       jsonArticlesToHTML(xmlHttp.responseText);
     } else {
-       document.location = "../error/error.html";
+      document.location = "../error/error.html";
     }
   }
 }
@@ -64,7 +64,8 @@ function getArticle(dataMap) {
     innerHtml += " <div id='articleBlock" + dataMap.get("id")
         + "' class=\"article_block_question\" style=\"padding: 10px 20px; margin-top: 10px;\" >\n"
         + membersHtml
-        + "    <h4 style='margin-top: -10px;' id=\"articleTitle" + dataMap.get("id") + "\">" + dataMap.get(
+        + "    <h4 style='margin-top: -10px;' id=\"articleTitle" + dataMap.get(
+            "id") + "\">" + dataMap.get(
             "title") + "</h4>\n"
         + "    <p id=\"articleDateTime" + dataMap.get("id")
         + "\" class=\"datetime_text\" style=\"margin-top: -40px;\">"
@@ -78,7 +79,7 @@ function getArticle(dataMap) {
     innerHtml += "<div> <button "
         + "style='padding-top:0; padding-bottom: 1px; height: 30px; background-color: transparent; border-style: solid; border-width: 1px; border-color: #95E06C; color:#95E06C;' "
         + "onclick='answerTheQuestion(\""
-        + dataMap.get("id")+"\", \""+getQuestionCreator(members)
+        + dataMap.get("id") + "\", \"" + getQuestionCreator(members)
         + "\")' class='btn'>Написати відповідь на питання</button></div>";
   } else {
     innerHtml += " <div id='articleBlock" + dataMap.get("id")
@@ -87,7 +88,8 @@ function getArticle(dataMap) {
         + "    <a onmouseover='selectLink(\"articleTitle" + dataMap.get("id")
         + "\")' onmouseout='unselectLink(\"articleTitle" + dataMap.get("id")
         + "\")'onclick='goToTheArticle(" + dataMap.get("id")
-        + ")'><h4 style='margin-top: -10px;'  id=\"articleTitle" + dataMap.get("id") + "\">" + dataMap.get(
+        + ")'><h4 style='margin-top: -10px;'  id=\"articleTitle" + dataMap.get(
+            "id") + "\">" + dataMap.get(
             "title") + "</h4></a>\n"
         + "    <p id=\"articleDateTime" + dataMap.get("id")
         + "\" class=\"datetime_text\" style=\"margin-top: -40px;\">"
@@ -104,8 +106,9 @@ function getArticle(dataMap) {
 }
 
 function manageOwnerBlock() {
-  let user = localStorage.getItem("userLogin");
-  if (user === null) {
+  let userRole = localStorage.getItem("role");
+  if (userRole === null || !(userRole === "USER" || userRole
+      === "PREMIUM_USER")) {
     document.getElementById("blockOwner").remove();
   }
 }
@@ -132,17 +135,17 @@ function setFilter() {
   loadArticles();
 }
 
-function getQuestionCreator(members){
+function getQuestionCreator(members) {
   for (const element of members) {
     let member = JSON.parse(JSON.stringify(element));
     let memberMap = new Map(Object.entries(member));
     let login = memberMap.get("login");
     let role = memberMap.get("articleRole");
-    if(role === "QUESTION_CREATOR"){
+    if (role === "QUESTION_CREATOR") {
       return login;
     }
   }
- return "";
+  return "";
 }
 
 function getMembers(members) {
@@ -166,27 +169,30 @@ function getMembers(members) {
       innerHtml += " color: dodgerblue;  border-color: dodgerblue; \" "
     }
     innerHtml += "\" data-toggle=\"modal\"\n"
-        + "                  data-target=\"#exampleModalScrollable"+id+"\">\n";
+        + "                  data-target=\"#exampleModalScrollable" + id
+        + "\">\n";
     if (name !== null && name.trim() !== "") {
-      innerHtml += name +" (#"+login+")";
+      innerHtml += name + " (#" + login + ")";
     } else {
-      innerHtml += "#"+login;
+      innerHtml += "#" + login;
     }
     innerHtml += "          </button>\n"
         + "\n"
-        + "          <div class=\"modal fade\" id=\"exampleModalScrollable"+id+"\" tabindex=\"-1\" role=\"dialog\"\n"
+        + "          <div class=\"modal fade\" id=\"exampleModalScrollable" + id
+        + "\" tabindex=\"-1\" role=\"dialog\"\n"
         + "               aria-labelledby=\"exampleModalScrollableTitle\" aria-hidden=\"true\">\n"
         + "            <div class=\"modal-dialog modal-dialog-scrollable\" role=\"document\">\n"
         + "              <div class=\"modal-content\">\n"
         + "                <div class=\"modal-header\">\n"
-        + "                  <h5 class=\"modal-title\" id=\"exampleModalScrollableTitle"+id+"\">";
+        + "                  <h5 class=\"modal-title\" id=\"exampleModalScrollableTitle"
+        + id + "\">";
 
     if (name !== null && name.trim() !== "") {
       innerHtml += name;
     } else {
       innerHtml += login;
     }
-    innerHtml +=  " </h5><span style=\"margin-left: 20px;\" class=\"badge ";
+    innerHtml += " </h5><span style=\"margin-left: 20px;\" class=\"badge ";
     if (role === "ARTICLE_CREATOR") {
       innerHtml += " badge-success\">Творець статті "
     } else if (role === "QUESTION_CREATOR") {
@@ -214,6 +220,6 @@ function getMembers(members) {
         + "        </div>\n"
   }
   innerHtml += "</div><hr>";
-return innerHtml;
+  return innerHtml;
 }
 

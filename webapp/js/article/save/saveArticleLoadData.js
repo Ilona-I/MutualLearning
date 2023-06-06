@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
   getInfoAboutCurrentArticle()
 });
 
-window.addEventListener('beforeunload', function (e) {
+window.addEventListener('beforeunload', function beforeunload(e) {
   e.preventDefault();
   e.returnValue = '';
 });

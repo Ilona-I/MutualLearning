@@ -9,6 +9,10 @@ body {
   background-color: rgb(252, 255, 235);
 }
 
+.nbvm{
+
+color: #ff7b7b;
+}
 #menu {
   position: fixed; /* Make it stick/fixed */
   top: 0; /* Stay on top */

@@ -122,7 +122,7 @@ function setArticleBody(articleParts) {
     let partId = partMap.get("id");
     let sequenceNumber = partMap.get("sequenceNumber");
     let partType = partMap.get("type");
-    innerHTML += "<div id='articleBlock" + partId + "'>"
+    innerHTML += "<div onclick='cleanWrongData(\"articleBlock" + partId + "\")' id='articleBlock" + partId + "'>"
         + "<input type='number' "
         + "      name='sequenceNumber'"
         + "      id='sequenceNumber" + partId + "' "

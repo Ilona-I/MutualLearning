@@ -83,7 +83,7 @@ function addNewBlock(blockContent, partId, sequenceNumberValue, type, id) {
       setNewSequenceNumber(mainId, (elementValue + 1), (size + 1));
     } else if (elementValue === sequenceNumberValue) {
       isUsed = true;
-      codeAfter += "<div id='articleBlock" + id + "'>\n"
+      codeAfter += "<div onclick='cleanWrongData(\"articleBlock" + id + "\")' id='articleBlock" + id + "'>\n"
           + "<input type='number' "
           + "      name='sequenceNumber'"
           + "      id='sequenceNumber" + id + "' "

@@ -20,7 +20,6 @@ function sendArticleChanges() {
     if (localStorage.getItem("isQuestionAnswer") === "true") {
       articleType = "QUESTION_ANSWER";
     } else {
-
       articleType = "ARTICLE";
       let articleParts = [];
       for (const element of sequenceNumbers) {
@@ -36,7 +35,12 @@ function sendArticleChanges() {
         let newOld = document.getElementById("newOld" + elementId).value;
         if (type === "TEXT" || type === "text") {
           if (newOld === "new") {
-            text = document.getElementById("newTextType" + elementId).value;
+            text = document.getElementById(
+                "newTextType" + elementId).value.trim();
+            if (text.length === 0) {
+              wrongData("articleBlock" + elementId);
+              return;
+            }
           } else {
             let prevBlock = document.getElementById("prevBlock" + elementId);
             if (prevBlock.hidden === false) {
@@ -44,12 +48,21 @@ function sendArticleChanges() {
                   "displayTextType" + elementId).innerHTML;
             } else {
               text = document.getElementById(
-                  "editTextType" + elementId).value;
+                  "editTextType" + elementId).value.trim();
+              if (text.length === 0) {
+                wrongData("articleBlock" + elementId);
+                return;
+              }
             }
           }
         } else if (type === "CODE" || type === "code") {
           if (newOld === "new") {
-            text = document.getElementById("newCodeType" + elementId).value;
+            text = document.getElementById(
+                "newCodeType" + elementId).value.trim();
+            if (text.length === 0) {
+              wrongData("articleBlock" + elementId);
+              return;
+            }
           } else if (newOld === "old") {
             let prevBlock = document.getElementById("prevBlock" + elementId);
             if (prevBlock.hidden === false) {
@@ -57,7 +70,11 @@ function sendArticleChanges() {
                   "displayCodeType" + elementId).innerText;
             } else {
               text = document.getElementById(
-                  "editCodeType" + elementId).value;
+                  "editCodeType" + elementId).value.trim();
+              if (text.length === 0) {
+                wrongData("articleBlock" + elementId);
+                return;
+              }
             }
           }
         } else if (type === "IMAGE" || type === "image") {
@@ -65,8 +82,11 @@ function sendArticleChanges() {
             let fileInput = document.getElementById(
                 "actual-img-btn" + elementId);
             let file = fileInput.files[0];
-            if (file !== null) {
+            if (file !== null && file !== undefined) {
               link = file.name;
+            } else {
+              wrongData("articleBlock" + elementId);
+              return;
             }
           } else if (newOld === "old") {
             let prevBlock = document.getElementById("prevBlock" + elementId);
@@ -77,7 +97,7 @@ function sendArticleChanges() {
               let fileInput = document.getElementById(
                   "actual-img-btn" + elementId);
               let file = fileInput.files[0];
-              if (file !== null) {
+              if (file !== null && file !== undefined) {
                 link = file.name;
               }
             }
@@ -87,31 +107,57 @@ function sendArticleChanges() {
             text = document.getElementById("newFileTypeText" + elementId).value;
             let fileInput = document.getElementById("file" + elementId);
             let file = fileInput.files[0];
-            if (file !== null) {
+            if (file !== null && file !== undefined) {
               link = file.name;
+            } else {
+              wrongData("articleBlock" + elementId);
+              return;
             }
+            if (text.length === 0) {
+              wrongData("articleBlock" + elementId);
+              return;
+            }
+
           } else if (newOld === "old") {
             let prevBlock = document.getElementById("prevBlock" + elementId);
             if (prevBlock.hidden === false) {
               text = document.getElementById(
-                  "displayFileType" + elementId).innerText;
+                  "displayFileType" + elementId).innerText.trim();
+              ;
               link = document.getElementById(
-                  "displayFileTypeLink" + elementId).value;
+                  "displayFileTypeLink" + elementId).value.trim();
+              ;
             } else {
               text = document.getElementById(
                   "editFileTypeTitle" + elementId).value;
               let fileInput = document.getElementById("file" + elementId);
               let file = fileInput.files[0];
-              if (file !== null) {
+              if (file !== null && file !== undefined) {
                 link = file.name;
+              } else {
+                link = document.getElementById(
+                    "displayFileTypeLink" + elementId).value.trim();
+              }
+              if (text.length === 0) {
+                wrongData("articleBlock" + elementId);
+                return;
               }
             }
           }
         } else if (type === "LINK" || type === "link") {
           if (newOld === "new") {
             text = document.getElementById(
-                "newLinkTypeTitle" + elementId).value;
-            link = document.getElementById("newLinkTypeLink" + elementId).value;
+                "newLinkTypeTitle" + elementId).value.trim();
+            link = document.getElementById(
+                "newLinkTypeLink" + elementId).value.trim();
+            if (text.length === 0) {
+              wrongData("articleBlock" + elementId);
+              return;
+            }
+            if (link.length === 0) {
+              wrongData("articleBlock" + elementId);
+              return;
+            }
           } else if (newOld === "old") {
             let prevBlock = document.getElementById("prevBlock" + elementId);
             if (prevBlock.hidden === false) {
@@ -120,9 +166,17 @@ function sendArticleChanges() {
               link = el.href;
             } else {
               text = document.getElementById(
-                  "editLinkTypeTitle" + elementId).value;
+                  "editLinkTypeTitle" + elementId).value.trim();
               link = document.getElementById(
-                  "editLinkTypeLink" + elementId).value;
+                  "editLinkTypeLink" + elementId).value.trim();
+              if (text.length === 0) {
+                wrongData("articleBlock" + elementId);
+                return;
+              }
+              if (link.length === 0) {
+                wrongData("articleBlock" + elementId);
+                return;
+              }
             }
           }
         }
@@ -164,7 +218,6 @@ function handleStateChangeSaveArticle() {
     if (xmlHttp.status == 200) {
       jsonToHTMLSaveArticle(xmlHttp.responseText);
     } else {
-      //document.location = "../html/error.html";
     }
   }
 }
@@ -199,4 +252,17 @@ function jsonToHTMLSaveArticle(jsonString) {
   }
 
   document.location = "article.html"
+}
+
+function wrongData(id) {
+  document.getElementById("myDialog").showModal();
+  document.getElementById(id).style.backgroundColor = "#ffc5c5";
+}
+
+function closeDialog() {
+  document.getElementById("myDialog").close()
+}
+
+function cleanWrongData(id) {
+  document.getElementById(id).style.backgroundColor = "white";
 }
