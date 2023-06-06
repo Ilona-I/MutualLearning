@@ -24,8 +24,12 @@ function getInfoAboutCurrentDisplayedArticle() {
   }
 }
 
-function setTypeQuestionDisplay() {
+function removeTestsBlock() {
   document.getElementById("testsBlock").remove();
+}
+
+function removeGiveAnswerButton(){
+  document.getElementById("giveAnswer").remove();
 }
 
 function handleStateChangeDisplay() {
@@ -62,8 +66,11 @@ function jsonToHTMLDisplay(jsonString) {
   document.getElementById("title").innerText = title.toString();
   setMarksDisplay(marks);
 
-  if (type === "QUESTION") {
-    setTypeQuestionDisplay();
+  if (type === "QUESTION" || type === "ANSWERED_QUESTION") {
+    removeTestsBlock();
+  }
+  if (type === "ARTICLE" || type === "ANSWERED_QUESTION") {
+    removeGiveAnswerButton();
   }
   let articleParts = dataMap.get("articleParts");
   setArticleBodyDisplay(articleParts);
@@ -88,12 +95,12 @@ function getTests(tests) {
 }
 
 function goToTheTest(id) {
-  localStorage.setItem("currentTest", id.toString());
+  localStorage.setItem("testId", id.toString());
   document.location = "../test/testInfo.html";
 }
 
 function getMembers(members) {
-  let currentUserLogin = localStorage.getItem("userLogin");
+  let currentUserLogin = localStorage.getItem("login");
   let innerHtml = "<div>";
   for (const element of members) {
     let id = getRandomInt();
@@ -106,7 +113,7 @@ function getMembers(members) {
     if (currentUserLogin === login) {
       let editArticleButton = document.getElementById("editArticleButton");
       if (editArticleButton !== null) {
-        let button = "<button class='btn btn-light' style='margin-bottom: 10px;' onclick='goToEditArticle()'>Редагувати</button>"
+        let button = "<button class='btn btn-light' style='margin-bottom: 20px; width: 100%;' onclick='goToEditArticle()'>Редагувати</button>"
         editArticleButton.innerHTML = button;
       }
     }

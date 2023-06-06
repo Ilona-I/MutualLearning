@@ -26,7 +26,7 @@ function handleStateChangeArticles() {
     if (xmlHttp.status == 200) {
       jsonArticlesToHTML(xmlHttp.responseText);
     } else {
-      // document.location = "../html/error.html";
+       document.location = "../error/error.html";
     }
   }
 }

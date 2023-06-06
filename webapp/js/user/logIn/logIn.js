@@ -54,9 +54,10 @@ function setUser(jsonString) {
   let dataMap = new Map(Object.entries(jsonObject));
   let login = dataMap.get("login");
   let role = dataMap.get("role");
+  let status = dataMap.get("status");
   localStorage.setItem("login", login.toString());
   localStorage.setItem("role", role.toString());
-
+  localStorage.setItem("status", status.toString());
 }
 
 function setWrongLogInData(wrongData) {

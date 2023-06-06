@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserLoginRoleResponse {
+public class UserLoginRoleStatusResponse {
 
     private String login;
     private String role;
+    private String status;
 }

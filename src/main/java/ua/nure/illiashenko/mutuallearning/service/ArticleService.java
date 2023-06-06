@@ -185,11 +185,13 @@ public class ArticleService {
         Set<String> types = new HashSet<>();
         if (QUESTION.equalsIgnoreCase(articleType)) {
             types.add(QUESTION);
+            types.add(ANSWERED_QUESTION);
         } else if (ARTICLE.equalsIgnoreCase(articleType)) {
             types.add(ARTICLE);
         } else {
             types.add(QUESTION);
             types.add(ARTICLE);
+            types.add(ANSWERED_QUESTION);
         }
         return types;
     }

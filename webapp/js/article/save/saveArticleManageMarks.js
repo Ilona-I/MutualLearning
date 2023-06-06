@@ -188,7 +188,8 @@ function setDefaultFilters() {
 }
 
 function isArticleMark(markId) {
-  return localStorage.getItem("articleMarksId").includes(markId);
+  let articleMarksId = localStorage.getItem("articleMarksId");
+  return articleMarksId!==null?articleMarksId.includes(markId):false;
 }
 
 function createMark() {

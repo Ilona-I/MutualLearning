@@ -79,37 +79,68 @@
 </nav>
 <!-- Кінець роботи з меню -->
 
-<div>
-
-
+<div class="row" style="margin-left: 20px;">
   <div class="profile_block">
-    <div class="inner_block_left">
+    <div id="profile" class="inner_block_left">
       <div class="row" style="margin-left: 0px;">
         <h3>Profile</h3>
-        <button class="btn"
+        <button onclick="updateProfile()" class="btn"
                 style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
           Зберегти зміни
         </button>
-        <button class="btn"
+        <button onclick="displayBlock('passwordBlock')" class="btn"
                 style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #094D92; color: white">
           Змінити пароль
         </button>
       </div>
-      <h6>Login:</h6>
-      <h6>Level: новачок</h6>
-      <h6>Тип акаунту: звичайний/преміум</h6>
-      <input type="text" class="form-control input_info" style="width: 350px;"
+      <p id="blocked" style="color: darkred"></p>
+      <h6>Login:<span id="login"></span></h6>
+      <div id="type">
+        <h6>Тип акаунту: <span id="role"></span></h6>
+      </div>
+
+      <input id="name" type="text" class="form-control input_info" style="width: 350px;"
              placeholder="Full name or nickname">
 
+      <input id="email" type="email" class="form-control input_info" style="width: 350px;"
+             placeholder="E-mail" onkeyup="cleanWrongData('wrongEmail')">
+      <p id="wrongEmail" style="color: darkred; font-size: small;"></p>
 
-      <input type="email" class="form-control input_info" style="width: 350px;"
-             placeholder="E-mail">
+      <textarea id="info" class="form-control input_info" placeholder="Info"></textarea>
 
-      <textarea class="form-control input_info" placeholder="Info"></textarea>
+    </div>
+  </div>
+  <div id="passwordBlock" class="profile_block" hidden>
+    <h5>Зміна паролю</h5>
+    <input id="currentPassword" type="password" class="form-control input_info" placeholder="Password" onkeyup="cleanWrongData('wrongCurrentPassword')">
+    <div style="width: 100%; text-align: left">
+      <p id="wrongCurrentPassword" style="color: darkred; font-size: small;"></p>
+    </div>
+    <input id="newPassword" type="password" class="form-control input_info" placeholder="Password" onkeyup="cleanWrongData('wrongNewPassword')">
+    <div style="width: 100%; text-align: left">
+      <p id="wrongNewPassword" style="color: darkred; font-size: small;"></p>
+    </div>
 
+    <input id="repeatedPassword" type="password" class="form-control input_info" placeholder="Repeat password" onkeyup="cleanWrongData('wrongRepeatedPassword')">
+    <div style="width: 100%; text-align: left">
+      <p id="wrongRepeatedPassword" style="color: darkred; font-size: small;"></p>
+    </div>
+    <div>
+      <button onclick="updatePassword()" class="btn"
+              style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #094D92; color: white">
+        Змінити пароль
+      </button>
+      <button onclick="hideBlock('passwordBlock')" class="btn"
+              style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #8f8c8c; color: white">
+        Скасувати
+      </button>
     </div>
   </div>
 </div>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/user/profile/loadProfile.js"></script>
+<script src="../../js/user/profile/sendProfileChanges.js"></script>
+<script src="../../js/user/profile/updatePassword.js"></script>
+<script src="../../js/util/util.js"></script>
 </body>
 </html>

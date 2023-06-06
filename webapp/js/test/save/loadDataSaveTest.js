@@ -11,9 +11,10 @@ function createXMLHttpRequest() {
 function getInfoAboutCurrentTestToUpdate() {
   let currentLogin = localStorage.getItem("login")
   let currentRole = localStorage.getItem("role");
+  let currentStatus = localStorage.getItem("status");
   if (currentLogin === null) {
     document.location = '../user/logIn.html'
-  } else if (!(currentRole === "USER" || currentRole === "PREMIUM_USER")) {
+  } else if (!(currentRole === "USER" || currentRole === "PREMIUM_USER")|| currentStatus !== "ACTIVE") {
     document.location = '../error/forbidden.html'
   } else {
     let testId = localStorage.getItem("testId");

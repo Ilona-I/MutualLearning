@@ -11,9 +11,11 @@ function createXMLHttpRequest() {
 function getInfoAboutCurrentArticle() {
   let currentLogin = localStorage.getItem("login")
   let currentRole = localStorage.getItem("role");
-  if(currentLogin===null){
-    document.location='../user/logIn.html'
-  } else if(!(currentRole==="USER"||currentRole==="PREMIUM_USER")) {
+  let currentStatus = localStorage.getItem("status");
+  if (currentLogin === null) {
+    document.location = '../user/logIn.html'
+  } else if (!(currentRole === "USER" || currentRole === "PREMIUM_USER")
+      || currentStatus !== "ACTIVE") {
     document.location = '../error/forbidden.html'
   } else {
     let articleId = localStorage.getItem("articleId");
@@ -68,7 +70,7 @@ function handleStateChange() {
     if (xmlHttp.status == 200) {
       jsonToHTML(xmlHttp.responseText);
     } else {
-        document.location = '../error/forbidden.html'
+      document.location = '../error/forbidden.html'
     }
   }
 }
@@ -82,8 +84,9 @@ function jsonToHTML(jsonString) {
   document.getElementById("articleTitle").innerText = title.toString();
   setMarks(marks);
   if (type === "QUESTION") {
-    document.getElementById("displayMessage").innerText = "Надання відповіді на запитання";
-    document.getElementById("articleTitle").setAttribute("readonly","");
+    document.getElementById(
+        "displayMessage").innerText = "Надання відповіді на запитання";
+    document.getElementById("articleTitle").setAttribute("readonly", "");
     document.getElementById("articleTypeQuestionCheckbox").checked = true;
   } else {
     document.getElementById("displayMessage").innerText = "Створення статті";
