@@ -44,7 +44,7 @@ function sendTestChanges() {
     createXMLHttpRequest();
     xmlHttp.open("POST", url, false);
   }
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.onreadystatechange = handleStateChangeSaveTest;
   xmlHttp.setRequestHeader("Content-Type", "application/json");
   xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));

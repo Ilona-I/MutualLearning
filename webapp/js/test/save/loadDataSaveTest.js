@@ -23,7 +23,7 @@ function getInfoAboutCurrentTestToUpdate() {
     }
     const url = "http://localhost:8080/test/update/" + testId;
     createXMLHttpRequest();
-    let user = '{"login":"' + currentLogin + '}';
+    let user = '{"login":"' + currentLogin + '"}';
     xmlHttp.open("GET", url, false);
     xmlHttp.onreadystatechange = handleStateChangeGetTestToUpdate;
     xmlHttp.setRequestHeader("Content-Type", "application/json");

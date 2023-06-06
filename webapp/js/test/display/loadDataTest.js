@@ -20,7 +20,7 @@ function getInfoAboutCurrentTest() {
     let testId = localStorage.getItem("testId");
     const url = "http://localhost:8080/test/" + testId;
     createXMLHttpRequest();
-    let user = '{"login":"' + currentLogin + '}';
+    let user = '{"login":"' + currentLogin + '"}';
     xmlHttp.open("GET", url, false);
     xmlHttp.onreadystatechange = handleStateChangeGetTest;
     xmlHttp.setRequestHeader("Content-Type", "application/json");

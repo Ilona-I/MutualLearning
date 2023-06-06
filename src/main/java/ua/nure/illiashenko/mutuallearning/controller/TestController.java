@@ -33,18 +33,24 @@ public class TestController {
     private JsonParser jsonParser;
 
     @PostMapping("/create/{id}")
-    public void createTest(@PathVariable int id, @RequestBody SaveTestRequest saveTestRequest) {
-        testService.createTest(id, saveTestRequest);
+    public void createTest(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+        @PathVariable int id, @RequestBody SaveTestRequest saveTestRequest) {
+        final String login = jsonParser.getLoginFromJsonString(authorization);
+        testService.createTest(login, id, saveTestRequest);
     }
 
     @PutMapping("/{id}")
-    public void editTest(@PathVariable int id, @RequestBody SaveTestRequest saveTestRequest) {
-        testService.editTest(id, saveTestRequest);
+    public void editTest(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+        @PathVariable int id, @RequestBody SaveTestRequest saveTestRequest) {
+        final String login = jsonParser.getLoginFromJsonString(authorization);
+        testService.editTest(login, id, saveTestRequest);
     }
 
     @GetMapping("/update/{id}")
-    public TestToUpdateResponse getTestToUpdate(@PathVariable int id) {
-        return testService.getTestToUpdate(id);
+    public TestToUpdateResponse getTestToUpdate(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+        @PathVariable int id) {
+        final String login = jsonParser.getLoginFromJsonString(authorization);
+        return testService.getTestToUpdate(login, id);
     }
 
     @GetMapping("/info/{id}")
@@ -68,7 +74,9 @@ public class TestController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTest(@PathVariable int id) {
-        testService.deleteTest(id);
+    public void deleteTest(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+        @PathVariable int id) {
+        final String login = jsonParser.getLoginFromJsonString(authorization);
+        testService.deleteTest(login, id);
     }
 }

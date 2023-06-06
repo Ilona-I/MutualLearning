@@ -15,7 +15,7 @@ function getInfoAboutCurrentDisplayedArticle() {
   } else {
     const url = "http://localhost:8080/articles/" + articleId;
     createXMLHttpRequest();
-    let user = '{"login":"' + localStorage.getItem("login") + '}';
+    let user = '{"login":"' + localStorage.getItem("login") + '"}';
     xmlHttp.open("GET", url, false);
     xmlHttp.onreadystatechange = handleStateChangeDisplay;
     xmlHttp.setRequestHeader("Content-Type", "application/json");

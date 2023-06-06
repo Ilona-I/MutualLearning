@@ -13,7 +13,7 @@ function addAnswerBlock(questionId){
       + "              </div>\n"
       + "              <div class=\"row\" style=\"margin-top: 20px; margin-left: 10px;\">\n"
       + "                <p>Оцінка: </p>\n"
-      + "                <input id='answerMark"+answerId+"' class=\"form-control input_info\" min=\"0\" type=\"number\" value=\"\"\n"
+      + "                <input id='answerMark"+answerId+"' class=\"form-control input_info\" min=\"0\" type=\"number\" value=\"0\"\n"
       + "                       style=\"width: 100px; margin-left: 20px; margin-top: -10px;\">\n"
       + "              </div>\n"
       + "\n"

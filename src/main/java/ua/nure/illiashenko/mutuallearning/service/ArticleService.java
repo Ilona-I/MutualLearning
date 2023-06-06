@@ -129,10 +129,8 @@ public class ArticleService {
         final MarkResponse[] markResponses = getMarkResponses(id);
         articleResponse.setArticleParts(articlePartResponses);
         articleResponse.setMarks(markResponses);
-        final UserArticle userArticle = userArticleRepository.findByUserLoginAndArticleId(login, id);
-        if (userArticle != null) {
-            articleResponse.setReaction(userArticle.getReaction());
-        }
+        final Optional<UserArticle> userArticle = userArticleRepository.findByUserLoginAndArticleId(login, id);
+        userArticle.ifPresent(value -> articleResponse.setReaction(value.getReaction()));
         articleResponse.setMembers(getMembers(article).toArray(Member[]::new));
         articleResponse.setTests(getArticleTestTitles(id));
         return articleResponse;
@@ -171,11 +169,9 @@ public class ArticleService {
 
             articleListElement.setMarks(getMarkResponses(article).toArray(MarkResponse[]::new));
             articleListElement.setMembers(getMembers(article).toArray(Member[]::new));
-            final UserArticle userArticle = userArticleRepository
+            final Optional<UserArticle> userArticle = userArticleRepository
                 .findByUserLoginAndArticleId(login, article.getId());
-            if (userArticle != null) {
-                articleListElement.setReaction(userArticle.getReaction());
-            }
+            userArticle.ifPresent(value -> articleListElement.setReaction(value.getReaction()));
             responses.add(articleListElement);
         }
         return responses;
@@ -296,7 +292,7 @@ public class ArticleService {
 
     private List<ArticleFileLinksResponse> updateArticleParts(Article article,
         ArticleRequest articleRequest) {
-        List<ArticlePart> newArticleParts = Arrays.asList(articleRequest.getArticleParts()).stream()
+        List<ArticlePart> newArticleParts = Arrays.stream(articleRequest.getArticleParts())
             .map(articlePartRequest -> {
                 ArticlePart articlePart = articlePartMapper.mapArticlePartRequestToArticlePart(articlePartRequest);
                 articlePart.setArticleId(article.getId());

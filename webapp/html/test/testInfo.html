@@ -101,7 +101,7 @@
       </table>
     </div>
 
-    <button class="btn btn-dark">Розпочати спробу</button>
+    <button onclick="goToTest()" class="btn btn-dark">Розпочати спробу</button>
 
 
     <hr>
@@ -114,7 +114,7 @@
       </div>
 
 
-      <button class="btn btn-dark" style="margin-top: 30px;">Редагувати тест</button>
+      <button onclick="goToEditTest()" class="btn btn-dark" style="margin-top: 30px;">Редагувати тест</button>
       <!-- Початок кнопки видалення тесту -->
       <div>
         <button type="button" class="btn btn-danger" style=" margin-top: 10px;" data-toggle="modal"
@@ -137,7 +137,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button onclick="deleteTest()" type="button" class="btn btn-danger">Видалити</button>
               </div>
             </div>
           </div>
@@ -153,6 +153,7 @@
 
 
 <script src="../../js/test/info/loadDataTestInfo.js"></script>
+<script src="../../js/test/info/deleteTest.js"></script>
 <script src="../../js/util/util.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
 </body>

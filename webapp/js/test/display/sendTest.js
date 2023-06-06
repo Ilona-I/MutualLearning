@@ -24,7 +24,7 @@ function sendTest() {
     let url = "http://localhost:8080/test/" + testId;
     createXMLHttpRequest();
     xmlHttp.open("POST", url, false);
-    let user = '{"login":"' + currentLogin + '}';
+    let user = '{"login":"' + currentLogin + '"}';
     xmlHttp.onreadystatechange = handleStateChangeCheckTest;
     xmlHttp.setRequestHeader("Content-Type", "application/json");
     xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));

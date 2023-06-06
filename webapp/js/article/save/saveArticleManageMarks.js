@@ -2,7 +2,7 @@ function getInfoAboutMarks() {
   setDefaultFilters();
   const url = "http://localhost:8080/marks";
   createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("GET", url, false);
   xmlHttp.onreadystatechange = handleStateChangeMarks;
   xmlHttp.setRequestHeader("Content-Type", "application/json");
@@ -221,7 +221,7 @@ function createMark() {
 
   const url = "http://localhost:8080/marks";
   createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("POST", url, false);
   xmlHttp.onreadystatechange = handleStateCreateMark;
   xmlHttp.setRequestHeader("Content-Type", "application/json");
@@ -303,7 +303,7 @@ function updateMark(markId, markTitle) {
   localStorage.setItem("currentUpdatedMarkTitle", markTitle);
   const url = "http://localhost:8080/marks";
   createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("PUT", url, false);
   xmlHttp.onreadystatechange = handleStateUpdateMark;
   xmlHttp.setRequestHeader("Content-Type", "application/json");
@@ -358,7 +358,7 @@ function deleteMark(markId, markTitle) {
 
   const url = "http://localhost:8080/marks/" + markId;
   createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("DELETE", url, false);
   xmlHttp.setRequestHeader("Content-Type", "application/json");
   xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));

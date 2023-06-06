@@ -12,16 +12,17 @@ function getTestInfo() {
   let currentLogin = localStorage.getItem("login")
   let currentRole = localStorage.getItem("role");
   let currentStatus = localStorage.getItem("status");
-  if(currentLogin===null){
-    document.location='../user/logIn.html'
-  } else if(!(currentRole==="USER"||currentRole==="PREMIUM_USER")|| currentStatus !== "ACTIVE") {
+  if (currentLogin === null) {
+    document.location = '../user/logIn.html'
+  } else if (!(currentRole === "USER" || currentRole === "PREMIUM_USER")
+      || currentStatus !== "ACTIVE") {
     document.location = '../error/forbidden.html'
   } else {
     let testId = localStorage.getItem("testId");
 
     const url = "http://localhost:8080/test/info/" + testId;
     createXMLHttpRequest();
-    let user = '{"login":"' + localStorage.getItem("login") + '}';
+    let user = '{"login":"' + localStorage.getItem("login") + '"}';
     xmlHttp.open("GET", url, false);
     xmlHttp.onreadystatechange = handleStateChangeGetTestInfo;
     xmlHttp.setRequestHeader("Content-Type", "application/json");
@@ -64,7 +65,8 @@ function jsonToHTMLGetTestInfo(jsonString) {
     let mark = attemptMap.get("mark");
     ownAttemptsTableBody += "    <tr>\n"
         + "        <th scope=\"row\">" + i + "</th>\n"
-        + "        <td>" + getDateTime(parseInt(dateTime.toString())) + "</td>\n"
+        + "        <td>" + getDateTime(parseInt(dateTime.toString()))
+        + "</td>\n"
 
         + "        <td>" + mark + "/" + maxMark + "</td>\n"
         + "      </tr>";
@@ -79,12 +81,13 @@ function jsonToHTMLGetTestInfo(jsonString) {
     let userAverageMark = dataMap.get("userAverageMark");
     document.getElementById("userCount").innerText = userCount.toString();
     document.getElementById(
-        "userAverageMark").innerText = userAverageMark.toString();
+        "userAverageMark").innerText = userAverageMark.toString() !== "NaN"
+        ? userAverageMark.toString() : "-";
     let usersAttemptsResponse = dataMap.get("usersAttemptsResponse");
-    if (usersAttemptsResponse === null) {
+    if (usersAttemptsResponse === null || usersAttemptsResponse.length === 0) {
       let premiumButton = "<button class='btn btn-success'>Оформити преміум для перегляду спроб користувачів</button>";
       document.getElementById("creatorInfo").innerHTML = premiumButton;
-    } else if (usersAttemptsResponse.length >= 0) {
+    } else if (usersAttemptsResponse.length > 0) {
       let table = "        <div style=\"width: 100%;\">\n"
           + "          <div class=\"row\" style=\"width: 95%; margin-left: 5px;\">\n"
           + "            <div class=\"table_border\">\n"
@@ -122,7 +125,8 @@ function jsonToHTMLGetTestInfo(jsonString) {
               + "                  <p>" + t + "</p>\n"
               + "                </div>\n"
               + "                <div class=\"table_border_body\">\n"
-              + "                  <p>" + getDateTime(parseInt(dateTime.toString()))
+              + "                  <p>" + getDateTime(
+                  parseInt(dateTime.toString()))
               + "</p>\n"
               + "                </div>\n"
               + "                <div class=\"table_border_body\">\n"
@@ -137,11 +141,19 @@ function jsonToHTMLGetTestInfo(jsonString) {
 
       }
       table += "        </div>\n"
-      document.getElementById("creatorInfo").innerHTML =table;
+      document.getElementById("creatorInfo").innerHTML = table;
     }
 
   } else {
     document.getElementById("creatorBlock").remove();
 
   }
+}
+
+function goToTest() {
+  document.location = 'test.html';
+}
+
+function goToEditTest() {
+  document.location = 'saveTest.html';
 }

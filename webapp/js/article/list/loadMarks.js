@@ -1,7 +1,7 @@
 function loadMarks(){
   const url = "http://localhost:8080/marks";
   createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("GET", url, false);
   xmlHttp.onreadystatechange = handleStateLoadMarks;
   xmlHttp.setRequestHeader("Content-Type", "application/json");

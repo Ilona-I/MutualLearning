@@ -2,7 +2,7 @@ function downloadFile(link) {
   localStorage.setItem("currentFileName", link)
   const url = "http://localhost:8080//downloadFile/" + link;
   createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("GET", url, true);
   xmlHttp.responseType = "arraybuffer";
   xmlHttp.onreadystatechange = handleStateChangeDownloadFile;
@@ -33,7 +33,7 @@ function handleStateChangeDownloadFile() {
 function downloadImage(link) {
   const url = "http://localhost:8080//downloadFile/" + link;
   createXMLHttpRequest();
-  let user = '{"login":"' + localStorage.getItem("login") + '}';
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("GET", url, true);
   xmlHttp.responseType = "arraybuffer";
   xmlHttp.onreadystatechange = handleStateChangeDownloadImage;
