@@ -19,6 +19,7 @@ public class Comment {
     private Integer id;
     @Column(name = "article_id")
     private Integer articleId;
+    private String login;
     @Column(name = "creation_date_time")
     private Timestamp creationDateTime;
     @Column(name = "last_update_date_time")

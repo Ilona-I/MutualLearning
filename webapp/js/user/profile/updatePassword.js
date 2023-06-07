@@ -73,5 +73,4 @@ function setWrongData(wrongData) {
 
 function displayBlock(id) {
   document.getElementById(id).removeAttribute("hidden");
-
 }

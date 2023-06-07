@@ -98,20 +98,8 @@
     <div id="giveAnswer" style="width: 100% ;">
       <button class="btn btn-info" style="width: 100% ;">Дати відповідь</button>
     </div>
-    <!-- Кінець тіла статті -->
-    <!-- Початок реакцій -->
     <br>
-    <!--
-    <hr>
-    <div style="float: right">
-      <button style="border-color: transparent; background-color: transparent">
-        <img src="../../file/like_selected.png" width="20" height="30">
-      </button>
-      <button style="border-color: transparent; background-color: transparent">
-        <img src="../../file/dislike.png" width="20" height="30">
-      </button>
-    </div>-->
-    <!-- Кінець реакцій -->
+    <!-- Кінець тіла статті -->
   </div>
   <!-- Кінець блоку статті -->
   <!-- Початок бокових блоків (учасники, тести) -->
@@ -138,114 +126,29 @@
   <!-- Кінець бокових блоків (учасники, тести) -->
 </div>
 
-<!--
 <div class="comment_block">
   <div class="row" style="margin-left: 10px">
     <h6>Обговорення</h6>
-    <button class="btn" style="font-style: italic; color: gray; padding: 0; height: 25px; margin-left: 50px; margin-top: -3px; text-decoration-line: underline">Написати</button>
+    <button onclick="displayBlock('saveComment')" class="btn" style="font-style: italic; color: gray; padding: 0; height: 25px; margin-left: 50px; margin-top: -3px; text-decoration-line: underline">Написати</button>
   </div>
 <hr>
-  <div class="comment_unit_block">
-    <div>
-      <p class="datetime_text">25.05.2023</p>
-      <div>
-        <button type="button" class="btn" data-toggle="modal"
-                data-target="#exampleModalScrollable3" style="height: 25px; padding: 0; font-style: revert;">
-          Учасник3
-        </button>
-        <div class="modal fade" id="exampleModalScrollable3" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalScrollableTitle3" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle3">Учасник3 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <h6>#login3</h6>
-                Інформація про себе
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-light">Переглянути статті та питання
-                  користувача
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-<hr>
-    <div>
-      <p> Проте чітке поняття алгоритму сформувалося </p>
-    </div>
-  <div class="row" style="margin-left: 5px;">
-    <button style="border-color: transparent; background-color: transparent">
-      <img src="../../file/like.png" width="13" height="19">
-    </button>
-    <button style="border-color: transparent; background-color: transparent">
-      <img src="../../file/dislike_selected.png" width="13" height="19">
-    </button>
-    <button class="btn" style="font-size: small; font-style: italic; color: gray; padding: 0; height: 20px; margin-left: 20px; margin-top: 4px;  text-decoration-line: underline">Відповісти</button>
-    <button class="btn" style="font-size: small; font-style: italic; color: gray; padding: 0; height: 20px; margin-left: 20px; margin-top: 4px;  text-decoration-line: underline">Сховати відповіді (1)</button>
+  <div id="saveComment" hidden>
+    <textarea onclick="sendComment()" id="commentText" class="form-control input_info" style="margin-bottom: 10px;"></textarea>
+    <button onclick="sendComment()" class="btn btn-primary">Надіслати</button>
+    <button onclick="hideBlock('saveComment')" class="btn btn-secondary">Скасувати</button>
   </div>
-  </div>
-  <div class="answer_comment_unit_block">
-    <div>
-      <p class="datetime_text">25.05.2023</p>
-      <div>
-        <button type="button" class="btn" data-toggle="modal"
-                data-target="#exampleModalScrollable4" style="height: 25px; padding: 0; font-style: revert;">
-          Учасник4
-        </button>
+  <div id="commentList">
 
-        <div class="modal fade" id="exampleModalScrollable4" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalScrollableTitle4" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle4">Учасник4 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <h6>#login3</h6>
-                Інформація про себе
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-light">Переглянути статті та питання
-                  користувача
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div>
-      <p> Обчислювальні процеси алгоритмічного характер</p>
-    </div>
-    <div class="row" style="margin-left: 5px;">
-      <button style="border-color: transparent; background-color: transparent">
-        <img src="../../file/like.png" width="13" height="19">
-      </button>
-      <button style="border-color: transparent; background-color: transparent">
-        <img src="../../file/dislike_selected.png" width="13" height="19">
-      </button>
-      <button class="btn" style="font-size: small; font-style: italic; color: gray; padding: 0; height: 20px; margin-left: 20px; margin-top: 4px;  text-decoration-line: underline">Відповісти</button>
-      <button class="btn" style="font-size: small; font-style: italic; color: gray; padding: 0; height: 20px; margin-left: 20px; margin-top: 4px;  text-decoration-line: underline">Показати відповіді (1)</button>
-    </div>
   </div>
 </div>
--->
+
 <hr>
 <script src="../../js/article/display/displayArticleLoadData.js"></script>
 <script src="../../js/article/display/setArticleBodyDisplay.js"></script>
 <script src="../../js/article/display/setArticleMarksDisplay.js"></script>
+<script src="../../js/article/comment/loadComments.js"></script>
+<script src="../../js/article/comment/sendComment.js"></script>
+<script src="../../js/article/comment/deleteComment.js"></script>
 <script src="../../js/util/util.js"></script>
 <script src="../../js/util/downloadFile.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>

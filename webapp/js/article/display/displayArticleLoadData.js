@@ -77,7 +77,8 @@ function jsonToHTMLDisplay(jsonString) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  getInfoAboutCurrentDisplayedArticle()
+  getInfoAboutCurrentDisplayedArticle();
+  getInfoAboutCurrentComments();
 });
 
 function getTests(tests) {
