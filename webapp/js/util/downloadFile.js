@@ -51,7 +51,6 @@ function handleStateChangeDownloadImage() {
           {type: 'application/octet-stream'});
       let imageOutput = document.getElementById(imageOutputId);
       imageOutput.src = window.URL.createObjectURL(blob);
-      localStorage.removeItem("currentImageId");
     }
   }
 }

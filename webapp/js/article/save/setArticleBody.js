@@ -57,7 +57,7 @@ function getCodeBlock(partMap) {
       + "    </div>"
       + "<div style=\"width: 77%; margin-left: 15px;\""
       + "      id='editBlock" + partMap.get("id") + "' hidden>"
-      + "<textarea  style='height: 400px;' id='editCodeType"+partMap.get("id")+"' onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
+      + "<textarea  style='height: 400px; width: 100%;' id='editCodeType"+partMap.get("id")+"' onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,"
       + "e=this.selectionEnd;this.value=v.substring(0, s)+'\\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;"
       + "return false;}\" "
       + " id='textareaCode" + partMap.get("id")

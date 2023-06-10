@@ -16,6 +16,7 @@ public class FileDownloadController {
 
     @GetMapping("/downloadFile/{fileCode}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable("fileCode") String fileName) throws IOException {
+
        FileDownloadUtil downloadUtil = new FileDownloadUtil();
         Resource resource = null;
         try {
@@ -26,7 +27,6 @@ public class FileDownloadController {
         if (resource == null) {
             return null;
         }
-
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE)
             .header(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.attachment().filename(resource.getFilename()).build().toString())

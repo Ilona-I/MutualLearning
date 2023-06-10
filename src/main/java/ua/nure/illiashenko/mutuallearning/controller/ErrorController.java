@@ -1,5 +1,6 @@
 package ua.nure.illiashenko.mutuallearning.controller;
 
+import com.stripe.exception.StripeException;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +21,7 @@ public class ErrorController {
         ArticleValidationException.class,
         MarkNotFoundException.class,
         AccessDeniedException.class,
+        StripeException.class,
         UserNotFoundException.class})
     public ResponseEntity<List<String>> handleServiceApiException(ServiceApiException exception) {
         return ResponseEntity.status(exception.getHttpStatus())

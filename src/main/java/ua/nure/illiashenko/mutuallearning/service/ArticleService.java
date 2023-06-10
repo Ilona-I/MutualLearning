@@ -22,7 +22,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ua.nure.illiashenko.mutuallearning.constants.ArticlePartType;
 import ua.nure.illiashenko.mutuallearning.constants.ArticleType;
-import ua.nure.illiashenko.mutuallearning.constants.ReactionType;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleFileLinksResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleForUpdateResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleListElementResponse;
@@ -39,6 +38,7 @@ import ua.nure.illiashenko.mutuallearning.entity.ArticlePart;
 import ua.nure.illiashenko.mutuallearning.entity.Mark;
 import ua.nure.illiashenko.mutuallearning.entity.User;
 import ua.nure.illiashenko.mutuallearning.entity.UserArticle;
+import ua.nure.illiashenko.mutuallearning.exception.AccessDeniedException;
 import ua.nure.illiashenko.mutuallearning.exception.article.ArticleNotFoundException;
 import ua.nure.illiashenko.mutuallearning.mapper.ArticleMapper;
 import ua.nure.illiashenko.mutuallearning.mapper.ArticlePartMapper;
@@ -113,6 +113,12 @@ public class ArticleService {
 
     public ArticleForUpdateResponse getArticleForUpdate(String login, int id) {
         final Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
+        final UserArticle userArticle = userArticleRepository.findByUserLoginAndArticleId(login, id)
+            .orElseThrow(ArticleNotFoundException::new);
+        if(article.getType().equals(ARTICLE)&&!userArticle.getRole().equals(ARTICLE_CREATOR)||
+            article.getType().equals(ANSWERED_QUESTION)&&!userArticle.getRole().equals(QUESTION_ANSWERER)){
+            throw new AccessDeniedException();
+        }
         final ArticleForUpdateResponse articleForUpdateResponse = articleMapper.mapArticleToArticleForUpdateResponse(
             article);
         final ArticlePartResponse[] articlePartResponses = getArticlePartResponses(id);
@@ -130,7 +136,6 @@ public class ArticleService {
         articleResponse.setArticleParts(articlePartResponses);
         articleResponse.setMarks(markResponses);
         final Optional<UserArticle> userArticle = userArticleRepository.findByUserLoginAndArticleId(login, id);
-        userArticle.ifPresent(value -> articleResponse.setReaction(value.getReaction()));
         articleResponse.setMembers(getMembers(article).toArray(Member[]::new));
         articleResponse.setTests(getArticleTestTitles(id));
         return articleResponse;
@@ -171,7 +176,6 @@ public class ArticleService {
             articleListElement.setMembers(getMembers(article).toArray(Member[]::new));
             final Optional<UserArticle> userArticle = userArticleRepository
                 .findByUserLoginAndArticleId(login, article.getId());
-            userArticle.ifPresent(value -> articleListElement.setReaction(value.getReaction()));
             responses.add(articleListElement);
         }
         return responses;
@@ -376,11 +380,6 @@ public class ArticleService {
         if ("OWN".equalsIgnoreCase(ownerType)) {
             articlesIdByOwnType = userArticleRepository
                 .findAllByUserLoginAndRoleIsIn(login, getArticleCreatorRoles()).stream()
-                .map(UserArticle::getArticleId)
-                .collect(Collectors.toSet());
-        } else if ("LIKED".equalsIgnoreCase(ownerType)) {
-            articlesIdByOwnType = userArticleRepository
-                .findAllByUserLoginAndReaction(login, ReactionType.LIKE).stream()
                 .map(UserArticle::getArticleId)
                 .collect(Collectors.toSet());
         }

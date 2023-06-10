@@ -64,7 +64,7 @@
         </li>
       </ul>
     </div>
-    <div class="collapse navbar-collapse" style="margin-left: 10px;">
+    <div id="accountBlock" class="collapse navbar-collapse" style="margin-left: 10px;">
       <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
                 aria-haspopup="true"
@@ -80,7 +80,12 @@
       </div>
 
     </div>
-
+    <div>
+      <select style="background-color: transparent; font-size: small;">
+        <option value="UA">UA</option>
+        <option value="EN">EN</option>
+      </select>
+    </div>
   </nav>
   <!-- Кінець роботи з меню -->
 
@@ -170,12 +175,6 @@
                        value="own">
                 <label class="form-check-label" for="inlineRadio2OwnerOwn">Власні</label>
               </div>
-              <div class="form-check form-check" onclick="checkLiked()" hidden>
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                       id="inlineRadio3OwnerSaved"
-                       value="saved">
-                <label class="form-check-label" for="inlineRadio3OwnerSaved">Вподобані</label>
-              </div>
             </div>
             <!-- Кінець роботи з фільтрацією (усі статті, власні, збережені) -->
             <div style="margin-left: 15px; margin-top: 15px; width: 92%;">
@@ -199,7 +198,7 @@
       </div>
       <div style="margin-left: 5px; width: 40%">
         <input id="searchArticle" type="text" class="form-control"
-               placeholder="Search...">
+               placeholder="Пошук...">
       </div>
       <div style="margin-left: 5px; width: 10%;">
         <button onclick="searchArticles()" class="btn btn-light">Знайти</button>

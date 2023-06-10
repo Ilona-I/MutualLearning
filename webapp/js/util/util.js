@@ -65,3 +65,15 @@ function isEmail(str) {
   const regexExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
   return regexExp.test(str);
 }
+
+
+function setMenuButton(){
+  let login = localStorage.getItem("login");
+  if(login===null||login.length===0){
+    document.getElementById("accountBlock").innerHTML =""
+        + "<button onclick=\"document.location='../user/logIn.html'\" "
+        + "class=\"btn btn-light menu_button_sign_up\" "
+        + "style=\"background-color: #303052; color:#ffffff ;border-width: 0px\">"
+        + "Увійти</button>";
+  }
+}

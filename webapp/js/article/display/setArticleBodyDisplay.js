@@ -52,6 +52,7 @@ function getLinkDisplay(partMap) {
 }
 
 function setArticleBodyDisplay(articleParts) {
+  localStorage.removeItem("currentImageId");
   let innerHTML = "";
   let images = [];
   for (const element of articleParts) {
@@ -72,8 +73,9 @@ function setArticleBodyDisplay(articleParts) {
     }
     innerHTML += "</div>";
   }
+  console.log(images)
   document.getElementById("articleBody").innerHTML = innerHTML;
-  for (const element of images) {
+  for(const element of images){
     localStorage.setItem("currentImageId", element.get("id"));
     downloadImage(element.get("link"));
   }

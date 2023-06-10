@@ -58,14 +58,7 @@ function getOwnerType() {
   if (document.getElementById("inlineRadio2OwnerOwn").getAttribute("checked")!=null) {
     return "own";
   }
-  if (document.getElementById("inlineRadio3OwnerSaved").getAttribute("checked")!=null) {
-    return "saved";
-  }
   return "all";
-}
-
-function getSortType() {
-  return document.getElementById("sort").value;
 }
 
 function getSearchLine() {

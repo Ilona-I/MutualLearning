@@ -75,7 +75,12 @@
     </div>
 
   </div>
-
+  <div>
+    <select style="background-color: transparent; font-size: small;">
+      <option value="UA">UA</option>
+      <option value="EN">EN</option>
+    </select>
+  </div>
 </nav>
 <!-- Кінець роботи з меню -->
 
@@ -83,7 +88,7 @@
   <div class="profile_block">
     <div id="profile" class="inner_block_left">
       <div class="row" style="margin-left: 0px;">
-        <h3>Profile</h3>
+        <h3>Профіль</h3>
         <button onclick="updateProfile()" class="btn"
                 style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
           Зберегти зміни
@@ -112,16 +117,16 @@
   </div>
   <div id="passwordBlock" class="profile_block" hidden>
     <h5>Зміна паролю</h5>
-    <input id="currentPassword" type="password" class="form-control input_info" placeholder="Password" onkeyup="cleanWrongData('wrongCurrentPassword')">
+    <input id="currentPassword" type="password" class="form-control input_info" placeholder="Пароль" onkeyup="cleanWrongData('wrongCurrentPassword')">
     <div style="width: 100%; text-align: left">
       <p id="wrongCurrentPassword" style="color: darkred; font-size: small;"></p>
     </div>
-    <input id="newPassword" type="password" class="form-control input_info" placeholder="Password" onkeyup="cleanWrongData('wrongNewPassword')">
+    <input id="newPassword" type="password" class="form-control input_info" placeholder="Новий пароль" onkeyup="cleanWrongData('wrongNewPassword')">
     <div style="width: 100%; text-align: left">
       <p id="wrongNewPassword" style="color: darkred; font-size: small;"></p>
     </div>
 
-    <input id="repeatedPassword" type="password" class="form-control input_info" placeholder="Repeat password" onkeyup="cleanWrongData('wrongRepeatedPassword')">
+    <input id="repeatedPassword" type="password" class="form-control input_info" placeholder="Повторіть новий пароль" onkeyup="cleanWrongData('wrongRepeatedPassword')">
     <div style="width: 100%; text-align: left">
       <p id="wrongRepeatedPassword" style="color: darkred; font-size: small;"></p>
     </div>

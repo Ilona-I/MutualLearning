@@ -9,12 +9,14 @@ function createXMLHttpRequest() {
 }
 
 function loadArticles() {
+  setMenuButton();
   let requestParamLine = getRequestParamLine();
   const url = "http://localhost:8080/articles?" + requestParamLine;
   createXMLHttpRequest();
   console.log(url);
   let user = '{"login":"' + localStorage.getItem("login") + '"}';
   xmlHttp.open("GET", url, false);
+  console.log(requestParamLine)
   xmlHttp.onreadystatechange = handleStateChangeArticles;
   xmlHttp.setRequestHeader("Content-Type", "application/json");
   xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
@@ -109,7 +111,7 @@ function manageOwnerBlock() {
   let userRole = localStorage.getItem("role");
   if (userRole === null || !(userRole === "USER" || userRole
       === "PREMIUM_USER")) {
-    document.getElementById("blockOwner").remove();
+    document.getElementById("blockOwner").hidden = true;
   }
 }
 

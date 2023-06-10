@@ -30,38 +30,39 @@
   <div class="logo_text_div">
     <p class="vertical-center">Mutual Learning</p>
   </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li id="li1" class="nav-item  menu_button">
+      <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
                 onclick="document.location='../article/articles.html'">
           СТАТТІ
         </button>
       </li>
-      <li id="li2" class="nav-item menu_button">
-
-      </li>
-      <li id="li3" class="nav-item menu_button">
+      <li class="nav-item menu_button"></li>
+      <li class="nav-item menu_button">
         <div>
-          <button style="height: 50%; width: 100%; padding: 0; background-color: transparent; color:  #D17542; font-size: x-small;
-        border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                  onclick="document.location='../mark/marks.html'">МІТКИ
+          <button onclick="goToCreateArticle('../article/saveArticle.html')"
+                  class="btn"
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+            Створити статтю
           </button>
-          <button style="height: 50%; width: 100%; padding: 0; background-color: transparent; color:  #D17542; font-size: x-small;
-        border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                  onclick="document.location='../mark/marks.html'">КОРИСТУВАЧІ
+          <button onclick="goToCreateQuestion('../article/saveArticle.html')"
+                  class="btn"
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+            Задати питання
           </button>
         </div>
-      </li>
+
       </li>
     </ul>
   </div>
   <div class="collapse navbar-collapse" style="margin-left: 10px;">
-    <div class="btn-group" >
+    <div class="btn-group">
       <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false">
@@ -69,6 +70,7 @@
       </button>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
+        <a class="dropdown-item" href="#">Оформити підписку</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
       </div>
@@ -83,43 +85,32 @@
 </nav>
 <!-- Кінець роботи з меню -->
 
-<div style="padding: 40px;">
-  <h3>Користувачі</h3>
-  <table class="table table-sm">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-    </tbody>
-  </table>
+<div class="simple_green_block" style="padding: 40px;">
+  <h4>Підключення преміум акаунту</h4>
+  <hr>
+  <h6>Переваги:</h6>
+  <p>- Перегляд списку користувачів, які пройшли тест, якщо він був створений поточним користувачем</p>
+<hr>
+<input type='hidden' id="amount" name='amount'/>
+<label>Ціна: 500 грн/місяць</label>
+<br>
+  <form action='http://localhost:8080/charge' method='POST' id='checkout-form'>
+<script
+    src='https://checkout.stripe.com/checkout.js'
+    class='stripe-button'
+    data-key='pk_test_51NGMURC9egQsvr2snhtX9hjIcbw8R84DF1X6mdBrRViJAOVXD1R67ei6rDyaN7S43tXxQGW8tmvCtNCmVo2eo0v500xysrI9vl'
+    data-amount='50000'
+    data-currency='UAH'
+    data-name='Premium'
+    data-description='Checkout'
 
-
-
+    data-locale='auto'
+    data-zip-code='false'
+onfocusout="charge()">
+</script>
+  </form>
+  <hr>
 </div>
-
-
-
+<script src="../../js/premium/premium.js"></script>
 </body>
 </html>

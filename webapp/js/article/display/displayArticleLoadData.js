@@ -9,6 +9,7 @@ function createXMLHttpRequest() {
 }
 
 function getInfoAboutCurrentDisplayedArticle() {
+  setMenuButton()
   let articleId = localStorage.getItem("articleId");
   if (articleId === null) {
     document.location = "../error/notFound.html"
@@ -117,6 +118,11 @@ function getMembers(members) {
         let button = "<button class='btn btn-light' style='margin-bottom: 20px; width: 100%;' onclick='goToEditArticle()'>Редагувати</button>"
         editArticleButton.innerHTML = button;
       }
+      let createTestButton = document.getElementById("createTestButton");
+      if (createTestButton !== null) {
+        let button = "<button class='btn btn-light' style='margin-bottom: 20px; width: 100%;' onclick='createTest()'>Створити тест</button>"
+        createTestButton.innerHTML = button;
+      }
     }
     innerHtml += "        <div>\n"
         + "          <button type=\"button\" class=\"badge\" style = \"background-color: transparent; border-width: 1px; ";
@@ -185,4 +191,9 @@ function getMembers(members) {
 
 function goToEditArticle() {
   document.location = "saveArticle.html";
+}
+
+function createTest(){
+  localStorage.removeItem("testId");
+  document.location='../test/saveTest.html';
 }
