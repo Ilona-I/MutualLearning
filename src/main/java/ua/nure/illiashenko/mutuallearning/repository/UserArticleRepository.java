@@ -17,5 +17,4 @@ public interface UserArticleRepository extends JpaRepository<UserArticle, Intege
 
     List<UserArticle> findAllByUserLoginContains(String userLogin);
 
-
 }

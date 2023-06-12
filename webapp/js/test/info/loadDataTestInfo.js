@@ -94,9 +94,6 @@ function jsonToHTMLGetTestInfo(jsonString) {
           + "              <h6>Користувач</h6>\n"
           + "            </div>\n"
           + "            <div class=\"table_border\">\n"
-          + "              <h6>Номер спроби</h6>\n"
-          + "            </div>\n"
-          + "            <div class=\"table_border\">\n"
           + "              <h6>Дата й час проходження</h6>\n"
           + "            </div>\n"
           + "            <div class=\"table_border\">\n"
@@ -111,19 +108,14 @@ function jsonToHTMLGetTestInfo(jsonString) {
             + "            <div class=\"table_border\">\n"
             + "              <p>" + userLogin + "</p>\n"
             + "            </div>\n"
-            + "            <div style=\"width: 75%\">\n";
+            + "            <div style=\"width: 66.66%\">\n";
         let previousAttempts = attemptMap.get("previousAttempts");
-        let t = previousAttempts.length;
         for (const e of previousAttempts) {
           let pAttempt = JSON.parse(JSON.stringify(e));
           let pAttemptMap = new Map(Object.entries(pAttempt));
           let dateTime = pAttemptMap.get("dateTime");
           let mark = pAttemptMap.get("mark");
-
           table += "              <div class=\"row\" style=\"margin-left: 0; width: 100%;\">\n"
-              + "                <div class=\"table_border_body\">\n"
-              + "                  <p>" + t + "</p>\n"
-              + "                </div>\n"
               + "                <div class=\"table_border_body\">\n"
               + "                  <p>" + getDateTime(
                   parseInt(dateTime.toString()))
@@ -133,7 +125,6 @@ function jsonToHTMLGetTestInfo(jsonString) {
               + "                  <p>" + mark + "</p>\n"
               + "                </div>\n"
               + "              </div>\n";
-          t = t - 1;
         }
         table += "            </div>\n"
             + "\n"

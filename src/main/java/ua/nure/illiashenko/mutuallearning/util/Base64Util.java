@@ -1,6 +1,5 @@
 package ua.nure.illiashenko.mutuallearning.util;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import org.springframework.stereotype.Component;
 

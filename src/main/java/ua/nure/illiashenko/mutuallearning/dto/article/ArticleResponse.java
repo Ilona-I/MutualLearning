@@ -18,5 +18,4 @@ public class ArticleResponse {
     private MarkResponse[] marks;
     private Member[] members;
     private TestTitleResponse[] tests;
-    private String reaction;
 }

@@ -19,13 +19,4 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     List<Article> findAllByIdIsInAndTypeIsInOrderByCreationDateTimeDesc(Set<Integer> articlesId, Set<String> types,
         Pageable limit);
 
-    @Modifying
-    @Query( value = "SELECT article.* "
-        + " FROM article LEFT JOIN user_article ON article.id = user_article.article_id WHERE user_article.reaction='LIKE'"
-        + " AND article.id in ?1 AND article.type in ?2 AND article.title LIKE CONCAT('%', ?3,'%') "
-        + " GROUP BY article.id "
-        + " ORDER BY COUNT(user_article.reaction) DESC "
-        + " LIMIT ?4, ?5 ",  nativeQuery = true)
-    List<Article> findAllByTitleAndByPopularity(Set<Integer> articlesId, Set<String> type, String title, int page,
-        int size);
 }

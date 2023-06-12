@@ -87,36 +87,49 @@ public class TestService {
         test.setTitle(saveTestRequest.getTitle());
         testRepository.save(test);
         deleteOldQuestionsWithAnswers(id, saveTestRequest);
+        updateQuestions(id, saveTestRequest, test);
+    }
+
+    private void updateQuestions(int id, SaveTestRequest saveTestRequest, Test test) {
         for (SaveQuestionRequest saveQuestionRequest : saveTestRequest.getQuestions()) {
             final Question question = new Question();
             final Optional<Question> dbQuestion = questionRepository.findById(saveQuestionRequest.getQuestionId());
-            if (dbQuestion.isPresent() && dbQuestion.get().getTestId() == id) {
-                question.setId(saveQuestionRequest.getQuestionId());
-                final List<Integer> oldAnswersId = answerRepository.findByQuestionId(
-                        saveQuestionRequest.getQuestionId())
-                    .stream()
-                    .map(Answer::getId)
-                    .collect(Collectors.toList());
-                oldAnswersId.removeAll(Arrays.stream(saveQuestionRequest.getAnswers()).map(
-                    SaveAnswerRequest::getAnswerId).collect(
-                    Collectors.toList()));
-                answerRepository.deleteAllById(oldAnswersId);
-            }
+            checkQuestion(id, saveQuestionRequest, question, dbQuestion);
             question.setTestId(test.getId());
             question.setText(saveQuestionRequest.getText());
             question.setType(saveQuestionRequest.getType());
             final Question savedQuestion = questionRepository.save(question);
-            for (SaveAnswerRequest saveAnswerRequest : saveQuestionRequest.getAnswers()) {
-                final Answer answer = new Answer();
-                final Optional<Answer> dbAnswer = answerRepository.findById(saveAnswerRequest.getAnswerId());
-                if (dbAnswer.isPresent() && Objects.equals(dbAnswer.get().getQuestionId(), savedQuestion.getId())) {
-                    answer.setId(saveAnswerRequest.getAnswerId());
-                }
-                answer.setQuestionId(savedQuestion.getId());
-                answer.setText(saveAnswerRequest.getText());
-                answer.setPoint(saveAnswerRequest.getMark());
-                answerRepository.save(answer);
+            updateAnswers(saveQuestionRequest, savedQuestion);
+        }
+    }
+
+    private void updateAnswers(SaveQuestionRequest saveQuestionRequest, Question savedQuestion) {
+        for (SaveAnswerRequest saveAnswerRequest : saveQuestionRequest.getAnswers()) {
+            final Answer answer = new Answer();
+            final Optional<Answer> dbAnswer = answerRepository.findById(saveAnswerRequest.getAnswerId());
+            if (dbAnswer.isPresent() && Objects.equals(dbAnswer.get().getQuestionId(), savedQuestion.getId())) {
+                answer.setId(saveAnswerRequest.getAnswerId());
             }
+            answer.setQuestionId(savedQuestion.getId());
+            answer.setText(saveAnswerRequest.getText());
+            answer.setPoint(saveAnswerRequest.getMark());
+            answerRepository.save(answer);
+        }
+    }
+
+    private void checkQuestion(int id, SaveQuestionRequest saveQuestionRequest, Question question,
+        Optional<Question> dbQuestion) {
+        if (dbQuestion.isPresent() && dbQuestion.get().getTestId() == id) {
+            question.setId(saveQuestionRequest.getQuestionId());
+            final List<Integer> oldAnswersId = answerRepository.findByQuestionId(
+                    saveQuestionRequest.getQuestionId())
+                .stream()
+                .map(Answer::getId)
+                .collect(Collectors.toList());
+            oldAnswersId.removeAll(Arrays.stream(saveQuestionRequest.getAnswers()).map(
+                SaveAnswerRequest::getAnswerId).collect(
+                Collectors.toList()));
+            answerRepository.deleteAllById(oldAnswersId);
         }
     }
 
@@ -140,26 +153,28 @@ public class TestService {
             .orElseThrow(() -> new ServiceApiException(HttpStatus.NOT_FOUND));
         final QuestionToUpdateResponse[] questionResponses = questionRepository.findByTestId(id)
             .stream()
-            .map(question -> {
-                final AnswerToUpdateResponse[] answerResponses = answerRepository.findByQuestionId(question.getId())
-                    .stream()
-                    .map(answer -> AnswerToUpdateResponse.builder()
-                        .answerId(answer.getId())
-                        .mark(answer.getPoint())
-                        .text(answer.getText())
-                        .build())
-                    .toArray(AnswerToUpdateResponse[]::new);
-                return QuestionToUpdateResponse.builder()
-                    .questionId(question.getId())
-                    .text(question.getText())
-                    .type(question.getType())
-                    .answers(answerResponses)
-                    .build();
-            })
+            .map(this::getQuestionToUpdateResponse)
             .toArray(QuestionToUpdateResponse[]::new);
         return TestToUpdateResponse.builder()
             .title(test.getTitle())
             .questions(questionResponses)
+            .build();
+    }
+
+    private QuestionToUpdateResponse getQuestionToUpdateResponse(Question question) {
+        final AnswerToUpdateResponse[] answerResponses = answerRepository.findByQuestionId(question.getId())
+            .stream()
+            .map(answer -> AnswerToUpdateResponse.builder()
+                .answerId(answer.getId())
+                .mark(answer.getPoint())
+                .text(answer.getText())
+                .build())
+            .toArray(AnswerToUpdateResponse[]::new);
+        return QuestionToUpdateResponse.builder()
+            .questionId(question.getId())
+            .text(question.getText())
+            .type(question.getType())
+            .answers(answerResponses)
             .build();
     }
 
@@ -174,11 +189,15 @@ public class TestService {
         if (optionalUserArticle.isPresent()) {
             role = optionalUserArticle.get().getRole();
         }
+        return getTestInfoResponse(login, id, test, maxMark, ownPreviousAttempts, role);
+    }
+
+    private TestInfoResponse getTestInfoResponse(String login, int id, Test test, Integer maxMark,
+        PreviousAttemptsResponse[] ownPreviousAttempts, String role) {
         int userCount = 0;
         int sumMarks = 0;
         final List<UserTest> userTests = userTestRepository.findByTestIdOrderByUserLoginAscDateTimeDesc(id);
         final List<UsersAttemptsResponse> usersAttemptsResponses = new ArrayList<>();
-
         UserTest currentUserTest = null;
         List<PreviousAttemptsResponse> previousAttempts = new ArrayList<>();
         for (UserTest userTest : userTests) {
@@ -186,33 +205,53 @@ public class TestService {
                 currentUserTest = userTest;
                 userCount++;
             } else if (currentUserTest != userTest) {
-                if (isPremiumCreator(role, login)) {
-                    usersAttemptsResponses.add(UsersAttemptsResponse.builder()
-                        .userLogin(currentUserTest.getUserLogin())
-                        .previousAttempts(previousAttempts.toArray(PreviousAttemptsResponse[]::new))
-                        .build());
-                    previousAttempts.clear();
-                }
+                addUsersAttemptsResponse(login, role, usersAttemptsResponses, currentUserTest, previousAttempts);
                 currentUserTest = userTest;
                 userCount++;
             }
             sumMarks += userTest.getMark();
-            if (isPremiumCreator(role, login)) {
-                previousAttempts.add(PreviousAttemptsResponse.builder()
-                    .dateTime(userTest.getDateTime())
-                    .mark(userTest.getMark())
-                    .build());
-            }
-
+            addPreviousAttemptsResponse(login, role, previousAttempts, userTest);
         }
+        addUserAttemptResponse(login, role, usersAttemptsResponses, currentUserTest, previousAttempts);
+        final Double userAverageMark = ((double) sumMarks) / userTests.size();
+        return getTestInfoResponse(login, test,
+            maxMark, ownPreviousAttempts, role, userCount, usersAttemptsResponses, userAverageMark);
+    }
+
+    private void addPreviousAttemptsResponse(String login, String role, List<PreviousAttemptsResponse> previousAttempts,
+        UserTest userTest) {
+        if (isPremiumCreator(role, login)) {
+            previousAttempts.add(PreviousAttemptsResponse.builder()
+                .dateTime(userTest.getDateTime())
+                .mark(userTest.getMark())
+                .build());
+        }
+    }
+
+    private void addUsersAttemptsResponse(String login, String role, List<UsersAttemptsResponse> usersAttemptsResponses,
+        UserTest currentUserTest, List<PreviousAttemptsResponse> previousAttempts) {
+        if (isPremiumCreator(role, login)) {
+            usersAttemptsResponses.add(UsersAttemptsResponse.builder()
+                .userLogin(currentUserTest.getUserLogin())
+                .previousAttempts(previousAttempts.toArray(PreviousAttemptsResponse[]::new))
+                .build());
+            previousAttempts.clear();
+        }
+    }
+
+    private void addUserAttemptResponse(String login, String role, List<UsersAttemptsResponse> usersAttemptsResponses,
+        UserTest currentUserTest, List<PreviousAttemptsResponse> previousAttempts) {
         if (currentUserTest != null && isPremiumCreator(role, login)) {
             usersAttemptsResponses.add(UsersAttemptsResponse.builder()
                 .userLogin(currentUserTest.getUserLogin())
                 .previousAttempts(previousAttempts.toArray(PreviousAttemptsResponse[]::new))
                 .build());
         }
-        final Double userAverageMark = ((double) sumMarks) / userTests.size();
+    }
 
+    private TestInfoResponse getTestInfoResponse(String login, Test test, Integer maxMark,
+        PreviousAttemptsResponse[] ownPreviousAttempts, String role, int userCount,
+        List<UsersAttemptsResponse> usersAttemptsResponses, Double userAverageMark) {
         final TestInfoResponse testInfoResponse = new TestInfoResponse();
         testInfoResponse.setTitle(test.getTitle());
         testInfoResponse.setMaxMark(maxMark);
@@ -259,25 +298,27 @@ public class TestService {
             .orElseThrow(() -> new ServiceApiException(HttpStatus.NOT_FOUND));
         final QuestionResponse[] questionResponses = questionRepository.findByTestId(id)
             .stream()
-            .map(question -> {
-                final AnswerResponse[] answerResponses = answerRepository.findByQuestionId(question.getId())
-                    .stream()
-                    .map(answer -> AnswerResponse.builder()
-                        .answerId(answer.getId())
-                        .text(answer.getText())
-                        .build())
-                    .toArray(AnswerResponse[]::new);
-                return QuestionResponse.builder()
-                    .questionId(question.getId())
-                    .text(question.getText())
-                    .type(question.getType())
-                    .answers(answerResponses)
-                    .build();
-            })
+            .map(this::getQuestionResponse)
             .toArray(QuestionResponse[]::new);
         return TestResponse.builder()
             .title(test.getTitle())
             .questions(questionResponses)
+            .build();
+    }
+
+    private QuestionResponse getQuestionResponse(Question question) {
+        final AnswerResponse[] answerResponses = answerRepository.findByQuestionId(question.getId())
+            .stream()
+            .map(answer -> AnswerResponse.builder()
+                .answerId(answer.getId())
+                .text(answer.getText())
+                .build())
+            .toArray(AnswerResponse[]::new);
+        return QuestionResponse.builder()
+            .questionId(question.getId())
+            .text(question.getText())
+            .type(question.getType())
+            .answers(answerResponses)
             .build();
     }
 

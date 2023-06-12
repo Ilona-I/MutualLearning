@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.nure.illiashenko.mutuallearning.constants.ArticlePartType;
 import ua.nure.illiashenko.mutuallearning.constants.ArticleType;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleFileLinksResponse;
@@ -79,6 +80,7 @@ public class ArticleService {
     @Autowired
     private TestRepository testRepository;
 
+    @Transactional
     public List<ArticleFileLinksResponse> createArticle(String login, ArticleRequest articleRequest) {
         articleValidator.validateArticleRequest(articleRequest);
         final Article article = articleMapper.mapArticleRequestToArticle(articleRequest);
@@ -86,6 +88,7 @@ public class ArticleService {
         return createArticle(login, article, articleRequest);
     }
 
+    @Transactional
     public List<ArticleFileLinksResponse> editArticle(String login, int id, ArticleRequest articleRequest) {
         articleValidator.validateArticleRequest(articleRequest);
         final Optional<Article> optionalDbArticle = articleRepository.findById(id);
@@ -93,17 +96,11 @@ public class ArticleService {
             throw new ArticleNotFoundException();
         }
         final Article updatedArticle = new Article();
-        if (optionalDbArticle.get().getType().equals(ARTICLE) || optionalDbArticle.get().getType()
-            .equals(ANSWERED_QUESTION)) {
+        if (isArticleOrAnsweredQuestion(optionalDbArticle)) {
             updatedArticle.setTitle(articleRequest.getTitle());
             updatedArticle.setType(optionalDbArticle.get().getType());
         } else if (optionalDbArticle.get().getType().equals(QUESTION)) {
-            updatedArticle.setTitle(optionalDbArticle.get().getTitle());
-            updatedArticle.setType(ANSWERED_QUESTION);
-            final UserArticle userArticle = new UserArticle();
-            userArticle.setArticleId(id);
-            userArticle.setUserLogin(login);
-            userArticle.setRole(QUESTION_ANSWERER);
+            setForQuestionType(login, id, optionalDbArticle, updatedArticle);
         }
         updatedArticle.setId(id);
         updatedArticle.setCreationDateTime(optionalDbArticle.get().getCreationDateTime());
@@ -111,12 +108,25 @@ public class ArticleService {
         return updateArticle(updatedArticle, articleRequest);
     }
 
+    private void setForQuestionType(String login, int id, Optional<Article> optionalDbArticle, Article updatedArticle) {
+        updatedArticle.setTitle(optionalDbArticle.get().getTitle());
+        updatedArticle.setType(ANSWERED_QUESTION);
+        final UserArticle userArticle = new UserArticle();
+        userArticle.setArticleId(id);
+        userArticle.setUserLogin(login);
+        userArticle.setRole(QUESTION_ANSWERER);
+    }
+
+    private boolean isArticleOrAnsweredQuestion(Optional<Article> optionalDbArticle) {
+        return optionalDbArticle.isPresent()&&optionalDbArticle.get().getType().equals(ARTICLE)
+            || optionalDbArticle.get().getType().equals(ANSWERED_QUESTION);
+    }
+
     public ArticleForUpdateResponse getArticleForUpdate(String login, int id) {
         final Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
         final UserArticle userArticle = userArticleRepository.findByUserLoginAndArticleId(login, id)
             .orElseThrow(ArticleNotFoundException::new);
-        if(article.getType().equals(ARTICLE)&&!userArticle.getRole().equals(ARTICLE_CREATOR)||
-            article.getType().equals(ANSWERED_QUESTION)&&!userArticle.getRole().equals(QUESTION_ANSWERER)){
+        if(checkForAccess(article, userArticle)){
             throw new AccessDeniedException();
         }
         final ArticleForUpdateResponse articleForUpdateResponse = articleMapper.mapArticleToArticleForUpdateResponse(
@@ -128,6 +138,11 @@ public class ArticleService {
         return articleForUpdateResponse;
     }
 
+    private boolean checkForAccess(Article article, UserArticle userArticle) {
+        return article.getType().equals(ARTICLE)&&!userArticle.getRole().equals(ARTICLE_CREATOR)||
+            article.getType().equals(ANSWERED_QUESTION)&&!userArticle.getRole().equals(QUESTION_ANSWERER);
+    }
+
     public ArticleResponse getArticle(String login, int id) {
         final Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
         final ArticleResponse articleResponse = articleMapper.mapArticleToArticleResponse(article);
@@ -135,7 +150,6 @@ public class ArticleService {
         final MarkResponse[] markResponses = getMarkResponses(id);
         articleResponse.setArticleParts(articlePartResponses);
         articleResponse.setMarks(markResponses);
-        final Optional<UserArticle> userArticle = userArticleRepository.findByUserLoginAndArticleId(login, id);
         articleResponse.setMembers(getMembers(article).toArray(Member[]::new));
         articleResponse.setTests(getArticleTestTitles(id));
         return articleResponse;
@@ -157,7 +171,13 @@ public class ArticleService {
         final Set<Integer> articlesId = getArticlesId(login, marksId, ownerType, searchType, searchLineText);
         Pageable limit = PageRequest.of(page, size);
         final Set<String> articleTypeSet = getArticleTypes(articleType);
+        List<Article> foundArticles = getFoundArticles(searchType,
+            searchLineText, articlesId, limit, articleTypeSet);
+        return getArticleListElementResponses(foundArticles);
+    }
 
+    private List<Article> getFoundArticles(String searchType, String searchLineText, Set<Integer> articlesId, Pageable limit,
+        Set<String> articleTypeSet) {
         List<Article> foundArticles;
         if ("by_title".equals(searchType) && !searchLineText.isEmpty()) {
             foundArticles = articleRepository.findAllByIdIsInAndTypeIsInAndTitleContainsOrderByCreationDateTimeDesc(
@@ -166,16 +186,16 @@ public class ArticleService {
             foundArticles = articleRepository.findAllByIdIsInAndTypeIsInOrderByCreationDateTimeDesc(articlesId,
                 articleTypeSet, limit);
         }
+        return foundArticles;
+    }
 
+    private List<ArticleListElementResponse> getArticleListElementResponses(List<Article> foundArticles) {
         final List<ArticleListElementResponse> responses = new ArrayList<>();
         for (Article article : foundArticles) {
             final ArticleListElementResponse articleListElement = articleMapper.mapArticleToArticleListElementResponse(
                 article);
-
             articleListElement.setMarks(getMarkResponses(article).toArray(MarkResponse[]::new));
             articleListElement.setMembers(getMembers(article).toArray(Member[]::new));
-            final Optional<UserArticle> userArticle = userArticleRepository
-                .findByUserLoginAndArticleId(login, article.getId());
             responses.add(articleListElement);
         }
         return responses;
@@ -264,20 +284,8 @@ public class ArticleService {
         final List<ArticleFileLinksResponse> articleFileLinksParts = new ArrayList<>();
         for (ArticlePartRequest articlePartRequest : articlePartRequests) {
             final ArticlePart articlePart = articlePartMapper.mapArticlePartRequestToArticlePart(articlePartRequest);
-            if (articlePartRepository.existsById(articlePartRequest.getId())) {
-                articlePart.setId(null);
-                if (isFileOrImage(articlePart)) {
-                    articlePart.setLink(null);
-                    int id = articlePartRepository.save(articlePart).getId();
-                    articlePart.setId(id);
-                    articlePart.setLink(id + "-" + articlePartRequest.getLink());
-                }
-            }
-            if (isFileOrImage(articlePart)) {
-                articlePartRequest.setLink(articlePartRequest.getLink()
-                    .replace(articlePartRequest.getId() + "-", ""));
-                articlePart.setLink(articlePart.getId() + "-" + articlePartRequest.getLink());
-            }
+            checkForExistence(articlePartRequest, articlePart);
+            checkType(articlePartRequest, articlePart);
             articlePart.setArticleId(savedArticle.getId());
             articlePartRepository.save(articlePart);
             articleFileLinksParts.add(ArticleFileLinksResponse.builder()
@@ -287,6 +295,26 @@ public class ArticleService {
                 .build());
         }
         return articleFileLinksParts;
+    }
+
+    private void checkType(ArticlePartRequest articlePartRequest, ArticlePart articlePart) {
+        if (isFileOrImage(articlePart)) {
+            articlePartRequest.setLink(articlePartRequest.getLink()
+                .replace(articlePartRequest.getId() + "-", ""));
+            articlePart.setLink(articlePart.getId() + "-" + articlePartRequest.getLink());
+        }
+    }
+
+    private void checkForExistence(ArticlePartRequest articlePartRequest, ArticlePart articlePart) {
+        if (articlePartRepository.existsById(articlePartRequest.getId())) {
+            articlePart.setId(null);
+            if (isFileOrImage(articlePart)) {
+                articlePart.setLink(null);
+                int id = articlePartRepository.save(articlePart).getId();
+                articlePart.setId(id);
+                articlePart.setLink(id + "-" + articlePartRequest.getLink());
+            }
+        }
     }
 
     private boolean isFileOrImage(ArticlePart articlePart) {
@@ -300,11 +328,7 @@ public class ArticleService {
             .map(articlePartRequest -> {
                 ArticlePart articlePart = articlePartMapper.mapArticlePartRequestToArticlePart(articlePartRequest);
                 articlePart.setArticleId(article.getId());
-                if (isFileOrImage(articlePart)) {
-                    articlePartRequest.setLink(articlePartRequest.getLink()
-                        .replace(articlePartRequest.getId() + "-", ""));
-                    articlePart.setLink(articlePart.getId() + "-" + articlePartRequest.getLink());
-                }
+                checkType(articlePartRequest, articlePart);
                 return articlePart;
             }).collect(Collectors.toList());
         deleteRemovedArticleParts(article, newArticleParts);
@@ -464,6 +488,6 @@ public class ArticleService {
 
     private ArticleNotFoundException articleNotFoundById(int id) {
         log.error("No article found by id: " + id);
-        return new ArticleNotFoundException();
+        throw new ArticleNotFoundException();
     }
 }
