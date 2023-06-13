@@ -1,7 +1,6 @@
 package ua.nure.illiashenko.mutuallearning.exception.article;
 
 import java.util.List;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.springframework.http.HttpStatus;
 import ua.nure.illiashenko.mutuallearning.exception.ServiceApiException;
