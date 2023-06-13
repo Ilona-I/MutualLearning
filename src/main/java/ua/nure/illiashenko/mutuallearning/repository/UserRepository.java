@@ -8,7 +8,5 @@ import ua.nure.illiashenko.mutuallearning.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
-    Optional<User> findByEmail(String email);
-
     boolean existsByEmail(String email);
 }

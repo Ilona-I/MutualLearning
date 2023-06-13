@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ua.nure.illiashenko.mutuallearning.dto.user.ChangePasswordRequest;
@@ -76,25 +75,10 @@ public class UserController {
         return userService.getUser(login);
     }
 
-    @GetMapping
-    public UserResponse getUsers(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
-        return null;
-    }
-
-    @DeleteMapping("/{login}")
+    @DeleteMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
-        @PathVariable String login) {
-
-    }
-
-    @GetMapping("/email")
-    public UserResponse getUserByEmail(@RequestParam String email) {
-        return null;
-    }
-
-    @GetMapping("/submit/email/{token}")
-    public UserLoginResponse submitEmail(@PathVariable String token) {
-        return null;
+    public void deleteProfile(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+        final String login = jsonParser.getLoginFromJsonString(authorization);
+        userService.deleteUser(login);
     }
 }

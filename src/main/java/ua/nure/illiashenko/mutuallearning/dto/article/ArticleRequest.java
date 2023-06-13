@@ -9,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import ua.nure.illiashenko.mutuallearning.annotation.article.ArticleTypeValidation;
 import ua.nure.illiashenko.mutuallearning.annotation.mark.MarksIdExistenceValidation;
 import ua.nure.illiashenko.mutuallearning.annotation.mark.MarksIdValidation;
-import ua.nure.illiashenko.mutuallearning.constants.ArticleType;
 
 @Data
 @Builder

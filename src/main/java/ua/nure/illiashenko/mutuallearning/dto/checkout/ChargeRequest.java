@@ -6,8 +6,9 @@ import lombok.Data;
 public class ChargeRequest {
 
     public enum Currency {
-        EUR, USD;
+        EUR, USD, UAH
     }
+
     private String description;
     private int amount;
     private Currency currency;

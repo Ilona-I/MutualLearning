@@ -21,14 +21,14 @@ public class DatabaseController {
     private JsonParser jsonParser;
 
     @PostMapping("/backup")
-    private void backup(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization){
+    private void backup(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
         final String login = jsonParser.getLoginFromJsonString(authorization);
-        adminService.backupDB();
+        adminService.backupDB(login);
     }
 
     @PostMapping("/restore")
-    private void restore(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization){
+    private void restore(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
         final String login = jsonParser.getLoginFromJsonString(authorization);
-        adminService.restoreDB();
+        adminService.restoreDB(login);
     }
 }

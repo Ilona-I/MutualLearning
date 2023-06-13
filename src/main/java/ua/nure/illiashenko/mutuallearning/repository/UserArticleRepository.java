@@ -16,5 +16,4 @@ public interface UserArticleRepository extends JpaRepository<UserArticle, Intege
     List<UserArticle> findAllByUserLoginAndRoleIsIn(String userLogin, List<String> roles);
 
     List<UserArticle> findAllByUserLoginContains(String userLogin);
-
 }

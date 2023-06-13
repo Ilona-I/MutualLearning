@@ -8,6 +8,5 @@ public class SystemUserRole {
     public static final String PREMIUM_USER = "PREMIUM_USER";
 
     private SystemUserRole() {
-
     }
 }

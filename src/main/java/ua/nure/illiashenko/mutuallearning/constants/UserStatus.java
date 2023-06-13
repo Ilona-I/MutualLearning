@@ -6,6 +6,5 @@ public class UserStatus {
     public static final String BLOCKED = "BLOCKED";
 
     private UserStatus() {
-
     }
 }

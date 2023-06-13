@@ -9,6 +9,5 @@ public class ArticlePartType {
     public static final String LINK = "LINK";
 
     private ArticlePartType() {
-
     }
 }

@@ -21,7 +21,7 @@ public class ArticleValidator {
     @Autowired
     private final ConstraintViolationMapper<ArticleRequest> constraintViolationMapper;
 
-    public void validateArticleRequest(ArticleRequest articleRequest){
+    public void validateArticleRequest(ArticleRequest articleRequest) {
         Set<ConstraintViolation<ArticleRequest>> violations = validator.validate(articleRequest);
         if (!violations.isEmpty()) {
             log.error("Article wasn't saved because of invalid data. Total mistake count: {}", violations.size());

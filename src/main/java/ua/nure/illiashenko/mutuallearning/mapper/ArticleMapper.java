@@ -18,7 +18,6 @@ public class ArticleMapper {
             .creationDateTime(article.getCreationDateTime())
             .lastUpdateDateTime(article.getLastUpdateDateTime())
             .build();
-
     }
 
     public ArticleForUpdateResponse mapArticleToArticleForUpdateResponse(Article article) {
@@ -27,10 +26,9 @@ public class ArticleMapper {
             .type(article.getType())
             .title(article.getTitle())
             .build();
-
     }
 
-    public ArticleListElementResponse mapArticleToArticleListElementResponse(Article article){
+    public ArticleListElementResponse mapArticleToArticleListElementResponse(Article article) {
         return ArticleListElementResponse.builder()
             .id(article.getId())
             .title(article.getTitle())
@@ -38,7 +36,6 @@ public class ArticleMapper {
             .creationDateTime(article.getCreationDateTime())
             .lastUpdateDateTime(article.getLastUpdateDateTime())
             .build();
-
     }
 
     public Article mapArticleRequestToArticle(ArticleRequest articleRequest) {

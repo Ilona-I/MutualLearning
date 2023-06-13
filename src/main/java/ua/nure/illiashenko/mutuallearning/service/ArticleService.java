@@ -118,7 +118,7 @@ public class ArticleService {
     }
 
     private boolean isArticleOrAnsweredQuestion(Optional<Article> optionalDbArticle) {
-        return optionalDbArticle.isPresent()&&optionalDbArticle.get().getType().equals(ARTICLE)
+        return optionalDbArticle.isPresent() && optionalDbArticle.get().getType().equals(ARTICLE)
             || optionalDbArticle.get().getType().equals(ANSWERED_QUESTION);
     }
 
@@ -126,7 +126,7 @@ public class ArticleService {
         final Article article = articleRepository.findById(id).orElseThrow(() -> articleNotFoundById(id));
         final UserArticle userArticle = userArticleRepository.findByUserLoginAndArticleId(login, id)
             .orElseThrow(ArticleNotFoundException::new);
-        if(checkForAccess(article, userArticle)){
+        if (checkForAccess(article, userArticle)) {
             throw new AccessDeniedException();
         }
         final ArticleForUpdateResponse articleForUpdateResponse = articleMapper.mapArticleToArticleForUpdateResponse(
@@ -139,8 +139,8 @@ public class ArticleService {
     }
 
     private boolean checkForAccess(Article article, UserArticle userArticle) {
-        return article.getType().equals(ARTICLE)&&!userArticle.getRole().equals(ARTICLE_CREATOR)||
-            article.getType().equals(ANSWERED_QUESTION)&&!userArticle.getRole().equals(QUESTION_ANSWERER);
+        return article.getType().equals(ARTICLE) && !userArticle.getRole().equals(ARTICLE_CREATOR) ||
+            article.getType().equals(ANSWERED_QUESTION) && !userArticle.getRole().equals(QUESTION_ANSWERER);
     }
 
     public ArticleResponse getArticle(String login, int id) {
@@ -176,7 +176,8 @@ public class ArticleService {
         return getArticleListElementResponses(foundArticles);
     }
 
-    private List<Article> getFoundArticles(String searchType, String searchLineText, Set<Integer> articlesId, Pageable limit,
+    private List<Article> getFoundArticles(String searchType, String searchLineText, Set<Integer> articlesId,
+        Pageable limit,
         Set<String> articleTypeSet) {
         List<Article> foundArticles;
         if ("by_title".equals(searchType) && !searchLineText.isEmpty()) {

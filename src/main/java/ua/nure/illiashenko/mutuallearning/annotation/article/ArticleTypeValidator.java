@@ -10,6 +10,6 @@ public class ArticleTypeValidator implements ConstraintValidator<ArticleTypeVali
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return ARTICLE.equals(value)||QUESTION.equals(value);
+        return ARTICLE.equals(value) || QUESTION.equals(value);
     }
 }

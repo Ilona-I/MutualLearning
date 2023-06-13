@@ -2,9 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <link rel="stylesheet" href="../../css/menu.css">
+  <link rel="stylesheet" href="../../css/blocks.css">
+  <link rel="stylesheet" href="../../css/buttons.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../css/style.css">
+  <title>Article</title>
 </head>
 <body>
+
+<!-- Початок роботи з меню -->
+<nav class="navbar  navbar-expand-lg navbar-light menu_background">
+
+  <img class="logo" src="../../file/logo.png" alt="Mutual Learning">
+  <div class="logo_text_div">
+    <p class="vertical-center">Mutual Learning</p>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item  menu_button">
+      </li>
+      <li  class="nav-item menu_button" ></li>
+      <li  class="nav-item menu_button" >
+      </li>
+    </ul>
+  </div>
+  <div id="accountBlock" class="collapse navbar-collapse" style="margin-left: 10px;">
+    <div class="btn-group" >
+      <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        <img src="../../file/profile.png" alt="Profile" width="40" height="40">
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+      </div>
+    </div>
+  </div>
+  <div>
+    <select style="background-color: transparent; font-size: small;">
+      <option value="UA">UA</option>
+      <option value="EN">EN</option>
+    </select>
+  </div>
+</nav>
+
+<div style="padding: 40px; width: 80%; margin-right: auto; margin-left: auto">
+  <h4>Керування мітками в системі</h4>
+  <!-- Початок блоку зі створенням мітки -->
+  <div style="margin-left: 5px;">
+    <button class="btn btn-secondary "
+            style="background-color: #C3F73A"
+            onclick="showCreateForm()">
+      Створити мітку
+    </button>
+    <div id="createMarkForm"
+         style="margin-top: 10px; padding: 10px; width: 98%; border-width: 1px; border-color: #555555; border-style: solid;"
+         hidden>
+      <input id="createMarkTitle" type="text" class="form-control input_info"
+             placeholder="Назва мітки" onkeyup="deleteCreateMarkTitleErrors()">
+      <textarea style="max-height: 350px;" id="createMarkDescription" class="form-control input_info"
+                placeholder="Опис"
+                onkeyup="deleteCreateMarkDescriptionErrors()"></textarea>
+
+      <div class="row" style="margin-left: 20px; margin-top: 10px;">
+        <button type="button" class="btn"
+                style="color: #68B684; border-color: #68B684; background-color: white;"
+                onclick="createMark()">
+          Зберегти
+        </button>
+        <button type="button" class="btn btn-secondary"
+                style="margin-left: 10px; color: gray; border-color: gray; background-color: white;"
+                onclick="hideCreateForm()">
+          Скасувати
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Кінець блоку зі створенням мітки -->
+  <!-- Початок роботи з блоком пошуку міток-->
+  <div class="row" style="width: 100%; margin-top: 20px;">
+    <input id="searchMarkLine" type="text" style="width: 100%; margin-left: 20px;"
+           class="form-control"
+           placeholder="Шукати..." onkeyup="displayMarks()">
+  </div>
+  <!-- Кінець роботи з блоком пошуку міток-->
+
+
+  <hr>
+  <!-- Початок блоку зі списком міток -->
+  <div id="markCheckboxList"
+       style="margin-left: 20px; overflow-y:scroll; height: 350px;">
+
+  </div>
+  <!-- Кінець блоку зі списком міток -->
+</div>
+
+<script src="../../js/mark/loadMarks.js"></script>
+<script src="../../js/util/util.js"></script>
+<script src="../../js/menu/changeLocation.js"></script>
 
 </body>
 </html>

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class ConstraintViolationMapper<T> {
 
     public List<String> map(Set<ConstraintViolation<T>> violations) {
-        List<String>  errorDetails = new ArrayList<>();
+        List<String> errorDetails = new ArrayList<>();
         for (ConstraintViolation<T> violation : violations) {
             String value = violation.getMessage();
             errorDetails.add(value);

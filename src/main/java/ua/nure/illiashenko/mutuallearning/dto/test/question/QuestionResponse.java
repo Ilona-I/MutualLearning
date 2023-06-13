@@ -2,7 +2,6 @@ package ua.nure.illiashenko.mutuallearning.dto.test.question;
 
 import lombok.Builder;
 import lombok.Data;
-import ua.nure.illiashenko.mutuallearning.constants.AnswerType;
 import ua.nure.illiashenko.mutuallearning.dto.test.question.answer.AnswerResponse;
 
 @Data
@@ -13,5 +12,4 @@ public class QuestionResponse {
     private String text;
     private String type;
     private AnswerResponse[] answers;
-
 }

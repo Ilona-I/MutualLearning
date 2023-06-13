@@ -7,6 +7,5 @@ public class ArticleType {
     public static final String ARTICLE = "ARTICLE";
 
     private ArticleType() {
-
     }
 }

@@ -89,10 +89,9 @@ public class MarkService {
     }
 
     public void deleteMark(int id) {
-        if(!markRepository.existsById(id)){
+        if (!markRepository.existsById(id)) {
             throw new MarkNotFoundException();
         }
         markRepository.deleteById(id);
     }
-
 }

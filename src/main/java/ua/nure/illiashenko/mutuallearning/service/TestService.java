@@ -34,6 +34,7 @@ import ua.nure.illiashenko.mutuallearning.entity.User;
 import ua.nure.illiashenko.mutuallearning.entity.UserArticle;
 import ua.nure.illiashenko.mutuallearning.entity.UserTest;
 import ua.nure.illiashenko.mutuallearning.exception.ServiceApiException;
+import ua.nure.illiashenko.mutuallearning.exception.test.TestNotFoundException;
 import ua.nure.illiashenko.mutuallearning.repository.AnswerRepository;
 import ua.nure.illiashenko.mutuallearning.repository.QuestionRepository;
 import ua.nure.illiashenko.mutuallearning.repository.TestRepository;
@@ -83,7 +84,7 @@ public class TestService {
     public void editTest(String login, int id, SaveTestRequest saveTestRequest) {
         checkAccessByTestId(login, id);
         final Test test = testRepository.findById(id)
-            .orElseThrow(() -> new ServiceApiException(List.of("testNotFound"), HttpStatus.NOT_FOUND));
+            .orElseThrow(TestNotFoundException::new);
         test.setTitle(saveTestRequest.getTitle());
         testRepository.save(test);
         deleteOldQuestionsWithAnswers(id, saveTestRequest);

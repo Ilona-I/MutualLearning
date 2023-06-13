@@ -10,5 +10,4 @@ public class TestResponse {
 
     private String title;
     private QuestionResponse[] questions;
-
 }

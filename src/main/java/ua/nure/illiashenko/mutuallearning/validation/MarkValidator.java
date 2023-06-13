@@ -6,12 +6,10 @@ import javax.validation.Validator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import ua.nure.illiashenko.mutuallearning.dto.mark.CreateMarkRequest;
 import ua.nure.illiashenko.mutuallearning.dto.mark.UpdateMarkRequest;
-import ua.nure.illiashenko.mutuallearning.exception.ServiceApiException;
-import ua.nure.illiashenko.mutuallearning.exception.article.ArticleValidationException;
+import ua.nure.illiashenko.mutuallearning.exception.mark.MarkValidationException;
 import ua.nure.illiashenko.mutuallearning.mapper.ConstraintViolationMapper;
 
 @Slf4j
@@ -30,8 +28,7 @@ public class MarkValidator {
         Set<ConstraintViolation<CreateMarkRequest>> violations = validator.validate(createMarkRequest);
         if (!violations.isEmpty()) {
             log.error("Mark wasn't saved because of invalid data. Total mistake count: {}", violations.size());
-            throw new ServiceApiException(
-                constraintViolationMapperCreateMarkRequest.map(violations), HttpStatus.BAD_REQUEST);
+            throw new MarkValidationException(constraintViolationMapperCreateMarkRequest.map(violations));
         }
     }
 
@@ -39,10 +36,7 @@ public class MarkValidator {
         Set<ConstraintViolation<UpdateMarkRequest>> violations = validator.validate(updateMarkRequest);
         if (!violations.isEmpty()) {
             log.error("Mark wasn't saved because of invalid data. Total mistake count: {}", violations.size());
-            throw new ServiceApiException(
-                constraintViolationMapperUpdateMarkRequest.map(violations), HttpStatus.BAD_REQUEST);
+            throw new MarkValidationException(constraintViolationMapperUpdateMarkRequest.map(violations));
         }
     }
-
-
 }

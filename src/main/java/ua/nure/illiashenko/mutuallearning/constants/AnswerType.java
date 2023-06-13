@@ -6,6 +6,5 @@ public class AnswerType {
     public static final String SEVERAL_ANSWERS = "SEVERAL_ANSWERS";
 
     private AnswerType() {
-
     }
 }

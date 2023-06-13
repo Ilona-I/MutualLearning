@@ -1,5 +1,11 @@
 package ua.nure.illiashenko.mutuallearning.exception.test;
 
-public class TestValidationException {
+import org.springframework.http.HttpStatus;
+import ua.nure.illiashenko.mutuallearning.exception.ServiceApiException;
 
+public class TestValidationException extends ServiceApiException {
+
+    public TestValidationException() {
+        super(HttpStatus.BAD_REQUEST);
+    }
 }

@@ -13,7 +13,7 @@ public class ArticlePartTypeValidator implements ConstraintValidator<ArticlePart
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return TEXT.equals(value) || CODE.equals(value) || IMAGE.equals(value) || FILE.equals(value) || LINK.equals(
-            value);
+        return TEXT.equals(value) || CODE.equals(value) || IMAGE.equals(value) || FILE.equals(value)
+            || LINK.equals(value);
     }
 }

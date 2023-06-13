@@ -1,34 +1,28 @@
 package ua.nure.illiashenko.mutuallearning.controller;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.Charge;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import ua.nure.illiashenko.mutuallearning.dto.checkout.ChargeRequest;
-import ua.nure.illiashenko.mutuallearning.dto.checkout.ChargeRequest.Currency;
 import ua.nure.illiashenko.mutuallearning.dto.checkout.ChargeResponse;
-import ua.nure.illiashenko.mutuallearning.service.StripeService;
+import ua.nure.illiashenko.mutuallearning.service.ChargeService;
+import ua.nure.illiashenko.mutuallearning.util.JsonParser;
 
 @Controller
 public class ChargeController {
 
     @Autowired
-    private StripeService paymentsService;
+    private ChargeService chargeService;
+    @Autowired
+    private JsonParser jsonParser;
 
     @PostMapping("/charge")
-    public ChargeResponse charge(ChargeRequest chargeRequest)
-        throws StripeException {
-        System.out.println("====="+chargeRequest);
-        chargeRequest.setDescription("PREMIUM");
-        chargeRequest.setAmount(15000);
-        chargeRequest.setCurrency(Currency.EUR);
-        Charge charge = paymentsService.charge(chargeRequest);
-        final ChargeResponse chargeResponse = new ChargeResponse();
-        chargeResponse.setId(charge.getId());
-        chargeResponse.setStatus(charge.getStatus());
-        chargeResponse.setChargeId(charge.getId());
-        chargeResponse.setBalanceTransaction(charge.getBalanceTransaction());
-        return chargeResponse;
+    public ChargeResponse charge(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+        ChargeRequest chargeRequest) throws StripeException {
+        final String login = jsonParser.getLoginFromJsonString(authorization);
+        return chargeService.charge(login, chargeRequest);
     }
 }

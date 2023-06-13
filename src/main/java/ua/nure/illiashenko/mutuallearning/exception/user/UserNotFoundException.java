@@ -5,8 +5,7 @@ import ua.nure.illiashenko.mutuallearning.exception.ServiceApiException;
 
 public class UserNotFoundException  extends ServiceApiException {
 
-    public UserNotFoundException(){
+    public UserNotFoundException() {
         super(HttpStatus.NOT_FOUND);
     }
-
 }

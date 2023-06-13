@@ -1,7 +1,6 @@
 package ua.nure.illiashenko.mutuallearning.controller;
 
 import java.io.IOException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,8 @@ import ua.nure.illiashenko.mutuallearning.util.FileUploadUtil;
 public class FileUploadController {
 
     @PostMapping("/uploadFile/{fileName}")
-    public ResponseEntity<FileUploadResponse> uploadFile(@RequestParam("file") MultipartFile multipartFile, @PathVariable String fileName) throws IOException {
+    public ResponseEntity<FileUploadResponse> uploadFile(@RequestParam("file") MultipartFile multipartFile,
+        @PathVariable String fileName) throws IOException {
         long size = multipartFile.getSize();
         FileUploadUtil.saveFile(fileName, multipartFile);
         FileUploadResponse response = new FileUploadResponse();

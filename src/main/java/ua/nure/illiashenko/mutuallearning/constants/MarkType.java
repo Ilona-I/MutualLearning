@@ -6,6 +6,5 @@ public class MarkType {
     public static final String CUSTOM = "CUSTOM";
 
     private MarkType() {
-
     }
 }
