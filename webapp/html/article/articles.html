@@ -20,7 +20,7 @@
           integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
           crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../../css/style.css">
-  <title>Article</title>
+  <title>Mutual Learning</title>
 </head>
 <body>
 <div id="menu"
@@ -42,7 +42,7 @@
         <li class="nav-item  menu_button">
           <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                  onclick="document.location='../article/articles.html'">
+                  onclick="document.location='../article/articles.html'" localization-key="menu_articles">
             СТАТТІ
           </button>
         </li>
@@ -81,9 +81,9 @@
 
     </div>
     <div>
-      <select style="background-color: transparent; font-size: small;">
-        <option value="UA">UA</option>
-        <option value="EN">EN</option>
+      <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+        <option value="ua">UA</option>
+        <option value="en">EN</option>
       </select>
     </div>
   </nav>
@@ -229,5 +229,6 @@
 <script src="../../js/article/list/goToArticle.js"></script>
 <script src="../../js/article/list/checkElement.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>
