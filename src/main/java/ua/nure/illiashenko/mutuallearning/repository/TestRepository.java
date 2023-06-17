@@ -9,4 +9,6 @@ import ua.nure.illiashenko.mutuallearning.entity.Test;
 public interface TestRepository extends JpaRepository<Test, Integer> {
 
     List<Test> findByArticleId(Integer articleId);
+
+    void deleteAllByArticleId(Integer articleId);
 }

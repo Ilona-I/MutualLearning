@@ -19,10 +19,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.nure.illiashenko.mutuallearning.constants.ArticlePartType;
 import ua.nure.illiashenko.mutuallearning.constants.ArticleType;
+import ua.nure.illiashenko.mutuallearning.constants.ArticleUserRole;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleFileLinksResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleForUpdateResponse;
 import ua.nure.illiashenko.mutuallearning.dto.article.ArticleListElementResponse;
@@ -40,6 +42,7 @@ import ua.nure.illiashenko.mutuallearning.entity.Mark;
 import ua.nure.illiashenko.mutuallearning.entity.User;
 import ua.nure.illiashenko.mutuallearning.entity.UserArticle;
 import ua.nure.illiashenko.mutuallearning.exception.AccessDeniedException;
+import ua.nure.illiashenko.mutuallearning.exception.ServiceApiException;
 import ua.nure.illiashenko.mutuallearning.exception.article.ArticleNotFoundException;
 import ua.nure.illiashenko.mutuallearning.mapper.ArticleMapper;
 import ua.nure.illiashenko.mutuallearning.mapper.ArticlePartMapper;
@@ -51,6 +54,7 @@ import ua.nure.illiashenko.mutuallearning.repository.MarkRepository;
 import ua.nure.illiashenko.mutuallearning.repository.TestRepository;
 import ua.nure.illiashenko.mutuallearning.repository.UserArticleRepository;
 import ua.nure.illiashenko.mutuallearning.repository.UserRepository;
+import ua.nure.illiashenko.mutuallearning.repository.UserTestRepository;
 import ua.nure.illiashenko.mutuallearning.validation.ArticleValidator;
 
 @Slf4j
@@ -79,6 +83,8 @@ public class ArticleService {
     private MarkRepository markRepository;
     @Autowired
     private TestRepository testRepository;
+    @Autowired
+    private UserTestRepository userTestRepository;
 
     @Transactional
     public List<ArticleFileLinksResponse> createArticle(String login, ArticleRequest articleRequest) {
@@ -217,8 +223,13 @@ public class ArticleService {
         return types;
     }
 
+    @Transactional
     public void deleteArticle(String login, int id) {
+        userArticleRepository.findByUserLoginAndArticleId(login,id)
+            .orElseThrow(()-> new ServiceApiException(HttpStatus.NOT_FOUND));
         articleRepository.deleteById(id);
+        userArticleRepository.deleteAllByArticleId(id);
+        testRepository.deleteAllByArticleId(id);
     }
 
     public List<ArticleFileLinksResponse> createArticle(String login, Article article, ArticleRequest articleRequest) {

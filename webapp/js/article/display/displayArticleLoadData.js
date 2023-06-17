@@ -29,7 +29,7 @@ function removeTestsBlock() {
   document.getElementById("testsBlock").remove();
 }
 
-function removeGiveAnswerButton(){
+function removeGiveAnswerButton() {
   document.getElementById("giveAnswer").remove();
 }
 
@@ -53,7 +53,7 @@ function jsonToHTMLDisplay(jsonString) {
   let articleDateTime = document.getElementById("articleDateTime");
   let members = dataMap.get("members");
   document.getElementById("members").innerHTML = getMembers(members);
-  if (type==="ARTICLE"){
+  if (type === "ARTICLE") {
     let tests = dataMap.get("tests");
     document.getElementById("tests").innerHTML = getTests(tests);
   }
@@ -115,12 +115,17 @@ function getMembers(members) {
     if (currentUserLogin === login) {
       let editArticleButton = document.getElementById("editArticleButton");
       if (editArticleButton !== null) {
-        let button = "<button class='btn btn-light' style='margin-bottom: 20px; width: 100%;' onclick='goToEditArticle()'>Редагувати</button>"
+        let button = "<button class='btn btn-light' style='margin-bottom: 20px; width: 100%;' onclick='goToEditArticle()'"
+            + " localization-key=\"edit\">Редагувати</button>"
         editArticleButton.innerHTML = button;
+        let button2 = "<button class='btn btn-light' style='margin-bottom: 20px; width: 100%;' onclick='removeArticle()'"
+            + " localization-key=\"remove\"> Видалити</button>"
+        document.getElementById("removeArticle").innerHTML = button2;
       }
       let createTestButton = document.getElementById("createTestButton");
       if (createTestButton !== null) {
-        let button = "<button class='btn btn-light' style='margin-bottom: 20px; width: 100%;' onclick='createTest()'>Створити тест</button>"
+        let button = "<button class='btn btn-light' style='margin-bottom: 20px; width: 100%;' onclick='createTest()'"
+            + " localization-key=\"create_test\">Створити тест</button>"
         createTestButton.innerHTML = button;
       }
     }
@@ -190,7 +195,31 @@ function goToEditArticle() {
   document.location = "saveArticle.html";
 }
 
-function createTest(){
+function createTest() {
   localStorage.removeItem("testId");
-  document.location='../test/saveTest.html';
+  document.location = '../test/saveTest.html';
+}
+
+function removeArticle() {
+  let articleId = localStorage.getItem("articleId");
+  let url = "http://localhost:8080/articles/" + articleId;
+  localStorage.removeItem("articleId")
+  createXMLHttpRequest();
+  xmlHttp.open("DELETE", url, false);
+
+  let user = '{"login":"' + localStorage.getItem("login") + '"}';
+  xmlHttp.onreadystatechange = handleStateChangeDeleteArticle;
+  xmlHttp.setRequestHeader("Content-Type", "application/json");
+  xmlHttp.setRequestHeader("Authorization", btoa(encodeURIComponent(user)));
+  xmlHttp.send();
+}
+
+function handleStateChangeDeleteArticle() {
+  if (xmlHttp.readyState == 4) {
+    if (xmlHttp.status == 200) {
+      document.location = "../article/articles.html";
+    } else {
+
+    }
+  }
 }

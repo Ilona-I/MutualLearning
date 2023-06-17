@@ -128,5 +128,6 @@
   "send": "Send",
   "add_mark": "Add mark",
   "close": "Close",
-  "button_get_premium": "Check out the premium to view user attempts"
+  "button_get_premium": "Check out the premium to view user attempts",
+  "create_test": "Create test"
 }
