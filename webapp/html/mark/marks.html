@@ -50,14 +50,14 @@
         <img src="../../file/profile.png" alt="Profile" width="40" height="40">
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+        <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
       </div>
     </div>
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
@@ -68,7 +68,7 @@
   <div style="margin-left: 5px;">
     <button class="btn btn-secondary "
             style="background-color: #C3F73A"
-            onclick="showCreateForm()">
+            onclick="showCreateForm()" localization-key="create_mark">
       Створити мітку
     </button>
     <div id="createMarkForm"
@@ -83,12 +83,12 @@
       <div class="row" style="margin-left: 20px; margin-top: 10px;">
         <button type="button" class="btn"
                 style="color: #68B684; border-color: #68B684; background-color: white;"
-                onclick="createMark()">
+                onclick="createMark()" localization-key="save">
           Зберегти
         </button>
         <button type="button" class="btn btn-secondary"
                 style="margin-left: 10px; color: gray; border-color: gray; background-color: white;"
-                onclick="hideCreateForm()">
+                onclick="hideCreateForm()" localization-key="cancel">
           Скасувати
         </button>
       </div>
@@ -117,6 +117,6 @@
 <script src="../../js/mark/loadMarks.js"></script>
 <script src="../../js/util/util.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
-
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>

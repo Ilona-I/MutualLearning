@@ -38,7 +38,7 @@
       <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                onclick="document.location='../article/articles.html'">
+                onclick="document.location='../article/articles.html'"  localization-key="menu_articles">
           СТАТТІ
         </button>
       </li>
@@ -47,16 +47,15 @@
         <div>
           <button onclick="goToCreateArticle('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
             Створити статтю
           </button>
           <button onclick="goToCreateQuestion('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
             Задати питання
           </button>
         </div>
-
       </li>
     </ul>
   </div>
@@ -68,18 +67,18 @@
         <img src="../../file/profile.png" alt="Profile" width="40" height="40">
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
-        <a class="dropdown-item" href="#">Оформити підписку</a>
+        <a class="dropdown-item" href="../user/profile.html" localization-key="my_profile">Мій профіль</a>
+        <a class="dropdown-item" href="../premium/premium.html" localization-key="get_premium">Оформити підписку</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+        <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
       </div>
     </div>
 
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
@@ -89,45 +88,13 @@
   <h5 id="testTitle"></h5>
   <hr>
   <div id="questions">
-  <!-- Початок питання -->
-  <div>
-    <p>Питання 1</p>
-    <!-- Початок варіантів відповіді -->
-    <div>
-      <!-- Початок варіанту з однією правильною відповіддю-->
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-        <label class="form-check-label" for="exampleRadios1">
-          Default radio
-        </label>
-      </div>
-      <!-- Кінець варіанту з однією правильною відповіддю-->
-      <!-- Початок варіанту з кількома правильними відповідями -->
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-        <label class="form-check-label" for="defaultCheck1">
-          Default checkbox
-        </label>
-      </div>
-      <!-- Кінець варіанту з кількома правильними відповідями -->
-      <!-- Початок варіанту з власною відповіддю -->
-      <div>
-        <textarea class="form-control input_info" placeholder="Answer"> </textarea>
-      </div>
-      <!-- Кінець варіанту з власною відповіддю -->
-    </div>
-    <!-- Кінець варіантів відповіді -->
-  </div>
-  <!-- Кінець питання -->
 
   </div>
-
 
   <hr>
   <div style="margin-top: 20px">
-    <button onclick="sendTest()" class="btn btn-primary" style="width: 100%;">Перевірити</button>
+    <button onclick="sendTest()" class="btn btn-primary" style="width: 100%;" localization-key="check">Перевірити</button>
   </div>
-
 
 </div>
 
@@ -135,5 +102,6 @@
 <script src="../../js/test/display/sendTest.js"></script>
 <script src="../../js/test/display/checkElement.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>

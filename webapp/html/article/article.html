@@ -38,7 +38,7 @@
       <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                onclick="document.location='../article/articles.html'">
+                onclick="document.location='../article/articles.html'"  localization-key="menu_articles">
           СТАТТІ
         </button>
       </li>
@@ -47,16 +47,15 @@
         <div>
           <button onclick="goToCreateArticle('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
             Створити статтю
           </button>
           <button onclick="goToCreateQuestion('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
             Задати питання
           </button>
         </div>
-
       </li>
     </ul>
   </div>
@@ -68,17 +67,17 @@
             <img src="../../file/profile.png" alt="Profile" width="40" height="40">
           </button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
-            <a class="dropdown-item" href="#">Оформити підписку</a>
+            <a class="dropdown-item" href="../user/profile.html" localization-key="my_profile">Мій профіль</a>
+            <a class="dropdown-item" href="../premium/premium.html" localization-key="get_premium">Оформити підписку</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+            <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
           </div>
         </div>
   </div>
 <div>
-  <select style="background-color: transparent; font-size: small;">
-    <option value="UA">UA</option>
-    <option value="EN">EN</option>
+  <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+    <option value="ua">UA</option>
+    <option value="en">EN</option>
   </select>
 </div>
 </nav>
@@ -88,7 +87,7 @@
   <!-- Початок блоку статті -->
   <div class="article_block" style="padding:40px;" >
     <div id="editArticleButton"></div>
-    <h4 id="title">Заголовок статті</h4>
+    <h4 id="title" localization-key="article_title">Заголовок статті</h4>
     <p id="articleDateTime" class="datetime_text" style="margin-top: -40px;">ред. 21.05.2023</p>
     <!-- Початок списку міток -->
     <div id="markList" class="row article_marks" style="margin-left: 0">
@@ -101,7 +100,7 @@
 
     </div>
     <div id="giveAnswer" style="width: 100% ;">
-      <button class="btn btn-info" style="width: 100% ;">Дати відповідь</button>
+      <button class="btn btn-info" style="width: 100% ;" localization-key="give_answer">Дати відповідь</button>
     </div>
     <br>
     <!-- Кінець тіла статті -->
@@ -111,7 +110,7 @@
   <div>
     <!-- Початок блоку з учасниками -->
     <div class="article_right_block">
-      <h6>Творці</h6>
+      <h6 localization-key="creators">Творці</h6>
       <div id="members">
 
       </div>
@@ -120,7 +119,7 @@
     <!-- Кінець блоку з учасниками -->
     <!-- Початок блоку з тестами -->
     <div id="testsBlock" class="article_right_block">
-      <h6>Тести до статті</h6>
+      <h6 localization-key="article_tests">Тести до статті</h6>
       <div id="tests">
 
       </div>
@@ -133,14 +132,14 @@
 
 <div class="comment_block">
   <div class="row" style="margin-left: 10px">
-    <h6>Обговорення</h6>
-    <button onclick="displayBlock('saveComment')" class="btn" style="font-style: italic; color: gray; padding: 0; height: 25px; margin-left: 50px; margin-top: -3px; text-decoration-line: underline">Написати</button>
+    <h6 localization-key="discussion">Обговорення</h6>
+    <button onclick="displayBlock('saveComment')" class="btn" style="font-style: italic; color: gray; padding: 0; height: 25px; margin-left: 50px; margin-top: -3px; text-decoration-line: underline" localization-key="write">Написати</button>
   </div>
 <hr>
   <div id="saveComment" hidden>
     <textarea onclick="sendComment()" id="commentText" class="form-control input_info" style="margin-bottom: 10px;"></textarea>
-    <button onclick="sendComment()" class="btn btn-primary">Надіслати</button>
-    <button onclick="hideBlock('saveComment')" class="btn btn-secondary">Скасувати</button>
+    <button onclick="sendComment()" class="btn btn-primary" localization-key="send">Надіслати</button>
+    <button onclick="hideBlock('saveComment')" class="btn btn-secondary" localization-key="cancel">Скасувати</button>
   </div>
   <div id="commentList">
 
@@ -157,5 +156,6 @@
 <script src="../../js/util/util.js"></script>
 <script src="../../js/util/downloadFile.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>

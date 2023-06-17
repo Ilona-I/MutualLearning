@@ -37,7 +37,7 @@
       <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                onclick="document.location='../article/articles.html'">
+                onclick="document.location='../article/articles.html'"  localization-key="menu_articles">
           СТАТТІ
         </button>
       </li>
@@ -46,16 +46,15 @@
         <div>
           <button onclick="goToCreateArticle('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
             Створити статтю
           </button>
           <button onclick="goToCreateQuestion('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
             Задати питання
           </button>
         </div>
-
       </li>
     </ul>
   </div>
@@ -67,18 +66,18 @@
         <img src="../../file/profile.png" alt="Profile" width="40" height="40">
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
-        <a class="dropdown-item" href="#">Оформити підписку</a>
+        <a class="dropdown-item" href="../user/profile.html" localization-key="my_profile">Мій профіль</a>
+        <a class="dropdown-item" href="../premium/premium.html" localization-key="get_premium">Оформити підписку</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+        <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
       </div>
     </div>
 
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
@@ -88,35 +87,35 @@
   <div class="profile_block">
     <div id="profile" class="inner_block_left">
       <div class="row" style="margin-left: 0px;">
-        <h3>Профіль</h3>
+        <h3  localization-key="my_profile">Профіль</h3>
         <button onclick="updateProfile()" class="btn"
-                style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white">
+                style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #C3F73A; color: white"  localization-key="save_changes">
           Зберегти зміни
         </button>
         <button onclick="displayBlock('passwordBlock')" class="btn"
-                style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #094D92; color: white">
+                style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #094D92; color: white"  localization-key="change_password">
           Змінити пароль
         </button>
       </div>
       <p id="blocked" style="color: darkred"></p>
-      <h6>Login:<span id="login"></span></h6>
+      <h6><span  localization-key="login">Login</span>: <span id="login"></span></h6>
       <div id="type">
-        <h6>Тип акаунту: <span id="role"></span></h6>
+        <h6><span  localization-key="account_type">Тип акаунту</span> <span id="role"></span></h6>
       </div>
 
-      <input id="name" type="text" class="form-control input_info" style="width: 350px;"
+      <input id="name" type="text" class="form-control input_info" style="width: 400px;"
              placeholder="Full name or nickname">
 
-      <input id="email" type="email" class="form-control input_info" style="width: 350px;"
+      <input id="email" type="email" class="form-control input_info" style="width: 400px;"
              placeholder="E-mail" onkeyup="cleanWrongData('wrongEmail')">
       <p id="wrongEmail" style="color: darkred; font-size: small;"></p>
 
-      <textarea id="info" class="form-control input_info" placeholder="Info"></textarea>
+      <textarea id="info" class="form-control input_info" placeholder="Info" ></textarea>
 
     </div>
   </div>
   <div id="passwordBlock" class="profile_block" hidden>
-    <h5>Зміна паролю</h5>
+    <h5  localization-key="password_changing">Зміна паролю</h5>
     <input id="currentPassword" type="password" class="form-control input_info" placeholder="Пароль" onkeyup="cleanWrongData('wrongCurrentPassword')">
     <div style="width: 100%; text-align: left">
       <p id="wrongCurrentPassword" style="color: darkred; font-size: small;"></p>
@@ -132,17 +131,18 @@
     </div>
     <div>
       <button onclick="updatePassword()" class="btn"
-              style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #094D92; color: white">
+              style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #094D92; color: white"  localization-key="change_password">
         Змінити пароль
       </button>
       <button onclick="hideBlock('passwordBlock')" class="btn"
-              style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #8f8c8c; color: white">
+              style="height: 26px; font-size: 10px;  margin-left: 10px; background-color: #8f8c8c; color: white"  localization-key="cancel">
         Скасувати
       </button>
     </div>
   </div>
 </div>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 <script src="../../js/user/profile/loadProfile.js"></script>
 <script src="../../js/user/profile/sendProfileChanges.js"></script>
 <script src="../../js/user/profile/updatePassword.js"></script>

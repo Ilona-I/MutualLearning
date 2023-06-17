@@ -40,7 +40,7 @@
       <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                onclick="document.location='../article/articles.html'">
+                onclick="document.location='../article/articles.html'"  localization-key="menu_articles">
           СТАТТІ
         </button>
       </li>
@@ -49,16 +49,15 @@
         <div>
           <button onclick="goToCreateArticle('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
             Створити статтю
           </button>
           <button onclick="goToCreateQuestion('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
             Задати питання
           </button>
         </div>
-
       </li>
     </ul>
   </div>
@@ -70,18 +69,18 @@
         <img src="../../file/profile.png" alt="Profile" width="40" height="40">
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
-        <a class="dropdown-item" href="#">Оформити підписку</a>
+        <a class="dropdown-item" href="../user/profile.html" localization-key="my_profile">Мій профіль</a>
+        <a class="dropdown-item" href="../premium/premium.html" localization-key="get_premium">Оформити підписку</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+        <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
       </div>
     </div>
 
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
@@ -96,13 +95,13 @@
         <input class="form-check-input" type="radio" name="inlineRadioOptions"
                id="articleTypeArticleCheckbox"
                value="option1">
-        <label class="form-check-label" for="articleTypeArticleCheckbox">Стаття</label>
+        <label class="form-check-label" for="articleTypeArticleCheckbox" localization-key="article">Стаття</label>
       </div>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="inlineRadioOptions"
                id="articleTypeQuestionCheckbox"
                value="option2">
-        <label class="form-check-label" for="articleTypeQuestionCheckbox">Питання</label>
+        <label class="form-check-label" for="articleTypeQuestionCheckbox" localization-key="question">Питання</label>
       </div>
     </div>
     <!-- Кінець вибору типу статті (стаття чи питання) -->
@@ -122,7 +121,7 @@
     <div>
       <button id="markManagementButton" type="button" class="btn" data-toggle="modal"
               style="background-color: #68B684; color: white;"
-              data-target="#exampleModalScrollable" onclick="getInfoAboutMarks()">
+              data-target="#exampleModalScrollable" onclick="getInfoAboutMarks()" localization-key="manage_marks">
         Керувати мітками
       </button>
 
@@ -132,7 +131,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalScrollableTitle">Додати мітку</h5>
+              <h5 class="modal-title" id="exampleModalScrollableTitle" localization-key="add_mark">Додати мітку</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -142,7 +141,7 @@
               <div style="margin-left: 5px;">
                 <button class="btn btn-secondary "
                         style="background-color: #C3F73A"
-                        onclick="showCreateForm()">
+                        onclick="showCreateForm()" localization-key="create_mark">
                   Створити мітку
                 </button>
                 <div id="createMarkForm"
@@ -157,12 +156,12 @@
                   <div class="row" style="margin-left: 20px; margin-top: 10px;">
                     <button type="button" class="btn"
                             style="color: #68B684; border-color: #68B684; background-color: white;"
-                            onclick="createMark()">
+                            onclick="createMark()" localization-key="save">
                       Зберегти
                     </button>
                     <button type="button" class="btn btn-secondary"
                             style="margin-left: 10px; color: gray; border-color: gray; background-color: white;"
-                            onclick="hideCreateForm()">
+                            onclick="hideCreateForm()" localization-key="cancel">
                       Скасувати
                     </button>
                   </div>
@@ -183,12 +182,12 @@
                   <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
                          id="inlineRadio1" value="optionMark1" checked="checked"
                          onchange="displayMarks()">
-                  <label class="form-check-label" for="inlineRadio1">Всі</label>
+                  <label class="form-check-label" for="inlineRadio1" localization-key="all">Всі</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptionsMarksType"
                          id="ownMarks" value="optionMark3" onchange="displayMarks()">
-                  <label class="form-check-label" for="ownMarks">Власні</label>
+                  <label class="form-check-label" for="ownMarks" localization-key="own">Власні</label>
                 </div>
               </div>
               <!-- Кінець роботи з блоком фільтрації міток (всі, лише власні)-->
@@ -199,13 +198,13 @@
                          name="inlineRadioOptionsMarksCheckedType"
                          id="inlineRadio2" value="optionMark1" checked="checked"
                          onchange="displayMarks()">
-                  <label class="form-check-label" for="inlineRadio2">Всі</label>
+                  <label class="form-check-label" for="inlineRadio2" localization-key="all">Всі</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio"
                          name="inlineRadioOptionsMarksCheckedType"
                          id="checkedMarks" value="optionMark2" onchange="displayMarks()">
-                  <label class="form-check-label" for="checkedMarks">Обрані</label>
+                  <label class="form-check-label" for="checkedMarks" localization-key="selected">Обрані</label>
                 </div>
               </div>
               <!-- Кінець роботи з блоком фільтрації міток (всі, обрані)-->
@@ -220,9 +219,9 @@
                 <button type="button" class="btn"
                         style="background-color: #68B684; color: white;"
                         onclick="updateSetMarks()" data-dismiss="modal"
-                >Застосувати до статті
+                        localization-key="apply_to_article">Застосувати до статті
                 </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Скасувати</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" localization-key="cancel">Скасувати</button>
               </div>
             </div>
           </div>
@@ -243,18 +242,18 @@
 
   <div style="margin-top: 10px;">
     <!-- Початок кнопки збереження змін -->
-    <button class="btn btn-info" style="width: 100%;" onclick="sendArticleChanges()">Зберегти зміни</button>
+    <button class="btn btn-info" style="width: 100%;" onclick="sendArticleChanges()" localization-key="save_changes">Зберегти зміни</button>
     <!-- Кінець кнопки збереження змін -->
     <!-- Початок кнопки скасування змін -->
     <button type="button" class="btn btn-danger" style="width: 100%; margin-top: 10px;"
-            data-toggle="modal" data-target="#cancelModal"> Скасувати зміни
+            data-toggle="modal" data-target="#cancelModal" localization-key="cancel_changes"> Скасувати зміни
     </button>
     <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Скасувати зміни</h5>
+            <h5 class="modal-title" localization-key="cancel_changes">Скасувати зміни</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -293,5 +292,6 @@
 <script src="../../js/article/save/getAddNewElementButtonBlock.js"></script>
 <script src="../../js/util/util.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>

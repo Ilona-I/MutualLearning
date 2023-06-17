@@ -50,26 +50,27 @@
         <img src="../../file/profile.png" alt="Profile" width="40" height="40">
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+        <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
       </div>
     </div>
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
 <div class="row div_backup center_content">
-  <button onclick="backUp()" class="center_content button_backup">Back up database</button>
+  <button onclick="backUp()" class="center_content button_backup" localization-key="backup_db">Back up database</button>
   <div class="div_line"></div>
-  <button onclick="restore()" class="center_content button_backup">Restore database</button>
+  <button onclick="restore()" class="center_content button_backup" localization-key="restore_db">Restore database</button>
 </div>
 <!-- Кінець роботи з меню -->
 <script src="../../js/util/util.js"></script>
 <script src="../../js/admin/backup.js"></script>
 <script src="../../js/util/downloadFile.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>

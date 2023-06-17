@@ -29,7 +29,7 @@
       <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-        onclick="document.location='../article/articles.html'">
+        onclick="document.location='../article/articles.html'"  localization-key="menu_articles">
           СТАТТІ
         </button>
       </li>
@@ -38,34 +38,33 @@
         <div>
           <button onclick="goToCreateArticle('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
             Створити статтю
           </button>
           <button onclick="goToCreateQuestion('../article/saveArticle.html')"
-              class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                  class="btn"
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
             Задати питання
           </button>
         </div>
-
       </li>
     </ul>
   </div>
   <div class="collapse navbar-collapse" style="margin-left: 10px;">
-    <button onclick="document.location='logIn.html'" class="btn btn-light menu_button_sign_up" style="background-color: #303052; color:#ffffff ;border-width: 0px">Увійти</button>
+    <button onclick="document.location='logIn.html'" class="btn btn-light menu_button_sign_up" style="background-color: #303052; color:#ffffff ;border-width: 0px" localization-key="menu_log_in">Увійти</button>
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
 <div class="simple_green_block">
   <div class="inner_block_center">
-    <h3>Реєстрація</h3>
+    <h3  localization-key="sign_up">Реєстрація</h3>
     <input id="signUpLogin" type="text" class="form-control input_info" placeholder="Логін" onkeyup="cleanWrongData('wrongSignUpLogin')">
-    <p style="font-size: 10px; color: gray; text-align: left">*Ви не зможете потім змінювати логін</p>
+    <p style="font-size: 10px; color: gray; text-align: left"  localization-key="login_warning">*Ви не зможете потім змінювати логін</p>
     <div style="width: 100%; text-align: left">
       <p id="wrongSignUpLogin" style="color: darkred; font-size: small;"></p>
     </div>
@@ -87,7 +86,7 @@
     </div>
 
     <textarea id="signUpInfo" type="text" class="form-control input_info" placeholder="Про себе..."></textarea>
-    <button onclick="signUp()" class="btn l_button" style=" background-color: #95E06C;color: #1C1018;">Зареєструватися</button>
+    <button onclick="signUp()" class="btn l_button" style=" background-color: #95E06C;color: #1C1018;"  localization-key="to_sign_up">Зареєструватися</button>
   </div>
 </div>
 <br>
@@ -98,6 +97,7 @@
   <a href="https://www.flaticon.com/free-icons/online-learning" title="online learning icons">Online learning icons created by Circlon Tech - Flaticon</a>
 </footer>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 <script src="../../js/user/signUp/signUp.js"></script>
 <script src="../../js/util/util.js"></script>
 </body>

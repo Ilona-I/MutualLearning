@@ -39,7 +39,7 @@
       <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                onclick="document.location='../article/articles.html'">
+                onclick="document.location='../article/articles.html'"  localization-key="menu_articles">
           СТАТТІ
         </button>
       </li>
@@ -48,16 +48,15 @@
         <div>
           <button onclick="goToCreateArticle('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
             Створити статтю
           </button>
           <button onclick="goToCreateQuestion('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
             Задати питання
           </button>
         </div>
-
       </li>
     </ul>
   </div>
@@ -69,30 +68,30 @@
         <img src="../../file/profile.png" alt="Profile" width="40" height="40">
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
-        <a class="dropdown-item" href="#">Оформити підписку</a>
+        <a class="dropdown-item" href="../user/profile.html" localization-key="my_profile">Мій профіль</a>
+        <a class="dropdown-item" href="../premium/premium.html" localization-key="get_premium">Оформити підписку</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+        <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
       </div>
     </div>
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
 <!-- Кінець роботи з меню -->
 
 <div class="simple_green_block" style="padding: 40px;">
-  <h4>Підключення преміум акаунту</h4>
+  <h4 localization-key="getting_premium">Підключення преміум акаунту</h4>
   <hr>
-  <h6>Переваги:</h6>
-  <p>- Перегляд списку користувачів, які пройшли тест, якщо він був створений поточним користувачем</p>
+  <h6 localization-key="advantages">Переваги:</h6>
+  <p localization-key="advantage1">- Перегляд списку користувачів, які пройшли тест, якщо він був створений поточним користувачем</p>
 <hr>
 <input type='hidden' id="amount" name='amount'/>
-<label>Ціна: 500 грн/місяць</label>
+<label localization-key="price">Ціна: 500 грн/місяць</label>
 <br>
   <form action='http://localhost:8080/charge' method='POST' id='checkout-form'>
 <script
@@ -112,5 +111,7 @@ onfocusout="charge()">
   <hr>
 </div>
 <script src="../../js/premium/premium.js"></script>
+<script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>

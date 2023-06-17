@@ -51,16 +51,15 @@
           <div>
             <button onclick="goToCreateArticle('../article/saveArticle.html')"
                     class="btn"
-                    style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                    style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
               Створити статтю
             </button>
             <button onclick="goToCreateQuestion('../article/saveArticle.html')"
                     class="btn"
-                    style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                    style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
               Задати питання
             </button>
           </div>
-
         </li>
       </ul>
     </div>
@@ -72,10 +71,10 @@
           <img src="../../file/profile.png" alt="Profile" width="40" height="40">
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
-          <a class="dropdown-item" href="#">Оформити підписку</a>
+          <a class="dropdown-item" href="../user/profile.html" localization-key="my_profile">Мій профіль</a>
+          <a class="dropdown-item" href="../premium/premium.html" localization-key="get_premium">Оформити підписку</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+          <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
         </div>
       </div>
 
@@ -97,7 +96,7 @@
     <div class="dropdown" style="margin-left: 50px; width: 50px;">
       <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-              style="width: 200px">
+              style="width: 200px" localization-key="filtration">
         Фільтрація
       </button>
       <div id="dropdown-menu" onclick="event.stopPropagation();" class="dropdown-menu"
@@ -111,15 +110,15 @@
             <div class="row">
               <input onkeyup="displayMarksArticles()" id="searchMarkLineArticles" type="text"
                      style="height: 30px;  width: 60%;" class="form-control"
-                     placeholder="Search mark...">
+                     placeholder="&#8981;">
               <!-- Кінець роботи з блоком пошуку міток-->
               <!-- Початок роботи з кнопками-->
               <button class="btn btn-info" onclick="checkAllMarks()" type="button"
-                      style="font-size: small; margin-left:10px; padding-top: 2px; padding-bottom: 2px;">
+                      style="font-size: small; margin-left:10px; padding-top: 2px; padding-bottom: 2px;" localization-key="select_all">
                 Обрати все
               </button>
               <button class="btn btn-dark" onclick="uncheckAllMarks()"
-                      style="font-size: small;margin-left:10px;  padding-top: 2px; padding-bottom: 2px;">
+                      style="font-size: small;margin-left:10px;  padding-top: 2px; padding-bottom: 2px;" localization-key="unselect_all">
                 Скинути все
               </button>
             </div>
@@ -130,7 +129,7 @@
 
             </div>
             <!-- Кінець блоку з списком міток -->
-            <p style="color: #555555; font-size: xx-small; font-style: italic">*відображення статей,
+            <p style="color: #555555; font-size: xx-small; font-style: italic" localization-key="marks_warning">*відображення статей,
               які мають принаймні одну мітку з обраних. Для перегляду статей, що не мають міток
               небхідно скинути всі мітки</p>
           </div>
@@ -143,20 +142,20 @@
                 <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                        id="inlineRadio1ArticleTypeAll"
                        value="all" checked="checked">
-                <label class="form-check-label" for="inlineRadio1ArticleTypeAll">Все</label>
+                <label class="form-check-label" for="inlineRadio1ArticleTypeAll" localization-key="all">Все</label>
               </div>
               <div class="form-check form-check" onclick="checkArticles()">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                        id="inlineRadio2ArticleTypeArticle"
                        value="article">
-                <label class="form-check-label" for="inlineRadio2ArticleTypeArticle">Статті</label>
+                <label class="form-check-label" for="inlineRadio2ArticleTypeArticle" localization-key="articles">Статті</label>
               </div>
               <div class="form-check form-check" onclick="checkQuestions()">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions1"
                        id="inlineRadio3ArticleTypeQuestion"
                        value="question">
                 <label class="form-check-label"
-                       for="inlineRadio3ArticleTypeQuestion">Питання</label>
+                       for="inlineRadio3ArticleTypeQuestion" localization-key="questions">Питання</label>
               </div>
             </div>
             <!-- Кінець блоку з типом статті -->
@@ -167,18 +166,18 @@
                 <input class="form-check-input" type="radio" name="inlineRadioOptions2"
                        id="inlineRadio1OwnerAll"
                        value="all" checked="checked">
-                <label class="form-check-label" for="inlineRadio1OwnerAll">Усі</label>
+                <label class="form-check-label" for="inlineRadio1OwnerAll" localization-key="all">Усі</label>
               </div>
               <div class="form-check form-check" onclick="checkOwn()">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions2"
                        id="inlineRadio2OwnerOwn"
                        value="own">
-                <label class="form-check-label" for="inlineRadio2OwnerOwn">Власні</label>
+                <label class="form-check-label" for="inlineRadio2OwnerOwn" localization-key="own">Власні</label>
               </div>
             </div>
             <!-- Кінець роботи з фільтрацією (усі статті, власні, збережені) -->
             <div style="margin-left: 15px; margin-top: 15px; width: 92%;">
-              <button onclick="setFilter()" class="btn btn-primary" style="width: 100%;">
+              <button onclick="setFilter()" class="btn btn-primary" style="width: 100%;" localization-key="apply">
                 Застосувати
               </button>
             </div>
@@ -192,16 +191,16 @@
     <div class="row" style="width: 600px; margin-left: 25%;">
       <div style="width: 30%">
         <select class="form-control" id="searchType">
-          <option value="by_title">За заголовком</option>
-          <option value="by_login">За логіном автора</option>
+          <option value="by_title" localization-key="by_article">За заголовком</option>
+          <option value="by_login" localization-key="by_login">За логіном автора</option>
         </select>
       </div>
       <div style="margin-left: 5px; width: 40%">
         <input id="searchArticle" type="text" class="form-control"
-               placeholder="Пошук...">
+               placeholder="&#8981;">
       </div>
       <div style="margin-left: 5px; width: 10%;">
-        <button onclick="searchArticles()" class="btn btn-light">Знайти</button>
+        <button onclick="searchArticles()" class="btn btn-light" localization-key="find">Знайти</button>
       </div>
       <div id="cancelSearchArticles" style="margin-left: 20px; width: 5%;" hidden>
         <button onclick="cancelSearchArticles()"

@@ -114,6 +114,7 @@
   "mark_already_exist": "* a mark with this name already exists",
   "create_mark": "Create a mark",
   "confirm_remove_block": "Are you sure you want to remove the block?",
+  "confirm_remove_test" : "Are you sure you want to remove the test?",
   "confirm_cancel": "Do you really want to cancel the changes?",
   "continue_edit": "Continue editing",
   "article_title": "Article Title",
@@ -123,5 +124,6 @@
   "backup_db": "Backup database",
   "restore_db": "Restore database",
   "confirm_remove_mark": "Are you sure you want to remove the mark?",
-  "manage_marks_in_system": "Manage marks in system"
+  "manage_marks_in_system": "Manage marks in system",
+  "send": "Send"
 }

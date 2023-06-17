@@ -38,7 +38,7 @@
       <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                onclick="document.location='../article/articles.html'">
+                onclick="document.location='../article/articles.html'"  localization-key="menu_articles">
           СТАТТІ
         </button>
       </li>
@@ -47,16 +47,15 @@
         <div>
           <button onclick="goToCreateArticle('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
             Створити статтю
           </button>
           <button onclick="goToCreateQuestion('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
             Задати питання
           </button>
         </div>
-
       </li>
     </ul>
   </div>
@@ -68,17 +67,17 @@
         <img src="../../file/profile.png" alt="Profile" width="40" height="40">
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
-        <a class="dropdown-item" href="#">Оформити підписку</a>
+        <a class="dropdown-item" href="../user/profile.html" localization-key="my_profile">Мій профіль</a>
+        <a class="dropdown-item" href="../premium/premium.html" localization-key="get_premium">Оформити підписку</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+        <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
       </div>
     </div>
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
@@ -87,63 +86,52 @@
 <div>
   <div class="article_block">
     <h4 id="testTitle"></h4>
-    <h6>Максимальна оцінка: <span id="maxMark"></span></h6>
-
-
-    <p>Попередні спроби (<span id="ownAttemptsNumber"></span>): </p>
+    <h6><span localization-key="max_mark">Максимальна оцінка:</span> <span id="maxMark"></span></h6>
+    <p><span localization-key="previous_attempts">Попередні спроби</span> (<span id="ownAttemptsNumber"></span>): </p>
     <div style="max-height: 400px; overflow: auto;">
       <table class="table table-hover">
         <thead>
         <tr>
-          <th>№ спроби</th>
-          <th>Дата й час проходження:</th>
-          <th>Отримана оцінка:</th>
+          <th localization-key="attempt_number">№ спроби</th>
+          <th localization-key="date_time">Дата й час проходження:</th>
+          <th localization-key="test_mark">Отримана оцінка:</th>
         </tr>
         </thead>
         <tbody id="ownAttemptsTableBody">
 
-
         </tbody>
       </table>
     </div>
-
-    <button onclick="goToTest()" class="btn btn-dark">Розпочати спробу</button>
-
-
+    <button onclick="goToTest()" class="btn btn-dark" localization-key="start_attempt">Розпочати спробу</button>
     <hr>
-
     <div id="creatorBlock">
       <h6>Загальна кількість спроб: <span id="userCount"></span></h6>
       <h6>Середня оцінка: <span id="userAverageMark"></span></h6>
       <div id="creatorInfo" style="margin-top: 20px; max-height: 600px; overflow: auto;">
-
       </div>
-
-
-      <button onclick="goToEditTest()" class="btn btn-dark" style="margin-top: 30px;">Редагувати тест</button>
+      <button onclick="goToEditTest()" class="btn btn-dark" style="margin-top: 30px;" localization-key="edit_test">Редагувати тест</button>
       <!-- Початок кнопки видалення тесту -->
       <div>
         <button type="button" class="btn btn-danger" style=" margin-top: 10px;" data-toggle="modal"
-                data-target="#removeTestModal">
+                data-target="#removeTestModal" localization-key="remove_test">
           Видалити тест
         </button>
-
         <div class="modal fade" id="removeTestModal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="removeTestModalLabel">Видалення тесту</h5>
+                <h5 class="modal-title" id="removeTestModalLabel" localization-key="remove_test">Видалення тесту</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body" localization-key="confirm_remove_test">
                 Ви дійсно бажаєте видалити цей тест?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button onclick="deleteTest()" type="button" class="btn btn-danger">Видалити</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"  localization-key="cancel">Close</button>
+                <button onclick="deleteTest()" type="button" class="btn btn-danger"  localization-key="remove">Видалити</button>
               </div>
             </div>
           </div>
@@ -151,16 +139,12 @@
       </div>
       <!-- Кінець кнопки видалення тесту -->
     </div>
-
-
   </div>
-
 </div>
-
-
 <script src="../../js/test/info/loadDataTestInfo.js"></script>
 <script src="../../js/test/info/deleteTest.js"></script>
 <script src="../../js/util/util.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>

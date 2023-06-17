@@ -38,7 +38,7 @@
       <li class="nav-item  menu_button">
         <button style="height: 100%; width: 100%; padding: 0; background-color: #D17542; color:  white; font-size: x-large;
         border-color: #D17542; border-style: solid; border-width: 1px; border-radius: 50px;"
-                onclick="document.location='../article/articles.html'">
+                onclick="document.location='../article/articles.html'"  localization-key="menu_articles">
           СТАТТІ
         </button>
       </li>
@@ -47,16 +47,15 @@
         <div>
           <button onclick="goToCreateArticle('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: #355432; color: white" localization-key="menu_create_article">
             Створити статтю
           </button>
           <button onclick="goToCreateQuestion('../article/saveArticle.html')"
                   class="btn"
-                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; ">
+                  style="height: 26px; font-size: 10px;  margin-left: 40px; background-color: transparent; color: #094D92; border-color: #094D92; " localization-key="menu_ask_question">
             Задати питання
           </button>
         </div>
-
       </li>
     </ul>
   </div>
@@ -68,25 +67,25 @@
         <img src="../../file/profile.png" alt="Profile" width="40" height="40">
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="../user/profile.html">Мій профіль</a>
-        <a class="dropdown-item" href="#">Оформити підписку</a>
+        <a class="dropdown-item" href="../user/profile.html" localization-key="my_profile">Мій профіль</a>
+        <a class="dropdown-item" href="../premium/premium.html" localization-key="get_premium">Оформити підписку</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="../user/logIn.html">Вийти</a>
+        <a class="dropdown-item" href="../user/logIn.html" localization-key="log_out">Вийти</a>
       </div>
     </div>
 
   </div>
   <div>
-    <select style="background-color: transparent; font-size: small;">
-      <option value="UA">UA</option>
-      <option value="EN">EN</option>
+    <select id="localization-switcher" style="background-color: transparent; font-size: small;">
+      <option value="ua">UA</option>
+      <option value="en">EN</option>
     </select>
   </div>
 </nav>
 <!-- Кінець роботи з меню -->
 
 <div class="article_block">
-  <h4>Тест</h4>
+  <h4 localization-key="test">Тест</h4>
   <input id="testTitle" type="text" class="form-control input_info"
          style="font-size: large"
          placeholder="Назва тесту">
@@ -98,18 +97,18 @@
 
     </div>
     <div id="addQuestionBlockButton" style="margin-top: 20px;">
-      <button onclick="addQuestionBlock()" class="btn btn-light">Додати питання</button>
+      <button onclick="addQuestionBlock()" class="btn btn-light" localization-key="test_add_question">Додати питання</button>
     </div>
     <hr>
   </div>
 
 
   <div style="width: 100%;">
-    <button onclick="sendTestChanges()" class="btn btn-success" style="width: 100%;">Зберегти тест</button>
+    <button onclick="sendTestChanges()" class="btn btn-success" style="width: 100%;" localization-key="save_test">Зберегти тест</button>
     <!-- Початок кнопки скасування змін -->
     <div>
       <button type="button" class="btn btn-secondary" style="width: 100%; margin-top: 10px;"
-              data-toggle="modal" data-target="#cancelChangesModal">
+              data-toggle="modal" data-target="#cancelChangesModal" localization-key="cancel_changes">
         Скасувати зміни
       </button>
 
@@ -118,19 +117,19 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="cancelChangesModalLabel">Скасувати зміни</h5>
+              <h5 class="modal-title" id="cancelChangesModalLabel" localization-key="cancel_changes">Скасувати зміни</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" localization-key="confirm_cancel">
               Ви дійсно бажаєте скасувати зміни?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Продовжити
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" localization-key="continue_edit">Продовжити
                 редагування
               </button>
-              <button onclick="document.location='testInfo.html'" type="button" class="btn btn-primary">Скасувати зміни</button>
+              <button onclick="document.location='testInfo.html'" type="button" class="btn btn-primary" localization-key="cancel_changes">Скасувати зміни</button>
             </div>
           </div>
         </div>
@@ -150,5 +149,6 @@
 <script src="../../js/test/save/sendChanges.js"></script>
 <script src="../../js/util/util.js"></script>
 <script src="../../js/menu/changeLocation.js"></script>
+<script src="../../js/localization/localization.js"></script>
 </body>
 </html>
