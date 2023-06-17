@@ -15,27 +15,27 @@ function getAddNewElementButtonBlock(partId, sequenceNumber) {
       + "' class=\"dropdown-item\" onclick='addText(" + partId
       + ", "
       + sequenceNumber
-      + ")'>Додати текст</button>\n"
+      + ")' localization-key=\"add_text\">Додати текст</button>\n"
       + "          <button id='addImage" + partId
       + "' class=\"dropdown-item\" onclick='addImage(" + partId
       + ", "
       + sequenceNumber
-      + ")'>Додати фото</button>\n"
+      + ")' localization-key=\"add_photo\">Додати фото</button>\n"
       + "          <button id='addCode" + partId
       + "' class=\"dropdown-item\" onclick='addCode(" + partId
       + ", "
       + sequenceNumber
-      + ")'>Додати код</button>\n"
+      + ")' localization-key=\"add_code\">Додати код</button>\n"
       + "          <button id='addFile" + partId
       + "' class=\"dropdown-item\" onclick='addFile(" + partId
       + ", "
       + sequenceNumber
-      + ")'>Додати файл</button>\n"
+      + ")' localization-key=\"add_file\">Додати файл</button>\n"
       + "          <button id='addLink" + partId
       + "' class=\"dropdown-item\" onclick='addLink(" + partId
       + ", "
       + sequenceNumber
-      + ")'>Додати посилання</button>\n"
+      + ")' localization-key=\"add_link\">Додати посилання</button>\n"
       + "        </div>\n"
       + "      </div>\n"
       + "      <div style=\"width: 100%;\">\n"

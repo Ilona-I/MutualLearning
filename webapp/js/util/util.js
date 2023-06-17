@@ -73,7 +73,7 @@ function setMenuButton(){
     document.getElementById("accountBlock").innerHTML =""
         + "<button onclick=\"document.location='../user/logIn.html'\" "
         + "class=\"btn btn-light menu_button_sign_up\" "
-        + "style=\"background-color: #303052; color:#ffffff ;border-width: 0px\">"
+        + "style=\"background-color: #303052; color:#ffffff ;border-width: 0px\"  localization-key=\"to_log_in\">"
         + "Увійти</button>";
   }
 }

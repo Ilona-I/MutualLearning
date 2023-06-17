@@ -48,7 +48,7 @@ function setMarks(marks) {
         + "                " + markMap.get("description") + "\n"
         + "              </div>\n"
         + "              <div class=\"modal-footer\">\n"
-        + "                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n"
+        + "                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" localization-key=\"close\">Close</button>\n"
         + "              </div>\n"
         + "            </div>\n"
         + "          </div>\n"

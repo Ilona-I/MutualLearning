@@ -159,7 +159,7 @@ function getMembers(members) {
     }
     innerHtml += " </h5><span style=\"margin-left: 20px;\" class=\"badge ";
     if (role === "ARTICLE_CREATOR") {
-      innerHtml += " badge-success\">Творець статті "
+      innerHtml += " badge-success\" localization-key=\"article_creator\">Творець статті "
     } else if (role === "QUESTION_CREATOR") {
       innerHtml += " badge-danger\">Задав питання "
     } else if (role === "QUESTION_ANSWERER") {
@@ -175,9 +175,6 @@ function getMembers(members) {
         + info
         + "                </div>\n"
         + "                <div class=\"modal-footer\">\n"
-        + "                  <button type=\"button\" class=\"btn btn-light\">Переглянути статті та питання\n"
-        + "                    користувача\n"
-        + "                  </button>\n"
         + "                </div>\n"
         + "              </div>\n"
         + "            </div>\n"

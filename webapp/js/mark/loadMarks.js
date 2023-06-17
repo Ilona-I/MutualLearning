@@ -79,7 +79,7 @@ function getMarkHtml(markMap, searchParam) {
         + "                                id=\"dropdownMenuButtonEditMark"
         + markMap.get("id") + "\" data-toggle=\"dropdown\"\n"
         + "                                aria-haspopup=\"true\"\n"
-        + "                                aria-expanded=\"false\">\n"
+        + "                                aria-expanded=\"false\" localization-key=\"edit\">\n"
         + "                          Редагувати\n"
         + "                        </button>\n"
         + "                        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButtonEditMark"
@@ -98,11 +98,12 @@ function getMarkHtml(markMap, searchParam) {
         + "                            <button type=\"button\" class=\"btn\"\n"
         + "                                    style=\"color: #68B684; border-color: #68B684; background-color: white;\""
         + "                                    onclick=\"updateMark('"
-        + markMap.get("id") + "', '" + markMap.get("title") + "')\">\n"
+        + markMap.get("id") + "', '" + markMap.get("title") + "')\" localization-key=\"save\">\n"
         + "                              Зберегти\n"
         + "                            </button>\n"
         + "                            <button type=\"button\" class=\"btn btn-secondary\"\n"
-        + "                                    style=\"margin-left: 10px; color: gray; border-color: gray; background-color: white;\">\n"
+        + "                                    style=\"margin-left: 10px; color: gray; border-color: gray; background-color: white;\""
+        + "                            localization-key=\"cancel\">\n"
         + "                              Скасувати\n"
         + "                            </button>\n"
         + "                          </div>\n"
@@ -119,7 +120,7 @@ function getMarkHtml(markMap, searchParam) {
       + markMap.get("id") + "\" data-toggle=\"dropdown\"\n"
       + "                                aria-haspopup=\"true\"\n"
       + "                                aria-expanded=\"false\""
-      + "                                >\n"
+      + "                               localization-key=\"remove\" >\n"
       + "                          Видалити\n"
       + "                        </button>\n"
       + "                        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButtonDeleteMark"
@@ -130,10 +131,11 @@ function getMarkHtml(markMap, searchParam) {
       + "                            <button type=\"button\" class=\"btn btn-danger\" "
       + "                                     onclick=\"deleteMark('"
       + markMap.get("id") + "', '" + markMap.get("title") + "')\""
-      + "                                     >Видалити\n"
+      + "                                    localization-key=\"remove\" >Видалити\n"
       + "                            </button>\n"
       + "                            <button type=\"button\" class=\"btn btn-secondary\"\n"
-      + "                                    style=\"margin-left: 10px; color: gray; border-color: gray; background-color: white;\">\n"
+      + "                                    style=\"margin-left: 10px; color: gray; border-color: gray; background-color: white;\""
+      + "                          localization-key=\"cancel\">\n"
       + "                              Скасувати\n"
       + "                            </button>\n"
       + "                          </div>\n"
@@ -180,24 +182,20 @@ function setDefaultFilters() {
   document.getElementById("searchMarkLine").value = "";
 }
 
-function isArticleMark(markId) {
-  let articleMarksId = localStorage.getItem("articleMarksId");
-  return articleMarksId !== null ? articleMarksId.includes(markId) : false;
-}
 
 function createMark() {
   let titleInput = document.getElementById("createMarkTitle");
   let title = titleInput.value;
   let allMarkTitles = localStorage.getItem("allMarkTitles");
   if (title.trim() === "") {
-    let wrongTitleHtml = "<div id='wrongTitleCreateMark'><p style='color: darkred'>*напишіть заголовок</p></div>";
+    let wrongTitleHtml = "<div id='wrongTitleCreateMark'><p style='color: darkred' localization-key=\"write_title\">*напишіть заголовок</p></div>";
     titleInput.parentNode.insertBefore(
         convertStringToHTML(wrongTitleHtml).children[0],
         titleInput.nextSibling);
     return;
   }
   if (JSON.stringify(allMarkTitles).includes(title)) {
-    let wrongTitleHtml = "<div id='wrongTitleCreateMark'><p style='color: darkred'>* мітка з цією назвою вже існує</p></div>";
+    let wrongTitleHtml = "<div id='wrongTitleCreateMark'><p style='color: darkred' localization-key=\"mark_already_exist\">* мітка з цією назвою вже існує</p></div>";
     titleInput.parentNode.insertBefore(
         convertStringToHTML(wrongTitleHtml).children[0],
         titleInput.nextSibling);
@@ -206,7 +204,7 @@ function createMark() {
   let descriptionTextarea = document.getElementById("createMarkDescription");
   let description = descriptionTextarea.value;
   if (description.trim() === "") {
-    let wrongDescriptionHtml = "<div id='wrongDescriptionCreateMark'><p style='color: darkred'>*напишіть опис</p></div>";
+    let wrongDescriptionHtml = "<div id='wrongDescriptionCreateMark'><p style='color: darkred' localization-key=\"write_description\">*напишіть опис</p></div>";
     descriptionTextarea.parentNode.insertBefore(
         convertStringToHTML(wrongDescriptionHtml).children[0],
         descriptionTextarea.nextSibling);
@@ -270,14 +268,16 @@ function updateMark(markId, markTitle) {
   let title = titleInput.value;
   let allMarkTitles = JSON.stringify(localStorage.getItem("allMarkTitles"));
   if (title.trim() === "") {
-    let wrongTitleHtml = "<div id='wrongTitleUpdateMark'><p style='color: darkred'>*напишіть заголовок</p></div>";
+    let wrongTitleHtml = "<div id='wrongTitleUpdateMark'><p style='color: darkred' "
+        + " localization-key=\"write_title\">*напишіть заголовок</p></div>";
     titleInput.parentNode.insertBefore(
         convertStringToHTML(wrongTitleHtml).children[0],
         titleInput.nextSibling);
     return;
   }
   if (allMarkTitles.indexOf(title) !== allMarkTitles.lastIndexOf(title)) {
-    let wrongTitleHtml = "<div id='wrongTitleUpdateMark'><p style='color: darkred'>* мітка з цією назвою вже існує</p></div>";
+    let wrongTitleHtml = "<div id='wrongTitleUpdateMark'><p style='color: darkred' "
+        + " localization-key=\"mark_already_exist\">* мітка з цією назвою вже існує</p></div>";
     titleInput.parentNode.insertBefore(
         convertStringToHTML(wrongTitleHtml).children[0],
         titleInput.nextSibling);
@@ -287,7 +287,8 @@ function updateMark(markId, markTitle) {
       "updateMarkDescription" + markId);
   let description = descriptionTextarea.value;
   if (description.trim() === "") {
-    let wrongDescriptionHtml = "<div id='wrongDescriptionUpdateMark'><p style='color: darkred'>*напишіть опис</p></div>";
+    let wrongDescriptionHtml = "<div id='wrongDescriptionUpdateMark'><p style='color: darkred' "
+        + " localization-key=\"write_description\">*напишіть опис</p></div>";
     descriptionTextarea.parentNode.insertBefore(
         convertStringToHTML(wrongDescriptionHtml).children[0],
         descriptionTextarea.nextSibling);

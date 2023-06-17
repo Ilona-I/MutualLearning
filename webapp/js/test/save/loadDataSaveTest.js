@@ -62,7 +62,7 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
 
     innerHtml += "<div id='questionBlock" + questionId
         + "' style=\"border-color: #949393; margin-top: 10px; border-style: solid; border-width: 1px; padding: 20px;  background-color: #eeeeff\">\n"
-        + "        <h6>Питання: </h6>"
+        + "        <h6  localization-key=\"question\">Питання: </h6>"
         + "        <input name='question' type='text' value='" + questionId
         + "' hidden> "
         + "        <textarea id='questionText" + questionId
@@ -84,7 +84,7 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
 
     innerHtml += ">\n"
         + "            <label class=\"custom-control-label\" for=\"customRadioOne"
-        + questionId + "\">Один варіант відповіді</label>\n"
+        + questionId + "\"  localization-key=\"one_variant\">Один варіант відповіді</label>\n"
         + "          </div>\n"
         + "          <div onclick='checkSeveralAnswers(" + questionId
         + ")' class=\"custom-control custom-radio custom-control-inline\">\n"
@@ -96,7 +96,7 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
     }
     innerHtml += ">\n"
         + "            <label class=\"custom-control-label\" for=\"customRadioSeveral"
-        + questionId + "\">Декілька варіантів\n"
+        + questionId + "\"  localization-key=\"several_variants\">Декілька варіантів\n"
         + "              відповіді</label>\n"
         + "          </div>\n"
         + "        </div>"
@@ -117,9 +117,9 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
           + "          <input name='answer" + questionId
           + "' type='text' value='" + answerId + "' hidden>"
           + "            <div style=\"width: 80%; padding: 20px;\">\n"
-          + "              <h6>Варіант відповіді:</h6>\n"
+          + "              <h6  localization-key=\"answer_variant\">Варіант відповіді:</h6>\n"
           + "              <div>\n"
-          + "                <p>Текст варіанту відповіді:</p>\n"
+          + "                <p  localization-key=\"answer_text\">Текст варіанту відповіді:</p>\n"
           + "                <textarea id='answerText" + answerId
           + "' class=\"form-control input_info\" placeholder=\"Answer\"> "
           + answerText + "</textarea>\n"
@@ -136,7 +136,7 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
           + "            <div\n"
           + "                style=\"padding: 20px; border-left-color: #d2cece; border-left-style: solid; border-left-width: 1px;\">\n"
           + "              <button onclick='deleteAnswerBlock(" + answerId
-          + ")' class=\"btn btn-danger\" style=\"height: 40px;\">Видалити</button>\n"
+          + ")' class=\"btn btn-danger\" style=\"height: 40px;\"  localization-key=\"remove\">Видалити</button>\n"
           + "            </div>\n"
           + "\n"
           + "          </div>\n"
@@ -147,7 +147,7 @@ function jsonToHTMLGetTestToUpdate(jsonString) {
         + "          <div id='addAnswerBlockButton" + questionId
         + "' style=\"margin-top: 20px;\">\n"
         + "            <button onclick='addAnswerBlock(" + questionId
-        + ")' class=\"btn btn-dark\">Додати варіант відповіді</button>\n"
+        + ")' class=\"btn btn-dark\"  localization-key=\"add_answer\">Додати варіант відповіді</button>\n"
         + "          </div>\n"
         + "        </div>\n"
         + "        <!-- Кінець  варіантів відповідей -->\n"

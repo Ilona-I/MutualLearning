@@ -48,7 +48,7 @@
   "manage_marks": "Manage Marks",
   "add_text": "Add text",
   "add_photo": "Add photo",
-  "add_cod": "Add code",
+  "add_code": "Add code",
   "add_file": "Add file",
   "add_link": "Add link",
   "confirm_delete_block": "Are you sure you want to delete the block?",
@@ -125,5 +125,8 @@
   "restore_db": "Restore database",
   "confirm_remove_mark": "Are you sure you want to remove the mark?",
   "manage_marks_in_system": "Manage marks in system",
-  "send": "Send"
+  "send": "Send",
+  "add_mark": "Add mark",
+  "close": "Close",
+  "button_get_premium": "Check out the premium to view user attempts"
 }

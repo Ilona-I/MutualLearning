@@ -36,7 +36,7 @@ function getImageBlock(partMap) {
       + "                 id=\"actual-img-btn" + partMap.get("id")
       + "\" hidden>\n"
       + "          <label for=\"actual-img-btn" + partMap.get("id")
-      + "\" class=\"btn btn-light\">Оберіть зображення</label><br>\n"
+      + "\" class=\"btn btn-light\" localization-key=\"choose_image\">Оберіть зображення</label><br>\n"
       + "          <img id=\"output" + partMap.get("id")
       + "\" style=\"max-width: 100%;\"/>\n"
       + "        </div>\n"
@@ -75,7 +75,7 @@ function getFileBlock(partMap) {
       + "</button></p>\n"
       + "         </div>"
       + "         <div id='editBlock" + partMap.get("id") + "' hidden> "
-      + "             <p>Текст відображення:</p>"
+      + "             <p localization-key=\"displayed_text\">Текст відображення:</p>"
       + "           <input id='editFileTypeTitle"+partMap.get("id")+"' type='text' class=\"form-control input_info article_text\" value='"
       + partMap.get("text") + "'>"
       + "             <br>"
@@ -96,11 +96,11 @@ function getLink(partMap) {
       + "    </div>"
       + "<div style=\"width: 77%; margin-left: 15px;\""
       + "      id='editBlock" + partMap.get("id") + "' hidden>"
-      + "   <p>Текст посилання</p>"
+      + "   <p localization-key=\"link_text\">Текст посилання</p>"
       + "           <input id='editLinkTypeTitle"+partMap.get("id")+"' type='text' class=\"form-control input_info article_text\" value='"
       + partMap.get("text") + "'>"
       + "<br>"
-      + "   <p>Посилання</p>"
+      + "   <p localization-key=\"link\">Посилання</p>"
       + "           <input id='editLinkTypeLink"+partMap.get("id")+"' type='text' class=\"form-control input_info article_text\" value='"
       + partMap.get("link") + "'>"
       + "</div>";

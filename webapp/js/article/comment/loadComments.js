@@ -60,7 +60,8 @@ function getComment(dataMap) {
       + "    <div>\n"
       + "      <p class=\"datetime_text\">" + commentDateTime + "</p>\n"
 
-      + "       <div class='row'><button  type=\"button\" class=\"btn\" data-toggle=\"modal\" data-target=\"#exampleModalComment"+commentId+"\"\n"
+      + "       <div class='row'><button  type=\"button\" class=\"btn\" data-toggle=\"modal\" "
+      + " data-target=\"#exampleModalComment"+commentId+"\"\n"
       + "\" style=\"height: 25px; padding: 0; font-style: revert;\">\n"
       + "         ";
   if (name !== null && name.trim() !== "") {
@@ -74,11 +75,12 @@ function getComment(dataMap) {
     innerHtml+="<button onclick='deleteComment("+commentId+")' "
         + " class='btn btn-danger' "
         + " style='margin-left: 20px; height: 20px; font-size: x-small; padding: 1px;'"
-        + ">Видалити коментар</button>";
+        + " localization-key=\"remove\">Видалити коментар</button>";
 
   }
   innerHtml += "</div> \n"
-      + "<div class=\"modal fade\" id=\"exampleModalComment"+commentId+"\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabelComment"+commentId+"\" aria-hidden=\"true\">\n"
+      + "<div class=\"modal fade\" id=\"exampleModalComment"+commentId+"\" tabindex=\"-1\" role=\"dialog\" "
+      + " aria-labelledby=\"exampleModalLabelComment"+commentId+"\" aria-hidden=\"true\">\n"
       + "  <div class=\"modal-dialog\" role=\"document\">\n"
       + "    <div class=\"modal-content\">\n"
       + "      <div class=\"modal-header\">\n"
@@ -99,9 +101,6 @@ function getComment(dataMap) {
   + "                " + (info != null&& info!=='' ? info : '') + "\n"
       + "              </div>\n"
       + "              <div class=\"modal-footer\">\n"
-      + "                <button type=\"button\" class=\"btn btn-light\">Переглянути статті та питання\n"
-      + "                  користувача\n"
-      + "                </button>\n"
       + "              </div>\n"
       + "            </div>\n"
       + "          </div>\n"

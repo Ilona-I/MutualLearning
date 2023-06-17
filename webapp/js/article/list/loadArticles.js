@@ -82,7 +82,7 @@ function getArticle(dataMap) {
         + "style='padding-top:0; padding-bottom: 1px; height: 30px; background-color: transparent; border-style: solid; border-width: 1px; border-color: #95E06C; color:#95E06C;' "
         + "onclick='answerTheQuestion(\""
         + dataMap.get("id") + "\", \"" + getQuestionCreator(members)
-        + "\")' class='btn'>Написати відповідь на питання</button></div>";
+        + "\")' class='btn' localization-key=\"write_answer\">Написати відповідь на питання</button></div>";
   } else {
     innerHtml += " <div id='articleBlock" + dataMap.get("id")
         + "' class=\"article_block\" style=\"padding: 10px 20px 0; margin-top: 10px;\" >\n"
@@ -212,9 +212,6 @@ function getMembers(members) {
         + info
         + "                </div>\n"
         + "                <div class=\"modal-footer\">\n"
-        + "                  <button type=\"button\" class=\"btn btn-light\">Переглянути статті та питання\n"
-        + "                    користувача\n"
-        + "                  </button>\n"
         + "                </div>\n"
         + "              </div>\n"
         + "            </div>\n"

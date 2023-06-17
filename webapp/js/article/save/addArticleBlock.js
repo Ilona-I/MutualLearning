@@ -18,7 +18,7 @@ function addImage(partId, sequenceNumberValue) {
       + "                 id=\"actual-img-btn" + id
       + "\" hidden>\n"
       + "          <label for=\"actual-img-btn" + id
-      + "\" class=\"btn btn-light\">Оберіть зображення</label><br>\n"
+      + "\" class=\"btn btn-light\" localization-key=\"choose_image\">Оберіть зображення</label><br>\n"
       + "          <img id=\"output" + id
       + "\" style=\"max-width: 100%;\"/>\n"
       + "       </div>";
@@ -42,7 +42,7 @@ function addFile(partId, sequenceNumberValue) {
   let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
-      + "             <p>Текст відображення:</p>"
+      + "             <p localization-key=\"displayed_text\">Текст відображення:</p>"
       + "           <input id='newFileTypeText"+id+"' type='text' class=\"form-control input_info article_text\" >"
       + "             <br>"
       + "          <label for=\"file" + id
@@ -58,10 +58,10 @@ function addLink(partId, sequenceNumberValue) {
   let id = getRandomInt();
   let blockContent = "<div class=\"row\" style=\"width: 130%;\">"
       + "      <div style=\"width: 77%; margin-left: 15px;\">\n"
-      + "   <p>Текст посилання</p>"
+      + "   <p localization-key=\"link_text\">Текст посилання</p>"
       + "           <input id='newLinkTypeTitle"+id+"' type='text' class=\"form-control input_info article_text\">"
       + "<br>"
-      + "   <p>Посилання</p>"
+      + "   <p localization-key=\"link\">Посилання</p>"
       + "           <input id='newLinkTypeLink"+id+"' type='text' class=\"form-control input_info article_text\">"
       + "       </div>";
   addNewBlock(blockContent, partId, sequenceNumberValue, "link", id);

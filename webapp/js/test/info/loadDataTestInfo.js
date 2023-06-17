@@ -85,7 +85,7 @@ function jsonToHTMLGetTestInfo(jsonString) {
         ? userAverageMark.toString() : "-";
     let usersAttemptsResponse = dataMap.get("usersAttemptsResponse");
     if (usersAttemptsResponse === null || usersAttemptsResponse.length === 0) {
-      let premiumButton = "<button class='btn btn-success'>Оформити преміум для перегляду спроб користувачів</button>";
+      let premiumButton = "<button class='btn btn-success' localization-key=\"button_get_premium\">Оформити преміум для перегляду спроб користувачів</button>";
       document.getElementById("creatorInfo").innerHTML = premiumButton;
     } else if (usersAttemptsResponse.length > 0) {
       let table = "        <div style=\"width: 100%;\">\n"
