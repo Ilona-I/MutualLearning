@@ -19,10 +19,10 @@ switcher.onchange = (e) => {
 
 const setLocale = async (newLocale) => {
   localStorage.setItem("lang",newLocale);
+  document.getElementById("localization-switcher").value = newLocale;
   translations = await fetchTranslations(newLocale);
 
   translatePage();
-
 };
 
 const fetchTranslations = async (newLocale) => {
