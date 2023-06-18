@@ -2,21 +2,23 @@ let defaultLocale = 'ua';
 let translations = {};
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  setLocale(defaultLocale);
-
+  let lang = localStorage.getItem("lang");
+  if(lang === null){
+    setLocale(defaultLocale);
+  } else {
+    setLocale(lang);
+  }
 });
 
 const switcher = document.getElementById('localization-switcher');
 
 switcher.onchange = (e) => {
-
   setLocale(e.target.value);
 
 };
 
 const setLocale = async (newLocale) => {
-
+  localStorage.setItem("lang",newLocale);
   translations = await fetchTranslations(newLocale);
 
   translatePage();
